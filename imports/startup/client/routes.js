@@ -15,7 +15,7 @@ import SettingsPage from '/imports/ui/pages/SettingsPage'
 import UserPage from '/imports/ui/pages/users/UserPage'
 import UsersPage from '/imports/ui/pages/users/UsersPage'
 
-export const renderRoutes = () => (
+export const Routes = () => (
   <Router history={browserHistory}>
     <Route path="/" component={AppContainer}>
       <IndexRoute component={HomePage}/>
