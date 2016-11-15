@@ -15,11 +15,27 @@ const ProfileSchema = new SimpleSchema({
   description: {
     type: String,
   },
+  skills: {
+    type: [ String ],
+  },
+})
+
+const RolesSchema = new SimpleSchema({
+  organizationId: {
+    type: String,
+  },
+  role: {
+    type: String,
+    allowedValues: [ "member", "admin" ],
+  }
 })
 
 const UserSchema = new SimpleSchema({
   profile: {
     type: ProfileSchema,
+  },
+  roles: {
+    type: [ RolesSchema ],
   },
 })
 
