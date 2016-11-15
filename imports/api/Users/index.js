@@ -15,6 +15,9 @@ const ProfileSchema = new SimpleSchema({
   description: {
     type: String,
   },
+  skills: {
+    type: [ String ],
+  },
 })
 
 const RolesSchema = new SimpleSchema({
