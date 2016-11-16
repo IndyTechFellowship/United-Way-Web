@@ -3,9 +3,9 @@ import { Meteor } from 'meteor/meteor'
 import { Mongo } from 'meteor/mongo'
 
 const SkillsSchema = new SimpleSchema({
-	name: {
-		type: String,
-	},
+  name: {
+    type: String,
+  },
 })
 
 const Skills = new Mongo.Collection('skills')
