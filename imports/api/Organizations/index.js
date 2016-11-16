@@ -18,9 +18,6 @@ const OrganizationSchema = new SimpleSchema({
   positions: {
     type: [String],
   },
-  admins: {
-    type: [String],
-  },
 })
 
 const Organizations = new Mongo.Collection('organizations')
