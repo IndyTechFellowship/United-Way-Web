@@ -23,26 +23,40 @@ class Navbar extends Component {
     				<FlatButton label="Feed" />
     				<FlatButton label="About" />
     				<AutoComplete
-          				hintText="Search"
-          				dataSource={this.state.dataSource}
-          				onUpdateInput={this.handleUpdateInput}
-        			/>
+          		hintText="Search"
+          		dataSource={this.state.dataSource}
+          		onUpdateInput={this.handleUpdateInput}
+        		/>
     				<FlatButton label="Agencies" />
     				<FlatButton label="People" />
+    				<img src="account_circle.png" height="45px" width="45px" />
     			</ToolbarGroup>
     		</Toolbar>
     	</div>
     )
   }
 
-  handleUpdateInput() {
+  handleFeedClick() {
 
   }
+
+  handleAboutClicked() {
+
+  }
+
+  handleAgenciesClicked() {
+
+  }
+
+  handlePeopleClicked() {
+
+  }
+
 }
 
 const toolbarGroupStyle = {
 	margin: 'auto',
-    width: '50%'
+  width: '50%'
 }
 
 export default Navbar
