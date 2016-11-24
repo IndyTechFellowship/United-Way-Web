@@ -3,12 +3,11 @@ import React, { Component } from 'react'
 const styles = {
   twoColumnLayout: {
     display: "flex",
-    alignItems: "stretch",
     flexWrap: "wrap",
   },
   columnOne: {
     flex: 2,
-    minWidth: 300,
+    minWidth: 200,
   },
   columnTwo: {
     flex: 3,
