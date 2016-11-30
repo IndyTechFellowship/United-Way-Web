@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import App from '/imports/ui/components/App'
+import App from '/imports/ui/views/app/App'
 
 class AppContainer extends Component {
 
