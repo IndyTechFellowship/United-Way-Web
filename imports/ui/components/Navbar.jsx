@@ -87,7 +87,7 @@ class SearchArea extends Component {
 
 const toolbarGroupStyle = {
   margin: 'auto',
-  width: '90%'
+  width: '90%',
 }
 
 const searchAreaStyle = {
@@ -95,12 +95,12 @@ const searchAreaStyle = {
   paddingRight: '5px',
   backgroundColor: '#EEEEEE',
   width: '100%',
-  display: 'inline-block'
+  display: 'inline-block',
 
 }
 
 const iconStyles = {
   width: '90px'
-};
+}
 
 export default Navbar

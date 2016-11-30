@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar/>
+        <Navbar />
         <div className="content">{ this.props.children }</div>
         <Footer />
       </div>
