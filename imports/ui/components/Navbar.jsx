@@ -23,7 +23,7 @@ class Navbar extends Component {
       <div>
         <Toolbar>
           <ToolbarGroup firstChild={true} style={toolbarGroupStyle}>
-            <img src="auw.png" width="45px" height="45px" />
+            <img src="auw.png" width="45" height="45" />
             <FlatButton label="Feed" onClick={this.handleFeedClick}  />
             <FlatButton label="About" onClick={this.handleAboutClicked} />
             <SearchArea style={{ margin: '5px' }}></SearchArea>
