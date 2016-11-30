@@ -35,7 +35,7 @@ const styles =  {
     justifyContent:"space-between",
     backgroundColor: "gray",
     color: "white",
-    height: 80
+    height: 80,
   },
 
   innerBlock: {
@@ -43,13 +43,13 @@ const styles =  {
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "center",
-    padding: 10
+    padding: 10,
   },
 
   outerBlock: {
     display: "flex",
-    flexDirection: "row"
-  }
+    flexDirection: "row",
+  },
 }
 
 export default Footer
