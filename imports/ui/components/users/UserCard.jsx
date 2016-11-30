@@ -21,7 +21,7 @@ class UserCard extends Component {
       <div style={styles.container}>
         <img src={this.props.avatarUrl} style={styles.img} />
         <div style={styles.name}>
-          John Smith
+          { this.props.name }
         </div>
       </div>
     )

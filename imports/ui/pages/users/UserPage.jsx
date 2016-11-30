@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import UserCard from '/imports/ui/components/users/UserCard'
 
 const test_user = {
-  avatarUrl: 'http://www.thewrap.com/wp-content/uploads/2015/11/Donald-Trump.jpg'
+  avatarUrl: 'http://www.thewrap.com/wp-content/uploads/2015/11/Donald-Trump.jpg',
+  name: "John Smith",
 }
 
 const styles = {
@@ -28,7 +29,7 @@ class UserPage extends Component {
     return (
       <div style={styles.twoColumnLayout}>
         <div style={styles.columnOne}>
-          <UserCard avatarUrl={test_user.avatarUrl}/>
+          <UserCard avatarUrl={test_user.avatarUrl} name={test_user.name} />
         </div>
         <div style={styles.columnTwo}>
           User { this.props.params.id } Column 2
