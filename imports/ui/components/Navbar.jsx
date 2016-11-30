@@ -10,10 +10,12 @@ import {
 } from 'material-ui'
 import blue500 from 'material-ui/styles/colors'
 import Person from 'material-ui/svg-icons/action/account-circle'
+import { Link } from 'react-router'
 
 class Navbar extends Component {
   constructor(props) {
     super(props)
+    this.handleFeedClick.bind(this)
   }
 
   render() {
@@ -22,11 +24,11 @@ class Navbar extends Component {
         <Toolbar>
           <ToolbarGroup firstChild={true} style={toolbarGroupStyle}>
             <img src="auw.png" width="45px" height="45px" />
-            <FlatButton label="Feed" />
-            <FlatButton label="About" />
+            <FlatButton label="Feed" onClick={this.handleFeedClick}  />
+            <FlatButton label="About" onClick={this.handleAboutClicked} />
             <SearchArea style={{ margin: '5px' }}></SearchArea>
-            <FlatButton label="Agencies" />
-            <FlatButton label="People" />
+            <FlatButton label="Agencies" onClick={this.handleAgenciesClicked} />
+            <FlatButton label="People" onClick={this.handlePeopleClicked} />
             <Person style={iconStyles} />
           </ToolbarGroup>
         </Toolbar>
@@ -35,19 +37,19 @@ class Navbar extends Component {
   }
 
   handleFeedClick() {
-
+    <Link to={'/home'} />
   }
 
   handleAboutClicked() {
-
+    <Link to={'/about'} />
   }
 
   handleAgenciesClicked() {
-
+    <Link to={'/organizations/'} />
   }
 
   handlePeopleClicked() {
-
+    <Link to={'/users'} />
   }
 
 }
