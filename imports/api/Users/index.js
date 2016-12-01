@@ -2,8 +2,6 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Meteor } from 'meteor/meteor'
 import { Mongo } from 'meteor/mongo'
 
-import './usersPublications'
-
 const ProfileSchema = new SimpleSchema({
   avatarUrl: {
     type: String,
