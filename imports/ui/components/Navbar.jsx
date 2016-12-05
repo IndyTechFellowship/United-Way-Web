@@ -22,11 +22,11 @@ class Navbar extends Component {
     return (
       <div>
         <Toolbar>
-          <ToolbarGroup firstChild={true} style={toolbarGroupStyle}>
+          <ToolbarGroup firstChild={true} >
             <img src="auw.png" style={logoStyle} />
-            <FlatButton label="Feed" onClick={this.handleFeedClick}  />
+            <FlatButton label="Opportunities" onClick={this.handleFeedClick}  />
             <FlatButton label="About" onClick={this.handleAboutClicked} />
-            <SearchArea style={{ margin: '5px' }}></SearchArea>
+            <SearchArea />
             <FlatButton label="Agencies" onClick={this.handleAgenciesClicked} />
             <FlatButton label="People" onClick={this.handlePeopleClicked} />
             <Person style={iconStyles} />
@@ -75,12 +75,11 @@ class SearchArea extends Component {
 
   render() {
     return (
-      <div style={searchAreaStyle}>
+      <div>
         <AutoComplete 
           hintText="Search"
           dataSource={this.state.dataSource}
           onUpdateInput={this.handleUpdateInput}
-          fullWidth={true}
         />
       </div>
     )
@@ -90,15 +89,6 @@ class SearchArea extends Component {
 const toolbarGroupStyle = {
   margin: 'auto',
   width: '90%',
-}
-
-const searchAreaStyle = {
-  paddingLeft: '5px',
-  paddingRight: '5px',
-  backgroundColor: '#EEEEEE',
-  width: '100%',
-  display: 'inline-block',
-
 }
 
 const iconStyles = {
