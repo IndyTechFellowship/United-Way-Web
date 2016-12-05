@@ -10,7 +10,7 @@ import {
 } from 'material-ui'
 import blue500 from 'material-ui/styles/colors'
 import Person from 'material-ui/svg-icons/action/account-circle'
-import { Link } from 'react-router'
+import { browserHistory } from 'react-router'
 
 class Navbar extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class Navbar extends Component {
       <div>
         <Toolbar>
           <ToolbarGroup firstChild={true} style={toolbarGroupStyle}>
-            <img src="auw.png" width="45px" height="45px" />
+            <img src="auw.png" style={logoStyle} />
             <FlatButton label="Feed" onClick={this.handleFeedClick}  />
             <FlatButton label="About" onClick={this.handleAboutClicked} />
             <SearchArea style={{ margin: '5px' }}></SearchArea>
@@ -37,19 +37,19 @@ class Navbar extends Component {
   }
 
   handleFeedClick() {
-    <Link to={'/home'} />
+    browserHistory.push('/')
   }
 
   handleAboutClicked() {
-    <Link to={'/about'} />
+    browserHistory.push('/about')
   }
 
   handleAgenciesClicked() {
-    <Link to={'/organizations/'} />
+    browserHistory.push('/organizations/1')
   }
 
   handlePeopleClicked() {
-    <Link to={'/users'} />
+    browserHistory.push('/users/1')
   }
 
 }
@@ -103,6 +103,11 @@ const searchAreaStyle = {
 
 const iconStyles = {
   width: '90px'
+}
+
+const logoStyle = {
+  width: '45px',
+  height: '45px',
 }
 
 export default Navbar
