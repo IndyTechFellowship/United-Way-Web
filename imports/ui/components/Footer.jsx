@@ -30,25 +30,26 @@ class Footer extends Component {
 
 const styles =  {
   footerContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent:"space-between",
-    backgroundColor: "gray",
-    color: "white",
-    height: 80,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    backgroundColor: 'gray',
+    color: 'white',
+    height: '80px',
+    width: '100vw',
   },
 
   innerBlock: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "center",
-    padding: 10,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    padding: '10px',
   },
 
   outerBlock: {
-    display: "flex",
-    flexDirection: "row",
+    display: 'flex',
+    flexDirection: 'row',
   },
 }
 
