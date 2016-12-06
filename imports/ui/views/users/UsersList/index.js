@@ -1,2 +1,2 @@
-import ULSC from './UsersListStateContainer'
-export default ULSC
+import UserListStateContainer from './UsersListStateContainer'
+export default UserListStateContainer
