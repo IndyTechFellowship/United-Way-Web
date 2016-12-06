@@ -7,6 +7,7 @@ import {
   FontIcon,
   AutoComplete,
   Chip,
+  IconButton
 } from 'material-ui'
 import blue500 from 'material-ui/styles/colors'
 import Person from 'material-ui/svg-icons/action/account-circle'
@@ -23,13 +24,13 @@ class Navbar extends Component {
       <div>
         <Toolbar>
           <ToolbarGroup firstChild={true} >
-            <img src="auw.png" style={logoStyle} />
+            <IconButton><img src="auw.png" style={logoStyle} /></IconButton>
             <FlatButton label="Opportunities" onClick={this.handleFeedClick}  />
             <FlatButton label="About" onClick={this.handleAboutClicked} />
             <SearchArea />
             <FlatButton label="Agencies" onClick={this.handleAgenciesClicked} />
             <FlatButton label="People" onClick={this.handlePeopleClicked} />
-            <Person style={iconStyles} />
+            <IconButton><Person style={iconStyles} /></IconButton>
           </ToolbarGroup>
         </Toolbar>
       </div>
