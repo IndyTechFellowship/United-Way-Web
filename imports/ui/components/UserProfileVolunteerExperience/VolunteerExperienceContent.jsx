@@ -6,12 +6,18 @@ class VolunteerExperienceContent extends Component {
 
 	render() {
 		return (
-			<div>
-				VolunteerExperienceContent
-				<OrganizationLogo/>
-				<VolunteerExperienceDescription/>
+			<div style={styles.rowContainer}>
+				<OrganizationLogo logoUrl={this.props.volunteerExperience.logoUrl}/>
+				<VolunteerExperienceDescription experience={this.props.volunteerExperience}/>
 			</div>
 		)
+	}
+}
+
+const styles= {
+	rowContainer: {
+		display: 'flex',
+		flexDirection: 'row',
 	}
 }
 
