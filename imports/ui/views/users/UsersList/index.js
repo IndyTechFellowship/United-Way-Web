@@ -1,0 +1,2 @@
+import UserListStateContainer from './UsersListStateContainer'
+export default UserListStateContainer
