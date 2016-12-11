@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import UserCard from '/imports/ui/views/user/UserCard'
+import UserCard from '/imports/ui/views/users/UserPage/UserCard'
 
 const test_user = {
   avatarUrl: 'http://www.thewrap.com/wp-content/uploads/2015/11/Donald-Trump.jpg',

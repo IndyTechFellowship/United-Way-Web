@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import UserView from '/imports/ui/views/user/UserView'
+import UserView from '/imports/ui/views/users/UserPage/UserView'
 
 class UserPage extends Component {
 
