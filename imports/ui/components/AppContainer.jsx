@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import App from '/imports/ui/views/app/App'
+import App from '/imports/ui/components/App'
 
 class AppContainer extends Component {
 

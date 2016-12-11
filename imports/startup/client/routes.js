@@ -3,7 +3,7 @@ import { IndexRoute, Router, Route, browserHistory } from 'react-router'
 
 // route components
 import AboutPage from '/imports/ui/views/about/AboutPage'
-import AppContainer from '/imports/ui/views/app/AppContainer'
+import AppContainer from '/imports/ui/components/AppContainer'
 import HomePage from '/imports/ui/views/home/HomePage'
 import LoginPage from '/imports/ui/views/login/LoginPage'
 import NotFoundPage from '/imports/ui/views/about/NotFoundPage'
