@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import VolunteerExperienceContent from '/imports/ui/components/UserProfileVolunteerExperience/VolunteerExperienceContent'
+import VolunteerExperienceContent from '/imports/ui/views/users/volunteerExperienceList/VolunteerExperienceContent'
 
 class VolunteerExperienceList extends Component {
 
@@ -21,12 +21,12 @@ class VolunteerExperienceList extends Component {
 }
 
 const testExperienceList = [
+	//FIXME: how will we be storing dates?
 	{
 		userId: 1,
 		logoUrl: 'http://media.vocativ.com/photos/2015/01/Hipster-Statistics-001928277552.jpg',
 		jobTitle: 'Hipster',
 		companyName: 'Chic Inc.',
-		//FIXME: how will we be storing date?
 		startMonth: 'Jun',
 		startYear: '2011',
 		endMonth: 'July',
@@ -39,7 +39,6 @@ const testExperienceList = [
 		logoUrl: 'http://s3.amazonaws.com/digitaltrends-uploads-prod/2015/07/GoPro-is-working-on-a-new-mobile-app-that-will-let-you-edit-and-share-videos1.jpg',
 		jobTitle: 'Personal GoPro Holder',
 		companyName: 'EDM Unite',
-		//FIXME: how will we be storing date?
 		startMonth: 'Apr',
 		startYear: '2014',
 		endMonth: 'Dec',
@@ -52,7 +51,6 @@ const testExperienceList = [
 		logoUrl: 'http://www.adventurecats.org/wp-content/uploads/2015/09/harness2-e1443158795556.jpg',
 		jobTitle: 'Cat Walker',
 		companyName: 'Meow You See Me',
-		//FIXME: how will we be storing date?
 		startMonth: 'Mar',
 		startYear: '1999',
 		endMonth: null,

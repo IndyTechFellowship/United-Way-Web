@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import OrganizationLogo from '/imports/ui/components/UserProfileVolunteerExperience/OrganizationLogo'
-import VolunteerExperienceDescription from '/imports/ui/components/UserProfileVolunteerExperience/VolunteerExperienceDescription'
+import OrganizationLogo from '/imports/ui/views/users/volunteerExperienceList/OrganizationLogo'
+import VolunteerExperienceDescription from '/imports/ui/views/users/volunteerExperienceList/VolunteerExperienceDescription'
 
 class VolunteerExperienceContent extends Component {
 

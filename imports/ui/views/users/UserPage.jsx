@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import VolunteerExperienceList from '/imports/ui/components/UserProfileVolunteerExperience/VolunteerExperienceList'
+import VolunteerExperienceList from '/imports/ui/views/users/volunteerExperienceList/VolunteerExperienceList'
 
 class UserPage extends Component {
 
