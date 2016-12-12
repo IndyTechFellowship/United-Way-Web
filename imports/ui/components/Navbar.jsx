@@ -23,8 +23,8 @@ class Navbar extends Component {
     return (
       <div>
         <Toolbar>
-          <ToolbarGroup firstChild={true} >
-            <IconButton><img src="auw.png" style={logoStyle} /></IconButton>
+          <ToolbarGroup style={toolbarGroupStyle} firstChild={true} >
+            <IconButton><img src="mauw.png" style={logoStyle} /></IconButton>
             <FlatButton label="Opportunities" onClick={this.handleFeedClick}  />
             <FlatButton label="About" onClick={this.handleAboutClicked} />
             <SearchArea />
@@ -76,19 +76,24 @@ class SearchArea extends Component {
 
   render() {
     return (
-      <div>
+      <div style={searchStyles}>
         <AutoComplete 
           hintText="Search"
           dataSource={this.state.dataSource}
           onUpdateInput={this.handleUpdateInput}
+          fullWidth={true}
         />
       </div>
     )
   }
 }
 
+const searchStyles = {
+  flexGrow: '1'
+}
+
 const toolbarGroupStyle = {
-  margin: 'auto',
+  margin: '0 auto',
   width: '90%',
 }
 

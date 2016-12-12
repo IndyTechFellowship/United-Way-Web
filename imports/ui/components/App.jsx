@@ -30,10 +30,12 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={styles.pageWrapper}>
+        <div>
           <Navbar />
-          <div style={styles.content}>{ this.props.children }</div>
-          <Footer />
+          <div style={styles.pageWrapper}>
+            <div style={styles.content}>{ this.props.children }</div>
+            <Footer />
+          </div>
         </div>
       </MuiThemeProvider>
     )
