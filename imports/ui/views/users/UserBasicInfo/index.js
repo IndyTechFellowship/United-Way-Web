@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 import AboutMeTagline from '/imports/ui/views/users/UserBasicInfo/AboutMeTagline'
 import Skills from '/imports/ui/views/users/UserBasicInfo/Skills'
