@@ -4,13 +4,13 @@ class VolunteerExperienceDescription extends Component {
 
   render() {
     let experience = this.props.experience
-    let dateEnd = experience.current ? 'current' : experience.endMonth + ' ' + experience.endYear
+    let dateEnd = experience.endDate === null ? 'present' : experience.endDate.toISOString()
 
     return (
         <div style={styles.descriptionContainer}>
           <div>{experience.jobTitle}</div>
           <div>{experience.companyName}</div>
-          <div>{experience.startMonth} {experience.startYear} - {dateEnd}</div>
+          <div>{experience.startDate.toISOString()} - {dateEnd}</div>
           <div>{experience.description}</div>
         </div>
     )
