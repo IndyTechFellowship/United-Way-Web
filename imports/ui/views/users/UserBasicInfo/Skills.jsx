@@ -6,7 +6,7 @@ class Skills extends Component {
 
 	render() {
 		let skills = fakeSkillPills.map((skill) => {
-			return <Chip style={styles.chip}>{skill}</Chip>
+			return <Chip key={skill} style={styles.chip}>{skill}</Chip>
 		})
 		return (
 			<div style={styles.skillsBox}>
