@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-  Toolbar, 
+  Toolbar,
   ToolbarGroup,
   RaisedButton,
   FlatButton,
@@ -77,7 +77,7 @@ class SearchArea extends Component {
   render() {
     return (
       <div>
-        <AutoComplete 
+        <AutoComplete
           hintText="Search"
           dataSource={this.state.dataSource}
           onUpdateInput={this.handleUpdateInput}
