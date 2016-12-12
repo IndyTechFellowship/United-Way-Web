@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import UserCard from '/imports/ui/views/users/UserCard'
-import VolunteerExperienceList from '/imports/ui/views/users/volunteerExperienceList/VolunteerExperienceList'
+import UserBasicInfo from '/imports/ui/views/users/UserBasicInfo'
+import VolunteerExperienceList from '/imports/ui/views/users/VolunteerExperienceList'
 
 const test_user = {
   avatarUrl: 'http://www.thewrap.com/wp-content/uploads/2015/11/Donald-Trump.jpg',
@@ -30,7 +30,7 @@ class UserPage extends Component {
     return (
       <div style={styles.twoColumnLayout}>
         <div style={styles.columnOne}>
-          <UserCard avatarUrl={test_user.avatarUrl} name={test_user.name} />
+          <UserBasicInfo avatarUrl={test_user.avatarUrl} name={test_user.name} />
         </div>
         <div style={styles.columnTwo}>
           <VolunteerExperienceList />
