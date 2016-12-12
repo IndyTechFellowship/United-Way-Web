@@ -4,7 +4,8 @@ class OrganizationDetails extends Component {
   render() {
     return (
       <div>
-        Org Details
+        <div>{this.props.details.industryType}</div>
+        <div>{this.props.details.website}</div>
       </div>
     )
   }
