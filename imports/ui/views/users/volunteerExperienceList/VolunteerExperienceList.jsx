@@ -21,7 +21,6 @@ class VolunteerExperienceList extends Component {
 }
 
 const testExperienceList = [
-  //FIXME: how will we be storing dates?
   {
     userId: 1,
     logoUrl: 'http://media.vocativ.com/photos/2015/01/Hipster-Statistics-001928277552.jpg',
