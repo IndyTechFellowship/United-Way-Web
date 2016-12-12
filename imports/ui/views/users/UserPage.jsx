@@ -16,7 +16,6 @@ const styles = {
   columnOne: {
     flex: 2,
     minWidth: 200,
-    padding: '10px',
   },
   columnTwo: {
     flex: 3,
