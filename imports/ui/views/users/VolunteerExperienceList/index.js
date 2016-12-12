@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import VolunteerExperienceContent from '/imports/ui/views/users/volunteerExperienceList/VolunteerExperienceContent'
+import VolunteerExperienceContent from '/imports/ui/views/users/VolunteerExperienceList/VolunteerExperienceContent'
 
 class VolunteerExperienceList extends Component {
 

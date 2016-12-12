@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
-import VolunteerExperienceList from '/imports/ui/views/users/volunteerExperienceList/VolunteerExperienceList'
+import UserBasicInfo from '/imports/ui/views/users/UserBasicInfo'
+import VolunteerExperienceList from '/imports/ui/views/users/VolunteerExperienceList'
 
 class UserPage extends Component {
 
@@ -8,6 +9,7 @@ class UserPage extends Component {
     return (
         <div>
           <div>User { this.props.params.id }</div>
+          <UserBasicInfo />
           <VolunteerExperienceList />
         </div>
     )
