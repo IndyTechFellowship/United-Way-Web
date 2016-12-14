@@ -24,7 +24,7 @@ class Navbar extends Component {
       <div>
         <Toolbar>
           <ToolbarGroup style={toolbarGroupStyle} firstChild={true} >
-            <IconButton><img src="mauw.png" style={logoStyle} /></IconButton>
+            <img src="auw.png" style={logoStyle} />
             <FlatButton label="Opportunities" onClick={this.handleFeedClick}  />
             <FlatButton label="About" onClick={this.handleAboutClicked} />
             <SearchArea />

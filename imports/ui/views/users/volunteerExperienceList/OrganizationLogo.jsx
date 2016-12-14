@@ -19,3 +19,4 @@ const styles = {
 }
 
 export default OrganizationLogo
+
