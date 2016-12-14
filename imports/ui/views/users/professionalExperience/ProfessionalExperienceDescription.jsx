@@ -4,7 +4,7 @@ class ProfessionalExperienceDescription extends Component {
   render() {
     return (
       <div>
-        {this.props.professionalExperienceDescription}
+        {this.props.description}
       </div>
     )
   }
