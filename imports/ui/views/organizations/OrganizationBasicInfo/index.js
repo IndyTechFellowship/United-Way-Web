@@ -4,14 +4,14 @@ import {FlatButton} from 'material-ui'
 
 import OrganizationDetails from './OrganizationDetails'
 import Skills from '/imports/ui/components/Skills'
-import UserCard from '/imports/ui/components/UserCard'
+import AvatarCard from '/imports/ui/components/AvatarCard'
 
 class OrganizationBasicInfo extends Component {
   render() {
     return (
       <div>
         <div style={styles.outerContainer}>
-          <UserCard avatarUrl={this.props.orgDetails.avatarUrl} name={this.props.orgDetails.name}/>
+          <AvatarCard avatarUrl={this.props.orgDetails.avatarUrl} name={this.props.orgDetails.name}/>
           <div style={styles.detailsBlock}>
             <OrganizationDetails details={this.props.orgDetails.info}/>
             <Skills/>

@@ -14,7 +14,7 @@ const styles = {
   }
 }
 
-class UserCard extends Component {
+class AvatarCard extends Component {
 
   render() {
     return (
@@ -29,4 +29,4 @@ class UserCard extends Component {
 
 }
 
-export default UserCard
+export default AvatarCard

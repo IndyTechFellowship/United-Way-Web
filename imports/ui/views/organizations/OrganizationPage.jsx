@@ -32,7 +32,6 @@ class OrganizationPage extends Component {
     return (
       <div style={styles.twoColumnLayout}>
         <div style={styles.columnOne}>
-          Column 1 (org { this.props.params.id })
           <OrganizationBasicInfo orgDetails={test_org}/>
         </div>
         <div style={styles.columnTwo}>
