@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 
+import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
+
 const test_org = {
   avatarUrl: 'http://unitedwaymoore.com/wp-content/uploads/united_way.jpg',
   name: "United Way",
+  info: {
+    industryType: 'Economic Development',
+    website: 'www.google.com',
+  },
 }
 
 const styles = {
@@ -26,7 +32,7 @@ class OrganizationPage extends Component {
     return (
       <div style={styles.twoColumnLayout}>
         <div style={styles.columnOne}>
-          Column 1 (org { this.props.params.id })
+          <OrganizationBasicInfo orgDetails={test_org}/>
         </div>
         <div style={styles.columnTwo}>
           Column 2 (org { this.props.params.id })
