@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+
+import Title from '/imports/ui/components/Title'
 import VolunteerExperienceContent from '/imports/ui/views/users/VolunteerExperienceList/VolunteerExperienceContent'
 
 class VolunteerExperienceList extends Component {
@@ -11,7 +13,7 @@ class VolunteerExperienceList extends Component {
 
     return (
         <div style={styles.listContainer}>
-          <div style={styles.title}>Volunteer Experience</div>
+          <Title>Volunteer Experience</Title>
           <div style={styles.listContainer}>
             {VolunteerExperienceList}
           </div>
