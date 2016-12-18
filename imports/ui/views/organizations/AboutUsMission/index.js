@@ -6,13 +6,13 @@ import Title from '/imports/ui/components/Title'
 class AboutUsMission extends Component {
   render() {
     return (
+      <div>
+        <Title>About Us & Our Mission</Title>
+        <AboutUsImages images={this.props.organization.images} />
         <div>
-          <Title>About Us & Our Mission</Title>
-          <AboutUsImages images={this.props.organization.images} />
-          <div>
-            {this.props.organization.description}
-          </div>
+          {this.props.organization.description}
         </div>
+      </div>
     )
   }
 }

@@ -3,16 +3,16 @@ import React, { Component } from 'react'
 class AboutUsImages extends Component {
   render() {
     return (
-        <div style={styles.images}>
-          {this.props.images.map((image, index) =>
-            <div id={index} src={image} style={
-                Object.assign({
-                  background: `url(${image})`},
-                  styles.image
-                )}
-            />
-          )}
-        </div>
+      <div style={styles.images}>
+        {this.props.images.map((image, index) =>
+          <div id={index} src={image} style={
+              Object.assign({
+                background: `url(${image})`},
+                styles.image
+              )}
+          />
+        )}
+      </div>
     )
   }
 }
