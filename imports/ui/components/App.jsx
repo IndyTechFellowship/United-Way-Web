@@ -15,7 +15,8 @@ const styles = {
   },
   content: {
     flex: 1,
-    width: 900,
+    width: "80%",
+    maxWidth: 900,
   },
 }
 
