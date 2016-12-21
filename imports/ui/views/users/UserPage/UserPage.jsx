@@ -27,6 +27,7 @@ const styles = {
 class UserPage extends Component {
 
   render() {
+    console.log(this.props)
     if(this.props.loading) {
       return <Loading />
     } else {
