@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import ProfessionalExperienceContent from '/imports/ui/views/users/professionalExperience/ProfessionalExperienceContent'
+import ProfessionalExperienceContent from '/imports/ui/views/users/ProfessionalExperience/ProfessionalExperienceContent'
 
 class ProfessionalExperience extends Component {
 

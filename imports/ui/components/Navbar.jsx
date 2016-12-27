@@ -30,7 +30,7 @@ class Navbar extends Component {
             <SearchArea />
             <FlatButton label="Agencies" onClick={this.handleAgenciesClicked} />
             <FlatButton label="People" onClick={this.handlePeopleClicked} />
-            <IconButton><Person style={iconStyles} /></IconButton>
+            <IconButton onClick={this.handleProfileClicked}><Person style={iconStyles} /></IconButton>
           </ToolbarGroup>
         </Toolbar>
       </div>
@@ -51,6 +51,10 @@ class Navbar extends Component {
 
   handlePeopleClicked() {
     browserHistory.push('/users/1')
+  }
+
+  handleProfileClicked() {
+    browserHistory.push('/login')
   }
 
 }
