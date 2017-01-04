@@ -31,6 +31,11 @@ const RolesSchema = new SimpleSchema({
 })
 
 const UserSchema = new SimpleSchema({
+  services: {
+    type: Object,
+    blackbox: true,
+    optional: true
+  },
   profile: {
     type: ProfileSchema,
   },
