@@ -2,9 +2,15 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Meteor } from 'meteor/meteor'
 import { Mongo } from 'meteor/mongo'
 
+const ProfileAvatarSchema = new SimpleSchema({
+  original: { type: String },
+  x250: { type: String, optional: true },
+})
+
 const ProfileSchema = new SimpleSchema({
-  avatarUrl: {
-    type: String,
+  avatar: {
+    type: ProfileAvatarSchema,
+    optional: true
   },
   firstName: {
     type: String,
