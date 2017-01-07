@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ProfessionalExperienceLogo from './ProfessionalExperienceLogo.jsx'
+import ExperienceLogo from '/imports/ui/components/ExperienceLogo'
 import ProfessionalExperienceHeader from './ProfessionalExperienceHeader'
 import ProfessionalExperienceDescription from './ProfessionalExperienceDescription'
 
@@ -11,7 +11,7 @@ class ProfessionalExperienceContent extends Component {
     return (
       <div style={contentStyle}>
         <div style={topStyle} >
-          <ProfessionalExperienceLogo logoUrl={info.logoUrl} />
+          <ExperienceLogo logoUrl={info.logoUrl} />
           <ProfessionalExperienceHeader 
             title={info.title} 
             company={info.company} 

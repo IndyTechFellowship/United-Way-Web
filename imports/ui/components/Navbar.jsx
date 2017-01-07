@@ -50,7 +50,7 @@ class Navbar extends Component {
   }
 
   handlePeopleClicked() {
-    browserHistory.push('/users')
+    browserHistory.push('/users/1')
   }
 
 }
