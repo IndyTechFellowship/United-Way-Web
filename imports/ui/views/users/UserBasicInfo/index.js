@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import AvatarCard from '/imports/ui/components/AvatarCard'
 import Skills from '/imports/ui/components/Skills'
+import Title from '/imports/ui/components/Title'
 import AboutMeTagline from '/imports/ui/views/users/UserBasicInfo/AboutMeTagline'
 
 class UserBasicInfo extends Component {
@@ -10,7 +11,7 @@ class UserBasicInfo extends Component {
         <div style={styles.userInfoBlock}>
           <AvatarCard avatarUrl={this.props.avatarUrl} name={this.props.name} />
           <div style={styles.aboutMeSkillsBlock}>
-            <div>About Me & Skills</div>
+            <Title>About Me & Skills</Title>
             <AboutMeTagline/>
             <Skills/>
           </div>

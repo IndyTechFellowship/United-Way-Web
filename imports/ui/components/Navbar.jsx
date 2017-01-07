@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-  Toolbar, 
+  Toolbar,
   ToolbarGroup,
   RaisedButton,
   FlatButton,
@@ -50,7 +50,7 @@ class Navbar extends Component {
   }
 
   handlePeopleClicked() {
-    browserHistory.push('/users/1')
+    browserHistory.push('/users')
   }
 
 }
