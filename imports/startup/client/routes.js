@@ -21,14 +21,14 @@ export const Routes = () => (
       <IndexRoute component={HomePage}/>
       <Route path="about" component={AboutPage}/>
       <Route path="login" component={LoginPage}/>
-      <Route path="organizations/">
+      <Route path="organizations">
         <IndexRoute component={OrganizationsPage}/>
         <Route path=":id" component={OrganizationPage}/>
         <Route path=":org_id/positions/:id" component={PositionPage}/>
       </Route>
       <Route path="search" component={SearchPage}/>
       <Route path="settings" component={SettingsPage}/>
-      <Route path="users/">
+      <Route path="users">
         <IndexRoute component={UsersPage}/>
         <Route path=":id" component={UserPage}/>
       </Route>

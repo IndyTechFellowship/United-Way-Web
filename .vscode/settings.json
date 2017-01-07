@@ -1,0 +1,20 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+  // Keep autosaving turned off due to meteor hot code reloading
+  "files.autoSave": "off",
+
+  // This excludes paths from appearing in the file tree.
+  // search.exclude inherits from this map
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.meteor": true,
+    "**/.svn": true,
+    "**/node_modules": true
+  }
+
+}

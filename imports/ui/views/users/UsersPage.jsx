@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 
+import UsersList from './UsersList'
+
 class UsersPage extends Component {
 
   render() {
-    return <div>Users</div>
+    return <UsersList />
   }
 
 }
