@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 
 import UserBasicInfo from '/imports/ui/views/users/UserBasicInfo'
 import VolunteerExperienceList from '/imports/ui/views/users/VolunteerExperienceList'
-import ProfessionalExperience from '/imports/ui/views/users/professionalExperience/ProfessionalExperience'
-
+import ProfessionalExperience from '/imports/ui/views/users/ProfessionalExperience'
 const test_user = {
   avatarUrl: 'http://www.thewrap.com/wp-content/uploads/2015/11/Donald-Trump.jpg',
   name: "John Smith",
