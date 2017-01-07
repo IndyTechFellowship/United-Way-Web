@@ -10,9 +10,12 @@ export default class EmailPasswordLogin extends Component {
     return (
       <div style={loginStyle}>
         <TextField
-          hintText="Email" />
+          hintText="Email"
+          floatingLabelText="Email" />
         <TextField
-          hintText="Password" />
+          hintText="Password"
+          floatingLabelText="Password"
+          type="password" />
         <FlatButton
           style={forgotPasswordButtonStyle}
           label="Forgot Password" />

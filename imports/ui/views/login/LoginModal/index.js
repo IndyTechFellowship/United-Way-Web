@@ -8,14 +8,14 @@ export default class LoginModal extends Component {
     render() {
         return (
             <div style={loginModal}>
-              <h1 style={center}>Let's get to yo account</h1>
+              <span style={bigHeader}>Let's get to yo account</span>
               <div style={topLogin}>
                 <EmailPasswordLogin />
                 <div style={divider} />
                 <SocialLogin />
               </div>
-              <h1>Oh, you ain't got an account yet?</h1>
-              <h6>Waddup! Create yo account to start showin and sharin yo interests</h6>
+              <span style={bigHeader}>Oh, you ain't got an account yet?</span>
+              <span style={smallHeader}>Waddup! Create yo account to start showin and sharin yo interests</span>
               <CreateAnAccountLogin />
             </div>
         )
@@ -25,7 +25,7 @@ export default class LoginModal extends Component {
 const loginModal = {
   display: 'flex',
   flexDirection: 'column',
-  flexGrow: '1'
+  flexGrow: '1',
 }
 
 const topLogin = {
@@ -39,6 +39,12 @@ const divider = {
   background: 'grey',
 }
 
-const center = {
+const bigHeader = {
+  fontSize: 32,
+  alignItems: 'center'
+}
+
+const smallHeader = {
+  fontSize: 20,
   alignItems: 'center'
 }
