@@ -6,26 +6,26 @@ import SocialLogin from '/imports/ui/views/login/LoginModal/SocialLogin.js'
 import CreateAnAccountLogin from '/imports/ui/views/login/LoginModal/CreateAnAccountLogin.jsx'
 
 export default class LoginModal extends Component {
-    render() {
-        return (
-            <Modal
-              isOpen={true}
-              contentLabel="Login/Register" 
-              style={loginModal} >
-              <div style={center}>
-              <span style={bigHeader}>Let's get to yo account</span>
-              <div style={topLogin}>
-                <EmailPasswordLogin />
-                <div style={divider} />
-                <SocialLogin />
-              </div>
-              <div style={bigHeader}>Oh, you ain't got an account yet?</div>
-              <div style={smallHeader}>Waddup! Create yo account to start showin and sharin yo interests</div>
-              <CreateAnAccountLogin />
-              </div>
-            </Modal>
-        )
-    }
+  render() {
+    return (
+      <Modal
+        isOpen={true}
+        contentLabel="Login/Register" 
+        style={loginModal} >
+          <div style={center}>
+            <span style={bigHeader}>Let's get to yo account</span>
+            <div style={topLogin}>
+              <EmailPasswordLogin />
+              <div style={divider} />
+              <SocialLogin />
+            </div>
+            <div style={bigHeader}>Oh, you ain't got an account yet?</div>
+            <div style={smallHeader}>Waddup! Create yo account to start showin and sharin yo interests</div>
+            <CreateAnAccountLogin />
+          </div>
+      </Modal>
+    )
+  }
 }
 
 const loginModal = {
