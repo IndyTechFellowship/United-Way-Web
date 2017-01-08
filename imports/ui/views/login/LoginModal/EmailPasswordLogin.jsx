@@ -6,16 +6,32 @@ import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
 
 export default class EmailPasswordLogin extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: "",
+      password: "",
+      remember: false,
+      emailErrorText: "",
+      passwordErrorText: ""
+    }
+  }
+
   render() {
     return (
       <div style={loginStyle}>
         <TextField
           hintText="Email"
-          floatingLabelText="Email" />
+          floatingLabelText="Email"
+          errorText={this.state.emailErrorText}
+          onChange={emailChange} />
         <TextField
           hintText="Password"
           floatingLabelText="Password"
-          type="password" />
+          type="password" 
+          errorText={this.state.passwordErrorText}
+          onChange={passwordChange} />
         <FlatButton
           style={forgotPasswordButtonStyle}
           label="Forgot Password" />
@@ -25,11 +41,44 @@ export default class EmailPasswordLogin extends Component {
             style={checkboxStyle} />
           <RaisedButton 
             label="Login" 
-            style={loginButtonStyle} />
+            style={loginButtonStyle}
+            onClick={emailLogin} />
         </div>
       </div>
     )
   }
+}
+
+emailChange = (event, value) => {
+  this.emailChange.bind(this)
+  this.state = {
+    email: value
+  }
+  console.log(this.state.email)
+}
+
+passwordChange = (event, value) => {
+  this.emailChange.bind(this)
+  this.state = {
+    password: value
+  }
+  console.log(this.state.password)
+}
+
+const emailLogin = () => {
+  let email = this.state.email
+  let password = this.state.password
+  console.log("email: " + email + " password: " + password)
+  if (validate(email, password)) {
+    console.log(email, password)
+  }
+}
+
+const validate = (email, password) => {
+  //could probably add a lot more validation methods
+  //console.log("Email: ", email.length)
+  //console.log("Passowrd: ", password.length)
+  return email.length != 0 || password.length != 0
 }
 
 const loginStyle = {
