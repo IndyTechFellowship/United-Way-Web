@@ -12,6 +12,7 @@ export default class LoginModal extends Component {
               isOpen={true}
               contentLabel="Login/Register" 
               style={loginModal} >
+              <div style={center}>
               <span style={bigHeader}>Let's get to yo account</span>
               <div style={topLogin}>
                 <EmailPasswordLogin />
@@ -21,6 +22,7 @@ export default class LoginModal extends Component {
               <div style={bigHeader}>Oh, you ain't got an account yet?</div>
               <div style={smallHeader}>Waddup! Create yo account to start showin and sharin yo interests</div>
               <CreateAnAccountLogin />
+              </div>
             </Modal>
         )
     }
@@ -28,14 +30,19 @@ export default class LoginModal extends Component {
 
 const loginModal = {
   content: {
-    position: 'absolute',
+    position: 'fixed',
     top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)'
-  }
+  },
+}
+
+const center = {
+  width: '95%',
+  margin: '0 auto'
 }
 
 const topLogin = {
@@ -51,10 +58,9 @@ const divider = {
 
 const bigHeader = {
   fontSize: 32,
-  alignItems: 'center'
 }
 
 const smallHeader = {
   fontSize: 20,
-  alignItems: 'center'
+  alignItems: 'center',
 }
