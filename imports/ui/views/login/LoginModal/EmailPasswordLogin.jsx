@@ -16,6 +16,8 @@ export default class EmailPasswordLogin extends Component {
       emailErrorText: "",
       passwordErrorText: ""
     }
+
+    this.validate = this.validate.bind(this)
   }
 
   render() {
@@ -25,13 +27,13 @@ export default class EmailPasswordLogin extends Component {
           hintText="Email"
           floatingLabelText="Email"
           errorText={this.state.emailErrorText}
-          onChange={emailChange} />
+          onChange={this.emailChange.bind(this)} />
         <TextField
           hintText="Password"
           floatingLabelText="Password"
           type="password" 
           errorText={this.state.passwordErrorText}
-          onChange={passwordChange} />
+          onChange={this.passwordChange.bind(this)} />
         <FlatButton
           style={forgotPasswordButtonStyle}
           label="Forgot Password" />
@@ -42,43 +44,57 @@ export default class EmailPasswordLogin extends Component {
           <RaisedButton 
             label="Login" 
             style={loginButtonStyle}
-            onClick={emailLogin} />
+            onClick={this.emailLogin.bind(this)} />
         </div>
       </div>
     )
   }
-}
 
-emailChange = (event, value) => {
-  this.emailChange.bind(this)
-  this.state = {
-    email: value
+  emailChange(event, value) {
+    this.setState({
+      email: value
+    })
   }
-  console.log(this.state.email)
-}
 
-passwordChange = (event, value) => {
-  this.emailChange.bind(this)
-  this.state = {
-    password: value
+  passwordChange(event, value) {
+    this.setState({
+      password: value
+    })
   }
-  console.log(this.state.password)
-}
 
-const emailLogin = () => {
-  let email = this.state.email
-  let password = this.state.password
-  console.log("email: " + email + " password: " + password)
-  if (validate(email, password)) {
-    console.log(email, password)
+  emailLogin() {
+    let email = this.state.email
+    let password = this.state.password
+    if (this.validate(email, password)) {
+      console.log(email, password)
+    } else {
+      console.log("Validation Failed")
+    }
   }
-}
 
-const validate = (email, password) => {
-  //could probably add a lot more validation methods
-  //console.log("Email: ", email.length)
-  //console.log("Passowrd: ", password.length)
-  return email.length != 0 || password.length != 0
+  validate(email, password) {
+    let valid = true
+    if (email === undefined || email.length == 0) {
+      valid = false
+      this.setState({
+        emailErrorText: "Email is required"
+      })
+    }
+    if (password === undefined || password.length == 0) {
+      valid = false
+      this.setState({
+        passwordErrorText: "Password is required"
+      })
+    }
+    if (valid) {
+      this.setState({
+        emailErrorText: "",
+        passwordErrorText: ""
+      })
+    }
+    return valid
+  }
+
 }
 
 const loginStyle = {
