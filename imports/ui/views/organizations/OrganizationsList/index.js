@@ -1,0 +1,2 @@
+import OrganizationListStateContainer from './OrganizationsListStateContainer'
+export default OrganizationListStateContainer
