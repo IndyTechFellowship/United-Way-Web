@@ -56,7 +56,7 @@ const UserSchema = new SimpleSchema({
   },
   savedPositions: {
     type: [ String ],
-  }
+  },
 })
 
 const Users = new Mongo.Collection('users')

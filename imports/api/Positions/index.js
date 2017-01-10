@@ -28,10 +28,10 @@ const PositionsSchema = new SimpleSchema({
     type: String,
   },
   skills: {
-    type: [String],
+    type: [ String ],
   },
   applicants: {
-    type: [String],
+    type: [ String ],
   },
   deadline: {
     type: Date
