@@ -7,9 +7,10 @@ import {
   FontIcon,
   AutoComplete,
   Chip,
-  IconButton
+  IconButton,
+  IconMenu,
+  MenuItem
 } from 'material-ui'
-import blue500 from 'material-ui/styles/colors'
 import Person from 'material-ui/svg-icons/action/account-circle'
 import { browserHistory } from 'react-router'
 
@@ -30,7 +31,17 @@ class Navbar extends Component {
             <SearchArea />
             <FlatButton label="Agencies" onClick={this.handleAgenciesClicked} />
             <FlatButton label="People" onClick={this.handlePeopleClicked} />
-            <IconButton onClick={this.handleProfileClicked}><Person style={iconStyles} /></IconButton>
+            <IconMenu listStyle={iconMenu}
+                    iconButtonElement={<IconButton onClick={this.handleProfileClicked}><Person style={iconStyles} /></IconButton>}
+                    anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+                    targetOrigin={{horizontal: 'left', vertical: 'top'}}
+            >
+              <MenuItem primaryText="View Profile - Add Other Stuff" />
+              <MenuItem primaryText="Edit Profile" />
+              <MenuItem primaryText="View Organization Profile - Admin Only" />
+              <MenuItem primaryText="Edit Organization Profile - Admin Only" />
+              <MenuItem primaryText="Sign out" />
+            </IconMenu>
           </ToolbarGroup>
         </Toolbar>
       </div>
@@ -108,6 +119,10 @@ const iconStyles = {
 const logoStyle = {
   width: '45px',
   height: '45px',
+}
+
+const iconMenu = {
+  // paddingTop: '30px'
 }
 
 export default Navbar
