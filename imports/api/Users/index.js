@@ -39,7 +39,7 @@ const UserSchema = new SimpleSchema({
   },
 })
 
-const Users = new Mongo.Collection('users')
+const Users = Meteor.users;
 Users.attachSchema(UserSchema)
 
 export { Users }
