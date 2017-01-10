@@ -12,10 +12,22 @@ const ProfileSchema = new SimpleSchema({
   lastName: {
     type: String,
   },
-  description: {
+  tagline: {
     type: String,
   },
+  summary: {
+    type: String,
+  },
+  interests: {
+    type: [ String ],
+  },
   skills: {
+    type: [ String ],
+  },
+  professionalExperience: {
+    type: [ String ],
+  },
+  volunteerExperience: {
     type: [ String ],
   },
 })
@@ -42,10 +54,12 @@ const UserSchema = new SimpleSchema({
   roles: {
     type: [ RolesSchema ],
   },
+  savedPositions: {
+    type: [ String ],
+  }
 })
 
 const Users = new Mongo.Collection('users')
 Users.attachSchema(UserSchema)
 
 export { Users }
-
