@@ -46,7 +46,7 @@ class Navbar extends Component {
   }
 
   handleAgenciesClicked() {
-    browserHistory.push('/organizations/1')
+    browserHistory.push('/organizations')
   }
 
   handlePeopleClicked() {

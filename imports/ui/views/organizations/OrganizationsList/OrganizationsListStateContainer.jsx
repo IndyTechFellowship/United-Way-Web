@@ -31,6 +31,6 @@ OrganizationsListStateContainer.propTypes = {
 export default createContainer(() => {
     const query = {}
     const handle = Meteor.subscribe('Organizations.get', query)
-    if (!handle.ready()) return { loading: true, users: [] }
+    if (!handle.ready()) return { loading: true, organizations: [] }
     else return { loading: false, organizations: Organizations.find({}).fetch() }
 }, OrganizationsListStateContainer)

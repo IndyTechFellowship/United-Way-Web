@@ -1,13 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 import Loading from '/imports/ui/components/Loading'
-import UserBasicInfo from '/imports/ui/views/users/UserBasicInfo'
-import VolunteerExperienceList from '/imports/ui/views/users/VolunteerExperienceList'
-
-const test_user = {
-  avatarUrl: 'http://www.thewrap.com/wp-content/uploads/2015/11/Donald-Trump.jpg',
-  name: "John Smith",
-}
+import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
 
 const styles = {
   twoColumnLayout: {
@@ -24,7 +18,7 @@ const styles = {
   }
 }
 
-class UserPage extends Component {
+class OrganizationPage extends Component {
 
   render() {
     if(this.props.loading) {
@@ -33,10 +27,10 @@ class UserPage extends Component {
       return (
         <div style={styles.twoColumnLayout}>
           <div style={styles.columnOne}>
-            <UserBasicInfo avatarUrl={this.props.user.profile.avatarUrl} name={`${this.props.user.profile.firstName} ${this.props.user.profile.lastName}`} />
+            <OrganizationBasicInfo organization={this.props.organization}/>
           </div>
           <div style={styles.columnTwo}>
-            <VolunteerExperienceList />
+            Column 2 (org { this.props.params.id })
           </div>
         </div>
       )
@@ -45,9 +39,9 @@ class UserPage extends Component {
 
 }
 
-UserPage.propTypes = {
+OrganizationPage.propTypes = {
   loading: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
+  organization: PropTypes.object.isRequired,
 }
 
-export default UserPage
+export default OrganizationPage
