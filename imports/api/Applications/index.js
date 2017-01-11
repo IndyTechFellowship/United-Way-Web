@@ -11,10 +11,10 @@ const ApplicationsSchema = new SimpleSchema({
   },
   position: {
     type: String,
-  }
+  },
 })
 
-const Application = new Mongo.Collection('application')
-Application.attachSchema(ApplicationsSchema)
+const Applications = new Mongo.Collection('applications')
+Applications.attachSchema(ApplicationsSchema)
 
-export { Application }
+export { Applications }
