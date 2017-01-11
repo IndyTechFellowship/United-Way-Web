@@ -14,5 +14,5 @@ import { Organizations } from '/imports/api/Organizations'
 // things on `this` that you sometimes need in publications and methods,
 // so you always want to use function(), not arrows, in these.
 Meteor.publish('Organizations.get', function(query) {
-    return Organizations.find(query, { 'name': 1 })
+    return Organizations.find(query)
 })
