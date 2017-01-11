@@ -1,0 +1,14 @@
+{
+  "facebook": {
+    "id": "",
+    "secret": ""
+  },
+  "google": {
+    "id": "",
+    "secret": ""
+  },
+  "linkedin": {
+    "id": "",
+    "secret": ""
+  }
+}
