@@ -13,14 +13,14 @@ export default class LoginModal extends Component {
         contentLabel="Login/Register" 
         style={loginModal} >
           <div style={center}>
-            <span style={bigHeader}>Let's get to yo account</span>
+            <span style={bigHeader}>Let's get you to your account</span>
             <div style={topLogin}>
               <EmailPasswordLogin />
               <div style={divider} />
               <SocialLogin />
             </div>
-            <div style={bigHeader}>Oh, you ain't got an account yet?</div>
-            <div style={smallHeader}>Waddup! Create yo account to start showin and sharin yo interests</div>
+            <div style={bigHeader}>Oh, you don't have an account yet?</div>
+            <div style={smallHeader}>Create your account to start showing and sharing your interests</div>
             <CreateAnAccountLogin />
           </div>
       </Modal>
@@ -61,6 +61,6 @@ const bigHeader = {
 }
 
 const smallHeader = {
-  fontSize: 20,
+  fontSize: 16,
   alignItems: 'center',
 }

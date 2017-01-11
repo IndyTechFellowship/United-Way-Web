@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -19,7 +18,6 @@ export default class CreateAnAccountLogin extends Component {
       passwordError: '',
       confirmPasswordError: ''
     }
-
     this.validate = this.validate.bind(this)
     this.isUndefinedOrEmpty = this.isUndefinedOrEmpty.bind(this)
   }
@@ -111,17 +109,12 @@ export default class CreateAnAccountLogin extends Component {
     let password = this.state.password
     let confirmPassword = this.state.confirmPassword
     let valid = true
-
-    
-
     valid = this.isUndefinedOrEmpty(firstName, "firstNameError") || 
             this.isUndefinedOrEmpty(lastName, "lastNameError") ||
             this.isUndefinedOrEmpty(email, "emailError") ||
             this.isUndefinedOrEmpty(password, "passwordError") || 
             this.isUndefinedOrEmpty(confirmPassword, "confirmPasswordError")
-
     return valid
-
   }
 
   isUndefinedOrEmpty(value, error) {
