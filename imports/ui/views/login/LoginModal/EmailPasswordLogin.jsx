@@ -36,11 +36,13 @@ export default class EmailPasswordLogin extends Component {
           onChange={this.passwordChange.bind(this)} />
         <FlatButton
           style={forgotPasswordButtonStyle}
-          label="Forgot Password" />
+          label="Forgot Password"
+          onClick={this.forgotPasswordClicked.bind(this)} />
         <div style={loginCheckButtonStyle} >
           <Checkbox
             label="Remember Me"
-            style={checkboxStyle} />
+            style={checkboxStyle}
+            onCheck={this.rememberChecked.bind(this)} />
           <RaisedButton 
             label="Login" 
             style={loginButtonStyle}
@@ -48,6 +50,10 @@ export default class EmailPasswordLogin extends Component {
         </div>
       </div>
     )
+  }
+
+  forgotPasswordClicked() {
+    console.log("Sorry, this feature isn't available")
   }
 
   emailChange(event, value) {
@@ -62,11 +68,18 @@ export default class EmailPasswordLogin extends Component {
     })
   }
 
+  rememberChecked(event, isChecked) {
+    this.setState({
+      remember: isChecked
+    })
+  }
+
   emailLogin() {
     let email = this.state.email
     let password = this.state.password
+    let remember = this.state.remember
     if (this.validate(email, password)) {
-      console.log(email, password)
+      console.log(email, password, remember)
     } else {
       console.log("Validation Failed")
     }
