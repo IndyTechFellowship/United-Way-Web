@@ -1,3 +1,5 @@
+import './sso';
+
 import '/imports/api/Users'
 import '/imports/api/Users/server/usersPublications'
 import '/imports/api/Organizations'

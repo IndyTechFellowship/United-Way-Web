@@ -15,6 +15,8 @@ import SettingsPage from '/imports/ui/views/settings/SettingsPage'
 import UserPage from '/imports/ui/views/users/UserPage'
 import UsersPage from '/imports/ui/views/users/UsersPage'
 
+import SsoButtons from '/imports/ui/views/login/SsoButtons'
+
 export const Routes = () => (
   <Router history={browserHistory}>
     <Route path="/" component={AppContainer}>
@@ -32,6 +34,7 @@ export const Routes = () => (
         <IndexRoute component={UsersPage}/>
         <Route path=":id" component={UserPage}/>
       </Route>
+      <Route path="testsso" component={SsoButtons} />
       <Route path="*" component={NotFoundPage}/>
     </Route>
   </Router>
