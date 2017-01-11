@@ -108,13 +108,12 @@ export default class CreateAnAccountLogin extends Component {
     let email = this.state.email
     let password = this.state.password
     let confirmPassword = this.state.confirmPassword
-    let valid = true
-    valid = this.isUndefinedOrEmpty(firstName, "firstNameError") || 
-            this.isUndefinedOrEmpty(lastName, "lastNameError") ||
-            this.isUndefinedOrEmpty(email, "emailError") ||
-            this.isUndefinedOrEmpty(password, "passwordError") || 
-            this.isUndefinedOrEmpty(confirmPassword, "confirmPasswordError")
-    return valid
+    let emailCheck = this.isUndefinedOrEmpty(email, "emailError")
+    let lastCheck = this.isUndefinedOrEmpty(lastName, "lastNameError")
+    let passCheck = this.isUndefinedOrEmpty(password, "passwordError")
+    let firstCheck = this.isUndefinedOrEmpty(firstName, "firstNameError")
+    let confirmCheck = this.isUndefinedOrEmpty(confirmPassword, "confirmPasswordError")
+    return emailCheck || lastCheck || passCheck || firstCheck || confirmCheck
   }
 
   isUndefinedOrEmpty(value, error) {
