@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
 import AboutUsMission from '/imports/ui/views/organizations/AboutUsMission'
-import PositionPosting from '/imports/ui/views/organizations/PositionPosting'
+import PositionsList from '/imports/ui/views/organizations/PositionsList'
 
 const test_org = {
   avatarUrl: 'http://unitedwaymoore.com/wp-content/uploads/united_way.jpg',
@@ -17,6 +17,36 @@ const test_org = {
     "http://www.nhs.uk/Livewell/volunteering/PublishingImages/why-volunteer_533x255_512194509.jpg",
   ],
 }
+
+// TODO: Move into org model?
+const test_positions = [
+  {
+    name: 'Kitten Mental Health Specialist',
+    description: 'Should be able to talk to all types of kittens in multiple languages.',
+    positionType: 'Animal Services',
+    opportunityType: 'committee',
+    timeCommitment: '1 year',
+    monetaryCommitment: '100',
+    frequency: 'monthly',
+    creator: 'Animal Kingdom',
+    skills: ['empathetic', 'inter-species communication', 'love'],
+    applicants: {},
+    deadline: new Date(2017, 10, 10),
+  },
+  {
+    name: 'Curriculum Chair',
+    description: 'Get shit done.',
+    positionType: 'Administration',
+    opportunityType: 'board',
+    timeCommitment: '2 years',
+    monetaryCommitment: '2000',
+    frequency: 'bi-weekly',
+    creator: 'Mike Langy...',
+    skills: ['beard', 'soylent', 'metro'],
+    applicants: {},
+    deadline: new Date(2017, 4, 8),
+  },
+]
 
 const styles = {
   twoColumnLayout: {
@@ -40,7 +70,8 @@ class OrganizationPage extends Component {
       <div style={styles.twoColumnLayout}>
         <div style={styles.columnOne}>
           <OrganizationBasicInfo orgDetails={test_org}/>
-          <PositionPosting/>
+          {/*TODO: Move into org model*/}
+          <PositionsList positions={test_positions}/>
         </div>
         <div style={styles.columnTwo}>
           <AboutUsMission organization={test_org}/>
