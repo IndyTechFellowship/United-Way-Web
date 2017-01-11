@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 import Loading from '/imports/ui/components/Loading'
 import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
+import PositionsList from '/imports/ui/views/organizations/PositionsList'
 
 const styles = {
   twoColumnLayout: {
@@ -24,10 +25,15 @@ class OrganizationPage extends Component {
     if(this.props.loading) {
       return <Loading />
     } else {
+      console.log(this.props.organization.getPositions());
+      console.log(this.props.organization.positions);
+
+
       return (
         <div style={styles.twoColumnLayout}>
           <div style={styles.columnOne}>
             <OrganizationBasicInfo organization={this.props.organization}/>
+            <PositionsList positions={this.props.organization.getPositions()}/>
           </div>
           <div style={styles.columnTwo}>
             (About Us Mission goes here)
