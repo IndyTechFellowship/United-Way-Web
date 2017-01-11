@@ -1,4 +1,7 @@
 
+node_modules/
+typings/
+
 # Created by https://www.gitignore.io/api/macos,meteorjs,node
 
 ### macOS ###
