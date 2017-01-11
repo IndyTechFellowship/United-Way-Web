@@ -48,11 +48,13 @@ export default class CreateAnAccountLogin extends Component {
           <TextField
             hintText="Password"
             floatingLabelText="Password"
+            type="password" 
             errorText={this.state.passwordError}
             onChange={this.onPasswordChanged.bind(this)} />
           <TextField
             hintText="Confirm Password"
             floatingLabelText="Confirm Password" 
+            type="password" 
             errorText={this.state.confirmPasswordError}
             onChange={this.onConfirmPasswordChanged.bind(this)} />
           <div>
@@ -118,7 +120,7 @@ export default class CreateAnAccountLogin extends Component {
             this.isUndefinedOrEmpty(password, "passwordError") || 
             this.isUndefinedOrEmpty(confirmPassword, "confirmPasswordError")
 
-
+    return valid
 
   }
 
