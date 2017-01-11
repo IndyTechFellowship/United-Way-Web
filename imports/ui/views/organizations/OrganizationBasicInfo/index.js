@@ -11,9 +11,9 @@ class OrganizationBasicInfo extends Component {
     return (
       <div>
         <div style={styles.outerContainer}>
-          <AvatarCard avatarUrl={this.props.orgDetails.avatarUrl} name={this.props.orgDetails.name}/>
+          <AvatarCard avatarUrl={this.props.organization.avatarUrl} name={this.props.organization.name}/>
           <div style={styles.detailsBlock}>
-            <OrganizationDetails details={this.props.orgDetails.info}/>
+            <OrganizationDetails organization={this.props.organization}/>
             <Skills/>
           </div>
         </div>
