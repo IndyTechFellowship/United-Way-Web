@@ -8,18 +8,33 @@ const PositionsSchema = new SimpleSchema({
   },
   description: {
     type: String,
-  }.
+  },
+  positionType: {
+    type: String,
+  },
+  opportunityType: {
+    type: String,
+  },
+  timeCommitment: {
+    type: String,
+  },
+  monetaryCommitment: {
+    type: Number,
+  },
+  frequency: {
+    type: String,
+  },
   creator: {
     type: String,
   },
-  requiredSkills: {
-    type: [String],
-  },
-  desiredSkills: {
-    type: [String],
+  skills: {
+    type: [ String ],
   },
   applicants: {
-    type: [String],
+    type: [ String ],
+  },
+  deadline: {
+    type: Date
   },
 })
 

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 
+import OrganizationsList from './OrganizationsList'
+
 class OrganizationsPage extends Component {
 
   render() {
-    return <div>Organizations</div>
+    return <OrganizationsList />
   }
 
 }

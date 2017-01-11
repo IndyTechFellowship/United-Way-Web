@@ -8,6 +8,7 @@ typings/
 *.DS_Store
 .AppleDouble
 .LSOverride
+settings.*json
 
 # Icon must end with two \r
 Icon
@@ -32,9 +33,6 @@ Temporary Items
 ### MeteorJS ###
 # default meteor build and local packages
 .meteor/local
-
-# meteor settings file
-settings.json
 
 # meteor build output files
 *.tar.gz
@@ -91,4 +89,6 @@ jspm_packages
 
 # Yarn Integrity file
 .yarn-integrity
->>>>>>> November
+
+# Intellij Configureations
+.idea/*

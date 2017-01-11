@@ -9,14 +9,23 @@ const OrganizationSchema = new SimpleSchema({
   name: {
     type: String,
   },
+  tagline: {
+    type: String,
+  },
+  imageUrls: {
+    type: [ String ],
+  },
   description: {
     type: String,
   },
   users: {
-    type: [String], 
+    type: [ String ],
+  },
+  tags: {
+    type: [ String ],
   },
   positions: {
-    type: [String],
+    type: [ String ],
   },
 })
 

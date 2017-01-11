@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import {
-  Toolbar, 
+  Toolbar,
   ToolbarGroup,
   RaisedButton,
   FlatButton,
   FontIcon,
   AutoComplete,
   Chip,
+  IconButton
 } from 'material-ui'
 import blue500 from 'material-ui/styles/colors'
 import Person from 'material-ui/svg-icons/action/account-circle'
-import { Link } from 'react-router'
+import { browserHistory } from 'react-router'
 
 class Navbar extends Component {
   constructor(props) {
@@ -22,14 +23,14 @@ class Navbar extends Component {
     return (
       <div>
         <Toolbar>
-          <ToolbarGroup firstChild={true} style={toolbarGroupStyle}>
-            <img src="auw.png" width="45" height="45" />
-            <FlatButton label="Feed" onClick={this.handleFeedClick}  />
+          <ToolbarGroup style={toolbarGroupStyle} firstChild={true} >
+            <img src="auw.png" style={logoStyle} />
+            <FlatButton label="Opportunities" onClick={this.handleFeedClick}  />
             <FlatButton label="About" onClick={this.handleAboutClicked} />
-            <SearchArea style={{ margin: '5px' }}></SearchArea>
+            <SearchArea />
             <FlatButton label="Agencies" onClick={this.handleAgenciesClicked} />
             <FlatButton label="People" onClick={this.handlePeopleClicked} />
-            <Person style={iconStyles} />
+            <IconButton><Person style={iconStyles} /></IconButton>
           </ToolbarGroup>
         </Toolbar>
       </div>
@@ -37,19 +38,19 @@ class Navbar extends Component {
   }
 
   handleFeedClick() {
-    <Link to={'/home'} />
+    browserHistory.push('/')
   }
 
   handleAboutClicked() {
-    <Link to={'/about'} />
+    browserHistory.push('/about')
   }
 
   handleAgenciesClicked() {
-    <Link to={'/organizations/'} />
+    browserHistory.push('/organizations')
   }
 
   handlePeopleClicked() {
-    <Link to={'/users'} />
+    browserHistory.push('/users/1')
   }
 
 }
@@ -75,7 +76,7 @@ class SearchArea extends Component {
 
   render() {
     return (
-      <div style={searchAreaStyle}>
+      <div style={searchStyles}>
         <AutoComplete 
           hintText="Search"
           dataSource={this.state.dataSource}
@@ -87,22 +88,22 @@ class SearchArea extends Component {
   }
 }
 
-const toolbarGroupStyle = {
-  margin: 'auto',
-  width: '90%',
+const searchStyles = {
+  flexGrow: '1'
 }
 
-const searchAreaStyle = {
-  paddingLeft: '5px',
-  paddingRight: '5px',
-  backgroundColor: '#EEEEEE',
-  width: '100%',
-  display: 'inline-block',
-
+const toolbarGroupStyle = {
+  margin: '0 auto',
+  width: '90%',
 }
 
 const iconStyles = {
   width: '90px'
+}
+
+const logoStyle = {
+  width: '45px',
+  height: '45px',
 }
 
 export default Navbar

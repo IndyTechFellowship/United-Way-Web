@@ -15,7 +15,8 @@ const styles = {
   },
   content: {
     flex: 1,
-    width: 900,
+    width: "80%",
+    maxWidth: 900,
   },
 }
 
@@ -30,10 +31,12 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={styles.pageWrapper}>
+        <div>
           <Navbar />
-          <div style={styles.content}>{ this.props.children }</div>
-          <Footer />
+          <div style={styles.pageWrapper}>
+            <div style={styles.content}>{ this.props.children }</div>
+            <Footer />
+          </div>
         </div>
       </MuiThemeProvider>
     )
