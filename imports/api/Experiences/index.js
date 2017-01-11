@@ -12,7 +12,7 @@ const ExperiencesSchema = new SimpleSchema({
   companyName: {
     type: String,
   },
-  organization: {
+  organizationId: {
     type: String,
   },
   location: {

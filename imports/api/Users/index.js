@@ -24,10 +24,10 @@ const ProfileSchema = new SimpleSchema({
   skills: {
     type: [ String ],
   },
-  professionalExperience: {
+  professionalExperiences: {
     type: [ String ],
   },
-  volunteerExperience: {
+  volunteerExperiences: {
     type: [ String ],
   },
 })
