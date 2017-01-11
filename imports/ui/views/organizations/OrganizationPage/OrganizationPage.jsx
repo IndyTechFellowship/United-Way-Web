@@ -30,7 +30,7 @@ class OrganizationPage extends Component {
             <OrganizationBasicInfo organization={this.props.organization}/>
           </div>
           <div style={styles.columnTwo}>
-            Column 2 (org { this.props.params.id })
+            (About Us Mission goes here)
           </div>
         </div>
       )
