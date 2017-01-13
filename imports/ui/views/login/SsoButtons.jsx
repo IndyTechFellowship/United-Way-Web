@@ -1,4 +1,4 @@
-import { FlatButton } from 'material-ui';
+import RaisedButton from 'material-ui/RaisedButton'
 import React, { Component } from 'react';
 
 class SsoButtons extends Component {
@@ -23,14 +23,25 @@ class SsoButtons extends Component {
 
   render() {
     return (
-      <div>
-        <FlatButton label="Google" onTouchTap={this.onClickGoogleLogin.bind(this)} />
-        <FlatButton label="Facebook" onTouchTap={this.onClickFacebookLogin.bind(this)} />
-        <FlatButton label="LinkedIn" onTouchTap={this.onClickLinkedinLogin.bind(this)} />
+      <div style={socialLoginStyle} >
+        <RaisedButton style={raisedButtonStyle} label="Login with LinkedIn" onTouchTap={this.onClickLinkedinLogin.bind(this)}/>
+        <RaisedButton style={raisedButtonStyle} label="Login with Facebook" onTouchTap={this.onClickFacebookLogin.bind(this)} />
+        <RaisedButton style={raisedButtonStyle} label="Login with Google" onTouchTap={this.onClickGoogleLogin.bind(this)} />
       </div>
     );
   }
 
+}
+
+const socialLoginStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center'
+}
+const raisedButtonStyle = {
+  margin: 4,
+  width: 200
 }
 
 export default SsoButtons;

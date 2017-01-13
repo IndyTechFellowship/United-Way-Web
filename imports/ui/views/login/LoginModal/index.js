@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Modal from 'react-modal'
 
 import EmailPasswordLogin from '/imports/ui/views/login/LoginModal/EmailPasswordLogin.jsx'
-import SocialLogin from '/imports/ui/views/login/LoginModal/SocialLogin.js'
+import SSOButtons from '/imports/ui/views/login/SsoButtons.jsx'
 import CreateAnAccountLogin from '/imports/ui/views/login/LoginModal/CreateAnAccountLogin.jsx'
 
 export default class LoginModal extends Component {
@@ -17,7 +17,7 @@ export default class LoginModal extends Component {
             <div style={topLogin}>
               <EmailPasswordLogin />
               <div style={divider} />
-              <SocialLogin />
+              <SSOButtons />
             </div>
             <div style={bigHeader}>Oh, you don't have an account yet?</div>
             <div style={smallHeader}>Create your account to start showing and sharing your interests</div>
