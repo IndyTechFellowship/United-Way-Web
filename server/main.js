@@ -2,6 +2,6 @@ import { Meteor } from 'meteor/meteor'
 
 import '/imports/startup/server'
 
-Meteor.startup(() => {
-  // code to run on server at startup
-})
+if (Meteor.isDevelopment) {
+  Seed = require('../imports/seeds').default;
+}
