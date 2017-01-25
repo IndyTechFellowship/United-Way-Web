@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
 
 class Footer extends Component {
 
@@ -26,10 +25,6 @@ class Footer extends Component {
         </div>
       </div>
     )
-  }
-
-  onTermsClicked() {
-    browserHistory.push('/termsandconditions')
   }
 
 }
