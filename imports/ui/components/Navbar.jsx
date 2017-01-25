@@ -27,7 +27,7 @@ class Navbar extends Component {
             <SearchArea />
             <FlatButton label="Agencies" onClick={this.handleAgenciesClicked} />
             <FlatButton label="People" onClick={this.handlePeopleClicked} />
-            <UserProfileMenu/>
+            <UserProfileMenu />
           </ToolbarGroup>
         </Toolbar>
       </div>

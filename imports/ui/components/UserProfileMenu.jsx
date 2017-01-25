@@ -1,25 +1,15 @@
 import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
 import {
-  Toolbar,
-  ToolbarGroup,
-  RaisedButton,
+  Divider,
   FlatButton,
-  FontIcon,
-  AutoComplete,
-  Chip,
   IconButton,
   IconMenu,
   MenuItem,
-  Divider
 } from 'material-ui'
 import Person from 'material-ui/svg-icons/action/account-circle'
-import { browserHistory } from 'react-router'
 
 export default class UserProfileMenu extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <IconMenu
@@ -35,7 +25,7 @@ export default class UserProfileMenu extends Component {
             <div style={styles.iconMenuItemContainer}>
               <div>Name</div>
               <div>Email</div>
-              <RaisedButton>View Profile</RaisedButton>
+              <FlatButton>View Profile</FlatButton>
             </div>
           </div>
         </MenuItem>
