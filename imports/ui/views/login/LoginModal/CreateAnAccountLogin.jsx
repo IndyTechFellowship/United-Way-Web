@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import { Link } from 'react-router'
 
 export default class CreateAnAccountLogin extends Component {
 
@@ -56,7 +57,7 @@ export default class CreateAnAccountLogin extends Component {
             errorText={this.state.confirmPasswordError}
             onChange={this.onConfirmPasswordChanged.bind(this)} />
           <div>
-            <span style={text}>I agree to <a href="/termsandconditions">Terms and Conditions</a></span>
+            <span style={text}>I agree to <Link to={'/termsandconditions'}>Terms and Conditions</Link></span>
             <RaisedButton 
               label="Sign Up"
               style={signUpButton}

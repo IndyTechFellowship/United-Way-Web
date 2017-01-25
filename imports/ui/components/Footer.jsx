@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 class Footer extends Component {
 
@@ -9,7 +10,7 @@ class Footer extends Component {
           <span>&copy; 2017 All Rights Reserved</span>
           <span>United Way of Central Indiana</span>
           <span>Website by Indy Tech Fellowship</span>
-          <span><a href="/termsandconditions">Terms and Conditions</a></span>
+          <Link to={'/termsandconditions'}>Terms and Conditions</Link>
         </div>
         <div style={styles.outerBlock}>
           <div style={styles.innerBlock}>
