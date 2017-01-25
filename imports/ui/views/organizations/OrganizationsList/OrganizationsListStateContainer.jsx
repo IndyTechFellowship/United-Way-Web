@@ -34,3 +34,5 @@ export default createContainer(() => {
     if (!handle.ready()) return { loading: true, organizations: [] }
     else return { loading: false, organizations: Organizations.find({}).fetch() }
 }, OrganizationsListStateContainer)
+
+// TODO: createContainer for Positions schema

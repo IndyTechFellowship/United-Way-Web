@@ -1,8 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 
+import { createContainer } from 'meteor/react-meteor-data'
+
 import Loading from '/imports/ui/components/Loading'
 import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
 import PositionsList from '/imports/ui/views/organizations/PositionsList'
+
+import { Positions } from '/imports/api/Positions'
 
 const styles = {
   twoColumnLayout: {
@@ -25,7 +29,7 @@ class OrganizationPage extends Component {
     if(this.props.loading) {
       return <Loading />
     } else {
-      console.log(this.props.organization.getPositions());
+      // console.log(this.props.organization.getPositions());
       console.log(this.props.organization.positions);
 
 
@@ -33,7 +37,7 @@ class OrganizationPage extends Component {
         <div style={styles.twoColumnLayout}>
           <div style={styles.columnOne}>
             <OrganizationBasicInfo organization={this.props.organization}/>
-            <PositionsList positions={this.props.organization.getPositions()}/>
+            <PositionsList positions={this.props.positions}/>
           </div>
           <div style={styles.columnTwo}>
             (About Us Mission goes here)
@@ -48,6 +52,22 @@ class OrganizationPage extends Component {
 OrganizationPage.propTypes = {
   loading: PropTypes.bool.isRequired,
   organization: PropTypes.object.isRequired,
+  positions: PropTypes.array.isRequired,
 }
 
-export default OrganizationPage
+export default createContainer(({ organization }) => {
+  const query = { organizationId: organization._id }
+  const handle = Meteor.subscribe('Positions.get', query);
+  if (!handle.ready()) {
+    return { positions: []}
+  } else {
+    // return { positions: Positions.find({ _id: { $in: organization.positions }}).fetch() }
+    return { positions: organization.getPosition() }
+  }
+  // const positions = organization.getPositions();
+  // return {
+  //   positions: Positions.find({ _id: { $in: organization.positions }}).fetch()
+  // }
+}, OrganizationPage);
+
+// export default OrganizationPage
