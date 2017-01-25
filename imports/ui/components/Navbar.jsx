@@ -2,15 +2,9 @@ import React, { Component } from 'react'
 import {
   Toolbar,
   ToolbarGroup,
-  RaisedButton,
   FlatButton,
   FontIcon,
   AutoComplete,
-  Chip,
-  IconButton,
-  IconMenu,
-  MenuItem,
-  Divider
 } from 'material-ui'
 import { browserHistory } from 'react-router'
 
