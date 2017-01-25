@@ -14,6 +14,7 @@ import SearchPage from '/imports/ui/views/search/SearchPage'
 import SettingsPage from '/imports/ui/views/settings/SettingsPage'
 import UserPage from '/imports/ui/views/users/UserPage'
 import UsersPage from '/imports/ui/views/users/UsersPage'
+import TermsAndConditions from '/imports/ui/views/terms/TermsAndConditions'
 
 import SsoButtons from '/imports/ui/views/login/SsoButtons'
 
@@ -35,6 +36,7 @@ export const Routes = () => (
         <Route path=":id" component={UserPage}/>
       </Route>
       <Route path="testsso" component={SsoButtons} />
+      <Route path="termsandconditions" component={TermsAndConditions} />
       <Route path="*" component={NotFoundPage}/>
     </Route>
   </Router>

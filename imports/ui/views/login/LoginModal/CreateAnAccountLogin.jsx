@@ -56,7 +56,7 @@ export default class CreateAnAccountLogin extends Component {
             errorText={this.state.confirmPasswordError}
             onChange={this.onConfirmPasswordChanged.bind(this)} />
           <div>
-            <span style={text}>I agree to the Terms and Privacy</span>
+            <span style={text}>I agree to <a href="/termsandconditions">Terms and Conditions</a></span>
             <RaisedButton 
               label="Sign Up"
               style={signUpButton}

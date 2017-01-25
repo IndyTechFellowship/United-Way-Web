@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
 
 class Footer extends Component {
 
@@ -9,6 +10,7 @@ class Footer extends Component {
           <span>&copy; 2017 All Rights Reserved</span>
           <span>United Way of Central Indiana</span>
           <span>Website by Indy Tech Fellowship</span>
+          <span><a href="/termsandconditions">Terms and Conditions</a></span>
         </div>
         <div style={styles.outerBlock}>
           <div style={styles.innerBlock}>
@@ -24,6 +26,10 @@ class Footer extends Component {
         </div>
       </div>
     )
+  }
+
+  onTermsClicked() {
+    browserHistory.push('/termsandconditions')
   }
 
 }
