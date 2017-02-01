@@ -29,9 +29,6 @@ class OrganizationPage extends Component {
     if(this.props.loading) {
       return <Loading />
     } else {
-      // console.log(this.props.organization.getPositions());
-      console.log(this.props.organization.positions);
-
 
       return (
         <div style={styles.twoColumnLayout}>
@@ -55,6 +52,7 @@ OrganizationPage.propTypes = {
   positions: PropTypes.array.isRequired,
 }
 
+// TODO: create positionListStateContainer instead - pass in query as parameter (ie. instead of organization)
 export default createContainer(({ organization }) => {
   const query = { organizationId: organization._id }
   const handle = Meteor.subscribe('Positions.get', query);

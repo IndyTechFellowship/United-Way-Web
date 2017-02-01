@@ -26,11 +26,21 @@ class PositionBasics extends Component {
             {this.props.position.deadline.toDateString()}
           </div>
         </div>
-        <div>
-          <RaisedButton label="Express Interest"></RaisedButton>
+        <div style={styles.buttonContainer}>
+          <RaisedButton onClick={this.onExpressInterest} label="Express Interest"/>
+          <RaisedButton onClick={this.onSave} label="Save"/>
         </div>
       </div>
     )
+  }
+
+  // TODO: need to have login state working in order to add these to user
+  onExpressInterest() {
+    console.log('express interest clicked');
+  }
+
+  onSave() {
+    console.log('save clicked');
   }
 }
 
@@ -45,6 +55,11 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     fontSize: '12px',
+  },
+
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'column',
   },
 }
 

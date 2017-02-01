@@ -38,8 +38,6 @@ Organizations.helpers({
 
   getPositions() {
     console.log('inside helper function');
-    console.log(this);
-    console.log(this.positions);
     console.log(Positions.find({ _id: { $in: this.positions }}).fetch());
     return Positions.find({ _id: { $in: this.positions }}).fetch()
   },
