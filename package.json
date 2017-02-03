@@ -4,7 +4,7 @@
   "scripts": {
     "start": "meteor run --settings settings.dev.json",
     "seed": "./scripts/seed.sh",
-	"deploy": "git push heroku master"
+    "deploy": "git push heroku master"
   },
   "dependencies": {
     "material-ui": "^0.16.4",
