@@ -12,6 +12,12 @@ class Footer extends Component {
           <span>Website by Indy Tech Fellowship</span>
           <Link to={'/termsandconditions'}>Terms and Conditions</Link>
         </div>
+        <div style={styles.linksContainer} >
+          <Link style={styles.links} to={'/about'}>About</Link>
+          <Link style={styles.links} to={'/termsandconditions'}>Terms and Conditions</Link>
+          <Link style={styles.links} to={'/Privacy Policy'}>Privacy Policy</Link>
+          <Link style={styles.links} to={'/'}>United Way of Central Indiana</Link>
+        </div>
         <div style={styles.outerBlock}>
           <div style={styles.innerBlock}>
             <span>Contact UWCI</span>
@@ -53,6 +59,15 @@ const styles =  {
     display: 'flex',
     flexDirection: 'row',
   },
+
+  linksContainer: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+
+  links: {
+    padding: '20px'
+  }
 }
 
 export default Footer
