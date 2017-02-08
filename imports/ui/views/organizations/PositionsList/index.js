@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 
-import PositionPosting from './PositionPosting'
+import PositionPosting from '../../positions/PositionPosting/PositionPosting'
 
+// TODO: remove this file
 class PositionsList extends Component {
   constructor(props) {
     super(props)
