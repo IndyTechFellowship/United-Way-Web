@@ -9,25 +9,28 @@ import LoginPage from '/imports/ui/views/login/LoginPage'
 import NotFoundPage from '/imports/ui/views/about/NotFoundPage'
 import OrganizationPage from '/imports/ui/views/organizations/OrganizationPage'
 import OrganizationsPage from '/imports/ui/views/organizations/OrganizationsPage'
-import PositionPage from '/imports/ui/views/organizations/positions/PositionPage'
+// import PositionPage from '/imports/ui/views/organizations/positions/PositionPage'
 import SearchPage from '/imports/ui/views/search/SearchPage'
 import SettingsPage from '/imports/ui/views/settings/SettingsPage'
 import UserPage from '/imports/ui/views/users/UserPage'
 import UsersPage from '/imports/ui/views/users/UsersPage'
 import TermsAndConditions from '/imports/ui/views/terms/TermsAndConditions'
 
+import PositionsPage from '/imports/ui/views/positions/PositionsPage'
+
 import SsoButtons from '/imports/ui/views/login/SsoButtons'
 
+// TODO: fix/remove excess routes
 export const Routes = () => (
   <Router history={browserHistory}>
     <Route path="/" component={AppContainer}>
       <IndexRoute component={HomePage}/>
-      <Route path="about" component={AboutPage}/>
+      <Route path="about" component={PositionsPage}/>
       <Route path="login" component={LoginPage}/>
       <Route path="organizations">
         <IndexRoute component={OrganizationsPage}/>
         <Route path=":id" component={OrganizationPage}/>
-        <Route path=":org_id/positions/:id" component={PositionPage}/>
+        {/*<Route path=":org_id/positions/:id" component={PositionPage}/>*/}
       </Route>
       <Route path="search" component={SearchPage}/>
       <Route path="settings" component={SettingsPage}/>

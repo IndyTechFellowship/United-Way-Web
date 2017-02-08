@@ -23,6 +23,7 @@ class Navbar extends Component {
           <ToolbarGroup style={toolbarGroupStyle} firstChild={true} >
             <img src="auw.png" style={logoStyle} />
             <FlatButton label="Opportunities" onClick={this.handleFeedClick}  />
+            {/*TODO: remove - testing positions using about*/}
             <FlatButton label="About" onClick={this.handleAboutClicked} />
             <SearchArea />
             <FlatButton label="Agencies" onClick={this.handleAgenciesClicked} />

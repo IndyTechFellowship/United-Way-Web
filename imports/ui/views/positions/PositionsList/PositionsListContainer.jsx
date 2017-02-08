@@ -8,7 +8,7 @@ import PositionsList from './PositionsList'
 class PositionsListContainer extends Component {
 
   render() {
-    return <PositionsList { ...this.props} />
+    return <PositionsList { ...this.props } />
   }
 }
 
@@ -17,12 +17,11 @@ PositionsListContainer.propTypes = {
 }
 
 export default createContainer(() => {
-  // TODO: pass in query as param
   const query = {}
   const handle = Meteor.subscribe('Positions.get', query)
   if (!handle.ready()) {
     return { loading: true, positions: [] }
   } else {
-    return { loading: false, positions: Positions.find(query).fetch() }
+    return { loading: false, positions: Positions.find({}).fetch() }
   }
 }, PositionsListContainer)

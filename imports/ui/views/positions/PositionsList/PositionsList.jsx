@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 
 import Loading from '/imports/ui/components/Loading'
 import PositionPosting from '/imports/ui/views/positions/PositionPosting'
@@ -9,15 +9,13 @@ const PositionsList = ({ loading, positions }) => {
   } else {
     return (
         <div>
-          {
-            positions.map((p) => {
-              return (
-                <div key={p._id}>
-                  <PositionPosting position={p}/>
-                </div>
-              )
-            })
-          }
+          {positions.map((p) => {
+            return (
+              <div key={p._id}>
+                <PositionPosting position={p}/>
+              </div>
+            )
+          })}
         </div>
     )
   }

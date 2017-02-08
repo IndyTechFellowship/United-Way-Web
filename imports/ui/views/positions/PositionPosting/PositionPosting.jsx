@@ -28,7 +28,9 @@ const styles = {
 	positionContainer: {
 		display: 'flex',
 		flexDirection: 'column',
-		justifyContent: 'space-between'
+		justifyContent: 'space-between',
+		width: '300px',
+		height: '300px',
 	},
 
 	showMore: {
