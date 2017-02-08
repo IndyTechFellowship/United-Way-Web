@@ -1,46 +1,40 @@
 import React, {Component} from 'react'
 
-import {RaisedButton} from 'material-ui'
+import {CardText} from 'material-ui'
+import People from 'material-ui/svg-icons/social/people'
+import Person from 'material-ui/svg-icons/social/person'
 
 class PositionBasics extends Component {
   constructor(props) {
     super(props)
   }
 
+  /* TODO: figure out how to get organization name? add to Positions schema? add Organization id to positions schema
+    and have separate query to pull org name for each position?
+  */
+
   render() {
-    let opportunityTypeIcon = this.props.position.opportunityType === 'committee' ? 'committee icon' : 'board icon';
+    //TODO: add real committee/board icons for hi-fi
+    let opportunityTypeIcon = this.props.position.opportunityType === 'committee' ? <Person/> : <People/>;
 
     return (
       <div style={styles.basicInfoContainer}>
-        <div>
+        <div style={styles.iconContainer}>
           {opportunityTypeIcon}
         </div>
         <div style={styles.basicDetailsContainer}>
-          <div>
-            {this.props.position.positionType}
+          <div style={styles.organizationName}>
+            Organization Name
           </div>
-          <div>
+          <div style={styles.positionTitle}>
             {this.props.position.name}
           </div>
-          <div>
+          <div style={styles.dates}>
             {this.props.position.deadline.toDateString()}
           </div>
         </div>
-        <div style={styles.buttonContainer}>
-          <RaisedButton onClick={this.onExpressInterest} label="Express Interest"/>
-          <RaisedButton onClick={this.onSave} label="Save"/>
-        </div>
       </div>
     )
-  }
-
-  // TODO: need to have login state working in order to add these to user
-  onExpressInterest() {
-    console.log('express interest clicked');
-  }
-
-  onSave() {
-    console.log('save clicked');
   }
 }
 
@@ -54,13 +48,34 @@ const styles = {
   basicDetailsContainer: {
     display: 'flex',
     flexDirection: 'column',
-    fontSize: '12px',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start'
   },
 
   buttonContainer: {
     display: 'flex',
     flexDirection: 'column',
   },
+
+  iconContainer: {
+    alignSelf: 'center',
+    padding: '0 16px',
+  },
+
+  organizationName: {
+    fontSize: '16px',
+    textDecoration: 'underline'
+  },
+
+  positionTitle: {
+    fontSize: '18px',
+    fontWeight: 'bold',
+  },
+
+  dates: {
+    fontSize: '14px',
+    textDecoration: 'italic'
+  }
 }
 
 export default PositionBasics
