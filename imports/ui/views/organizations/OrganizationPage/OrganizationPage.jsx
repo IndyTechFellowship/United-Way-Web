@@ -29,13 +29,13 @@ class OrganizationPage extends Component {
     if(this.props.loading) {
       return <Loading />
     } else {
+      let positionsQuery = { _id: { $in: this.props.organization.positions }}
 
       return (
         <div style={styles.twoColumnLayout}>
           <div style={styles.columnOne}>
             <OrganizationBasicInfo organization={this.props.organization}/>
-            {/* TODO: pass in query to get all positions for org id */}
-            <PositionsList />
+            <PositionsList query={positionsQuery} />
           </div>
           <div style={styles.columnTwo}>
             (About Us Mission goes here)

@@ -16,12 +16,11 @@ PositionsListContainer.propTypes = {
 
 }
 
-export default createContainer(() => {
-  const query = {}
-  const handle = Meteor.subscribe('Positions.get', query)
+export default createContainer((props) => {
+  const handle = Meteor.subscribe('Positions.get', props.query)
   if (!handle.ready()) {
     return { loading: true, positions: [] }
   } else {
-    return { loading: false, positions: Positions.find({}).fetch() }
+    return { loading: false, positions: Positions.find(props.query).fetch() }
   }
 }, PositionsListContainer)
