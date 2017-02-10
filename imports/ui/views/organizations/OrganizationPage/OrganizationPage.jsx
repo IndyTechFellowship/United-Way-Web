@@ -1,12 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 
-import { createContainer } from 'meteor/react-meteor-data'
-
 import Loading from '/imports/ui/components/Loading'
 import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
 import PositionsList from '/imports/ui/views/positions/PositionsList'
-
-import { Positions } from '/imports/api/Positions'
 
 const styles = {
   twoColumnLayout: {

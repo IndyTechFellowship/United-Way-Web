@@ -2,8 +2,6 @@ import { Meteor } from 'meteor/meteor'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Mongo } from 'meteor/mongo'
 
-import { Positions } from '/imports/api/Positions'
-
 const OrganizationSchema = new SimpleSchema({
   avatarUrl: {
     type: String,
@@ -33,15 +31,5 @@ const OrganizationSchema = new SimpleSchema({
 
 const Organizations = new Mongo.Collection('organizations')
 Organizations.attachSchema(OrganizationSchema)
-
-Organizations.helpers({
-
-  getPositions() {
-    console.log('inside helper function');
-    console.log(Positions.find({ _id: { $in: this.positions }}).fetch());
-    return Positions.find({ _id: { $in: this.positions }}).fetch()
-  },
-
-})
 
 export { Organizations }

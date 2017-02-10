@@ -9,13 +9,12 @@ import LoginPage from '/imports/ui/views/login/LoginPage'
 import NotFoundPage from '/imports/ui/views/about/NotFoundPage'
 import OrganizationPage from '/imports/ui/views/organizations/OrganizationPage'
 import OrganizationsPage from '/imports/ui/views/organizations/OrganizationsPage'
+import PositionsPage from '/imports/ui/views/positions/PositionsPage'
 import SearchPage from '/imports/ui/views/search/SearchPage'
 import SettingsPage from '/imports/ui/views/settings/SettingsPage'
 import UserPage from '/imports/ui/views/users/UserPage'
 import UsersPage from '/imports/ui/views/users/UsersPage'
 import TermsAndConditions from '/imports/ui/views/terms/TermsAndConditions'
-
-import PositionsPage from '/imports/ui/views/positions/PositionsPage'
 
 import SsoButtons from '/imports/ui/views/login/SsoButtons'
 
