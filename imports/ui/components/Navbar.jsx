@@ -23,7 +23,7 @@ class Navbar extends Component {
           <ToolbarGroup style={toolbarGroupStyle} firstChild={true} >
             <img src="auw.png" style={logoStyle} />
             <FlatButton label="Opportunities" onClick={this.handleFeedClick}  />
-            <FlatButton label="About" onClick={this.handleAboutClicked} />
+            <FlatButton label="Positions" onClick={this.handlePositionsClicked} />
             <SearchArea />
             <FlatButton label="Agencies" onClick={this.handleAgenciesClicked} />
             <FlatButton label="People" onClick={this.handlePeopleClicked} />
@@ -38,8 +38,8 @@ class Navbar extends Component {
     browserHistory.push('/')
   }
 
-  handleAboutClicked() {
-    browserHistory.push('/about')
+  handlePositionsClicked() {
+    browserHistory.push('/positions')
   }
 
   handleAgenciesClicked() {
