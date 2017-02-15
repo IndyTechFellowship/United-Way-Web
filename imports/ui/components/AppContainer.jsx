@@ -7,10 +7,9 @@ class AppContainer extends Component {
 
   render() {
     return (
-        <App children={ this.props.children } />
+      <App children={ this.props.children } />
     )
   }
-
 }
 
 export default AppContainer
