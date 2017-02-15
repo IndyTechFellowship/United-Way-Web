@@ -1,5 +1,5 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Meteor } from 'meteor/meteor'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Mongo } from 'meteor/mongo'
 
 const TagsSchema = new SimpleSchema({

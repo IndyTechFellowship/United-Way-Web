@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 
 class PositionDetails extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  // TODO: add helper call to get list of skills
+  // TODO: change skills to tags in positions schema
 
   render() {
+    let skillNames = this.props.position.skills.map((skill) => {
+      return skill.name;
+    }).join(', ')
+
     return (
       <div style={styles.descriptionContainer}>
         <div style={styles.labelContainer}>
@@ -24,7 +24,7 @@ class PositionDetails extends Component {
         </div>
         <div style={styles.labelContainer}>
           <span style={styles.label}>Skills needed | </span>
-          <span style={styles.content}>{this.props.position.skills.join(', ')}</span>
+          <span style={styles.content}>{skillNames}</span>
         </div>
       </div>
     )

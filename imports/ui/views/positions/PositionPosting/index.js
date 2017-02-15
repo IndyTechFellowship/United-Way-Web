@@ -1,2 +1,2 @@
-import PositionPosting from './PositionPosting'
-export default PositionPosting
+import PositionPostingContainer from './PositionPostingContainer'
+export default PositionPostingContainer
