@@ -38,7 +38,7 @@ class Navbar extends Component {
   }
 
   handlePositionsClicked() {
-    browserHistory.push('/about')
+    browserHistory.push('/positions')
   }
 
   handleOrganizationsClicked() {
