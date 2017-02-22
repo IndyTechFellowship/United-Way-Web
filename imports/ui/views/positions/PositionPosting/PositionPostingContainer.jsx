@@ -24,8 +24,6 @@ export default createContainer((props) => {
   if (!positionSubscription.ready()) return { loading: true, position: {} }
   let position = Positions.findOne(positionQuery)
 
-  // TODO: change skills to tags
-
   const tagQuery = {_id: {$in: position.skills}}
   const tagSubscription = Meteor.subscribe('Tags.get', tagQuery)
   if (!tagSubscription.ready()) return { loading: true, position: {} }

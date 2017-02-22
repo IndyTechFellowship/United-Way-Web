@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 
 class PositionDetails extends Component {
-  // TODO: change skills to tags in positions schema
-
   render() {
     let skillNames = this.props.position.skills.map((skill) => {
       return skill.name;
