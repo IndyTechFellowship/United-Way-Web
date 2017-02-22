@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { createContainer } from 'meteor/react-meteor-data'
 import React, { Component } from 'react'
+import _ from 'lodash'
 
 import { Positions } from '/imports/api/Positions'
 import { Organizations } from '/imports/api/Organizations'
@@ -33,7 +34,7 @@ export default createContainer((props) => {
   ]
 
   if (_.some(subs, (s) => !s.ready())) return { loading: true, position: {}, organization: {} }
-  let organization = !props.organization._id ? Organizations.find(orgQuery).fetch()[0] : props.organization
+  let organization = !_.get(props, 'organization._id') ? Organizations.find(orgQuery).fetch()[0] : props.organization
   position = Object.assign(position, {
     skills: Tags.find(tagQuery).fetch()
   })
