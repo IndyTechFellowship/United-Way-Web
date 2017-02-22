@@ -6,7 +6,7 @@ import Loading from '/imports/ui/components/Loading'
 
 import {Card, CardHeader, CardText, CardActions, RaisedButton} from 'material-ui'
 
-class PositionPosting extends Component {
+class Position extends Component {
 
   render() {
     if (this.props.loading) {
@@ -15,7 +15,7 @@ class PositionPosting extends Component {
       return (
         <Card style={styles.card}>
           <CardText style={styles.header}>
-            <PositionBasics position={this.props.position}/>
+            <PositionBasics position={this.props.position} organization={this.props.organization}/>
             <div style={styles.buttonContainer}>
               <RaisedButton label="Send Interest" primary={true} labelStyle={styles.button}/>
               <RaisedButton label="Save" secondary={true} labelStyle={styles.button}/>
@@ -37,9 +37,10 @@ class PositionPosting extends Component {
   }
 }
 
-PositionPosting.propTypes = {
+Position.propTypes = {
   loading: PropTypes.bool.isRequired,
   position: PropTypes.object.isRequired,
+  organization: PropTypes.object.isRequired,
 }
 
 const styles = {
@@ -69,4 +70,4 @@ const styles = {
   }
 }
 
-export default PositionPosting
+export default Position

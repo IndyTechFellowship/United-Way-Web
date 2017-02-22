@@ -9,10 +9,6 @@ class PositionBasics extends Component {
     super(props)
   }
 
-  /* TODO: figure out how to get organization name? add to Positions schema? add Organization id to positions schema
-    and have separate query to pull org name for each position?
-  */
-
   render() {
     //TODO: add real committee/board icons for hi-fi
     let opportunityTypeIcon = this.props.position.opportunityType === 'committee' ? <Person/> : <People/>;
@@ -24,7 +20,7 @@ class PositionBasics extends Component {
         </div>
         <div style={styles.basicDetailsContainer}>
           <div style={styles.organizationName}>
-            Organization Name
+            {this.props.organization.name}
           </div>
           <div style={styles.positionTitle}>
             {this.props.position.name}
