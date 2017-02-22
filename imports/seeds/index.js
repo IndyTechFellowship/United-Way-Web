@@ -1,7 +1,13 @@
-import SeedPositions from './seedPositions';
+import SeedTags from './seedTags'
+import SeedOrganizations from './seedOrganizations'
+import SeedPositions from './seedPositions'
+import SeedUsers from './seedUsers'
 
 export default () => {
-  SeedPositions();
+  SeedTags()
+  SeedOrganizations()
+  SeedPositions()
+  SeedUsers()
 
   // return 'Done!';
 }

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
+import AboutUsMission from '/imports/ui/views/organizations/AboutUsMission'
 import Loading from '/imports/ui/components/Loading'
 import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
 
@@ -30,7 +31,7 @@ class OrganizationPage extends Component {
             <OrganizationBasicInfo organization={this.props.organization}/>
           </div>
           <div style={styles.columnTwo}>
-            (About Us Mission goes here)
+            <AboutUsMission organization={this.props.organization}/>
           </div>
         </div>
       )
