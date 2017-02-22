@@ -14,27 +14,35 @@ const ProfileSchema = new SimpleSchema({
   },
   firstName: {
     type: String,
+    optional: true,
   },
   lastName: {
     type: String,
+    optional: true,
   },
   tagline: {
     type: String,
+    optional: true,
   },
   summary: {
     type: String,
+    optional: true,
   },
   interests: {
     type: [ String ],
+    optional: true,
   },
   skills: {
     type: [ String ],
+    optional: true,
   },
   professionalExperiences: {
     type: [ String ],
+    optional: true,
   },
   volunteerExperiences: {
     type: [ String ],
+    optional: true,
   },
 })
 
@@ -56,12 +64,15 @@ const UserSchema = new SimpleSchema({
   },
   profile: {
     type: ProfileSchema,
+    optional: true,
   },
   roles: {
     type: [ RolesSchema ],
+    optional: true,
   },
   savedPositions: {
     type: [ String ],
+    optional: true,
   },
 })
 
