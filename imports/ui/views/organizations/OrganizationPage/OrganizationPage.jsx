@@ -31,7 +31,7 @@ class OrganizationPage extends Component {
         <div style={styles.twoColumnLayout}>
           <div style={styles.columnOne}>
             <OrganizationBasicInfo organization={this.props.organization}/>
-            <PositionsList query={positionsQuery} />
+            <PositionsList query={positionsQuery} organization={this.props.organization} />
           </div>
           <div style={styles.columnTwo}>
             (About Us Mission goes here)

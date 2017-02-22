@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 
 import Loading from '/imports/ui/components/Loading'
-import PositionPosting from '/imports/ui/views/positions/PositionPosting'
+import Position from '/imports/ui/views/positions/Position'
 
-const PositionsList = ({ loading, positions }) => {
+const PositionsList = ({ loading, positions, organization }) => {
   if (loading) {
     return <Loading />
   } else {
@@ -12,7 +12,7 @@ const PositionsList = ({ loading, positions }) => {
           {positions.map((p) => {
             return (
               <div key={p._id}>
-                <PositionPosting position={p}/>
+                <Position position={p} organization={organization}/>
               </div>
             )
           })}
@@ -24,6 +24,7 @@ const PositionsList = ({ loading, positions }) => {
 PositionsList.propTypes = {
   loading: PropTypes.bool.isRequired,
   positions: PropTypes.array.isRequired,
+  organization: PropTypes.object.isRequired,
 }
 
 export default PositionsList
