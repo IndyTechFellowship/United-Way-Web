@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 import { Organizations } from '/imports/api/Organizations'
-import { Position } from '/imports/api/Positions'
+import { Positions } from '/imports/api/Positions'
 import { Tags } from '/imports/api/Tags'
 
 const run = () => {
@@ -34,7 +34,7 @@ const run = () => {
           opportunityType: "Committee",
           frequency: "Monthly",
           timeCommitment: "2 hours per week",
-          monetaryCommitment: "$1000 per year",
+          monetaryCommitment: 1000,
           skills: [
             tags[Math.floor(Math.random() * tags.length)]._id,
             tags[Math.floor(Math.random() * tags.length)]._id,
@@ -53,7 +53,7 @@ const run = () => {
           opportunityType: "Committee",
           frequency: "Monthly",
           timeCommitment: "2 hours per week",
-          monetaryCommitment: "$1000 per year",
+          monetaryCommitment: 500,
           skills: [
             tags[Math.floor(Math.random() * tags.length)]._id,
             tags[Math.floor(Math.random() * tags.length)]._id,
@@ -88,12 +88,12 @@ const run = () => {
       positions: [
         Positions.insert({
           name: "Treasurer",
-          description: "Et decore scribentur eum, usu ludus dicant ex, quot graeci noluisse ne mei. Corpora dissentiet pri an, sumo novum id per. Eam nostrud consulatu ei.",
+          description: "Lorem ipsum dolor sit amet, eam nisl vero melius id. Harum fuisset epicuri est cu, et prima indoctum eum. Tritani viderer accommodare eu his, quo utamur sensibus consulatu ut, ut eam hinc mnesarchum interpretaris. Et decore scribentur eum, usu ludus dicant ex, quot graeci noluisse ne mei. Corpora dissentiet pri an, sumo novum id per. Eam nostrud consulatu ei. Mel posse volumus appareat te, erant scripta quaerendum te eum. Ius minim consul deterruisset te, an his esse altera. Vix agam aperiam oportere et, per aeque graecis eu. At aliquid suavitate pro, docendi repudiare quo in. Novum legendos sententiae per an, ad posse saepe interesset eam. Albucius oporteat qui te, in maiorum oporteat gloriatur duo. Sit eripuit epicurei an, pericula consequat duo te. Est persius omittam imperdiet ei. Elit minim pericula ad his, nostro corpora cum et. Est in menandri adversarium, erant delenit gloriatur id mea, quo unum solum percipit at. Regione denique ea per, at vim clita meliore posidonium.",
           positionType: "Finance",
           opportunityType: "Board",
           frequency: "Monthly",
           timeCommitment: "8 hours per week",
-          monetaryCommitment: "$5000 per year",
+          monetaryCommitment: 5000,
           skills: [
             tags[Math.floor(Math.random() * tags.length)]._id,
             tags[Math.floor(Math.random() * tags.length)]._id,
