@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router'
+import { Accounts } from 'meteor/accounts-base'
 
 export default class CreateAnAccountLogin extends Component {
 
@@ -99,8 +100,21 @@ export default class CreateAnAccountLogin extends Component {
   }
 
   onRegisterClicked() {
-    this.validate()
-    console.log(this.state)
+    let valide = this.validate()
+    console.log("Valid: " + valide)
+    if (valide) {
+      this.register()
+      
+    }
+  }
+
+  register() {
+    Accounts.createUser({
+      email: this.state.email,
+      password: this.state.password
+    }, (error) => {
+      console.log("Error logging in: " + error)
+    })
   }
 
   validate() {
@@ -109,18 +123,33 @@ export default class CreateAnAccountLogin extends Component {
     let email = this.state.email
     let password = this.state.password
     let confirmPassword = this.state.confirmPassword
-    let emailCheck = this.isUndefinedOrEmpty(email, "emailError")
-    let lastCheck = this.isUndefinedOrEmpty(lastName, "lastNameError")
-    let passCheck = this.isUndefinedOrEmpty(password, "passwordError")
-    let firstCheck = this.isUndefinedOrEmpty(firstName, "firstNameError")
-    let confirmCheck = this.isUndefinedOrEmpty(confirmPassword, "confirmPasswordError")
-    return emailCheck || lastCheck || passCheck || firstCheck || confirmCheck
+    let emailError = this.isUndefinedOrEmpty(email, "emailError")
+    let lastError = this.isUndefinedOrEmpty(lastName, "lastNameError")
+    let passError = this.isUndefinedOrEmpty(password, "passwordError")
+    let firstError = this.isUndefinedOrEmpty(firstName, "firstNameError")
+    let confirmError = this.isUndefinedOrEmpty(confirmPassword, "confirmPasswordError")
+    let passwordMatch = false
+    if (!firstError && !confirmError) {
+      passwordMatch = this.doPasswordsMatch(confirmPassword, password)
+    }
+    let error = (emailError || lastError || passError || firstError || confirmError)
+    return !error && passwordMatch
+  }
+
+  doPasswordsMatch(confirm, password) {
+    let match = confirm === password
+    if (!match) {
+      let obj = {}
+      obj["confirmPasswordError"] = "Passwords do not match"
+      obj["passwordError"]        = "Passwords do not match"
+      this.setState(obj)
+    }
+    return match
   }
 
   isUndefinedOrEmpty(value, error) {
     let result = value.length == 0 || value === undefined
     let obj = {}
-
     if (result) {
       obj[error] = 'This value is required'
     } else {

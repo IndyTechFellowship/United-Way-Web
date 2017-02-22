@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { Meteor } from 'meteor/meteor'
+
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import Checkbox from 'material-ui/Checkbox'
@@ -79,7 +81,9 @@ export default class EmailPasswordLogin extends Component {
     let password = this.state.password
     let remember = this.state.remember
     if (this.validate(email, password)) {
-      console.log(email, password, remember)
+      //login
+      Meteor.loginWith
+      this.props.closeModal()
     } else {
       console.log("Validation Failed")
     }
