@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { createContainer } from 'meteor/react-meteor-data'
 import React, { Component, PropTypes } from 'react'
+import _ from 'lodash'
 
 import { Experiences } from '/imports/api/Experiences'
 import { Users } from '/imports/api/Users'
@@ -14,13 +15,12 @@ const UserContainer = createContainer((props) => {
   if (!userHandle.ready()) return { loading: true, user: {} }
   let user = Users.findOne(query)
 
-  // get tags
-  const tagsHandle = Meteor.subscribe('Tags.get', { _id: { $in: user.profile.interests.concat(user.profile.skills) } })
-  if (!tagsHandle.ready()) return { loading: true, user: {} }
-
-  // get experiences
-  const experiencesHandle = Meteor.subscribe('Experiences.get', { _id: { $in: user.profile.volunteerExperiences.concat(user.profile.professionalExperiences) } })
-  if (!experiencesHandle.ready()) return { loading: true, user: {} }
+  // get tags and experiences
+  const subs = [
+    Meteor.subscribe('Tags.get', { _id: { $in: user.profile.interests.concat(user.profile.skills) } }),
+    Meteor.subscribe('Experiences.get', { _id: { $in: user.profile.volunteerExperiences.concat(user.profile.professionalExperiences) } })
+  ]
+  if (_.some(subs, (s) => !s.ready())) return { loading: true, position: {}, organization: {} }
 
   // update organization with tag objects
   user.profile = Object.assign(user.profile, {
