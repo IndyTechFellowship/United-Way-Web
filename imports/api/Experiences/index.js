@@ -5,15 +5,22 @@ import { Mongo } from 'meteor/mongo'
 const ExperiencesSchema = new SimpleSchema({
   logoUrl: {
     type: String,
+    optional: true
   },
   title: {
     type: String,
-  }.
+  },
   companyName: {
     type: String,
+    optional: true
+  },
+  description: {
+    type: String,
+    optional: true
   },
   organizationId: {
     type: String,
+    optional: true
   },
   location: {
     type: String,
@@ -23,6 +30,7 @@ const ExperiencesSchema = new SimpleSchema({
   },
   endDate: {
     type: Date,
+    optional: true
   },
 })
 

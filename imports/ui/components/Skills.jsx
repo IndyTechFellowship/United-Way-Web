@@ -5,8 +5,8 @@ import {Chip} from 'material-ui'
 class Skills extends Component {
 
   render() {
-    let skills = fakeSkillPills.map((skill) => {
-      return <Chip key={skill} style={styles.chip}>{skill}</Chip>
+    let skills = this.props.skills.map((skill) => {
+      return <Chip key={skill._id} style={styles.chip}>{skill.name}</Chip>
     })
     return (
         <div style={styles.skillsBox}>

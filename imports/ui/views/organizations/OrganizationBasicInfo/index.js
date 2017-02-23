@@ -14,7 +14,7 @@ class OrganizationBasicInfo extends Component {
           <AvatarCard avatarUrl={this.props.organization.avatarUrl} name={this.props.organization.name}/>
           <div style={styles.detailsBlock}>
             <OrganizationDetails organization={this.props.organization}/>
-            <Skills/>
+            <Skills skills={this.props.organization.tags}/>
           </div>
         </div>
         <div style={styles.buttonContainer}>

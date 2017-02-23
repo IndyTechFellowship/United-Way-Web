@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 const styles = {
   title: {
-    fontSize: '20px',
+    fontSize: '25px',
     fontWeight: 'bold',
   },
 }
