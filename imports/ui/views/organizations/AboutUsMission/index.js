@@ -8,7 +8,7 @@ class AboutUsMission extends Component {
     return (
       <div>
         <Title>About Us & Our Mission</Title>
-        <AboutUsImages images={this.props.organization.images} />
+        <AboutUsImages images={this.props.organization.imageUrls} />
         <div>
           {this.props.organization.description}
         </div>

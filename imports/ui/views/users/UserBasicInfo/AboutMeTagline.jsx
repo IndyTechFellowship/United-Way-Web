@@ -4,7 +4,7 @@ class AboutMeTagline extends Component {
 
   render() {
     return (
-        <div>Short Bio/Tagline</div>
+        <div>{this.props.tagline}</div>
     )
   }
 }

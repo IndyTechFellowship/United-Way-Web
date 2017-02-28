@@ -4,7 +4,7 @@ class OrganizationDetails extends Component {
   render() {
     return (
       <div>
-        <div>{this.props.organization.description}</div>
+        <div>{this.props.organization.tagline}</div>
       </div>
     )
   }

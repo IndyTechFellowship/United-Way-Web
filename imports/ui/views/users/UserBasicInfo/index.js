@@ -9,11 +9,11 @@ class UserBasicInfo extends Component {
   render() {
     return (
         <div style={styles.userInfoBlock}>
-          <AvatarCard avatarUrl={this.props.avatarUrl} name={this.props.name} />
+          <AvatarCard avatarUrl={this.props.user.avatar ? this.props.user.avatar.original : null} name={this.props.user.firstName + " " + this.props.user.lastName} />
           <div style={styles.aboutMeSkillsBlock}>
             <Title>About Me & Skills</Title>
-            <AboutMeTagline/>
-            <Skills/>
+            <AboutMeTagline tagline={this.props.user.tagline}/>
+            <Skills skills={this.props.user.interests}/>
           </div>
         </div>
     )

@@ -5,7 +5,7 @@ class AboutUsImages extends Component {
     return (
       <div style={styles.images}>
         {this.props.images.map((image, index) =>
-          <div id={index} src={image} style={
+          <div key={index} src={image} style={
               Object.assign(
                 {background: `url(${image})`},
                 styles.image
