@@ -8,10 +8,10 @@ const PositionsList = ({ loading, positions, organization }) => {
     return <Loading />
   } else {
     return (
-        <div>
+        <div style={styles.twoColumnLayout}>
           {positions.map((p) => {
             return (
-              <div key={p._id}>
+              <div key={p._id} style={styles.position}>
                 <Position position={p} organization={organization}/>
               </div>
             )
@@ -25,6 +25,17 @@ PositionsList.propTypes = {
   loading: PropTypes.bool.isRequired,
   positions: PropTypes.array.isRequired,
   organization: PropTypes.object.isRequired,
+}
+
+const styles = {
+  twoColumnLayout: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  position: {
+    flexBasis: '50%',
+  }
 }
 
 export default PositionsList

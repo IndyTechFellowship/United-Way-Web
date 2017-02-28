@@ -7,7 +7,7 @@ class HomePage extends Component {
   render() {
     return (
         <div>
-          <UsersList />
+          Stuff will go here
         </div>
     )
   }

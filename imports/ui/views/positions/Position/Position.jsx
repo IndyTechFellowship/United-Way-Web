@@ -1,10 +1,9 @@
-import React, {Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { Card, CardHeader, CardText, CardActions, RaisedButton } from 'material-ui'
 
+import Loading from '/imports/ui/components/Loading'
 import PositionBasics from './PositionBasics'
 import PositionDetails from './PositionDetails'
-import Loading from '/imports/ui/components/Loading'
-
-import {Card, CardHeader, CardText, CardActions, RaisedButton} from 'material-ui'
 
 class Position extends Component {
 
@@ -61,7 +60,7 @@ const styles = {
   },
 
   card: {
-    width: '400px',
+    margin: '8px',
   },
 
   button: {
