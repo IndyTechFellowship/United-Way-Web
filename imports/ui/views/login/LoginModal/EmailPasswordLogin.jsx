@@ -84,6 +84,10 @@ export default class EmailPasswordLogin extends Component {
       Meteor.loginWithPassword(email, password, (error) => {
         if (error) {
           console.log("Login error: " + error)
+          this.setState({
+            passwordErrorText: "Email/Password is incorrect",
+            emailErrorText: "Email/Password is incorrect"
+          })
         } else {
           console.log("Login Successful")
           this.props.closeModal()
@@ -116,7 +120,6 @@ export default class EmailPasswordLogin extends Component {
     }
     return valid
   }
-
 }
 
 const loginStyle = {

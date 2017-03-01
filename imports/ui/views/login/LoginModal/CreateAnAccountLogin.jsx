@@ -101,7 +101,7 @@ export default class CreateAnAccountLogin extends Component {
 
   onRegisterClicked() {
     let valid = this.validate()
-    console.log("Valid: " + valide)
+    console.log("Valid: " + valid)
     if (valid) {
       this.register()
     }
@@ -109,13 +109,18 @@ export default class CreateAnAccountLogin extends Component {
 
   register() {
     Accounts.createUser({
-      user: {
-        email: this.state.email
-      },
-      password: this.state.password
+      email: this.state.email,
+      password: this.state.password,
+      profile: {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName
+      }
     }, (error) => {
       if (error) {
         console.log("Error creating user: " + error)
+        this.setState({
+          emailError: error.reason
+        })
       } else {
         console.log("User created successfully")
       }
