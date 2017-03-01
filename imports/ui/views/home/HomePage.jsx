@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import Title from '/imports/ui/components/Title'
-import UsersList from '/imports/ui/views/users/UsersList'
+import SideScroll from '/imports/ui/components/SideScroll'
 
 class HomePage extends Component {
 
@@ -23,6 +23,8 @@ class HomePage extends Component {
           <img src="https://unsplash.it/200/200" style={styles.img} />
           <img src="https://unsplash.it/125/150" style={styles.img} />
         </div>
+
+        <SideScroll/>
       </div>
     )
   }
