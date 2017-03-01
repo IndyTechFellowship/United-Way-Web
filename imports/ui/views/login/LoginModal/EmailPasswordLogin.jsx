@@ -81,9 +81,14 @@ export default class EmailPasswordLogin extends Component {
     let password = this.state.password
     let remember = this.state.remember
     if (this.validate(email, password)) {
-      //login
-      Meteor.loginWith
-      this.props.closeModal()
+      Meteor.loginWithPassword(email, password, (error) => {
+        if (error) {
+          console.log("Login error: " + error)
+        } else {
+          console.log("Login Successful")
+          this.props.closeModal()
+        }
+      })
     } else {
       console.log("Validation Failed")
     }

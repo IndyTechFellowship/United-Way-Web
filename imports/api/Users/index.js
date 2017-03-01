@@ -61,6 +61,10 @@ const UserSchema = new SimpleSchema({
     type: Object,
     blackbox: true,
     optional: true
+  }, 
+  registered_emails : {
+    type: [Object],
+    optional: true,
   },
   profile: {
     type: ProfileSchema,

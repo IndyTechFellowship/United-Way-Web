@@ -10,7 +10,7 @@ import { browserHistory } from 'react-router'
 export default class LoginModal extends Component {
   constructor(props) {
     super(props)
-    let isUserLoggedIn = Meteor.userId() != null
+    let isUserLoggedIn = Meteor.userId != null
     this.state = {
       modalOpen: isUserLoggedIn,
     }

@@ -100,20 +100,25 @@ export default class CreateAnAccountLogin extends Component {
   }
 
   onRegisterClicked() {
-    let valide = this.validate()
+    let valid = this.validate()
     console.log("Valid: " + valide)
-    if (valide) {
+    if (valid) {
       this.register()
-      
     }
   }
 
   register() {
     Accounts.createUser({
-      email: this.state.email,
+      user: {
+        email: this.state.email
+      },
       password: this.state.password
     }, (error) => {
-      console.log("Error logging in: " + error)
+      if (error) {
+        console.log("Error creating user: " + error)
+      } else {
+        console.log("User created successfully")
+      }
     })
   }
 
