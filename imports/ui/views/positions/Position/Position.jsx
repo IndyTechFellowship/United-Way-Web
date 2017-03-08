@@ -39,7 +39,7 @@ class Position extends Component {
 Position.propTypes = {
   loading: PropTypes.bool.isRequired,
   position: PropTypes.object.isRequired,
-  organization: PropTypes.object.isRequired,
+  organization: PropTypes.object,
 }
 
 const styles = {

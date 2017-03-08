@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import _ from 'lodash'
 
 import {CardText} from 'material-ui'
 import People from 'material-ui/svg-icons/social/people'
@@ -12,6 +13,7 @@ class PositionBasics extends Component {
   render() {
     //TODO: add real committee/board icons for hi-fi
     let opportunityTypeIcon = this.props.position.opportunityType === 'committee' ? <Person/> : <People/>;
+    let orgName = !_.get(this.props, 'organization.name') ? '' : this.props.organization.name;
 
     return (
       <div style={styles.basicInfoContainer}>
@@ -20,7 +22,7 @@ class PositionBasics extends Component {
         </div>
         <div style={styles.basicDetailsContainer}>
           <div style={styles.organizationName}>
-            {this.props.organization.name}
+            {orgName}
           </div>
           <div style={styles.positionTitle}>
             {this.props.position.name}
