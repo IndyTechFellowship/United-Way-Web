@@ -24,7 +24,8 @@ export default createContainer(() => {
   if (!positionSubscription.ready()) {
     return { loading: true, positions: [] }
   } else {
-    // TODO: use lodash to shuffle array and pull random 10
-    return { loading: false, positions: Positions.find(positionQuery).fetch() }
+    // NOTE: shuffle positions array and then take select 10 positions or whatever number of positions are available
+    let positions =  _.take(_.shuffle(Positions.find(positionQuery).fetch()), 10);
+    return { loading: false, positions: positions }
   }
 }, PositionCarouselContainer)
