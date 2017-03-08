@@ -24,7 +24,7 @@ export default createContainer(() => {
   if (!positionSubscription.ready()) {
     return { loading: true, positions: [] }
   } else {
-    // NOTE: shuffle positions array and then take select 10 positions or whatever number of positions are available
+    // NOTE: shuffle array of positions and then select 10 positions (or however many are available if less than 10)
     let positions =  _.take(_.shuffle(Positions.find(positionQuery).fetch()), 10);
     return { loading: false, positions: positions }
   }
