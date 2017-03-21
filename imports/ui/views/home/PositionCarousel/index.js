@@ -1,0 +1,2 @@
+import PositionCarouselContainer from './PositionCarouselContainer'
+export default PositionCarouselContainer

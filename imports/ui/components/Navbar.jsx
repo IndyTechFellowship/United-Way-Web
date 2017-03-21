@@ -13,7 +13,6 @@ import UserProfileMenu from '/imports/ui/components/UserProfileMenu'
 class Navbar extends Component {
   constructor(props) {
     super(props)
-    this.handleFeedClick.bind(this)
   }
 
   render() {
@@ -22,11 +21,11 @@ class Navbar extends Component {
         <Toolbar>
           <ToolbarGroup style={toolbarGroupStyle} firstChild={true} >
             <img src="auw.png" style={logoStyle} />
-            <FlatButton label="Opportunities" onClick={this.handleFeedClick}  />
-            <FlatButton label="About" onClick={this.handleAboutClicked} />
+            <FlatButton label="Opportunities" onClick={this.handleOpportunitiesClick}  />
+            <FlatButton label="Positions" onClick={this.handlePositionsClicked} />
             <SearchArea />
-            <FlatButton label="Agencies" onClick={this.handleAgenciesClicked} />
-            <FlatButton label="People" onClick={this.handlePeopleClicked} />
+            <FlatButton label="Organizations" onClick={this.handleOrganizationsClicked} />
+            <FlatButton label="Volunteers" onClick={this.handleVolunteersClicked} />
             <UserProfileMenu />
           </ToolbarGroup>
         </Toolbar>
@@ -34,19 +33,19 @@ class Navbar extends Component {
     )
   }
 
-  handleFeedClick() {
+  handleOpportunitiesClick() {
     browserHistory.push('/')
   }
 
-  handleAboutClicked() {
-    browserHistory.push('/about')
+  handlePositionsClicked() {
+    browserHistory.push('/positions')
   }
 
-  handleAgenciesClicked() {
+  handleOrganizationsClicked() {
     browserHistory.push('/organizations')
   }
 
-  handlePeopleClicked() {
+  handleVolunteersClicked() {
     browserHistory.push('/users')
   }
 
