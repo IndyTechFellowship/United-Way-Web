@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import Title from '/imports/ui/components/Title'
-import UsersList from '/imports/ui/views/users/UsersList'
+import PositionCarousel from '/imports/ui/views/home/PositionCarousel'
 
 class HomePage extends Component {
 
@@ -23,6 +23,9 @@ class HomePage extends Component {
           <img src="https://unsplash.it/200/200" style={styles.img} />
           <img src="https://unsplash.it/125/150" style={styles.img} />
         </div>
+
+        <div style={styles.opportunityLabel}>Positions</div>
+        <PositionCarousel />
       </div>
     )
   }
@@ -42,6 +45,11 @@ const styles = {
   title: {
     marginTop: '32px',
     marginBottom: '16px',
+  },
+  opportunityLabel: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    margin: '12px'
   }
 }
 

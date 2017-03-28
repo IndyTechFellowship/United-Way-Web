@@ -56,11 +56,24 @@ const RolesSchema = new SimpleSchema({
   }
 })
 
+const EmailAddressSchema = new SimpleSchema({
+  address: { type: String },
+  verified: { type: Boolean, optional: true },
+})
+
 const UserSchema = new SimpleSchema({
   services: {
     type: Object,
     blackbox: true,
     optional: true
+  },
+  emails : {
+    type: [EmailAddressSchema],
+    optional: true,
+  },
+  registered_emails: {
+    type: [EmailAddressSchema],
+    optional: true,
   },
   profile: {
     type: ProfileSchema,
