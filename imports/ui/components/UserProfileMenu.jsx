@@ -7,15 +7,16 @@ import {
   IconMenu,
   MenuItem,
 } from 'material-ui'
+import { lightBlue800 } from 'material-ui/styles/colors'
 import Person from 'material-ui/svg-icons/action/account-circle'
 
 export default class UserProfileMenu extends Component {
   render() {
     return (
       <IconMenu
-          iconButtonElement={<IconButton onClick={this.handleProfileClicked}><Person style={styles.iconStyles} /></IconButton>}
-          anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+          iconButtonElement={<div style={styles.roundButton}>Login</div>}
+          anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+          targetOrigin={{horizontal: 'right', vertical: 'top'}}
       >
         <MenuItem >
           <div style={styles.iconMenuViewProfileContainer}>
@@ -46,7 +47,9 @@ export default class UserProfileMenu extends Component {
 
 const styles = {
   iconStyles: {
-    width: '90px'
+    height: '48px',
+    width: '48px',
+    margin: '24px',
   },
 
   iconMenuViewProfileContainer: {
@@ -59,4 +62,18 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
   },
+
+  roundButton: {
+    borderRadius: '50%',
+    height: '48px',
+    width: '48px',
+    border: '1px solid white',
+    margin: '24px',
+    backgroundColor: 'white',
+    color: lightBlue800,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px',
+  }
 }
