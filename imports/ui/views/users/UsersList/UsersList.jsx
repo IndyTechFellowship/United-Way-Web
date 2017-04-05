@@ -2,31 +2,36 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
 import Loading from '/imports/ui/components/Loading'
-
-const styles = {
-  firstName: {
-    color: 'red',
-  },
-  selected: {
-    color: 'blue',
-  }
-}
+import UserCard from '/imports/ui/views/users/UserCard'
 
 // And this is the presentational component.
 const UsersList = ({ loading, selectedUser, users }) => {
   if (loading) {
     return <Loading />
   } else {
-    return <div>
-      {users.map((u) => {
-        const style = { ...styles.firstName, ...(selectedUser === u._id ? styles.selected : {}) }
+    return (
+      <div style={styles.twoColumnLayout}>
+        {users.map((u) => {
           return (
-            <div key={u._id} style={style}>
-              <Link to={`/users/${u._id}`}>{u.profile.firstName}</Link>
-            </div>
+            <Link to={`/users/${u._id}`} style={styles.user} key={u._id}>
+              <UserCard user={u.profile} />
+            </Link>
           )
-      })}
-    </div>
+        })}
+      </div>
+    )
+  }
+}
+
+const styles = {
+  twoColumnLayout: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  user: {
+    flexBasis: '50%',
+    textDecoration: 'none',
   }
 }
 
