@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import {
-  Toolbar,
-  ToolbarGroup,
+  AppBar,
   FlatButton,
   FontIcon,
-  AutoComplete,
+  AutoComplete
 } from 'material-ui'
+import SearchIcon from 'material-ui/svg-icons/action/search'
+import { lightBlue800 } from 'material-ui/styles/colors'
 import { browserHistory } from 'react-router'
 
 import UserProfileMenu from '/imports/ui/components/UserProfileMenu'
@@ -17,36 +19,18 @@ class Navbar extends Component {
 
   render() {
     return (
-      <div>
-        <Toolbar>
-          <ToolbarGroup style={toolbarGroupStyle} firstChild={true} >
-            <img src="auw.png" style={logoStyle} />
-            <FlatButton label="Opportunities" onClick={this.handleOpportunitiesClick}  />
-            <FlatButton label="Positions" onClick={this.handlePositionsClicked} />
-            <SearchArea />
-            <FlatButton label="Organizations" onClick={this.handleOrganizationsClicked} />
-            <FlatButton label="Volunteers" onClick={this.handleVolunteersClicked} />
-            <UserProfileMenu />
-          </ToolbarGroup>
-        </Toolbar>
+      <div style={toolbarStyle}>
+        <div style={toolbarGroup}>
+          <img src="logo.svg" style={logoStyle} />
+          <Link to={'/'} style={linkStyle}>Opportunities</Link>
+          <Link to={'/positions'} style={linkStyle}>Positions</Link>
+          <SearchArea />
+          <Link to={'/organizations'} style={linkStyle}>Organizations</Link>
+          <Link to={'/users'} style={linkStyle}>Volunteers</Link>
+          <UserProfileMenu />
+        </div>
       </div>
     )
-  }
-
-  handleOpportunitiesClick() {
-    browserHistory.push('/')
-  }
-
-  handlePositionsClicked() {
-    browserHistory.push('/positions')
-  }
-
-  handleOrganizationsClicked() {
-    browserHistory.push('/organizations')
-  }
-
-  handleVolunteersClicked() {
-    browserHistory.push('/users')
   }
 
 }
@@ -73,11 +57,13 @@ class SearchArea extends Component {
   render() {
     return (
       <div style={searchStyles}>
-        <AutoComplete 
+        <SearchIcon style={iconStyle} />
+        <AutoComplete
           hintText="Search"
           dataSource={this.state.dataSource}
           onUpdateInput={this.handleUpdateInput}
           fullWidth={true}
+          style={searchFieldStyle}
         />
       </div>
     )
@@ -85,17 +71,46 @@ class SearchArea extends Component {
 }
 
 const searchStyles = {
-  flexGrow: '1'
+  flexGrow: '1',
+  margin: '24px',
+  display: 'flex',
+  alignItems: 'center',
 }
 
-const toolbarGroupStyle = {
-  margin: '0 auto',
-  width: '90%',
+const toolbarStyle = {
+  backgroundColor: lightBlue800,
+  width: '100vw',
+  boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px',
+}
+
+const toolbarGroup = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
 }
 
 const logoStyle = {
-  width: '45px',
-  height: '45px',
+  display: 'block',
+  width: '48px',
+  height: '48px',
+  margin: '24px',
+}
+
+const linkStyle = {
+  textDecoration: 'none',
+  color: 'white',
+  opacity: '0.7',
+  fontSize: '18px',
+  margin: '24px',
+}
+
+const iconStyle = {
+  color: 'white',
+  marginRight: '4px',
+}
+
+const searchFieldStyle = {
+  color: 'white',
 }
 
 export default Navbar
