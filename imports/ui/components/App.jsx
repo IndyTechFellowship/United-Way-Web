@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { deepOrange500 } from 'material-ui/styles/colors'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import LoginModal from '/imports/ui/views/login/LoginModal'
 
 import Footer from '/imports/ui/components/Footer'
 import Navbar from '/imports/ui/components/Navbar'
@@ -28,6 +29,13 @@ const muiTheme = getMuiTheme({
 
 class App extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      showNavbar: false
+    }
+  }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -37,11 +45,11 @@ class App extends Component {
             <div style={styles.content}>{ this.props.children }</div>
             <Footer />
           </div>
+          <LoginModal isShown={this.state.showNavbar} />
         </div>
       </MuiThemeProvider>
     )
   }
-
 }
 
 export default App
