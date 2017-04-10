@@ -18,8 +18,8 @@ class UsersListStateContainer extends Component {
     }
 
     render() {
-        const { selectedUser } = this.state
-        return <UsersList { ...this.props } selectedUser={selectedUser} />
+      const { selectedUser } = this.state
+      return <UsersList { ...this.props } selectedUser={selectedUser} />
     }
 
 }

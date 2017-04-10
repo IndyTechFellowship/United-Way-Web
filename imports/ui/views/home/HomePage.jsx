@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
 import Title from '/imports/ui/components/Title'
+import OrganizationCarousel from '/imports/ui/views/home/OrganizationCarousel'
 import PositionCarousel from '/imports/ui/views/home/PositionCarousel'
+import UserCarousel from '/imports/ui/views/home/UserCarousel'
 
 class HomePage extends Component {
 
@@ -26,6 +28,12 @@ class HomePage extends Component {
 
         <div style={styles.opportunityLabel}>Positions</div>
         <PositionCarousel />
+
+        <div style={styles.opportunityLabel}>Organizations</div>
+        <OrganizationCarousel />
+
+          <div style={styles.opportunityLabel}>Volunteers</div>
+          <UserCarousel />
       </div>
     )
   }
