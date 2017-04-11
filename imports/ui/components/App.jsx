@@ -32,24 +32,34 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showNavbar: false
+      showLoginModal: this.props.isUserLoggedIn
     }
+    this.onUserButtonClicked = this.onUserButtonClicked.bind(this)
   }
 
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <Navbar />
+          <Navbar isUserLoggedIn={this.props.isUserLoggedIn} onUserButtonClicked={this.onUserButtonClicked} />
           <div style={styles.pageWrapper}>
             <div style={styles.content}>{ this.props.children }</div>
             <Footer />
           </div>
-          <LoginModal isShown={this.state.showNavbar} />
+          <LoginModal isShown={this.state.showLoginModal} />
         </div>
       </MuiThemeProvider>
     )
   }
+
+  onUserButtonClicked() {
+    this.setState({
+      showLoginModal: true
+    })
+    console.log("on user button clicked")
+  }
+
+
 }
 
 export default App

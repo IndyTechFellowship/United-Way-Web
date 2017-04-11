@@ -39,10 +39,6 @@ export default class UserProfileMenu extends Component {
       </IconMenu>
     )
   }
-
-  handleProfileClicked() {
-    browserHistory.push('/login')
-  }
 }
 
 const styles = {

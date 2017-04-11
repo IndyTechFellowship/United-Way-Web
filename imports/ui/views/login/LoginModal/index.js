@@ -33,7 +33,7 @@ export default class LoginModal extends Component {
   render() {
     return (
       <Modal
-        isOpen={this.state.modalOpen}
+        isOpen={this.props.isShown}
         contentLabel="Login/Register" 
         style={loginModal} >
           <div style={center}>
