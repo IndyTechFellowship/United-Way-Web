@@ -15,7 +15,7 @@ const run = () => {
     frequency: 'every night at 11:42pm',
     creator: 'probably a userId?',
     skills: [ 'skillid' ],
-    applicants: [ 'userid' ],
+    applicants: [ { userId: 'userid', at: moment().subtract(5, 'days').toDate() } ],
     deadline: moment().add(10, 'days').toDate(),
   });
 
