@@ -1,31 +1,33 @@
 import _ from 'lodash'
+import { Meteor } from 'meteor/meteor'
 import {
   applyMiddleware,
-  createStore,
   combineReducers,
+  createStore,
 } from 'redux'
-import logger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
-
-const middleware = _.compact([
-  applyMiddleware(thunk),
-  Meteor.isDevelopment() ? applyMiddleware(logger) : null,
-])
 
 // Import each reducer you create here
 import { searchReducer } from './search'
+import { userReducer } from './user'
 
 // Add them to the combineReducers call below
 export const store = createStore(
   combineReducers({
     search: searchReducer,
+    user: userReducer,
   }), 
-  middleware,
+  applyMiddleware(
+    thunk,
+    createLogger()
+  ),
 )
 
 // And also export everything from each reducer file, 
 // as those are the files that contain the actions we are dispatching.
 export * from './search'
+export * from './user'
 
 // Every action must have a unique name.
 // You must also name your reducer something like 'thingReducer' instead of just 'reducer'
