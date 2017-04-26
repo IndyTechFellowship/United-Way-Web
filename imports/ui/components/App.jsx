@@ -32,7 +32,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showLoginModal: this.props.isUserLoggedIn
+      showLoginModal: this.props.isUserLoggedIn,
+      isUserLoggedIn: this.props.isUserLoggedIn
     }
     this.onUserButtonClicked = this.onUserButtonClicked.bind(this)
   }
@@ -41,7 +42,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <Navbar isUserLoggedIn={this.props.isUserLoggedIn} onUserButtonClicked={this.onUserButtonClicked} />
+          <Navbar isUserLoggedIn={this.state.isUserLoggedIn} onUserButtonClicked={this.onUserButtonClicked} />
           <div style={styles.pageWrapper}>
             <div style={styles.content}>{ this.props.children }</div>
             <Footer />
@@ -54,9 +55,9 @@ class App extends Component {
 
   onUserButtonClicked() {
     this.setState({
-      showLoginModal: true
+      showLoginModal: Meteor.user() == null,
+      isUserLoggedIn: Meteor.user() != null
     })
-    console.log("on user button clicked")
   }
 
 

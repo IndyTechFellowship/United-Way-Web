@@ -32,12 +32,11 @@ class Navbar extends Component {
       </div>
     )
   }
-
 }
 
 class UserButton extends Component {
   render() {
-    if (this.props.isUserLoggedIn) {
+    if (Meteor.user() != null) {
       return (
         <UserProfileMenu />
       )

@@ -20,7 +20,6 @@ export default class LoginModal extends Component {
     this.setState({
       modalOpen: false
     })
-    browserHistory.push('/')
   }
 
   openModal() {
