@@ -10,7 +10,7 @@ Meteor.methods({
   
   'Search.fullText.all'(query) {
     check(query, String)
-    const mQuery = { $text: { $search: query } }
+    const mQuery = { $text: { $language: 'en', $search: query } }
     const opts = {
       fields: {
           score: { $meta: "textScore" }
