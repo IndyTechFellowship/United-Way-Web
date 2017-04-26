@@ -17,6 +17,7 @@ const run = () => {
         "http://gpi.bitnamiapp.com/wp-content/uploads/2015/03/14910352423_ee4ca89b33_o-1024x683.jpg",
         "http://gpi.bitnamiapp.com/wp-content/uploads/2015/03/20322984212_600b41f410_k-1024x768.jpg"
       ],
+      websiteUrl: 'http://www.growingplacesindy.org',
       description: "We are a 501c3 non-profit organization. Our mission is to empower people to cultivate personal, family and community wellness through urban agriculture, food access and mind-body education.",
       users: [],
       tags: [
@@ -74,6 +75,7 @@ const run = () => {
       imageUrls: [
         "https://static1.squarespace.com/static/5331b54de4b0f2d9b1b04153/54dd0a87e4b0183db7131604/574dc87d7da24f0b913092b1/1464716262545/Seats_From+Behind.jpg?format=2500w"
       ],
+      websiteUrl: 'http://www.peopleup.org/',
       description: "We are an Indianapolis-based not-for-profit. We advance connectivity, environmental responsibility, and good design. We rescue discarded materials, redesigning them for public benefit. Our locally-designed products fund big projects and big ideas that improve Indianapolis’ urban spaces. Simply put, we make GOODS FOR GOOD.",
       users: [],
       tags: [

@@ -5,14 +5,26 @@ import CardComponent from '/imports/ui/components/CardComponent'
 class OrganizationCard extends Component {
   render() {
     const organization = this.props.organization
+    let body = {
+      leftColumn: {
+        label: 'Other Website URL',
+        content: organization.websiteUrl
+      },
+      rightColumn: {
+        label: 'Search Tags',
+        content: 'org tags TODO'
+      }
+    }
+
     return (
       <CardComponent
         imageUrl={organization.avatarUrl}
-        supertitle="Education"
-        title={organization.name}
-        subtitle={organization.tagline}
+        name={organization.name}
+        title="Who Knows?"
+        subtitle="Location TODO"
         buttonLabel="Favorite"
-        body={organization.description}
+        body={body}
+        cardType="organization"
       />
     )
   }
