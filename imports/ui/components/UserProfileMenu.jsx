@@ -11,21 +11,31 @@ import { lightBlue800 } from 'material-ui/styles/colors'
 import Person from 'material-ui/svg-icons/action/account-circle'
 
 export default class UserProfileMenu extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      userInitials: ""
+    }
+    this.getUserInitials = this.getUserInitials.bind(this)
+  }
+
   render() {
+    let profile = Meteor.user().profile
+    let name = profile.firstName + " " + profile.lastName
+    let email = Meteor.user().emails[0].address
     return (
       <IconMenu
-          iconButtonElement={<div style={styles.roundButton}>Login</div>}
+          iconButtonElement={<div style={styles.roundButton}>{this.getUserInitials()}</div>}
           anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-          targetOrigin={{horizontal: 'right', vertical: 'top'}}
-      >
+          targetOrigin={{horizontal: 'right', vertical: 'top'}} >
         <MenuItem >
           <div style={styles.iconMenuViewProfileContainer}>
             <div style={styles.iconMenuItemContainer}>
               <IconButton><Person style={styles.iconStyles}/></IconButton>
             </div>
             <div style={styles.iconMenuItemContainer}>
-              <div>Name</div>
-              <div>Email</div>
+              <div>{name}</div>
+              <div>{email}</div>
               <FlatButton>View Profile</FlatButton>
             </div>
           </div>
@@ -40,8 +50,13 @@ export default class UserProfileMenu extends Component {
     )
   }
 
-  handleProfileClicked() {
-    browserHistory.push('/login')
+  getUserInitials() {
+    if (Meteor.user() == null) {
+      return "";
+    }
+    let firstName = Meteor.user().profile.firstName
+    let lastName = Meteor.user().profile.lastName
+    return firstName.charAt(0) + lastName.charAt(0)
   }
 }
 

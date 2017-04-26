@@ -10,9 +10,8 @@ import { browserHistory } from 'react-router'
 export default class LoginModal extends Component {
   constructor(props) {
     super(props)
-    let isUserLoggedIn = Meteor.user() != null
     this.state = {
-      modalOpen: !isUserLoggedIn,
+      modalOpen: this.props.isShown,
     }
   }
 
@@ -21,7 +20,6 @@ export default class LoginModal extends Component {
     this.setState({
       modalOpen: false
     })
-    browserHistory.push('/')
   }
 
   openModal() {
@@ -34,7 +32,7 @@ export default class LoginModal extends Component {
   render() {
     return (
       <Modal
-        isOpen={this.state.modalOpen}
+        isOpen={this.props.isShown}
         contentLabel="Login/Register" 
         style={loginModal} >
           <div style={center}>
