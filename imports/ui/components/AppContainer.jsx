@@ -7,7 +7,7 @@ class AppContainer extends Component {
 
   render() {
     return (
-      <App isUserLoggedIn={Meteor.user() != null} children={ this.props.children } />
+      <App children={ this.props.children } />
     )
   }
 }

@@ -13,13 +13,13 @@ export default class LoginModal extends Component {
     this.state = {
       modalOpen: this.props.isShown,
     }
+
+    this.closeModal = this.closeModal.bind(this)
   }
 
   closeModal() {
     console.log("Close")
-    this.setState({
-      modalOpen: false
-    })
+    this.props.onUserLoggedIn()
   }
 
   openModal() {
@@ -38,13 +38,13 @@ export default class LoginModal extends Component {
           <div style={center}>
             <span style={bigHeader}>Let's get you to your account</span>
             <div style={topLogin}>
-              <EmailPasswordLogin closeModal={this.closeModal.bind(this)} />
+              <EmailPasswordLogin closeModal={this.closeModal} />
               <div style={divider} />
               <SSOButtons />
             </div>
             <div style={bigHeader}>Oh, you don't have an account yet?</div>
             <div style={smallHeader}>Create your account to start showing and sharing your interests</div>
-            <CreateAnAccountLogin closeModal={this.closeModal.bind(this)} />
+            <CreateAnAccountLogin closeModal={this.closeModal} />
           </div>
       </Modal>
     )
