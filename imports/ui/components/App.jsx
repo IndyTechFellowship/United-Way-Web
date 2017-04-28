@@ -55,6 +55,7 @@ class App extends Component {
   }
 
   onUserButtonClicked() {
+    console.log("On User Button Clicked")
     this.setState({
       showLoginModal: Meteor.user() == null
     })
@@ -65,6 +66,13 @@ class App extends Component {
     this.setState({
       isUserLoggedIn: true,
       showLoginModal: false
+    })
+  }
+
+  onUserLoggedOut() {
+    console.log("On User logged out triggered")
+    this.setState({
+      isUserLoggedIn: false
     })
   }
 
