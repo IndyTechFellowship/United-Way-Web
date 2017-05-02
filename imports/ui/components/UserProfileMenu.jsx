@@ -17,15 +17,17 @@ export default class UserProfileMenu extends Component {
       userInitials: ""
     }
     this.getUserInitials = this.getUserInitials.bind(this)
+    this.getPlaceholder = this.getPlaceholder.bind(this)
   }
 
   render() {
     let profile = Meteor.user().profile
     let name = profile.firstName + " " + profile.lastName
     let email = Meteor.user().emails[0].address
+    let imageUri = "http://placehold.it/350x150"
     return (
       <IconMenu
-          iconButtonElement={<div style={styles.roundButton}>{this.getUserInitials()}</div>}
+          iconButtonElement={<div style={styles.roundButton}>{this.getPlaceholder()}</div>}
           anchorOrigin={{horizontal: 'right', vertical: 'top'}}
           targetOrigin={{horizontal: 'right', vertical: 'top'}} >
         <MenuItem >
@@ -50,10 +52,15 @@ export default class UserProfileMenu extends Component {
     )
   }
 
-  getUserInitials() {
-    if (Meteor.user() == null) {
-      return "";
+  getPlaceholder() {
+    let userAvatar = 'https://placehold.it/350x150'; //replace this with an actual user avatar url once all that is setup
+    if (userAvatar == undefined) {
+      return getUserInitials();
     }
+    return <img style={{height: '48px', width: '48px', borderRadius: '50%'}} src={userAvatar} />;
+  }
+
+  getUserInitials() {
     let firstName = Meteor.user().profile.firstName
     let lastName = Meteor.user().profile.lastName
     return firstName.charAt(0) + lastName.charAt(0)
