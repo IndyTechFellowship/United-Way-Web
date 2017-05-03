@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Card } from 'material-ui/Card'
-import { FlatButton } from 'material-ui'
 
 class CardComponent extends Component {
   render() {
     let imgStyle = this.props.cardType === 'user' ? styles.header.logo.userImg : styles.header.logo.orgImg;
+    let CardButtons = this.props.cardButtons;
+
     return (
       <Card style={styles.card}>
         <div style={styles.header.style}>
@@ -17,7 +18,7 @@ class CardComponent extends Component {
             <div style={{...styles.fontBase, ...styles.header.title.subtitle}}>{this.props.subtitle}</div>
           </div>
           <div style={styles.header.actions.style}>
-            <FlatButton label={this.props.buttonLabel} fullWidth={true} style={styles.header.actions.button}/>
+            <CardButtons/>
           </div>
         </div>
         <div style={styles.body}>
@@ -77,7 +78,7 @@ const styles = {
         flexDirection: 'column',
         flexGrow: 1,
         width: 0,
-        margin: '0 0 0 16px',
+        margin: '0 16px',
       },
       name: {
         fontSize: '20px',
@@ -98,8 +99,8 @@ const styles = {
       style: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
-        width: '100px',
+        justifyContent: 'flex-start',
+        height: '80px',
       },
       button: {
         backgroundColor: 'black',
