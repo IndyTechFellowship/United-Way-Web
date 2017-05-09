@@ -6,7 +6,9 @@
     "seed": "./scripts/seed.sh"
   },
   "dependencies": {
+    "algoliasearch": "^3.22.1",
     "bcrypt": "^1.0.2",
+    "jsxstyle": "^1.0.2",
     "lodash": "^4.17.4",
     "material-ui": "^0.16.4",
     "meteor-node-stubs": "~0.2.0",

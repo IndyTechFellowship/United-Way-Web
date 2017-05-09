@@ -1,4 +1,11 @@
+import _ from 'lodash'
 import { Meteor } from 'meteor/meteor'
+
+export const SET_FULL_TEXT_SEARCH_ANCHOR = 'SET_FULL_TEXT_SEARCH_ANCHOR'
+export const setFullTextSearchAnchor = (anchor) => ({
+  type: SET_FULL_TEXT_SEARCH_ANCHOR,
+  anchor,
+});
 
 export const SET_FULL_TEXT_SEARCH_ERROR = 'SET_FULL_TEXT_SEARCH_ERROR'
 export const setFullTextSearchError = (searchError) => ({
@@ -18,6 +25,12 @@ export const setFullTextSearchResultsLoading = (searchResultsLoading) => ({
   searchResultsLoading,
 })
 
+export const SET_FULL_TEXT_SEARCH_RESULTS_OPEN = 'SET_FULL_TEXT_SEARCH_RESULTS_OPEN'
+export const setFullTextSearchResultsOpen = (open) => ({
+  type: SET_FULL_TEXT_SEARCH_RESULTS_OPEN,
+  open,
+})
+
 export const SET_FULL_TEXT_SEARCH_TERM = 'SET_FULL_TEXT_SEARCH_TERM'
 export const setFullTextSearchTerm = (searchTerm) => ({
   type: SET_FULL_TEXT_SEARCH_TERM,
@@ -29,6 +42,7 @@ export const updateFullTextSearchResults = () => (
     dispatch(setFullTextSearchResultsLoading(true))
     Meteor.call('Search.fullText.all', getState().search.searchTerm, (err, results) => {
       dispatch(setFullTextSearchResultsLoading(false))
+      dispatch(setFullTextSearchResultsOpen(true))
       if (err) return dispatch(setFullTextSearchError(err.reason))
       else return dispatch(setFullTextSearchResults(results))
     })
@@ -36,20 +50,26 @@ export const updateFullTextSearchResults = () => (
 )
 
 const initialState = {
+  anchor: null,
   searchError: null,
   searchResults: [],
   searchResultsLoading: false,
+  searchResultsOpen: false,
   searchTerm: '',
 }
 
 export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_FULL_TEXT_SEARCH_ANCHOR:
+      return {...state, anchor: action.anchor}
     case SET_FULL_TEXT_SEARCH_ERROR:
       return {...state, searchError: action.searchError}
     case SET_FULL_TEXT_SEARCH_RESULTS:
       return {...state, searchResults: action.searchResults}
     case SET_FULL_TEXT_SEARCH_RESULTS_LOADING:
       return {...state, searchResultsLoading: action.searchResultsLoading}
+    case SET_FULL_TEXT_SEARCH_RESULTS_OPEN:
+      return {...state, searchResultsOpen: action.open}
     case SET_FULL_TEXT_SEARCH_TERM:
       return {...state, searchTerm: action.searchTerm}
     default:

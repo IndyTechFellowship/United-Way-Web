@@ -1,4 +1,3 @@
-import './indices'
 import './sso'
 import './accounts'
 
