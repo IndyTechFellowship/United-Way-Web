@@ -72,7 +72,7 @@ class SearchArea extends Component {
 
 const searchStyles = {
   flexGrow: '1',
-  margin: '24px',
+  margin: '16px 24px',
   display: 'flex',
   alignItems: 'center',
 }
@@ -93,7 +93,7 @@ const logoStyle = {
   display: 'block',
   width: '48px',
   height: '48px',
-  margin: '24px',
+  margin: '16px 24px',
 }
 
 const linkStyle = {
@@ -101,7 +101,7 @@ const linkStyle = {
   color: 'white',
   opacity: '0.7',
   fontSize: '18px',
-  margin: '24px',
+  margin: '16px 24px',
 }
 
 const iconStyle = {

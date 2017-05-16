@@ -8,7 +8,7 @@ class UserCard extends Component {
     return (
       <CardComponent
         key={user._id}
-        imageUrl={user.avatar.original}
+        imageUrl={user.avatar ? user.avatar.original : null}
         supertitle="Education"
         title={`${user.firstName} ${user.lastName}`}
         subtitle={user.tagline}

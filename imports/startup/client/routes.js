@@ -10,6 +10,7 @@ import NotFoundPage from '/imports/ui/views/about/NotFoundPage'
 import OrganizationPage from '/imports/ui/views/organizations/OrganizationPage'
 import OrganizationsPage from '/imports/ui/views/organizations/OrganizationsPage'
 import PositionsPage from '/imports/ui/views/positions/PositionsPage'
+import RegistrationPage from '/imports/ui/views/registration/RegistrationPage'
 import SearchPage from '/imports/ui/views/search/SearchPage'
 import SettingsPage from '/imports/ui/views/settings/SettingsPage'
 import UserPage from '/imports/ui/views/users/UserPage'
@@ -22,6 +23,7 @@ export const Routes = () => (
   <Router history={browserHistory}>
     <Route path="/" component={AppContainer}>
       <IndexRoute component={HomePage}/>
+      <Route path="register" component={RegistrationPage}/>
       <Route path="about" component={AboutPage}/>
       <Route path="positions" component={PositionsPage}/>
       <Route path="login" component={LoginPage}/>

@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 
 const styles = {
   title: {
-    fontSize: '25px',
-    fontWeight: 'bold',
+    fontSize: '20px',
+    color: '#0091ea',
+    marginBottom: '16px',
   },
 }
 
