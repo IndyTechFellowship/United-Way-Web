@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { deepOrange500, grey200 } from 'material-ui/styles/colors'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import LoginModal from '/imports/ui/views/login/LoginModal'
 
 import Footer from '/imports/ui/components/Footer'
 import Navbar from '/imports/ui/components/Navbar'
@@ -29,19 +30,53 @@ const muiTheme = getMuiTheme({
 
 class App extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      isUserLoggedIn: Meteor.user() != null,
+      showLoginModal: false
+    }
+    this.onUserButtonClicked = this.onUserButtonClicked.bind(this)
+    this.onUserLoggedIn = this.onUserLoggedIn.bind(this)
+  }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <Navbar />
+          <Navbar isUserLoggedIn={this.state.isUserLoggedIn} onUserButtonClicked={this.onUserButtonClicked} />
           <div style={styles.pageWrapper}>
             <div style={styles.content}>{ this.props.children }</div>
             <Footer />
           </div>
+          <LoginModal isShown={this.state.showLoginModal} onUserLoggedIn={this.onUserLoggedIn} />
         </div>
       </MuiThemeProvider>
     )
   }
+
+  onUserButtonClicked() {
+    console.log("On User Button Clicked")
+    this.setState({
+      showLoginModal: Meteor.user() == null
+    })
+  }
+
+  onUserLoggedIn() {
+    console.log("On User Logged In triggered")
+    this.setState({
+      isUserLoggedIn: true,
+      showLoginModal: false
+    })
+  }
+
+  onUserLoggedOut() {
+    console.log("On User logged out triggered")
+    this.setState({
+      isUserLoggedIn: false
+    })
+  }
+
 
 }
 
