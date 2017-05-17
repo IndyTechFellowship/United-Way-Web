@@ -10,8 +10,11 @@ class OrganizationCard extends Component {
       return <Loading/>
     } else {
 
-      console.log(this.props)
-      const organization = this.props.organization
+      let organization = this.props.organization
+      let searchTags = organization.tags.map((tag) => {
+        return tag.name
+      }).join(', ')
+
       let body = {
         leftColumn: {
           label: 'Other Website URL',
@@ -19,7 +22,7 @@ class OrganizationCard extends Component {
         },
         rightColumn: {
           label: 'Search Tags',
-          content: organization.tags.join(', ')
+          content: searchTags
         }
       }
 

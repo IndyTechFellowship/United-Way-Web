@@ -117,6 +117,7 @@ const styles = {
     justifyContent: 'space-between',
 
     column: {
+      maxWidth: 'calc(50% - 12px)',
       flexBasis: 'calc(50% - 12px)',
       display: 'flex',
       flexDirection: 'column',
