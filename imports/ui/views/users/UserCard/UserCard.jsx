@@ -15,10 +15,10 @@ class UserCard extends Component {
       }).join(', ')
 
       let body = {
-        leftColumn: {
+        leftColumn: [{
           label: 'About',
           content: user.summary
-        },
+        }],
         rightColumn: {
           label: 'Skills',
           content: skills
@@ -26,7 +26,7 @@ class UserCard extends Component {
       }
       return (
           <CardComponent
-              key={user._id}
+              key={user.name}  //FIXME: hacky for now - actually get user._id
               imageUrl={user.avatar.original}
               name={`${user.firstName} ${user.lastName}`}
               title={user.tagline}

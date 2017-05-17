@@ -16,10 +16,10 @@ class OrganizationCard extends Component {
       }).join(', ')
 
       let body = {
-        leftColumn: {
+        leftColumn: [{
           label: 'Other Website URL',
           content: organization.websiteUrl
-        },
+        }],
         rightColumn: {
           label: 'Search Tags',
           content: searchTags

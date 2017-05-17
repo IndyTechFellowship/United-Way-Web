@@ -6,6 +6,15 @@ class CardComponent extends Component {
     let imgStyle = this.props.cardType === 'user' ? styles.header.logo.userImg : styles.header.logo.orgImg;
     let CardButtons = this.props.cardButtons;
 
+    let leftColumnBody = this.props.body.leftColumn.map((body) => {
+      return (
+        <div style={styles.body.contentRow}>
+          <div style={{...styles.fontBase, ...styles.body.label}}>{body.label}</div>
+          <div style={{...styles.fontBase, ...styles.body.content}}>{body.content}</div>
+        </div>
+      )
+    })
+
     return (
       <Card style={styles.card}>
         <div style={styles.header.style}>
@@ -23,8 +32,7 @@ class CardComponent extends Component {
         </div>
         <div style={styles.body}>
           <div style={styles.body.column}>
-            <div style={{...styles.fontBase, ...styles.body.label}}>{this.props.body.leftColumn.label}</div>
-            <div style={{...styles.fontBase, ...styles.body.content}}>{this.props.body.leftColumn.content}</div>
+            {leftColumnBody}
           </div>
           <div style={styles.body.column}>
             <div style={{...styles.fontBase, ...styles.body.label}}>{this.props.body.rightColumn.label}</div>
@@ -101,6 +109,7 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         height: '80px',
+        width: '150px',
       },
       button: {
         backgroundColor: 'black',
@@ -116,16 +125,21 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
 
+    contentRow: {
+      margin: '0 0 18px 0'
+    },
+
     column: {
       maxWidth: 'calc(50% - 12px)',
       flexBasis: 'calc(50% - 12px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-start',
+      overflow: 'hidden'
     },
 
     label: {
-      height: '24px',
+      height: '20px',
       fontSize: '16px',
       fontWeight: '300',
     },
