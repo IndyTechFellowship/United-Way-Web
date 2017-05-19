@@ -2,7 +2,6 @@ import _ from 'lodash';
 import {
   TextField,
 } from 'material-ui'
-import SearchIcon from 'material-ui/svg-icons/action/search'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
@@ -21,7 +20,7 @@ const styles = {
     alignItems: 'center',
     display: 'flex',
     flexGrow: '1',
-    margin: '24px',
+    margin: '24px 24px 24px 8px',
   },
   icon: {
     color: 'white',
@@ -43,7 +42,6 @@ const SearchBox = ({ dispatch, searchResults, searchTerm }) => {
   });
   return (
     <div style={styles.container}>
-      <SearchIcon style={styles.icon} />
       <TextField
         fullWidth={true}
         hint="Search..."
