@@ -10,18 +10,16 @@ import { browserHistory } from 'react-router'
 export default class LoginModal extends Component {
   constructor(props) {
     super(props)
-    let isUserLoggedIn = Meteor.user() != null
     this.state = {
-      modalOpen: !isUserLoggedIn,
+      modalOpen: this.props.isShown,
     }
+
+    this.closeModal = this.closeModal.bind(this)
   }
 
   closeModal() {
     console.log("Close")
-    this.setState({
-      modalOpen: false
-    })
-    browserHistory.push('/')
+    this.props.onUserLoggedIn()
   }
 
   openModal() {
@@ -34,19 +32,19 @@ export default class LoginModal extends Component {
   render() {
     return (
       <Modal
-        isOpen={this.state.modalOpen}
+        isOpen={this.props.isShown}
         contentLabel="Login/Register" 
         style={loginModal} >
           <div style={center}>
             <span style={bigHeader}>Let's get you to your account</span>
             <div style={topLogin}>
-              <EmailPasswordLogin closeModal={this.closeModal.bind(this)} />
+              <EmailPasswordLogin closeModal={this.closeModal} />
               <div style={divider} />
               <SSOButtons />
             </div>
             <div style={bigHeader}>Oh, you don't have an account yet?</div>
             <div style={smallHeader}>Create your account to start showing and sharing your interests</div>
-            <CreateAnAccountLogin closeModal={this.closeModal.bind(this)} />
+            <CreateAnAccountLogin closeModal={this.closeModal} />
           </div>
       </Modal>
     )
