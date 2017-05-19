@@ -15,6 +15,10 @@ const OrganizationSchema = new SimpleSchema({
   imageUrls: {
     type: [ String ],
   },
+  websiteUrl: {
+    type: String,
+    optional: true,
+  },
   description: {
     type: String,
   },
