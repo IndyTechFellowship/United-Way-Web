@@ -19,16 +19,6 @@ import UserProfileMenu from '/imports/ui/components/UserProfileMenu'
 import SearchBox from './SearchBox'
 import { updateFullTextSearchResults } from '/imports/ui/state'
 
-const searchArea = {
-  alignItems: 'center',
-  flexGrow: '1',
-  justifyContent: 'center',
-}
-
-const searchButton = {
-  height: '24px',
-}
-
 class Navbar extends Component {
   
   render() {
@@ -40,10 +30,10 @@ class Navbar extends Component {
           <Link to={'/'} style={linkStyle}>Opportunities</Link>
           <Link to={'/positions'} style={linkStyle}>Positions</Link>
           <Row style={searchArea}>
-            <FloatingActionButton mini={true} onTouchTap={() => dispatch(updateFullTextSearchResults())} zDepth={1}>
+            <FloatingActionButton mini={true} onTouchTap={onSearchClick(dispatch)} zDepth={1}>
               {searchLoading ? <Cached /> : <SearchIcon />}
             </FloatingActionButton>
-            <SearchBox />
+            <SearchBox onSubmit={onSearchClick(dispatch)} />
           </Row>
           <Link to={'/organizations'} style={linkStyle}>Organizations</Link>
           <Link to={'/users'} style={linkStyle}>Volunteers</Link>
@@ -66,6 +56,21 @@ class UserButton extends Component {
       )
     }
   }
+}
+
+const onSearchClick = (dispatch) => () => {
+  dispatch(updateFullTextSearchResults())
+  browserHistory.push('/search')
+}
+
+const searchArea = {
+  alignItems: 'center',
+  flexGrow: '1',
+  justifyContent: 'center',
+}
+
+const searchButton = {
+  height: '24px',
 }
 
 const toolbarStyle = {

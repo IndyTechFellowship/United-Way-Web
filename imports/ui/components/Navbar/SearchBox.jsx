@@ -31,7 +31,7 @@ const styles = {
   },
 }
 
-const SearchBox = ({ dispatch, searchResults, searchTerm }) => {
+const SearchBox = ({ dispatch, onSubmit, searchResults, searchTerm }) => {
   const mapped = _.map(searchResults, r => {
     if (r._type === 'Organizations') {
       return `Organization: ${r.name}`
@@ -47,10 +47,9 @@ const SearchBox = ({ dispatch, searchResults, searchTerm }) => {
         hint="Search..."
         inputStyle={styles.textField}
         onChange={onUpdateInput(dispatch)}
-        onKeyDown={onKeyDown(dispatch)}
+        onKeyDown={(e) => e.keyCode === 13 && onSubmit()}
         style={styles.textField} 
         value={searchTerm} />
-      <SearchResultsPopover />
     </div>
   )
 };
