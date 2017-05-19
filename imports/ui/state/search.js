@@ -13,6 +13,13 @@ export const setFullTextSearchError = (searchError) => ({
   searchError,
 })
 
+export const SET_FULL_TEXT_SEARCH_FILTER_TOGGLE = 'SET_FULL_TEXT_SEARCH_FILTER_TOGGLE'
+export const setFullTextSearchFilterToggle = (toggle, toggled) => ({
+  type: SET_FULL_TEXT_SEARCH_FILTER_TOGGLE,
+  toggle,
+  toggled,
+})
+
 export const SET_FULL_TEXT_SEARCH_RESULTS = 'SET_FULL_TEXT_SEARCH_RESULTS'
 export const setFullTextSearchResults = (searchResults) => ({
   type: SET_FULL_TEXT_SEARCH_RESULTS,
@@ -40,7 +47,7 @@ export const setFullTextSearchTerm = (searchTerm) => ({
 export const updateFullTextSearchResults = () => (
   (dispatch, getState) => {
     dispatch(setFullTextSearchResultsLoading(true))
-    Meteor.call('Search.fullText.all', getState().search.searchTerm, (err, results) => {
+    Meteor.call('Search.fullText.all', getState().search.searchTerm, getState().search.searchFilters, (err, results) => {
       dispatch(setFullTextSearchResultsLoading(false))
       dispatch(setFullTextSearchResultsOpen(true))
       if (err) return dispatch(setFullTextSearchError(err.reason))
@@ -52,6 +59,11 @@ export const updateFullTextSearchResults = () => (
 const initialState = {
   anchor: null,
   searchError: null,
+  searchFilters: {
+    organizations: true,
+    positions: true,
+    users: true,
+  },
   searchResults: [],
   searchResultsLoading: false,
   searchResultsOpen: false,
@@ -64,6 +76,13 @@ export const searchReducer = (state = initialState, action) => {
       return {...state, anchor: action.anchor}
     case SET_FULL_TEXT_SEARCH_ERROR:
       return {...state, searchError: action.searchError}
+    case SET_FULL_TEXT_SEARCH_FILTER_TOGGLE:
+      state.searchFilters[action.toggle] = action.toggled;
+      return {...state,
+        searchFilters: {...state.searchFilters,
+          [action.toggle]: action.toggled,
+        },
+      };
     case SET_FULL_TEXT_SEARCH_RESULTS:
       return {...state, searchResults: action.searchResults}
     case SET_FULL_TEXT_SEARCH_RESULTS_LOADING:

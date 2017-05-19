@@ -1,6 +1,6 @@
 import algolia from 'algoliasearch'
 import _ from 'lodash'
-import { check } from 'meteor/check'
+import { check, Match } from 'meteor/check'
 import { Meteor } from 'meteor/meteor'
 
 import { Organizations } from '/imports/api/Organizations'
@@ -25,14 +25,19 @@ Meteor.methods({
     Meteor.wrapAsync(usersIndex.addObjects, usersIndex)(allUsers)
   },
 
-  'Search.fullText.all'(query) {
+  'Search.fullText.all'(query, filters) {
     check(query, String)
+    check(filters, Object)
+    check(filters.users, Boolean)
     if (query.length < 3) return []
     const usersIndex = algoliaClient.initIndex('users')
-    const results = _.map(Meteor.wrapAsync(usersIndex.search, usersIndex)(query).hits, h => _.assign(h, {
-      _type: 'Users'
-    }))
-    return results;
+    const usersResults = (() => {
+      if (!filters.users) return []
+      else return _.map(Meteor.wrapAsync(usersIndex.search, usersIndex)(query).hits, h => _.assign(h, {
+        _type: 'Users'
+      }))
+    })()
+    return [...usersResults];
   },
 
 })

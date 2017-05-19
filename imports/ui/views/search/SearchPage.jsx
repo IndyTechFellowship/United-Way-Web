@@ -3,12 +3,22 @@ import { connect } from 'react-redux'
 
 import { Colors } from '/imports/ui/styles';
 
+import SearchFiltering from './SearchFiltering'
 import SearchResultsContent from './SearchResultsContent'
 
 const styles = {
-  background: {
-    
-  }
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    height: '100%',
+    padding: '16px',
+  },
+  filter: {
+    flex: '1',
+  },
+  results: {
+    flex: '3',
+  },
 }
 
 class SearchPage extends Component {
@@ -16,8 +26,13 @@ class SearchPage extends Component {
   render() {
     const { searchResults } = this.props
     return (
-      <div style={styles.background}>
-        <SearchResultsContent searchResults={searchResults} />
+      <div style={styles.container}>
+        <div style={styles.filter}>
+          <SearchFiltering />
+        </div>
+        <div style={styles.results}>
+          <SearchResultsContent searchResults={searchResults} />
+        </div>
       </div>
     )
   }
