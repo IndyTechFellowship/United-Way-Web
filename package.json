@@ -6,7 +6,9 @@
     "seed": "./scripts/seed.sh"
   },
   "dependencies": {
+    "algoliasearch": "^3.22.1",
     "bcrypt": "^1.0.2",
+    "jsxstyle": "^1.0.2",
     "lodash": "^4.17.4",
     "material-ui": "^0.16.4",
     "meteor-node-stubs": "~0.2.0",
@@ -15,9 +17,13 @@
     "react-addons-pure-render-mixin": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-modal": "^1.6.5",
+    "react-redux": "^5.0.4",
     "react-router": "^3.0.0",
     "react-slick": "^0.14.2",
     "react-social-button": "^1.0.2",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-logger": "^3.0.1",
+    "redux-thunk": "^2.2.0"
   }
 }
