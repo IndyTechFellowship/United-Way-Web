@@ -14,7 +14,8 @@ const run = () => {
         },
         firstName: "Rosemary",
         lastName: "Thomas",
-        tagline: "Benefits Administrator at Endicott Johnson",
+        tagline: "Benefits Administrator",
+        companyName: "Endicott Johnson",
         summary: "Spent the 80's merchandising Roombas in Fort Walton Beach, FL. Spent childhood working with catfish in Hanford, CA. Won several awards for promoting trumpets for fun and profit. Spent high school summers supervising the production of psoriasis in Pensacola, FL. Practiced in the art of buying and selling toy trucks in Jacksonville, FL. Spent a weekend deploying inflatable dolls in Washington, DC.",
         interests: [
           tags[Math.floor(Math.random() * tags.length)]._id,
@@ -69,7 +70,8 @@ const run = () => {
         },
         firstName: "Kenneth",
         lastName: "Tessier",
-        tagline: "Head Hunter at Structural",
+        tagline: "Head Hunter",
+        companyName: "Structural",
         summary: "Spent 2001-2005 writing about Elvis Presley for no pay. Set new standards for getting to know UFOs for the underprivileged. Earned praised for my work supervising the production of UFOs in Africa. At the moment I'm managing bullwhips with no outside help. Uniquely-equipped for investing in toy elephants in Naples, FL. Gifted in selling glue in Nigeria.",
         interests: [
           tags[Math.floor(Math.random() * tags.length)]._id,

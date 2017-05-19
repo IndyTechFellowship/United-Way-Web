@@ -1,22 +1,19 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router'
 import {
   AppBar,
+  AutoComplete,
   FlatButton,
   FontIcon,
-  AutoComplete
+  TextField,
 } from 'material-ui'
-import SearchIcon from 'material-ui/svg-icons/action/search'
 import { lightBlue800 } from 'material-ui/styles/colors'
-import { browserHistory } from 'react-router'
+import React, { Component } from 'react'
+import { browserHistory, Link } from 'react-router'
 
 import UserProfileMenu from '/imports/ui/components/UserProfileMenu'
+import SearchBox from './SearchBox'
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props)
-  }
-
+  
   render() {
     return (
       <div style={toolbarStyle}>
@@ -24,7 +21,7 @@ class Navbar extends Component {
           <img src="logo.svg" style={logoStyle} />
           <Link to={'/'} style={linkStyle}>Opportunities</Link>
           <Link to={'/positions'} style={linkStyle}>Positions</Link>
-          <SearchArea />
+          <SearchBox />
           <Link to={'/organizations'} style={linkStyle}>Organizations</Link>
           <Link to={'/users'} style={linkStyle}>Volunteers</Link>
           <UserButton isUserLoggedIn={this.props.isUserLoggedIn} onUserButtonClicked={this.props.onUserButtonClicked}/>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import { IndexRoute, Router, Route, browserHistory } from 'react-router'
 
 // route components
@@ -17,29 +18,30 @@ import UserPage from '/imports/ui/views/users/UserPage'
 import UsersPage from '/imports/ui/views/users/UsersPage'
 import TermsAndConditions from '/imports/ui/views/terms/TermsAndConditions'
 
-import SsoButtons from '/imports/ui/views/login/SsoButtons'
+import { store } from '/imports/ui/state'
 
 export const Routes = () => (
-  <Router history={browserHistory}>
-    <Route path="/" component={AppContainer}>
-      <IndexRoute component={HomePage}/>
-      <Route path="register" component={RegistrationPage}/>
-      <Route path="about" component={AboutPage}/>
-      <Route path="positions" component={PositionsPage}/>
-      <Route path="login" component={LoginPage}/>
-      <Route path="organizations">
-        <IndexRoute component={OrganizationsPage}/>
-        <Route path=":id" component={OrganizationPage}/>
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={AppContainer}>
+        <IndexRoute component={HomePage}/>
+        <Route path="register" component={RegistrationPage}/>
+        <Route path="about" component={AboutPage}/>
+        <Route path="positions" component={PositionsPage}/>
+        <Route path="login" component={LoginPage}/>
+        <Route path="organizations">
+          <IndexRoute component={OrganizationsPage}/>
+          <Route path=":id" component={OrganizationPage}/>
+        </Route>
+        <Route path="search" component={SearchPage}/>
+        <Route path="settings" component={SettingsPage}/>
+        <Route path="users">
+          <IndexRoute component={UsersPage}/>
+          <Route path=":id" component={UserPage}/>
+        </Route>
+        <Route path="termsandconditions" component={TermsAndConditions} />
+        <Route path="*" component={NotFoundPage}/>
       </Route>
-      <Route path="search" component={SearchPage}/>
-      <Route path="settings" component={SettingsPage}/>
-      <Route path="users">
-        <IndexRoute component={UsersPage}/>
-        <Route path=":id" component={UserPage}/>
-      </Route>
-      <Route path="testsso" component={SsoButtons} />
-      <Route path="termsandconditions" component={TermsAndConditions} />
-      <Route path="*" component={NotFoundPage}/>
-    </Route>
-  </Router>
+    </Router>
+  </Provider>
 );
