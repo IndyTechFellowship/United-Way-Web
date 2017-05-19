@@ -10,7 +10,7 @@ class AvatarCard extends Component {
         <CardMedia style={styles.cardMedia}>
           <img src={this.props.avatarUrl} />
         </CardMedia>
-        <CardTitle title={this.props.name} subtitle={this.props.name}/>
+        <CardTitle title={<span>{this.props.firstName}<br />{this.props.lastName}</span>} style={styles.title}/>
       </Card>
     )
   }
@@ -19,12 +19,17 @@ class AvatarCard extends Component {
 
 const styles = {
   cardMedia: {
-    height: '150px',
+    height: '200px',
+    width: '200px',
+    borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     overflow: 'hidden',
-    margin: '4px',
+    margin: '16px',
   },
+  title: {
+    lineHeight: '24px'
+  }
 }
 
 export default AvatarCard

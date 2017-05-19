@@ -131,7 +131,7 @@ const roundButton = {
   height: '48px',
   width: '48px',
   border: '1px solid white',
-  margin: '24px',
+  margin: '16px 24px',
   backgroundColor: 'white',
   color: lightBlue800,
   display: 'flex',

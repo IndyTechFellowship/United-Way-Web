@@ -64,20 +64,21 @@ class UserPage extends Component {
           </div>
         )
       }
+      const name = `${this.props.user.firstName} ${this.props.user.lastName}`
       return (
         <div style={styles.twoColumnLayout}>
           <div style={styles.columnOne}>
             <Breadcrumbs crumbs={[
                 {text: 'Volunteers', path: '/users'},
-                {text: 'Pizza', path: null}
+                {text: name, path: null}
               ]}
             />
             <UserBasicInfo user={this.props.user} />
             <Title>Interests</Title>
             <TagCloud 
               style={styles.cloud}
-              minSize={14}
-              maxSize={30}
+              minSize={18}
+              maxSize={36}
               tags={interests}
               renderer={customRenderer}
               disableRandomColor={true} 

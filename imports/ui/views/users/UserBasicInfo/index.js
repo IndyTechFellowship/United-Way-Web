@@ -9,10 +9,10 @@ import AboutMeTagline from '/imports/ui/views/users/UserBasicInfo/AboutMeTagline
 class UserBasicInfo extends Component {
   render() {
     return (
-      <div>
+      <div style={styles.container}>
         <Title>About Me & Skills</Title>
         <div style={styles.userInfoBlock}>
-          <AvatarCard avatarUrl={this.props.user.avatar ? this.props.user.avatar.original : null} name={this.props.user.firstName + " " + this.props.user.lastName} />
+          <AvatarCard avatarUrl={this.props.user.avatar ? this.props.user.avatar.original : null} firstName={this.props.user.firstName} lastName={this.props.user.lastName} />
           <div style={styles.aboutMeSkillsBlock}>
             <AboutMeTagline tagline={this.props.user.tagline}/>
             <Card>
@@ -26,6 +26,9 @@ class UserBasicInfo extends Component {
 }
 
 const styles = {
+  container: {
+    marginBottom: '24px'
+  },
   userInfoBlock: {
     display: 'flex',
     flexDirection: 'row',
@@ -33,6 +36,7 @@ const styles = {
   aboutMeSkillsBlock: {
     display: 'flex',
     flexDirection: 'column',
+    marginLeft: '24px'
   },
 }
 
