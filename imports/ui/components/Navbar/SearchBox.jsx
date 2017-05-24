@@ -21,7 +21,7 @@ const styles = {
     alignItems: 'center',
     display: 'flex',
     flexGrow: '1',
-    margin: '24px',
+    margin: '16px 24px',
   },
   icon: {
     color: 'white',

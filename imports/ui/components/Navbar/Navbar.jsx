@@ -45,48 +45,6 @@ class UserButton extends Component {
   }
 }
 
-class SearchArea extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      dataSource: []
-    }
-    this.handleUpdateInput = this.handleUpdateInput.bind(this)
-  }
-
-  handleUpdateInput(value) {
-    this.setState({
-      dataSource: [
-        "People: " + value,
-        "Agencies: " + value,
-        "All: " + value,
-      ]
-    })
-  }
-
-  render() {
-    return (
-      <div style={searchStyles}>
-        <SearchIcon style={iconStyle} />
-        <AutoComplete
-          hintText="Search"
-          dataSource={this.state.dataSource}
-          onUpdateInput={this.handleUpdateInput}
-          fullWidth={true}
-          style={searchFieldStyle}
-        />
-      </div>
-    )
-  }
-}
-
-const searchStyles = {
-  flexGrow: '1',
-  margin: '16px 24px',
-  display: 'flex',
-  alignItems: 'center',
-}
-
 const toolbarStyle = {
   backgroundColor: lightBlue800,
   width: '100vw',

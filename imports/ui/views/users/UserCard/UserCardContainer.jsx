@@ -18,7 +18,7 @@ UserCardContainer.propTypes = {
 
 export default createContainer((props) => {
   let user = props.user
-  const tagQuery = {_id: {$in: user.skills}}
+  const tagQuery = {_id: {$in: user.skills || []}}
   const tagSubscription = Meteor.subscribe('Tags.get', tagQuery)
 
   if (!tagSubscription.ready()) return { loading: true, user: {} }
