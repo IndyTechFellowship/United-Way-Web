@@ -25,8 +25,7 @@ const styles = {
   listContainer: {
     display: 'flex',
     flexDirection: 'column',
-    paddingBottom: '10px',
-    marginTop: '48px'
+    paddingBottom: '10px'
   },
 }
 
