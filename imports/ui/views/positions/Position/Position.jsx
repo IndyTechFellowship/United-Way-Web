@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { Card, CardHeader, CardText, CardActions, RaisedButton } from 'material-ui'
+import { FlatButton } from 'material-ui'
 
 import Loading from '/imports/ui/components/Loading'
-import PositionBasics from './PositionBasics'
-import PositionDetails from './PositionDetails'
+import CardComponent from '/imports/ui/components/CardComponent'
 
 class Position extends Component {
 
@@ -11,26 +10,47 @@ class Position extends Component {
     if (this.props.loading) {
       return <Loading/>
     } else {
-      return (
-        <Card style={styles.card}>
-          <CardText style={styles.header}>
-            <PositionBasics position={this.props.position} organization={this.props.organization}/>
-            <div style={styles.buttonContainer}>
-              <RaisedButton label="Send Interest" primary={true} labelStyle={styles.button}/>
-              <RaisedButton label="Save" secondary={true} labelStyle={styles.button}/>
-            </div>
-          </CardText>
+      let position = this.props.position
+      let positionName = !position.name ? '' : position.name
+      let organization = this.props.organization
 
-          <CardText>
-            <PositionDetails position={this.props.position}/>
-          </CardText>
-          <CardText actAsExpander={true}>
-            <div style={styles.showMore}>Show More</div>
-          </CardText>
-          <CardText expandable={true}>
-            {this.props.position.description}
-          </CardText>
-        </Card>
+      let skills = position.skills.map((skill) => {
+        return skill.name
+      }).join(', ')
+
+      let imageUrl = position.opportunityType === 'Committee' ? 'committee-icon.svg' : 'board-icon.svg'
+
+      let body = {
+        leftColumn: [
+          {
+            label: 'Position Category',
+            content: position.positionType
+          },
+          {
+            label: 'Time Commitment',
+            content: position.timeCommitment
+          },
+          {
+            label: 'Monetary Commitment',
+            content: position.monetaryCommitment
+          }
+        ],
+        rightColumn: {
+          label: 'Skills Needed',
+          content: skills
+        }
+      }
+      return (
+          <CardComponent
+              key={position._id}
+              imageUrl={imageUrl}
+              name={positionName}
+              title={organization.name}
+              subtitle="Open"
+              body={body}
+              cardType="position"
+              cardButtons={PositionButtons}
+          />
       )
     }
   }
@@ -42,31 +62,53 @@ Position.propTypes = {
   organization: PropTypes.object,
 }
 
+export default Position
+
+class PositionButtons extends Component {
+  render() {
+    return (
+
+
+        <div style={styles.buttonContainer}>
+          <FlatButton
+              label="SHOW INTEREST"
+              labelStyle={styles.button.label}
+              style={styles.button.style}
+              fullWidth={true}
+              backgroundColor={styles.button.backgroundColor}
+          />
+          <FlatButton
+              label="BOOKMARK"
+              labelStyle={styles.button.label}
+              style={styles.button.style}
+              fullWidth={true}
+              backgroundColor={styles.button.backgroundColor}
+          />
+        </div>
+    )
+  }
+}
+
 const styles = {
-  showMore: {
-    color: 'blue',
-    textDecoration: 'underline',
+  button: {
+    backgroundColor: '#0277bd',
+
+    label: {
+      color: '#ffffff',
+      fontSize: '14px',
+      fontWeight: '500',
+    },
+
+    style: {
+      height: '32px',
+      lineHeight: 1
+    }
   },
 
   buttonContainer: {
     display: 'flex',
     flexDirection: 'column',
-  },
-
-  header: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-
-  card: {
-    margin: '8px',
-  },
-
-  button: {
-    fontSize: '12px',
-    alignText: 'center',
+    justifyContent: 'space-between',
+    height: '100%'
   }
 }
-
-export default Position

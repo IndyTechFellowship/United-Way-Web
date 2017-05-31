@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { deepOrange500 } from 'material-ui/styles/colors'
+import { deepOrange500, grey200 } from 'material-ui/styles/colors'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import LoginModal from '/imports/ui/views/login/LoginModal'
@@ -13,11 +13,12 @@ const styles = {
     minHeight: "100vh",
     flexDirection: "column",
     alignItems: "center",
+    background: grey200,
   },
   content: {
     flex: 1,
     width: "80%",
-    maxWidth: 970,
+    maxWidth: 1440,
   },
 }
 

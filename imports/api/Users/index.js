@@ -24,6 +24,10 @@ const ProfileSchema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  companyName: {
+    type: String,
+    optional: true,
+  },
   summary: {
     type: String,
     optional: true,

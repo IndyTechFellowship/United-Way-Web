@@ -26,6 +26,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     paddingBottom: '10px',
+    marginTop: '48px'
   },
 }
 

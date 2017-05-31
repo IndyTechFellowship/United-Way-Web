@@ -4,8 +4,15 @@ class AboutMeTagline extends Component {
 
   render() {
     return (
-        <div>{this.props.tagline}</div>
+        <div style={styles.tagline}>{this.props.tagline}</div>
     )
+  }
+}
+
+const styles = {
+  tagline: {
+    marginBottom: '16px',
+    fontSize: '18px'
   }
 }
 
