@@ -7,7 +7,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router'
 
-import './results/searchResults.css';
 import { Colors } from '/imports/ui/styles';
 import {
   setFullTextSearchResultsOpen,
