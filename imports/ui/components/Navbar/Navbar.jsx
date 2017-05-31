@@ -61,7 +61,7 @@ const logoStyle = {
   display: 'block',
   width: '48px',
   height: '48px',
-  margin: '24px',
+  margin: '16px 24px',
 }
 
 const linkStyle = {
@@ -69,7 +69,7 @@ const linkStyle = {
   color: 'white',
   opacity: '0.7',
   fontSize: '18px',
-  margin: '24px',
+  margin: '16px 24px',
 }
 
 const iconStyle = {
@@ -86,7 +86,7 @@ const roundButton = {
   height: '48px',
   width: '48px',
   border: '1px solid white',
-  margin: '24px',
+  margin: '16px 24px',
   backgroundColor: 'white',
   color: lightBlue800,
   display: 'flex',

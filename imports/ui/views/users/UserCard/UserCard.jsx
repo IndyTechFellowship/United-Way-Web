@@ -27,7 +27,7 @@ class UserCard extends Component {
       return (
           <CardComponent
               key={user.name}  //FIXME: hacky for now - actually get user._id
-              imageUrl={user.avatar.original}
+              imageUrl={user.avatar ? user.avatar.original : null}
               name={`${user.firstName} ${user.lastName}`}
               title={user.tagline}
               subtitle={user.companyName}
@@ -52,14 +52,12 @@ class VolunteerButtons extends Component {
               label="RECOMMEND"
               labelStyle={styles.button.label}
               style={styles.button.style}
-              fullWidth={true}
               backgroundColor={styles.button.backgroundColor}
           />
           <FlatButton
               label="BOOKMARK"
               labelStyle={styles.button.label}
               style={styles.button.style}
-              fullWidth={true}
               backgroundColor={styles.button.backgroundColor}
           />
         </div>
