@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
+import _ from 'lodash'
 import { Card } from 'material-ui/Card'
+import React, { Component } from 'react'
 
 class CardComponent extends Component {
   render() {
     let imgStyle = this.props.cardType === 'user' ? styles.header.logo.userImg : styles.header.logo.orgImg;
     let CardButtons = this.props.cardButtons;
 
-    let leftColumnBody = this.props.body.leftColumn.map((body) => {
+    let leftColumnBody = _.map(this.props.body.leftColumn, (body, i) => {
       return (
-        <div style={styles.body.contentRow}>
+        <div key={i} style={styles.body.contentRow}>
           <div style={{...styles.fontBase, ...styles.body.label}}>{body.label}</div>
           <div style={{...styles.fontBase, ...styles.body.content}}>{body.content}</div>
         </div>
