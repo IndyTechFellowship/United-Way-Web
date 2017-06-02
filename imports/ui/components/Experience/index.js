@@ -32,6 +32,7 @@ class Experience extends Component {
         body={body}
         cardType="experience"
         cardButtons={ExperienceButtons}
+        drawerContent={experience.description}
       />
     )
   }

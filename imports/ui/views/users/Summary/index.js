@@ -19,6 +19,7 @@ const styles = {
   summary: {
     fontSize: '16px',
     fontWeight: 300,
+    marginBottom: '16px'
   }
 }
 

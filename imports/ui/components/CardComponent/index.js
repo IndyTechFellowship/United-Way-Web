@@ -1,7 +1,23 @@
 import React, { Component } from 'react'
 import { Card } from 'material-ui/Card'
+import {
+  FlatButton,
+} from 'material-ui'
+import { grey200 } from 'material-ui/styles/colors'
 
 class CardComponent extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      expanded: false
+    }
+    this.toggleExpanded = this.toggleExpanded.bind(this)
+  }
+
+  toggleExpanded() {
+    this.setState({ expanded: !this.state.expanded })
+  }
+
   render() {
     let imgStyle = this.props.cardType === 'user' ? styles.header.logo.userImg : styles.header.logo.orgImg;
     let CardButtons = this.props.cardButtons;
@@ -16,30 +32,42 @@ class CardComponent extends Component {
     })
 
     return (
-      <Card style={styles.card}>
-        <div style={styles.header.style}>
-          <div style={styles.header.logo.style}>
-            <img src={this.props.imageUrl} style={imgStyle} />
+      <div style={styles.container}>
+        {this.state.expanded
+          ? <Card style={styles.drawer}>
+              <div>{this.props.drawerContent}</div>
+            </Card>
+          : null
+        }
+        <Card style={styles.card}>
+          <div style={styles.header.style}>
+            <div style={styles.header.logo.style}>
+              <img src={this.props.imageUrl} style={imgStyle} />
+            </div>
+            <div style={styles.header.title.style}>
+              <div style={{...styles.fontBase, ...styles.header.title.name}}>{this.props.name}</div>
+              <div style={{...styles.fontBase, ...styles.header.title.title}}>{this.props.title}</div>
+              <div style={{...styles.fontBase, ...styles.header.title.subtitle}}>{this.props.subtitle}</div>
+            </div>
+            <div style={styles.header.actions.style}>
+              <CardButtons />
+            </div>
           </div>
-          <div style={styles.header.title.style}>
-            <div style={{...styles.fontBase, ...styles.header.title.name}}>{this.props.name}</div>
-            <div style={{...styles.fontBase, ...styles.header.title.title}}>{this.props.title}</div>
-            <div style={{...styles.fontBase, ...styles.header.title.subtitle}}>{this.props.subtitle}</div>
+          <div style={styles.body}>
+            <div style={styles.body.column}>
+              {leftColumnBody}
+              {this.props.drawerContent
+                ? <FlatButton onClick={this.toggleExpanded}>{this.state.expanded ? "SHOW LESS" : "SHOW MORE"}</FlatButton>
+                : null
+              }
+            </div>
+            <div style={styles.body.column}>
+              <div style={{...styles.fontBase, ...styles.body.label}}>{this.props.body.rightColumn.label}</div>
+              <div style={{...styles.fontBase, ...styles.body.content}}>{this.props.body.rightColumn.content}</div>
+            </div>
           </div>
-          <div style={styles.header.actions.style}>
-            <CardButtons />
-          </div>
-        </div>
-        <div style={styles.body}>
-          <div style={styles.body.column}>
-            {leftColumnBody}
-          </div>
-          <div style={styles.body.column}>
-            <div style={{...styles.fontBase, ...styles.body.label}}>{this.props.body.rightColumn.label}</div>
-            <div style={{...styles.fontBase, ...styles.body.content}}>{this.props.body.rightColumn.content}</div>
-          </div>
-        </div>
-      </Card>
+        </Card>
+      </div>
     )
   }
 }
@@ -56,6 +84,7 @@ const styles = {
   card: {
     margin: '8px',
     padding: '24px',
+    height: '100%'
   },
   header: {
     style: {
@@ -118,7 +147,6 @@ const styles = {
     }
   },
   body: {
-    height: '150px',
     marginTop: '8px',
 
     display: 'flex',
@@ -151,6 +179,16 @@ const styles = {
       whiteSpace: 'normal',
     }
   },
+  drawer: {
+    margin: '-24px 8px 8px 8px',
+    background: grey200,
+    padding: '32px 16px 16px 16px'
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'column-reverse',
+    height: '100%'
+  }
 }
 
 export default CardComponent
