@@ -92,6 +92,8 @@ const UserSchema = new SimpleSchema({
     type: [ String ],
     optional: true,
   },
+  // TODO: add interestedPositions[]
+  // TODO: add followedOrganizations[]
 })
 
 const Users = Meteor.users;

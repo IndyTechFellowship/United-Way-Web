@@ -3,6 +3,7 @@ import { FlatButton } from 'material-ui'
 
 import Loading from '/imports/ui/components/Loading'
 import CardComponent from '/imports/ui/components/CardComponent'
+import ShowInterestButton from '/imports/ui/components/ShowInterestButton'
 
 class Position extends Component {
 
@@ -67,16 +68,8 @@ export default Position
 class PositionButtons extends Component {
   render() {
     return (
-
-
         <div style={styles.buttonContainer}>
-          <FlatButton
-              label="SHOW INTEREST"
-              labelStyle={styles.button.label}
-              style={styles.button.style}
-              fullWidth={true}
-              backgroundColor={styles.button.backgroundColor}
-          />
+          <ShowInterestButton />
           <FlatButton
               label="BOOKMARK"
               labelStyle={styles.button.label}
@@ -86,6 +79,24 @@ class PositionButtons extends Component {
           />
         </div>
     )
+  }
+
+  handleExpressInterest(positionId) {
+    // need positionId and opts?
+    // TODO: refactor
+    if (Meteor.user()) {
+      Meteor.call('Positions.expressInterest', positionId, {userId: Meteor.userId()},
+          (err, res) => {
+            if (err) {
+              alert(err)
+            } else {
+              console.log('express interest worked!')
+            }
+          })
+    } else {
+      console.log('no user logged in!')
+    }
+    console.log('express interest clicked with positionId: ' + positionId);
   }
 }
 
