@@ -20,10 +20,10 @@ export const setFullTextSearchFilterToggle = (toggle, toggled) => ({
   toggled,
 })
 
-export const SET_FULL_TEXT_SEARCH_RESULTS = 'SET_FULL_TEXT_SEARCH_RESULTS'
-export const setFullTextSearchResults = (searchResults) => ({
-  type: SET_FULL_TEXT_SEARCH_RESULTS,
-  searchResults, 
+export const SET_USER_SEARCH_RESULTS = 'SET_USER_SEARCH_RESULTS'
+export const setUserSearchResults = (searchResults) => ({
+  type: SET_USER_SEARCH_RESULTS,
+  searchResults,
 })
 
 export const SET_FULL_TEXT_SEARCH_RESULTS_LOADING = 'SET_FULL_TEXT_SEARCH_RESULTS_LOADING'
@@ -32,29 +32,22 @@ export const setFullTextSearchResultsLoading = (searchResultsLoading) => ({
   searchResultsLoading,
 })
 
-export const SET_FULL_TEXT_SEARCH_RESULTS_OPEN = 'SET_FULL_TEXT_SEARCH_RESULTS_OPEN'
-export const setFullTextSearchResultsOpen = (open) => ({
-  type: SET_FULL_TEXT_SEARCH_RESULTS_OPEN,
-  open,
-})
-
 export const SET_FULL_TEXT_SEARCH_TERM = 'SET_FULL_TEXT_SEARCH_TERM'
 export const setFullTextSearchTerm = (searchTerm) => ({
   type: SET_FULL_TEXT_SEARCH_TERM,
   searchTerm,
 })
 
-export const updateFullTextSearchResults = () => (
+export const updateUserSearchResults = () => (
   (dispatch, getState) => {
-    dispatch(setFullTextSearchResultsLoading(true))
-    Meteor.call('Search.fullText.all', getState().search.searchTerm, getState().search.searchFilters, (err, results) => {
+    dispatch(setFullTextSearchResultsLoading(true));
+    Meteor.call('Search.Users.FullText', getState().search.searchTerm, {}, (err, results) => {
       dispatch(setFullTextSearchResultsLoading(false))
-      dispatch(setFullTextSearchResultsOpen(true))
       if (err) return dispatch(setFullTextSearchError(err.reason))
-      else return dispatch(setFullTextSearchResults(results))
+      else return dispatch(setUserSearchResults(results))
     })
   }
-)
+);
 
 const initialState = {
   anchor: null,
@@ -64,10 +57,10 @@ const initialState = {
     positions: true,
     users: true,
   },
-  searchResults: [],
   searchResultsLoading: false,
   searchResultsOpen: false,
   searchTerm: '',
+  userResults: null,
 }
 
 export const searchReducer = (state = initialState, action) => {
@@ -83,12 +76,10 @@ export const searchReducer = (state = initialState, action) => {
           [action.toggle]: action.toggled,
         },
       };
-    case SET_FULL_TEXT_SEARCH_RESULTS:
-      return {...state, searchResults: action.searchResults}
+    case SET_USER_SEARCH_RESULTS:
+      return {...state, userResults: action.searchResults}
     case SET_FULL_TEXT_SEARCH_RESULTS_LOADING:
       return {...state, searchResultsLoading: action.searchResultsLoading}
-    case SET_FULL_TEXT_SEARCH_RESULTS_OPEN:
-      return {...state, searchResultsOpen: action.open}
     case SET_FULL_TEXT_SEARCH_TERM:
       return {...state, searchTerm: action.searchTerm}
     default:

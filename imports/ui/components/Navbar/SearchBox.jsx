@@ -8,12 +8,10 @@ import { browserHistory } from 'react-router'
 
 import {
   setFullTextSearchAnchor,
-  setFullTextSearchResults,
   setFullTextSearchTerm,
+  setUserSearchResults,
   updateFullTextSearchResults,
 } from '/imports/ui/state'
-
-import SearchResultsPopover from './SearchResultsPopover';
 
 const styles = {
   container: {
@@ -32,14 +30,6 @@ const styles = {
 }
 
 const SearchBox = ({ dispatch, onSubmit, searchResults, searchTerm }) => {
-  const mapped = _.map(searchResults, r => {
-    if (r._type === 'Organizations') {
-      return `Organization: ${r.name}`
-    } else if (r._type === 'Users') {
-      return `User: ${r.profile.firstName} ${r.profile.lastName}`;
-    }
-    return 'nothing'
-  });
   return (
     <div style={styles.container}>
       <TextField
@@ -55,14 +45,8 @@ const SearchBox = ({ dispatch, onSubmit, searchResults, searchTerm }) => {
 
 const onUpdateInput = (dispatch) => (e, v) => {
   dispatch(setFullTextSearchAnchor(e.currentTarget));
-  dispatch(setFullTextSearchResults([]))
+  dispatch(setUserSearchResults([]))
   dispatch(setFullTextSearchTerm(v))
-}
-
-const onKeyDown = (dispatch) => (e) => {
-  if (e.keyCode === 13) {
-    dispatch(updateFullTextSearchResults())
-  }
 }
 
 SearchBox.propTypes = {

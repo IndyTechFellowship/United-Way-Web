@@ -17,7 +17,7 @@ import { connect } from 'react-redux'
 
 import UserProfileMenu from '/imports/ui/components/UserProfileMenu'
 import SearchBox from './SearchBox'
-import { updateFullTextSearchResults } from '/imports/ui/state'
+import { updateUserSearchResults } from '/imports/ui/state'
 
 class Navbar extends Component {
   
@@ -59,8 +59,8 @@ class UserButton extends Component {
 }
 
 const onSearchClick = (dispatch) => () => {
-  dispatch(updateFullTextSearchResults())
-  browserHistory.push('/search')
+  dispatch(updateUserSearchResults())
+  browserHistory.push('/users')
 }
 
 const searchArea = {
