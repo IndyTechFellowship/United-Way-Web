@@ -44,7 +44,6 @@ const SearchBox = ({ dispatch, onSubmit, searchResults, searchTerm }) => {
     <div style={styles.container}>
       <TextField
         fullWidth={true}
-        hint="Search..."
         inputStyle={styles.textField}
         onChange={onUpdateInput(dispatch)}
         onKeyDown={(e) => e.keyCode === 13 && onSubmit()}
