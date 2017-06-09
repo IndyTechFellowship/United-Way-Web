@@ -19,7 +19,7 @@ class UsersListContainer extends Component {
     let { users } = this.props
     if (userResults) users = _.intersectionBy(users, userResults, u => u._id)
     return <div>
-      {userResults && <UserListFilterBar />}
+      <UserListFilterBar isTextFiltered={!!userResults} />
       <UsersList 
         loading={loading} 
         users={users} />
