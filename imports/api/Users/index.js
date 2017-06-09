@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Meteor } from 'meteor/meteor'
 import { Mongo } from 'meteor/mongo'
@@ -95,5 +96,29 @@ const UserSchema = new SimpleSchema({
 
 const Users = Meteor.users;
 Users.attachSchema(UserSchema)
+
+Users.after.insert(function(userId, doc) {
+  if (Meteor.isServer) {
+    const algolia = require('algoliasearch')
+    const { applicationId, adminKey } = Meteor.settings.algolia
+    const algoliaClient = algolia(applicationId, adminKey)
+    const usersIndex = algoliaClient.initIndex('users')
+    Meteor.wrapAsync(usersIndex.addObjects, usersIndex)([
+      _(doc).assign({ objectID: doc._id }).omit([ 'services' ]).value()
+    ])
+  }
+})
+
+Users.after.update(function(userId, doc) {
+  if (Meteor.isServer) {
+    const algolia = require('algoliasearch')
+    const { applicationId, adminKey } = Meteor.settings.algolia
+    const algoliaClient = algolia(applicationId, adminKey)
+    const usersIndex = algoliaClient.initIndex('users')
+    Meteor.wrapAsync(usersIndex.saveObjects, usersIndex)([
+      _(doc).assign({ objectID: doc._id }).omit([ 'services' ]).value()
+    ])
+  }
+})
 
 export { Users }

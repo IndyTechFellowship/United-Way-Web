@@ -3,6 +3,7 @@ import moment from 'moment';
 import { Tags } from '/imports/api/Tags';
 
 const run = () => {
+  Tags.remove({})
   const tags = [
     "Accuracy","Adaptable","Administrative","Advising","Analysis","Analytical","Assembling Apparatus","Being Artistic/Creative","Being Thorough","Budgeting","Business Storytelling","Calculations","Challenging Employees","Classifying Records","Coaching Individuals","Collaboration","Communication","Compiling Statistics","Computer","Conducting Meetings","Conflict Resolution","Confronting Others","Construction","Consultation","Counseling",
     "Creating Ideas","Creating Innovation","Creating New Solutions","Creating New Procedures","Creative Thinking","Critical Thinking","Customer Service","Decision Making","Defining Performance Standards","Defining Problems","Demonstrations","Detail Management","Dispensing Information","Displaying Ideas","Editing","Emotional Control","Encouragement","Entertainment","Equipment Operation","Evaluating","Expression of Feelings","Financial Report Auditing","Fundraising","Goal Setting","Handling Complaints",

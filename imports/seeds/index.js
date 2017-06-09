@@ -1,13 +1,20 @@
+import { Meteor } from 'meteor/meteor'
+
 import SeedTags from './seedTags'
 import SeedOrganizations from './seedOrganizations'
 import SeedPositions from './seedPositions'
 import SeedUsers from './seedUsers'
 
-export default () => {
-  SeedTags()
-  SeedOrganizations()
-  SeedPositions()
-  SeedUsers()
+Meteor.methods({
 
-  // return 'Done!';
-}
+  'Seed'() {
+    if (Meteor.isDevelopment) {
+      SeedTags()
+      SeedPositions()
+      SeedOrganizations()
+      SeedUsers()
+      console.log('done!')
+    }
+  }
+
+})
