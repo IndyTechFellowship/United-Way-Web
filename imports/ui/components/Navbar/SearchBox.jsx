@@ -45,7 +45,6 @@ const SearchBox = ({ dispatch, onSubmit, searchResults, searchTerm }) => {
 
 const onUpdateInput = (dispatch) => (e, v) => {
   dispatch(setFullTextSearchAnchor(e.currentTarget));
-  dispatch(setUserSearchResults([]))
   dispatch(setFullTextSearchTerm(v))
 }
 

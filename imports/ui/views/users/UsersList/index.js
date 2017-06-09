@@ -1,2 +1,2 @@
-import UserListStateContainer from './UsersListStateContainer'
-export default UserListStateContainer
+import UsersListContainer from './UsersListContainer'
+export default UsersListContainer
