@@ -41,6 +41,9 @@ class Position extends Component {
           content: skills
         }
       }
+
+      const positionButtons = <PositionButtons positionId={position._id} />
+      console.log(positionButtons)
       return (
           <CardComponent
               key={position._id}
@@ -50,7 +53,7 @@ class Position extends Component {
               subtitle="Open"
               body={body}
               cardType="position"
-              cardButtons={PositionButtons}
+              cardButtons={positionButtons}
           />
       )
     }
@@ -67,6 +70,8 @@ export default Position
 
 class PositionButtons extends Component {
   render() {
+    console.log('PositionButton props')
+    console.log(this.props);
     return (
         <div style={styles.buttonContainer}>
           <ShowInterestButton />
@@ -79,24 +84,6 @@ class PositionButtons extends Component {
           />
         </div>
     )
-  }
-
-  handleExpressInterest(positionId) {
-    // need positionId and opts?
-    // TODO: refactor
-    if (Meteor.user()) {
-      Meteor.call('Positions.expressInterest', positionId, {userId: Meteor.userId()},
-          (err, res) => {
-            if (err) {
-              alert(err)
-            } else {
-              console.log('express interest worked!')
-            }
-          })
-    } else {
-      console.log('no user logged in!')
-    }
-    console.log('express interest clicked with positionId: ' + positionId);
   }
 }
 

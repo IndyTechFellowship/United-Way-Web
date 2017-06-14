@@ -9,6 +9,7 @@ export default class ShowInterestButton extends Component {
 
     this.state = {
       open: false,
+      note: ''
     };
   }
 
@@ -20,15 +21,25 @@ export default class ShowInterestButton extends Component {
       open: true,
       anchorEl: event.currentTarget,
     });
-    console.log('express interest clicked')
 
   }
 
   handleRequestClose() {
     this.setState({
       open: false,
-    });
-  };
+      note: ''
+    })
+  }
+
+  handleNoteChange(event) {
+    this.setState({note: event.target.value})
+  }
+
+  handleExpressInterest() {
+    console.log('express interest')
+    console.log(this.state)
+    console.log(this.props)
+  }
 
   render() {
     let label = <div style={styles.label}>
@@ -53,7 +64,7 @@ export default class ShowInterestButton extends Component {
               onRequestClose={this.handleRequestClose.bind(this)}
           >
             <div style={styles.dropDown}>
-              <textarea style={styles.dropDown.note} />
+              <textarea style={styles.dropDown.note} type="text" value={this.state.note} onChange={this.handleNoteChange.bind(this)}/>
               <div style={styles.dropDown.helperText}>You can choose to send a note later in
                 <span style={styles.dropDown.boldHelperText}> My Activity</span>
               </div>
@@ -62,11 +73,13 @@ export default class ShowInterestButton extends Component {
                     label="SHOW INTEREST"
                     labelStyle={styles.dropDown.button.label}
                     style={styles.dropDown.button}
+                    onTouchTap={this.handleExpressInterest.bind(this)}
                 />
                 <RaisedButton
                     label="CANCEL"
                     labelStyle={styles.dropDown.button.label}
                     style={styles.dropDown.button}
+                    onTouchTap={this.handleRequestClose.bind(this)}
                 />
               </div>
             </div>
