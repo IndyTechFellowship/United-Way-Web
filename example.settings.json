@@ -11,5 +11,10 @@
   "linkedin": {
     "id": "",
     "secret": ""
+  },
+  "algolia": {
+    "applicationId": "",
+    "searchKey": "",
+    "adminKey": ""
   }
 }

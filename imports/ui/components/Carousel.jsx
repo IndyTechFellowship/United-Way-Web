@@ -25,13 +25,13 @@ export default class Carousel extends Component {
 
 class NextArrowCustom extends Component {
   render() {
-    return <div {...this.props} style={styles.arrow} ></div>
+    return <div style={styles.arrow} ></div>
   }
 }
 
 class PrevArrowCustom extends Component {
   render() {
-    return <div {...this.props} style={styles.arrow} ></div>
+    return <div style={styles.arrow} ></div>
   }
 }
 

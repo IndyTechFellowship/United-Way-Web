@@ -2,7 +2,6 @@ import _ from 'lodash';
 import {
   TextField,
 } from 'material-ui'
-import SearchIcon from 'material-ui/svg-icons/action/search'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
@@ -21,7 +20,7 @@ const styles = {
     alignItems: 'center',
     display: 'flex',
     flexGrow: '1',
-    margin: '16px 24px',
+    margin: '24px 24px 24px 8px',
   },
   icon: {
     color: 'white',
@@ -32,7 +31,7 @@ const styles = {
   },
 }
 
-const SearchBox = ({ dispatch, searchResults, searchTerm }) => {
+const SearchBox = ({ dispatch, onSubmit, searchResults, searchTerm }) => {
   const mapped = _.map(searchResults, r => {
     if (r._type === 'Organizations') {
       return `Organization: ${r.name}`
@@ -43,16 +42,13 @@ const SearchBox = ({ dispatch, searchResults, searchTerm }) => {
   });
   return (
     <div style={styles.container}>
-      <SearchIcon style={styles.icon} />
       <TextField
         fullWidth={true}
-        hint="Search..."
         inputStyle={styles.textField}
         onChange={onUpdateInput(dispatch)}
-        onKeyDown={onKeyDown(dispatch)}
+        onKeyDown={(e) => e.keyCode === 13 && onSubmit()}
         style={styles.textField} 
         value={searchTerm} />
-      <SearchResultsPopover />
     </div>
   )
 };
