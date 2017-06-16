@@ -11,12 +11,15 @@ import {
   setFullTextSearchTerm,
   setUserSearchResults,
   updateFullTextSearchResults,
+  setSearchCategoriesOpen,
 } from '/imports/ui/state'
+import ResultCategoryDropdown from './ResultCategoryDropdown'
 
 const styles = {
   container: {
     alignItems: 'center',
     display: 'flex',
+    flexDirection: 'column',
     flexGrow: '1',
     margin: '24px 24px 24px 8px',
   },
@@ -29,23 +32,26 @@ const styles = {
   },
 }
 
-const SearchBox = ({ dispatch, onSubmit, searchResults, searchTerm }) => {
+const SearchBox = ({ dispatch, searchResults, searchTerm }) => {
   return (
     <div style={styles.container}>
       <TextField
         fullWidth={true}
         inputStyle={styles.textField}
         onChange={onUpdateInput(dispatch)}
-        onKeyDown={(e) => e.keyCode === 13 && onSubmit()}
         style={styles.textField} 
         value={searchTerm} />
+      <ResultCategoryDropdown />
     </div>
   )
 };
 
 const onUpdateInput = (dispatch) => (e, v) => {
   dispatch(setFullTextSearchAnchor(e.currentTarget));
-  dispatch(setFullTextSearchTerm(v))
+  if (v) {
+    dispatch(setSearchCategoriesOpen(true));
+  }
+  dispatch(setFullTextSearchTerm(v));
 }
 
 SearchBox.propTypes = {

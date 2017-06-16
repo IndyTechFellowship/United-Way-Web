@@ -38,6 +38,12 @@ export const setFullTextSearchTerm = (searchTerm) => ({
   searchTerm,
 })
 
+export const SET_SEARCH_CATEGORIES_OPEN = 'SET_SEARCH_CATEGORIES_OPEN'
+export const setSearchCategoriesOpen = (open) => ({
+  type: SET_SEARCH_CATEGORIES_OPEN,
+  searchCategoriesOpen: open,
+})
+
 export const updateUserSearchResults = () => (
   (dispatch, getState) => {
     dispatch(setFullTextSearchResultsLoading(true));
@@ -58,7 +64,7 @@ const initialState = {
     users: true,
   },
   searchResultsLoading: false,
-  searchResultsOpen: false,
+  searchCategoriesOpen: false,
   searchTerm: '',
   userResults: null,
 }
@@ -82,6 +88,8 @@ export const searchReducer = (state = initialState, action) => {
       return {...state, searchResultsLoading: action.searchResultsLoading}
     case SET_FULL_TEXT_SEARCH_TERM:
       return {...state, searchTerm: action.searchTerm}
+    case SET_SEARCH_CATEGORIES_OPEN:
+      return {...state, searchCategoriesOpen: action.searchCategoriesOpen}
     default:
       return state
   }

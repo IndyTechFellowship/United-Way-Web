@@ -15,13 +15,13 @@ class UsersListContainer extends Component {
   }
 
   render() {
-    const { loading, userResults } = this.props
+    const { loading, searchResultsLoading, userResults } = this.props
     let { users } = this.props
     if (userResults) users = _.intersectionBy(users, userResults, u => u._id)
     return <div>
       <UserListFilterBar isTextFiltered={!!userResults} />
       <UsersList 
-        loading={loading} 
+        loading={searchResultsLoading || loading} 
         users={users} />
     </div>
   }
@@ -30,11 +30,14 @@ class UsersListContainer extends Component {
 
 UsersListContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  searchResultsLoading: PropTypes.bool,
   users: PropTypes.array,
   userResults: PropTypes.array,
 }
 
 const mapStateToProps = ({ search }) => ({
+  searchResultsLoading: search.searchResultsLoading,
   userResults: search.userResults,
 })
 

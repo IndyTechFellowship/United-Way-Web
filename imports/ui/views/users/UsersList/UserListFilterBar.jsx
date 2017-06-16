@@ -31,7 +31,6 @@ const UserListFilterBar = ({ dispatch, isTextFiltered }) => {
       {isTextFiltered
         ? <span style={styles.filterText}>Text Filtered</span>
         : <span style={styles.filterText}>No Text Filter</span>}
-      
       <FlatButton
         icon={<ContentClear />}
         onTouchTap={onXClick(dispatch)} />
