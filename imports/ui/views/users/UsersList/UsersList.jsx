@@ -5,7 +5,7 @@ import Loading from '/imports/ui/components/Loading'
 import UserCard from '/imports/ui/views/users/UserCard'
 
 // And this is the presentational component.
-const UsersList = ({ loading, selectedUser, users }) => {
+const UsersList = ({ loading, users }) => {
   if (loading) {
     return <Loading />
   } else {
@@ -37,7 +37,6 @@ const styles = {
 
 UsersList.propTypes = {
   loading: PropTypes.bool.isRequired,
-  selectedUser: PropTypes.string,
   users: PropTypes.array.isRequired,
 }
 

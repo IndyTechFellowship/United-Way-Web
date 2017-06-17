@@ -5,6 +5,7 @@ import { Positions } from '/imports/api/Positions'
 import { Tags } from '/imports/api/Tags'
 
 const run = () => {
+  Organizations.remove({})
   const tags = Tags.find({}).fetch()
   const organizations = [
     {

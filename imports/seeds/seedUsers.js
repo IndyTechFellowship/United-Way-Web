@@ -5,6 +5,7 @@ import { Tags } from '/imports/api/Tags';
 import { Users } from '/imports/api/Users';
 
 const run = () => {
+  Users.remove({})
   const tags = Tags.find({}).fetch()
   const users = [
     {

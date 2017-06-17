@@ -2,8 +2,7 @@
   "name": "united-way-web",
   "private": true,
   "scripts": {
-    "start": "meteor run --settings settings.dev.json",
-    "seed": "./scripts/seed.sh"
+    "start": "meteor run --settings settings.dev.json"
   },
   "dependencies": {
     "algoliasearch": "^3.22.1",

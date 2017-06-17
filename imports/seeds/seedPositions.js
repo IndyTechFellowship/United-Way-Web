@@ -3,8 +3,7 @@ import moment from 'moment';
 import { Positions } from '/imports/api/Positions';
 
 const run = () => {
-  console.log('inserting data');
-
+  Positions.remove({})
   Positions.insert({
     name: 'Chairman',
     description: 'We need someone to man the chair',
