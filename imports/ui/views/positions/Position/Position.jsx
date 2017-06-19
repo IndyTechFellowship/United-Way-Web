@@ -42,8 +42,7 @@ class Position extends Component {
         }
       }
 
-      const positionButtons = <PositionButtons positionId={position._id} />
-      console.log(positionButtons)
+      const positionButtons = () => <PositionButtons positionId={position._id} />
       return (
           <CardComponent
               key={position._id}
@@ -70,11 +69,9 @@ export default Position
 
 class PositionButtons extends Component {
   render() {
-    console.log('PositionButton props')
-    console.log(this.props);
     return (
         <div style={styles.buttonContainer}>
-          <ShowInterestButton />
+          <ShowInterestButton positionId={this.props.positionId}/>
           <FlatButton
               label="BOOKMARK"
               labelStyle={styles.button.label}

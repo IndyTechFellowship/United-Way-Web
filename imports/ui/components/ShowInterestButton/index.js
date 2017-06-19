@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { Meteor } from 'meteor/meteor'
 import { FlatButton, RaisedButton, Popover} from 'material-ui'
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
@@ -39,6 +40,22 @@ export default class ShowInterestButton extends Component {
     console.log('express interest')
     console.log(this.state)
     console.log(this.props)
+    const positionId = this.props.positionId
+
+    if (Meteor.user()) {
+      const opts = {userId: Meteor.userId(), note: this.state.note};
+      Meteor.call('Positions.expressInterest', positionId, opts,
+          (err, res) => {
+            if (err) {
+              alert(err)
+            } else {
+              console.log('express interest worked!')
+            }
+          })
+    } else {
+      console.log('no user logged in!')
+    }
+    console.log('express interest clicked with positionId: ' + positionId);
   }
 
   render() {
