@@ -9,6 +9,9 @@ const run = () => {
   const tags = Tags.find({}).fetch()
   const users = [
     {
+      emails: [
+        { address: 'rosemary@domain.com' },
+      ],
       profile: {
         avatar: {
           original: "http://www.photopixels.com/portraits/images/Business%20Headshot.jpg"
@@ -65,6 +68,9 @@ const run = () => {
       savedPositions: []
     },
     {
+      emails: [
+        { address: 'kenny@domain.com' },
+      ],
       profile: {
         avatar: {
           original: "http://2.bp.blogspot.com/-ikS64MpWxHg/TiCzXTILydI/AAAAAAAAAzg/-ICAXPh4BW0/s1600/dallas-headshot-background-good.jpg"
@@ -121,7 +127,8 @@ const run = () => {
     }
   ]
   users.forEach(function(user) {
-    Users.insert(user)
+    const id = Users.insert(user)
+    Accounts.setPassword(id, 'password')
   })
 }
 
