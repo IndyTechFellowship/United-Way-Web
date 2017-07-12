@@ -64,17 +64,21 @@ class ShowInterestButton extends Component {
       return <Loading/>
     } else {
 
-    let label = <div style={styles.label}>
-      <span style={styles.label.content}>SHOW INTEREST</span>
-      <DropDownArrow style={{...styles.label.content, ...styles.label.icon}}/>
+    const labelText = this.props.interestExpressed ? 'INTEREST SENT' : 'SHOW INTEREST'
+    const dropDownArrow = this.props.interestExpressed ? '' :  <DropDownArrow style={{...styles.label.content, ...styles.label.icon}}/>
+
+    const label = <div style={styles.label}>
+      <span style={styles.label.content}>{labelText}</span>
+      {dropDownArrow}
     </div>
 
     return (
         <div>
           <FlatButton
               children={label}
-              style={styles.button.style}
+              style={{...styles.button.style, ...((this.props.interestExpressed || !this.props.currentUser)&& styles.button.disabled)}}
               fullWidth={true}
+              disabled={this.props.interestExpressed || !this.props.currentUser}
               backgroundColor={styles.button.backgroundColor}
               onTouchTap={this.handleOpenDropDown.bind(this)}
           />
@@ -148,6 +152,10 @@ const styles = {
       width: '100%',
       height: '32px',
       lineHeight: '1.5'
+    },
+
+    disabled: {
+      opacity: '0.3'
     }
   },
 
