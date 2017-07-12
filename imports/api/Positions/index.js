@@ -53,4 +53,28 @@ const PositionsSchema = new SimpleSchema({
 const Positions = new Mongo.Collection('positions')
 Positions.attachSchema(PositionsSchema)
 
+Organizations.after.insert(function(userId, doc) {
+  if (Meteor.isServer) {
+    const algolia = require('algoliasearch')
+    const { applicationId, adminKey } = Meteor.settings.algolia
+    const algoliaClient = algolia(applicationId, adminKey)
+    const orgIndex = algoliaClient.initIndex('organizations')
+    Meteor.wrapAsync(orgIndex.addObjects, orgIndex)([
+      _(doc).assign({ objectID: doc._id }).omit([]).value()
+    ])
+  }
+})
+
+Organizations.after.update(function(userId, doc) {
+  if (Meteor.isServer) {
+    const algolia = require('algoliasearch')
+    const { applicationId, adminKey } = Meteor.settings.algolia
+    const algoliaClient = algolia(applicationId, adminKey)
+    const orgIndex = algoliaClient.initIndex('organizations')
+    Meteor.wrapAsync(orgIndex.saveObjects, orgIndex)([
+      _(doc).assign({ objectID: doc._id }).omit([]).value()
+    ])
+  }
+})
+
 export { Positions }

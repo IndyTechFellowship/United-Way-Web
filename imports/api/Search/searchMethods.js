@@ -49,6 +49,14 @@ Meteor.methods({
     return Meteor.wrapAsync(orgIndex.search, orgIndex)(query).hits;
   },
 
+  'Search.Positions.FullText'(query, filters) {
+    check(query, String);
+    check(filters, Object);
+    if (query.length < 3) return [];
+    const positionsIndex = algoliaClient.initIndex('positionsIndex')
+    return Meteor.wrapAsync(positionsIndex.search, positionsIndex)(query).hits;
+  },
+
   'Search.Users.FullText'(query, filters) {
     check(query, String);
     check(filters, Object);
