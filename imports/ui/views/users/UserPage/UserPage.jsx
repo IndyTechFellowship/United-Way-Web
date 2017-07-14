@@ -3,6 +3,7 @@ import { TagCloud } from 'react-tagcloud'
 import { Link } from 'react-router'
 
 import Breadcrumbs from '/imports/ui/components/Breadcrumbs'
+import Interests from '/imports/ui/views/users/Interests'
 import Loading from '/imports/ui/components/Loading'
 import ProfessionalExperienceList from '/imports/ui/views/users/ProfessionalExperienceList'
 import Summary from '/imports/ui/views/users/Summary'
@@ -50,21 +51,7 @@ class UserPage extends Component {
     if(this.props.loading) {
       return <Loading />
     } else {
-      const interests = this.props.user.interests.map((interest,index) => ({
-        value: interest.name,
-        count: index
-      }))
-      const customRenderer = (tag, size, color) => {
-        return (
-          <div 
-            key={tag.value} 
-            style={Object.assign({fontSize: size}, styles.tag)} 
-          >
-            {tag.value}
-          </div>
-        )
-      }
-      const name = `${this.props.user.firstName} ${this.props.user.lastName}`
+      const name = `${this.props.user.profile.firstName} ${this.props.user.profile.lastName}`
       return (
         <div style={styles.twoColumnLayout}>
           <div style={styles.columnOne}>
@@ -73,22 +60,14 @@ class UserPage extends Component {
                 {text: name, path: null}
               ]}
             />
-            <UserBasicInfo user={this.props.user} />
-            <Title>Interests</Title>
-            <TagCloud 
-              style={styles.cloud}
-              minSize={18}
-              maxSize={36}
-              tags={interests}
-              renderer={customRenderer}
-              disableRandomColor={true} 
-            />
-            <ProfessionalExperienceList experiences={this.props.user.professionalExperiences}/>
+            <UserBasicInfo user={this.props.user} tags={this.props.tags} />
+            <Interests user={this.props.user} tags={this.props.tags} />
+            <ProfessionalExperienceList experiences={this.props.user.profile.professionalExperiences}/>
           </div>
           <div style={styles.columnTwo}>
             <UserProfileButtons />
-            <Summary summary={this.props.user.summary} />
-            { this.props.user.volunteerExperiences.length > 0 ? <VolunteerExperienceList experiences={this.props.user.volunteerExperiences}/> : "" }
+            <Summary user={this.props.user} />
+            { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList experiences={this.props.user.profile.volunteerExperiences}/> : "" }
           </div>
         </div>
       )
@@ -100,6 +79,7 @@ class UserPage extends Component {
 UserPage.propTypes = {
   loading: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
+  tags: PropTypes.array.isRequired
 }
 
 export default UserPage

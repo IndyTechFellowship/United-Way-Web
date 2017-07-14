@@ -13,6 +13,7 @@ import '/imports/api/Tags'
 import '/imports/api/Tags/server/tagsPublications'
 import '/imports/api/Users'
 import '/imports/api/Users/server/usersPublications'
+import '/imports/api/Users/usersMethods'
 
 // Import the seed initiator so it is included in the build bundle
 import '/imports/seeds'

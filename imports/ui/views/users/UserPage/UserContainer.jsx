@@ -9,7 +9,7 @@ import { Tags } from '/imports/api/Tags'
 import UserPage from './UserPage'
 
 const UserContainer = createContainer((props) => {
-  // get organization
+  // get user
   const query = {_id: props.params.id}
   const userHandle = Meteor.subscribe('Users.get', query)
   if (!userHandle.ready()) return { loading: true, user: {} }
@@ -17,7 +17,7 @@ const UserContainer = createContainer((props) => {
 
   // get tags and experiences
   const subs = [
-    Meteor.subscribe('Tags.get', { _id: { $in: user.profile.interests.concat(user.profile.skills) } }),
+    Meteor.subscribe('Tags.get', {}),
     Meteor.subscribe('Experiences.get', { _id: { $in: user.profile.volunteerExperiences.concat(user.profile.professionalExperiences) } })
   ]
   if (_.some(subs, (s) => !s.ready())) return { loading: true, position: {}, organization: {} }
@@ -31,7 +31,7 @@ const UserContainer = createContainer((props) => {
   })
 
   // render
-  return { loading: false, user: user.profile }
+  return { loading: false, user: user, tags: Tags.find().fetch() }
 }, UserPage)
 
 UserContainer.propTypes = {
