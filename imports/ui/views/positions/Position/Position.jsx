@@ -76,7 +76,6 @@ class PositionButtons extends Component {
               label="BOOKMARK"
               labelStyle={styles.button.label}
               style={styles.button.style}
-              fullWidth={true}
               backgroundColor={styles.button.backgroundColor}
           />
         </div>

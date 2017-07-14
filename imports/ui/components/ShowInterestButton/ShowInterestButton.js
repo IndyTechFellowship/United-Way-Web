@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Meteor } from 'meteor/meteor'
-import { FlatButton, RaisedButton, Popover} from 'material-ui'
+import { FlatButton, RaisedButton, Popover, Snackbar } from 'material-ui'
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 import Loading from '/imports/ui/components/Loading'
 
@@ -11,7 +11,8 @@ class ShowInterestButton extends Component {
 
     this.state = {
       open: false,
-      note: ''
+      note: '',
+      snackbarOpen: false
     };
   }
 
@@ -33,30 +34,37 @@ class ShowInterestButton extends Component {
     })
   }
 
+  handleSnackbarOpen() {
+    this.setState({
+      snackbarOpen: true
+    })
+  }
+
+  handleSnackbarClose() {
+    this.setState({
+      snackbarOpen: false
+    })
+  }
+
   handleNoteChange(event) {
     this.setState({note: event.target.value})
   }
 
   handleExpressInterest() {
-    console.log('express interest')
-    console.log(this.state)
-    console.log(this.props)
     const positionId = this.props.position._id
 
-    if (Meteor.user()) {
-      const opts = {userId: Meteor.userId(), note: this.state.note};
+    if (this.props.currentUser._id) {
+      const opts = {userId: this.props.currentUser._id, note: this.state.note}
       Meteor.call('Positions.expressInterest', positionId, opts,
           (err, res) => {
             if (err) {
+              console.log("Oh darn");
               alert(err)
             } else {
-              console.log('express interest worked!')
+              this.handleSnackbarOpen()
             }
           })
-    } else {
-      console.log('no user logged in!')
     }
-    console.log('express interest clicked with positionId: ' + positionId);
   }
 
   render() {
@@ -77,7 +85,6 @@ class ShowInterestButton extends Component {
           <FlatButton
               children={label}
               style={{...styles.button.style, ...((this.props.interestExpressed || !this.props.currentUser)&& styles.button.disabled)}}
-              fullWidth={true}
               disabled={this.props.interestExpressed || !this.props.currentUser}
               backgroundColor={styles.button.backgroundColor}
               onTouchTap={this.handleOpenDropDown.bind(this)}
@@ -111,6 +118,12 @@ class ShowInterestButton extends Component {
               </div>
             </div>
           </Popover>
+          <Snackbar
+              open={this.state.snackbarOpen}
+              message="Thank you for sending your interest. It is up to the organization to contact you directly in return."
+              autoHideDuration={4000}
+              onRequestClose={this.handleSnackbarClose.bind(this)}
+          />
         </div>
     )
   }

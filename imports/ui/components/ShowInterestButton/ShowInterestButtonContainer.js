@@ -34,5 +34,5 @@ export default connect(mapStateToProps)(createContainer(props => {
     'applicants.userId': props.currentUser._id
   }).count() === 1
 
-  return { loading: false, position: position, interestExpressed }
+  return { loading: false, position: position, interestExpressed, currentUser: props.currentUser }
 }, ShowInterestButtonContainer))
