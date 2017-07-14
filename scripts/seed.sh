@@ -1,1 +1,0 @@
-echo 'Seed()' | meteor shell

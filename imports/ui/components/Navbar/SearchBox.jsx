@@ -8,17 +8,18 @@ import { browserHistory } from 'react-router'
 
 import {
   setFullTextSearchAnchor,
-  setFullTextSearchResults,
   setFullTextSearchTerm,
+  setUserSearchResults,
   updateFullTextSearchResults,
+  setSearchCategoriesOpen,
 } from '/imports/ui/state'
-
-import SearchResultsPopover from './SearchResultsPopover';
+import ResultCategoryDropdown from './ResultCategoryDropdown'
 
 const styles = {
   container: {
     alignItems: 'center',
     display: 'flex',
+    flexDirection: 'column',
     flexGrow: '1',
     margin: '24px 24px 24px 8px',
   },
@@ -31,39 +32,26 @@ const styles = {
   },
 }
 
-const SearchBox = ({ dispatch, onSubmit, searchResults, searchTerm }) => {
-  const mapped = _.map(searchResults, r => {
-    if (r._type === 'Organizations') {
-      return `Organization: ${r.name}`
-    } else if (r._type === 'Users') {
-      return `User: ${r.profile.firstName} ${r.profile.lastName}`;
-    }
-    return 'nothing'
-  });
+const SearchBox = ({ dispatch, searchResults, searchTerm }) => {
   return (
     <div style={styles.container}>
       <TextField
         fullWidth={true}
-        hint="Search..."
         inputStyle={styles.textField}
         onChange={onUpdateInput(dispatch)}
-        onKeyDown={(e) => e.keyCode === 13 && onSubmit()}
         style={styles.textField} 
         value={searchTerm} />
+      <ResultCategoryDropdown />
     </div>
   )
 };
 
 const onUpdateInput = (dispatch) => (e, v) => {
   dispatch(setFullTextSearchAnchor(e.currentTarget));
-  dispatch(setFullTextSearchResults([]))
-  dispatch(setFullTextSearchTerm(v))
-}
-
-const onKeyDown = (dispatch) => (e) => {
-  if (e.keyCode === 13) {
-    dispatch(updateFullTextSearchResults())
+  if (v) {
+    dispatch(setSearchCategoriesOpen(true));
   }
+  dispatch(setFullTextSearchTerm(v));
 }
 
 SearchBox.propTypes = {

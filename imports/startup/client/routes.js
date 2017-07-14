@@ -12,7 +12,6 @@ import OrganizationPage from '/imports/ui/views/organizations/OrganizationPage'
 import OrganizationsPage from '/imports/ui/views/organizations/OrganizationsPage'
 import PositionsPage from '/imports/ui/views/positions/PositionsPage'
 import RegistrationPage from '/imports/ui/views/registration/RegistrationPage'
-import SearchPage from '/imports/ui/views/search/SearchPage'
 import SettingsPage from '/imports/ui/views/settings/SettingsPage'
 import UserPage from '/imports/ui/views/users/UserPage'
 import UsersPage from '/imports/ui/views/users/UsersPage'
@@ -33,7 +32,6 @@ export const Routes = () => (
           <IndexRoute component={OrganizationsPage}/>
           <Route path=":id" component={OrganizationPage}/>
         </Route>
-        <Route path="search" component={SearchPage}/>
         <Route path="settings" component={SettingsPage}/>
         <Route path="users">
           <IndexRoute component={UsersPage}/>

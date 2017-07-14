@@ -33,7 +33,7 @@ AppContainer.propTypes = {
 }
 
 const mapStateToProps = ({ user }) => ({
-  reduxUser: user.user,
+  reduxUser: user.currentUser,
 })
 
 export default connect(mapStateToProps)(createContainer(() => {

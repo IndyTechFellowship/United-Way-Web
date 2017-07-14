@@ -17,12 +17,16 @@ import { connect } from 'react-redux'
 
 import UserProfileMenu from '/imports/ui/components/UserProfileMenu'
 import SearchBox from './SearchBox'
-import { updateFullTextSearchResults } from '/imports/ui/state'
+import { 
+  setUserSearchResults,
+  updateUserSearchResults,
+  setSearchCategoriesOpen,
+} from '/imports/ui/state'
 
 class Navbar extends Component {
   
   render() {
-    const { dispatch, searchLoading } = this.props
+    const { dispatch, searchLoading, searchTerm } = this.props
     return (
       <div style={toolbarStyle}>
         <div style={toolbarGroup}>
@@ -30,10 +34,10 @@ class Navbar extends Component {
           <Link to={'/'} style={linkStyle}>Opportunities</Link>
           <Link to={'/positions'} style={linkStyle}>Positions</Link>
           <Row style={searchArea}>
-            <FloatingActionButton mini={true} onTouchTap={onSearchClick(dispatch)} zDepth={1}>
+            <FloatingActionButton disabled={true} disabledColor='#E1F5FE' mini={true} zDepth={1}>
               {searchLoading ? <Cached /> : <SearchIcon />}
             </FloatingActionButton>
-            <SearchBox onSubmit={onSearchClick(dispatch)} />
+            <SearchBox />
           </Row>
           <Link to={'/organizations'} style={linkStyle}>Organizations</Link>
           <Link to={'/users'} style={linkStyle}>Volunteers</Link>
@@ -56,11 +60,6 @@ class UserButton extends Component {
       )
     }
   }
-}
-
-const onSearchClick = (dispatch) => () => {
-  dispatch(updateFullTextSearchResults())
-  browserHistory.push('/search')
 }
 
 const searchArea = {
@@ -125,6 +124,7 @@ const roundButton = {
 
 const mapStateToProps = ({ search }) => ({
   searchLoading: search.searchResultsLoading,
+  searchTerm: search.searchTerm,
 })
 
 export default connect(mapStateToProps)(Navbar)
