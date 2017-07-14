@@ -27,6 +27,17 @@ Meteor.methods({
             .value())
           .value()
       )
+      const posIndex = algoliaClient.initIndex('positions')
+      Meteor.wrapAsync(posIndex.deleteByQuery, posIndex)('')
+      const allPos = Positions.find({}).fetch()
+      Meteor.wrapAsync(posIndex.addObjects, posIndex)(
+        _(allPos)
+          .map(o => _(o)
+            .assign({ objectID: o._id })
+            .omit([])
+            .value())
+          .value()
+      )
       const usersIndex = algoliaClient.initIndex('users')
       Meteor.wrapAsync(usersIndex.deleteByQuery, usersIndex)('')
       const allUsers = Users.find({}).fetch()
@@ -38,6 +49,7 @@ Meteor.methods({
             .value())
           .value()
       )
+      console.log('reindex done')
     }
   },
 
