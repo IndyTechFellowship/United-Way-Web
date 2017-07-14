@@ -3,6 +3,7 @@ import { FlatButton } from 'material-ui'
 
 import Loading from '/imports/ui/components/Loading'
 import CardComponent from '/imports/ui/components/CardComponent'
+import ShowInterestButton from '/imports/ui/components/ShowInterestButton'
 
 class Position extends Component {
 
@@ -40,6 +41,8 @@ class Position extends Component {
           content: skills
         }
       }
+
+      const positionButtons = () => <PositionButtons position={position} />
       return (
           <CardComponent
               key={position._id}
@@ -49,7 +52,7 @@ class Position extends Component {
               subtitle="Open"
               body={body}
               cardType="position"
-              cardButtons={PositionButtons}
+              cardButtons={positionButtons}
           />
       )
     }
@@ -67,21 +70,12 @@ export default Position
 class PositionButtons extends Component {
   render() {
     return (
-
-
         <div style={styles.buttonContainer}>
-          <FlatButton
-              label="SHOW INTEREST"
-              labelStyle={styles.button.label}
-              style={styles.button.style}
-              fullWidth={true}
-              backgroundColor={styles.button.backgroundColor}
-          />
+          <ShowInterestButton position={this.props.position}/>
           <FlatButton
               label="BOOKMARK"
               labelStyle={styles.button.label}
               style={styles.button.style}
-              fullWidth={true}
               backgroundColor={styles.button.backgroundColor}
           />
         </div>
