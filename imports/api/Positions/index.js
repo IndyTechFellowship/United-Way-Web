@@ -71,7 +71,7 @@ Positions.after.update(function(userId, doc) {
     const algolia = require('algoliasearch')
     const { applicationId, adminKey } = Meteor.settings.algolia
     const algoliaClient = algolia(applicationId, adminKey)
-    const orgIndex = algoliaClient.initIndex('positions')
+    const posIndex = algoliaClient.initIndex('positions')
     Meteor.wrapAsync(posIndex.saveObjects, posIndex)([
       _(doc).assign({ objectID: doc._id }).omit([]).value()
     ])

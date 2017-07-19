@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { FlatButton } from 'material-ui'
+import _ from 'lodash'
 
 import Loading from '/imports/ui/components/Loading'
 import CardComponent from '/imports/ui/components/CardComponent'
@@ -14,6 +15,7 @@ class Position extends Component {
       let position = this.props.position
       let positionName = !position.name ? '' : position.name
       let organization = this.props.organization
+      let orgName = !_.get(this.props, 'organization.name') ? '' : this.props.organization.name;
 
       let skills = position.skills.map((skill) => {
         return skill.name
@@ -48,7 +50,7 @@ class Position extends Component {
               key={position._id}
               imageUrl={imageUrl}
               name={positionName}
-              title={organization.name}
+              title={orgName}
               subtitle="Open"
               body={body}
               cardType="position"
