@@ -31,6 +31,12 @@ const OrganizationSchema = new SimpleSchema({
   positions: {
     type: [ String ],
   },
+  city: {
+    type: String,
+  },
+  state: {
+    type: String,
+  }
 })
 
 const Organizations = new Mongo.Collection('organizations')

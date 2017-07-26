@@ -1,18 +1,29 @@
 import React, { Component, PropTypes } from 'react'
 
 import AboutUsMission from '/imports/ui/views/organizations/AboutUsMission'
+import Breadcrumbs from '/imports/ui/components/Breadcrumbs'
 import Loading from '/imports/ui/components/Loading'
 import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
+import OrganizationProfileButtons from '/imports/ui/views/organizations/OrganizationProfileButtons'
 import PositionsList from '/imports/ui/views/positions/PositionsList'
+import Title from '/imports/ui/components/Title'
 
 const styles = {
+  container: {
+    marginBottom: '32px'
+  },
   twoColumnLayout: {
     display: "flex",
   },
-  column: {
-    flex: '1 1 50%',
-    overflow: 'hidden',
-    padding: '8px'
+  columnOne: {
+    flex: 1,
+    minWidth: 200,
+    marginRight: '16px'
+  },
+  columnTwo: {
+    flex: 1,
+    minWidth: 300,
+    marginLeft: '16px'
   }
 }
 
@@ -25,15 +36,22 @@ class OrganizationPage extends Component {
       let positionsQuery = { _id: { $in: this.props.organization.positions }}
 
       return (
-        <div>
+        <div style={styles.container}>
           <div style={styles.twoColumnLayout}>
-            <div style={styles.column}>
-              <OrganizationBasicInfo organization={this.props.organization}/>
+            <div style={styles.columnOne}>
+              <Breadcrumbs crumbs={[
+                  {text: 'Organizations', path: '/organizations'},
+                  {text: this.props.organization.name, path: null}
+                ]}
+              />
+              <OrganizationBasicInfo organization={this.props.organization} tags={this.props.tags} />
             </div>
-            <div style={styles.column}>
-              <AboutUsMission organization={this.props.organization}/>
+            <div style={styles.columnTwo}>
+              <OrganizationProfileButtons />
+              <AboutUsMission organization={this.props.organization} />
             </div>
           </div>
+          <Title>Positions</Title>
           <PositionsList query={positionsQuery} organization={this.props.organization} />
         </div>
       )

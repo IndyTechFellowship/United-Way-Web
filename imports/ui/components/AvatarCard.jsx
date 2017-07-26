@@ -10,7 +10,7 @@ class AvatarCard extends Component {
         <CardMedia style={styles.cardMedia}>
           <img src={this.props.avatarUrl} />
         </CardMedia>
-        <CardTitle title={<span>{this.props.firstName}<br />{this.props.lastName}</span>} style={styles.title}/>
+        <CardTitle title={this.props.title} style={styles.title}/>
       </Card>
     )
   }

@@ -25,12 +25,12 @@ const styles = {
   columnOne: {
     flex: 1,
     minWidth: 200,
-    marginRight: '32px'
+    marginRight: '24px'
   },
   columnTwo: {
     flex: 1,
     minWidth: 300,
-    marginLeft: '32px'
+    marginLeft: '24px'
   },
   cloud: {
     display: 'flex',

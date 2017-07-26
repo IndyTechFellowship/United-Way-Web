@@ -14,7 +14,7 @@ const OrganizationContainer = createContainer((props) => {
   let organization = Organizations.findOne(query)
 
   // get tags
-  const tagsHandle = Meteor.subscribe('Tags.get', { _id: { $in: organization.tags } })
+  const tagsHandle = Meteor.subscribe('Tags.get', {})
   if (!tagsHandle.ready()) return { loading: true, organization: {} }
 
   // update organization with tag objects
@@ -23,7 +23,7 @@ const OrganizationContainer = createContainer((props) => {
   })
 
   // render
-  return { loading: false, organization: organization }
+  return { loading: false, organization: organization, tags: Tags.find().fetch() }
 }, OrganizationPage)
 
 OrganizationContainer.propTypes = {

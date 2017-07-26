@@ -83,7 +83,6 @@ const styles = {
     minWidth: 0,
   },
   card: {
-    margin: '8px',
     padding: '24px',
     height: '100%'
   },

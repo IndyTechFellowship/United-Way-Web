@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 
 import Carousel from '/imports/ui/components/Carousel'
 import Loading from '/imports/ui/components/Loading'
@@ -8,10 +9,14 @@ const UserCarousel = ({ loading, users }) => {
     if (loading) {
       return <Loading/>
     } else {
-      let userCards = users.map((u) => {
+      let userCards = users.map((user, index) => {
         return (
-            <div key={u._id} style={styles.user}>
-              <UserCard user={u.profile} />
+            <div key={user._id} style={styles.user}>
+              <div style={styles[index%2 ? 'right' : 'left']}>
+                <Link to={`/users/${user._id}`} style={styles.link} key={user._id}>
+                  <UserCard user={user.profile} />
+                </Link>
+              </div>
             </div>
         )
       })
@@ -28,6 +33,15 @@ UserCarousel.propTypes = {
 const styles = {
   user: {
     flexBasis: '50%',
+  },
+  left: {
+    marginRight: '8px'
+  },
+  right: {
+    marginLeft: '8px'
+  },
+  link: {
+    textDecoration: 'none'
   }
 }
 

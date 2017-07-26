@@ -41,16 +41,18 @@ class Position extends Component {
         }
       }
       return (
+        <div style={styles.card}>
           <CardComponent
-              key={position._id}
-              imageUrl={imageUrl}
-              name={positionName}
-              title={organization.name}
-              subtitle="Open"
-              body={body}
-              cardType="position"
-              cardButtons={PositionButtons}
+            key={position._id}
+            imageUrl={imageUrl}
+            name={positionName}
+            title={organization.name}
+            subtitle="Open"
+            body={body}
+            cardType="position"
+            cardButtons={PositionButtons}
           />
+        </div>
       )
     }
   }
@@ -67,24 +69,22 @@ export default Position
 class PositionButtons extends Component {
   render() {
     return (
-
-
-        <div style={styles.buttonContainer}>
-          <FlatButton
-              label="SHOW INTEREST"
-              labelStyle={styles.button.label}
-              style={styles.button.style}
-              fullWidth={true}
-              backgroundColor={styles.button.backgroundColor}
-          />
-          <FlatButton
-              label="BOOKMARK"
-              labelStyle={styles.button.label}
-              style={styles.button.style}
-              fullWidth={true}
-              backgroundColor={styles.button.backgroundColor}
-          />
-        </div>
+      <div style={styles.buttonContainer}>
+        <FlatButton
+          label="SHOW INTEREST"
+          labelStyle={styles.button.label}
+          style={styles.button.style}
+          fullWidth={true}
+          backgroundColor={styles.button.backgroundColor}
+        />
+        <FlatButton
+          label="BOOKMARK"
+          labelStyle={styles.button.label}
+          style={styles.button.style}
+          fullWidth={true}
+          backgroundColor={styles.button.backgroundColor}
+        />
+      </div>
     )
   }
 }
@@ -110,5 +110,8 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     height: '100%'
+  },
+  card: {
+    marginBottom: '16px'
   }
 }

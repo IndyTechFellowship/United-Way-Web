@@ -9,7 +9,8 @@ const styles = {
   },
   breadcrumbs: {
     fontSize: '20px',
-    margin: '24px 0'
+    margin: '24px 0',
+    height: '36px'
   }
 }
 

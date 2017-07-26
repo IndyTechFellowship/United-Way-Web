@@ -57,11 +57,11 @@ class UserBasicInfo extends Component {
   render() {
     const { user, tags } = this.props
     const viewing = <div style={styles.userInfoBlock}>
-                      <AvatarCard avatarUrl={user.profile.avatar ? user.profile.avatar.original : null} firstName={this.state.firstName} lastName={this.state.lastName} />
+                      <AvatarCard avatarUrl={user.profile.avatar ? user.profile.avatar.original : null} title={<span>{this.state.firstName}<br />{this.state.lastName}</span>} />
                       <div style={styles.aboutMeSkillsBlock}>
                         <AboutMeTagline tagline={this.state.tagline}/>
                         <Card>
-                          <Skills skills={user.profile.skills}/>
+                          <Skills skills={_.compact(this.state.skills)}/>
                         </Card>
                       </div>
                     </div>

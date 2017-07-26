@@ -8,10 +8,12 @@ const PositionCarousel = ({ loading, positions }) => {
     if (loading) {
       return <Loading/>
     } else {
-      let positionCards = positions.map((p) => {
+      let positionCards = positions.map((p, index) => {
         return (
             <div key={p._id} style={styles.position}>
-              <Position position={p} />
+              <div style={styles[index%2 ? 'right' : 'left']}>
+                <Position position={p} />
+              </div>
             </div>
         )
       })
@@ -28,7 +30,13 @@ PositionCarousel.propTypes = {
 const styles = {
   position: {
     flexBasis: '50%',
-  }
+  },
+  left: {
+    marginRight: '8px'
+  },
+  right: {
+    marginLeft: '8px'
+  },
 }
 
 export default PositionCarousel
