@@ -48,16 +48,6 @@ class Position extends Component {
       return (
         <div style={styles.card}>
           <CardComponent
-<<<<<<< HEAD
-            key={position._id}
-            imageUrl={imageUrl}
-            name={positionName}
-            title={organization.name}
-            subtitle="Open"
-            body={body}
-            cardType="position"
-            cardButtons={PositionButtons}
-=======
               key={position._id}
               imageUrl={imageUrl}
               name={positionName}
@@ -66,7 +56,6 @@ class Position extends Component {
               body={body}
               cardType="position"
               cardButtons={positionButtons}
->>>>>>> master
           />
         </div>
       )
