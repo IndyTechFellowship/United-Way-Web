@@ -139,7 +139,7 @@ class UserBasicInfo extends Component {
 
 const styles = {
   container: {
-    marginBottom: '24px',
+    marginBottom: '32px',
     position: 'relative'
   },
   edit: {
