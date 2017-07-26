@@ -2,6 +2,7 @@ import { check, Match } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 
 import { Positions } from './index';
+import { Users } from '/imports/api/Users'
 
 Meteor.methods({
 
@@ -36,6 +37,7 @@ Meteor.methods({
         $push: {
           applicants: {
             userId: opts.userId,
+            note: opts.note,
             at: new Date(),
           },
         },

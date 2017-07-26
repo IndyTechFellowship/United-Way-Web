@@ -125,7 +125,7 @@ class OrganizationBasicInfo extends Component {
           </div>
         </div>
         <div style={styles.buttonContainer}>
-          <RaisedButton label="Follow Organization" fullWidth={true} />
+          <RaisedButton label="Follow Organization" />
         </div>
       </div>
     )

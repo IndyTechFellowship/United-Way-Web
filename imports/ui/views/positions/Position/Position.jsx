@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { FlatButton } from 'material-ui'
+import _ from 'lodash'
 
 import Loading from '/imports/ui/components/Loading'
 import CardComponent from '/imports/ui/components/CardComponent'
+import ShowInterestButton from '/imports/ui/components/ShowInterestButton'
 
 class Position extends Component {
 
@@ -13,6 +15,7 @@ class Position extends Component {
       let position = this.props.position
       let positionName = !position.name ? '' : position.name
       let organization = this.props.organization
+      let orgName = !_.get(this.props, 'organization.name') ? '' : this.props.organization.name;
 
       let skills = position.skills.map((skill) => {
         return skill.name
@@ -40,9 +43,12 @@ class Position extends Component {
           content: skills
         }
       }
+
+      const positionButtons = () => <PositionButtons position={position} />
       return (
         <div style={styles.card}>
           <CardComponent
+<<<<<<< HEAD
             key={position._id}
             imageUrl={imageUrl}
             name={positionName}
@@ -51,6 +57,16 @@ class Position extends Component {
             body={body}
             cardType="position"
             cardButtons={PositionButtons}
+=======
+              key={position._id}
+              imageUrl={imageUrl}
+              name={positionName}
+              title={orgName}
+              subtitle="Open"
+              body={body}
+              cardType="position"
+              cardButtons={positionButtons}
+>>>>>>> master
           />
         </div>
       )
@@ -69,22 +85,15 @@ export default Position
 class PositionButtons extends Component {
   render() {
     return (
-      <div style={styles.buttonContainer}>
-        <FlatButton
-          label="SHOW INTEREST"
-          labelStyle={styles.button.label}
-          style={styles.button.style}
-          fullWidth={true}
-          backgroundColor={styles.button.backgroundColor}
-        />
-        <FlatButton
-          label="BOOKMARK"
-          labelStyle={styles.button.label}
-          style={styles.button.style}
-          fullWidth={true}
-          backgroundColor={styles.button.backgroundColor}
-        />
-      </div>
+        <div style={styles.buttonContainer}>
+          <ShowInterestButton position={this.props.position}/>
+          <FlatButton
+              label="BOOKMARK"
+              labelStyle={styles.button.label}
+              style={styles.button.style}
+              backgroundColor={styles.button.backgroundColor}
+          />
+        </div>
     )
   }
 }
