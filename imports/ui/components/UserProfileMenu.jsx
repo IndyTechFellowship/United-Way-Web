@@ -18,6 +18,7 @@ export default class UserProfileMenu extends Component {
     }
     this.getUserInitials = this.getUserInitials.bind(this)
     this.getPlaceholder = this.getPlaceholder.bind(this)
+    this.goToUserProfile = this.goToUserProfile.bind(this)
   }
 
   render() {
@@ -30,7 +31,7 @@ export default class UserProfileMenu extends Component {
           iconButtonElement={<div style={styles.roundButton}>{this.getPlaceholder()}</div>}
           anchorOrigin={{horizontal: 'right', vertical: 'top'}}
           targetOrigin={{horizontal: 'right', vertical: 'top'}} >
-        <MenuItem >
+        <MenuItem onClick={this.goToUserProfile}>
           <div style={styles.iconMenuViewProfileContainer}>
             <div style={styles.iconMenuItemContainer}>
               <IconButton><Person style={styles.iconStyles}/></IconButton>
@@ -38,7 +39,6 @@ export default class UserProfileMenu extends Component {
             <div style={styles.iconMenuItemContainer}>
               <div>{name}</div>
               <div>{email}</div>
-              <FlatButton>View Profile</FlatButton>
             </div>
           </div>
         </MenuItem>
@@ -64,6 +64,10 @@ export default class UserProfileMenu extends Component {
     let firstName = Meteor.user().profile.firstName
     let lastName = Meteor.user().profile.lastName
     return firstName.charAt(0) + lastName.charAt(0)
+  }
+
+  goToUserProfile() {
+    browserHistory.push('/users/' + Meteor.userId())
   }
 }
 
