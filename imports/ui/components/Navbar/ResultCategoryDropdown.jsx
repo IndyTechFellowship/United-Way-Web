@@ -27,7 +27,18 @@ const ResultCategoryDropdown = ({ anchor, dispatch, searchCategoriesOpen, search
       open={searchCategoriesOpen}
       style={styles.container}>
       <List style={styles.container}>
-        <ListItem leftIcon={<SocialPerson />} onTouchTap={onSearchClick(dispatch, searchTerm)} primaryText='Search Volunteers...' />
+        <ListItem
+          leftIcon={<SocialPerson />}
+          onTouchTap={onSearchClick(dispatch, searchTerm)}
+          primaryText='Search Organizations...' />
+        <ListItem 
+          leftIcon={<SocialPerson />}
+          onTouchTap={onSearchClick(dispatch, searchTerm)}
+          primaryText='Search Positions...' />
+        <ListItem 
+          leftIcon={<SocialPerson />} 
+          onTouchTap={onSearchClick(dispatch, searchTerm)} 
+          primaryText='Search Volunteers...' />
       </List>
     </Popover>
   )

@@ -6,20 +6,25 @@ import { connect } from 'react-redux'
 
 import { Users } from '/imports/api/Users'
 import UsersList from './UsersList'
-import UserListFilterBar from './UserListFilterBar'
+import CollectionFilterBar from '/imports/ui/components/CollectionFilterBar';
+
+import { setUserSearchResults } from '/imports/ui/state'
 
 class UsersListContainer extends Component {
 
-  constructor(props) {
-    super(props)
-  }
-
   render() {
-    const { loading, searchResultsLoading, userResults } = this.props
+    const { 
+      dispatch,
+      loading,
+      searchResultsLoading,
+      userResults,
+    } = this.props
     let { users } = this.props
     if (userResults) users = _.intersectionBy(users, userResults, u => u._id)
     return <div>
-      <UserListFilterBar isTextFiltered={!!userResults} />
+      <CollectionFilterBar 
+        clearFilters={() => dispatch(setUserSearchResults(null))} 
+        isTextFiltered={!!userResults} />
       <UsersList 
         loading={searchResultsLoading || loading} 
         users={users} />

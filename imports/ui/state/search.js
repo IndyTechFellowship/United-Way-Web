@@ -20,6 +20,12 @@ export const setFullTextSearchFilterToggle = (toggle, toggled) => ({
   toggled,
 })
 
+export const SET_ORGANIZATION_SEARCH_RESULTS = 'SET_ORGANIZATION_SEARCH_RESULTS'
+export const setOrganizationSearchResults = (searchResults) => ({
+  type: SET_ORGANIZATION_SEARCH_RESULTS,
+  searchResults,
+})
+
 export const SET_USER_SEARCH_RESULTS = 'SET_USER_SEARCH_RESULTS'
 export const setUserSearchResults = (searchResults) => ({
   type: SET_USER_SEARCH_RESULTS,
@@ -57,6 +63,7 @@ export const updateUserSearchResults = () => (
 
 const initialState = {
   anchor: null,
+  organizationResults: null,
   searchError: null,
   searchFilters: {
     organizations: true,
@@ -82,6 +89,8 @@ export const searchReducer = (state = initialState, action) => {
           [action.toggle]: action.toggled,
         },
       };
+    case SET_ORGANIZATION_SEARCH_RESULTS:
+      return {...state, organizationResults: action.searchResults}
     case SET_USER_SEARCH_RESULTS:
       return {...state, userResults: action.searchResults}
     case SET_FULL_TEXT_SEARCH_RESULTS_LOADING:
