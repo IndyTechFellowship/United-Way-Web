@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 
 import Carousel from '/imports/ui/components/Carousel'
 import Loading from '/imports/ui/components/Loading'
@@ -8,10 +9,14 @@ const OrganizationCarousel = ({ loading, organizations }) => {
     if (loading) {
       return <Loading/>
     } else {
-      let organizationCards = organizations.map((o) => {
+      let organizationCards = organizations.map((organization, index) => {
         return (
-            <div key={o._id} style={styles.organization}>
-              <OrganizationCard organization={o} />
+            <div key={organization._id} style={styles.organization}>
+              <div style={styles[index%2 ? 'right' : 'left']}>
+                <Link to={`/organizations/${organization._id}`} style={styles.link} key={organization._id}>
+                  <OrganizationCard organization={organization} />
+                </Link>
+              </div>
             </div>
         )
       })
@@ -28,6 +33,15 @@ OrganizationCarousel.propTypes = {
 const styles = {
   organization: {
     flexBasis: '50%',
+  },
+  left: {
+    marginRight: '8px'
+  },
+  right: {
+    marginLeft: '8px'
+  },
+  link: {
+    textDecoration: 'none'
   }
 }
 

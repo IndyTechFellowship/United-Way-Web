@@ -46,6 +46,7 @@ class Position extends Component {
 
       const positionButtons = () => <PositionButtons position={position} />
       return (
+        <div style={styles.card}>
           <CardComponent
               key={position._id}
               imageUrl={imageUrl}
@@ -56,6 +57,7 @@ class Position extends Component {
               cardType="position"
               cardButtons={positionButtons}
           />
+        </div>
       )
     }
   }
@@ -106,5 +108,8 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     height: '100%'
+  },
+  card: {
+    marginBottom: '16px'
   }
 }

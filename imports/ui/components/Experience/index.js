@@ -24,16 +24,18 @@ class Experience extends Component {
     }
 
     return (
-      <CardComponent
-        imageUrl={null}
-        name={experience.companyName}
-        title={experience.title}
-        subtitle={experience.location}
-        body={body}
-        cardType="experience"
-        cardButtons={ExperienceButtons}
-        drawerContent={experience.description}
-      />
+      <div style={styles.card}>
+        <CardComponent
+          imageUrl={null}
+          name={experience.companyName}
+          title={experience.title}
+          subtitle={experience.location}
+          body={body}
+          cardType="experience"
+          cardButtons={ExperienceButtons}
+          drawerContent={experience.description}
+        />
+      </div>
     )
   }
 
@@ -41,11 +43,14 @@ class Experience extends Component {
 
 const styles = {
   experience: {
-    paddingBottom: '10px',
+    paddingBottom: '10px'
   },
   header: {
     display: 'flex',
     flexDirection: 'row',
+  },
+  card: {
+    marginBottom: '16px'
   }
 }
 

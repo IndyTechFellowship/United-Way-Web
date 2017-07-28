@@ -109,7 +109,7 @@ class Interests extends Component {
 
 const styles = {
   container: {
-    marginBottom: '16px',
+    marginBottom: '32px',
     position: 'relative'
   },
   cloud: {

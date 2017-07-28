@@ -2,21 +2,27 @@ import React, { PropTypes } from 'react'
 
 import Loading from '/imports/ui/components/Loading'
 import Position from '/imports/ui/views/positions/Position'
+import Title from '/imports/ui/components/Title'
 
 const PositionsList = ({ loading, positions, organization }) => {
   if (loading) {
     return <Loading />
   } else {
     return (
+      <div style={styles.container}>
+        <Title>Positions</Title>
         <div style={styles.twoColumnLayout}>
-          {positions.map((p) => {
+          {positions.map((p, index) => {
             return (
               <div key={p._id} style={styles.position}>
-                <Position position={p} organization={organization}/>
+                <div style={styles[index%2 ? 'right' : 'left']}>
+                  <Position position={p} organization={organization}/>
+                </div>
               </div>
             )
           })}
         </div>
+      </div>
     )
   }
 }
@@ -28,6 +34,9 @@ PositionsList.propTypes = {
 }
 
 const styles = {
+  container: {
+    margin: '32px 0'
+  },
   twoColumnLayout: {
     display: 'flex',
     flexDirection: 'row',
@@ -35,6 +44,12 @@ const styles = {
   },
   position: {
     flexBasis: '50%',
+  },
+  left: {
+    marginRight: '8px'
+  },
+  right: {
+    marginLeft: '8px'
   }
 }
 

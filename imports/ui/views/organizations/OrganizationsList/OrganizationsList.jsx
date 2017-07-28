@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 
 import Loading from '/imports/ui/components/Loading'
 import OrganizationCard from '/imports/ui/views/organizations/OrganizationCard'
+import Title from '/imports/ui/components/Title'
 
 // And this is the presentational component.
 const OrganizationsList = ({ loading, organizations }) => {
@@ -10,14 +11,21 @@ const OrganizationsList = ({ loading, organizations }) => {
     return <Loading />
   } else {
     return (
-      <div style={styles.twoColumnLayout}>
-        {organizations.map((o) => {
-          return (
-            <Link to={`/organizations/${o._id}`} style={styles.organization} key={o._id}>
-              <OrganizationCard organization={o} />
-            </Link>
-          )
-        })}
+      <div style={styles.container}>
+        <Title>Organizations</Title>
+        <div style={styles.twoColumnLayout}>
+          {organizations.map((organization, index) => {
+            return (
+              <div style={styles.column}>
+                <div style={styles[index%2 ? 'right' : 'left']}>
+                  <Link to={`/organizations/${organization._id}`} style={styles.organization} key={organization._id}>
+                    <OrganizationCard organization={organization} />
+                  </Link>
+                </div>
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
   }
@@ -29,14 +37,25 @@ OrganizationsList.propTypes = {
 }
 
 const styles = {
+  container: {
+    margin: '32px 0'
+  },
   twoColumnLayout: {
     display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   organization: {
-    flexBasis: '50%',
-    textDecoration: 'none',
+    textDecoration: 'none'
+  },
+  column: {
+    flexBasis: '50%'
+  },
+  left: {
+    marginRight: '8px'
+  },
+  right: {
+    marginLeft: '8px'
   }
 }
 
