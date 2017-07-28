@@ -44,7 +44,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <Navbar isUserLoggedIn={this.state.isUserLoggedIn} onUserButtonClicked={this.onUserButtonClicked} />
+          <Navbar isUserLoggedIn={Meteor.user() != null} onUserButtonClicked={this.onUserButtonClicked} />
           <div style={styles.pageWrapper}>
             <div style={styles.content}>{ this.props.children }</div>
             <Footer />

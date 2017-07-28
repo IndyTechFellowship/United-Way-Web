@@ -26,7 +26,7 @@ import {
 class Navbar extends Component {
   
   render() {
-    const { dispatch, searchLoading, searchTerm } = this.props
+    const { dispatch, searchLoading, searchTerm, isUserLoggedIn, onUserButtonClicked } = this.props
     return (
       <div style={toolbarStyle}>
         <div style={toolbarGroup}>
@@ -41,7 +41,7 @@ class Navbar extends Component {
           </Row>
           <Link to={'/organizations'} style={linkStyle}>Organizations</Link>
           <Link to={'/users'} style={linkStyle}>Volunteers</Link>
-          <UserButton isUserLoggedIn={this.props.isUserLoggedIn} onUserButtonClicked={this.props.onUserButtonClicked}/>
+          <UserButton isUserLoggedIn={isUserLoggedIn} onUserButtonClicked={onUserButtonClicked}/>
         </div>
       </div>
     )
