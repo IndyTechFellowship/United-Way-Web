@@ -50,6 +50,17 @@ export const setSearchCategoriesOpen = (open) => ({
   searchCategoriesOpen: open,
 })
 
+export const updateOrganizationSearchResults = () => (
+  (dispatch, getState) => {
+    dispatch(setFullTextSearchResultsLoading(true));
+    Meteor.call('Search.Organizations.FullText', getState().search.searchTerm, {}, (err, results) => {
+      dispatch(setFullTextSearchResultsLoading(false));
+      if (err) return dispatch(setFullTextSearchError(err.reason));
+      else return dispatch(setOrganizationSearchResults(results));
+    })
+  }
+);
+
 export const updateUserSearchResults = () => (
   (dispatch, getState) => {
     dispatch(setFullTextSearchResultsLoading(true));

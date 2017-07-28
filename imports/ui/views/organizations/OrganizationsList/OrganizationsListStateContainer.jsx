@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { Meteor } from 'meteor/meteor'
 import { createContainer } from 'meteor/react-meteor-data'
 import React, { Component, PropTypes } from 'react'
@@ -36,10 +37,12 @@ class OrganizationsListStateContainer extends Component {
 
 OrganizationsListStateContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  organizations: PropTypes.array,
+  organizationResults: PropTypes.array,
 };
 
 const mapStateToProps = ({ search }) => ({
-  
+  organizationResults: search.organizationResults,
 });
 
 export default createContainer(() => {
