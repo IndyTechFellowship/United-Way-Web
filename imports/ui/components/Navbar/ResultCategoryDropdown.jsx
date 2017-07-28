@@ -13,6 +13,7 @@ import {
   setUserSearchResults,
   updateOrganizationSearchResults,
   updateUserSearchResults,
+  updatePositionSearchResults,
 } from '/imports/ui/state'
 
 const styles = {
@@ -30,11 +31,11 @@ const ResultCategoryDropdown = ({ anchor, dispatch, searchCategoriesOpen, search
       <List style={styles.container}>
         <ListItem
           leftIcon={<SocialPerson />}
-           onTouchTap={onOrgSearchClick(dispatch, searchTerm)} 
+          onTouchTap={onOrgSearchClick(dispatch, searchTerm)} 
           primaryText='Search Organizations...' />
         <ListItem 
           leftIcon={<SocialPerson />}
-          onTouchTap={onOrgSearchClick(dispatch, searchTerm)}
+          onTouchTap={onPosSearchClick(dispatch, searchTerm)}
           primaryText='Search Positions...' />
         <ListItem 
           leftIcon={<SocialPerson />} 
@@ -50,6 +51,13 @@ const onOrgSearchClick = (dispatch, searchTerm) => () => {
   dispatch(setSearchCategoriesOpen(false));
   dispatch(updateOrganizationSearchResults());
   return browserHistory.push('/organizations');
+}
+
+const onPosSearchClick = (dispatch, searchTerm) => () => {
+  if (!searchTerm) return dispatch(setPositionSearchResults(null));
+  dispatch(setSearchCategoriesOpen(false));
+  dispatch(updatePositionSearchResults());
+  return browserHistory.push('/positions');
 }
 
 const onUserSearchClick = (dispatch, searchTerm) => () => {
