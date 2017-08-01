@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { TagCloud } from 'react-tagcloud'
 import { Link } from 'react-router'
+import { Tabs, Tab } from 'material-ui/Tabs';
 
 import Breadcrumbs from '/imports/ui/components/Breadcrumbs'
 import Interests from '/imports/ui/views/users/Interests'
@@ -42,38 +43,66 @@ const styles = {
   },
   tag: {
     padding: '4px'
+  },
+  tabs: {
+    display: 'flex',
+    alignItems: 'left',
+    width: 400,
+    backgroundColor: '#0091ea'
+  },
+  tabContainerStyle: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1
   }
 }
 
 class UserPage extends Component {
-
   render() {
-    if(this.props.loading) {
-      return <Loading />
-    } else {
-      const name = `${this.props.user.profile.firstName} ${this.props.user.profile.lastName}`
+    const { loading, user, tags } = this.props
+    return (
+      <div>
+        <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
+          <Tab label="Profile">
+            <UserProfileTab user={user} loading={loading} tags={tags} />
+          </Tab>
+          <Tab label="Recommendations">
+        
+          </Tab>
+        </Tabs>
+      </div>
+    )
+  }
+}
+
+class UserProfileTab extends Component {
+  render() {
+    if (this.props.loading) {
       return (
-        <div style={styles.twoColumnLayout}>
-          <div style={styles.columnOne}>
-            <Breadcrumbs crumbs={[
-                {text: 'Volunteers', path: '/users'},
-                {text: name, path: null}
-              ]}
-            />
-            <UserBasicInfo user={this.props.user} tags={this.props.tags} />
-            <Interests user={this.props.user} tags={this.props.tags} />
-            <ProfessionalExperienceList experiences={this.props.user.profile.professionalExperiences}/>
-          </div>
-          <div style={styles.columnTwo}>
-            <UserProfileButtons />
-            <Summary user={this.props.user} />
-            { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList experiences={this.props.user.profile.volunteerExperiences}/> : "" }
-          </div>
-        </div>
+        <Loading />
       )
     }
+    const name = `${this.props.user.profile.firstName} ${this.props.user.profile.lastName}`
+    return (
+      <div style={styles.twoColumnLayout}>
+        <div style={styles.columnOne}>
+          <Breadcrumbs crumbs={[
+              {text: 'Volunteers', path: '/users'},
+              {text: name, path: null}
+            ]}
+          />
+          <UserBasicInfo user={this.props.user} tags={this.props.tags} />
+          <Interests user={this.props.user} tags={this.props.tags} />
+          <ProfessionalExperienceList experiences={this.props.user.profile.professionalExperiences}/>
+        </div>
+        <div style={styles.columnTwo}>
+          <UserProfileButtons />
+          <Summary user={this.props.user} />
+          { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList experiences={this.props.user.profile.volunteerExperiences}/> : "" }
+        </div>
+      </div>    
+    )
   }
-
 }
 
 UserPage.propTypes = {
