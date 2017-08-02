@@ -4,6 +4,9 @@ import { Mongo } from 'meteor/mongo'
 import _ from 'lodash'
 
 const OrganizationSchema = new SimpleSchema({
+  admins: {
+    type: [String],
+  },
   avatarUrl: {
     type: String,
   },

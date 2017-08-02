@@ -51,16 +51,6 @@ const ProfileSchema = new SimpleSchema({
   },
 })
 
-const RolesSchema = new SimpleSchema({
-  organizationId: {
-    type: String,
-  },
-  role: {
-    type: String,
-    allowedValues: [ "member", "admin" ],
-  }
-})
-
 const EmailAddressSchema = new SimpleSchema({
   address: { type: String },
   verified: { type: Boolean, optional: true },
@@ -82,10 +72,6 @@ const UserSchema = new SimpleSchema({
   },
   profile: {
     type: ProfileSchema,
-    optional: true,
-  },
-  roles: {
-    type: [ RolesSchema ],
     optional: true,
   },
   savedPositions: {

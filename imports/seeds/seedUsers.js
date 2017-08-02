@@ -64,7 +64,6 @@ const run = () => {
           })
         ]
       },
-      roles: [],
       savedPositions: []
     },
     {
@@ -122,7 +121,6 @@ const run = () => {
           }),
         ]
       },
-      roles: [],
       savedPositions: []
     }
   ]
