@@ -113,6 +113,7 @@ class UserProfileTab extends Component {
       )
     }
   }
+}
 
 UserPage.propTypes = {
   loading: PropTypes.bool.isRequired,
