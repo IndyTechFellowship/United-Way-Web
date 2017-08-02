@@ -49,17 +49,18 @@ class VolunteerButtons extends Component {
     return (
       <div style={styles.buttonContainer}>
         <FlatButton
-          label="RECOMMEND"
-          labelStyle={styles.button.label}
-          style={styles.button.style}
-          backgroundColor={styles.button.backgroundColor}
+            label="RECOMMEND"
+            labelStyle={styles.button.label}
+            style={styles.button.style}
+            backgroundColor={styles.button.backgroundColor}
         />
-        <FlatButton
-          label="BOOKMARK"
-          labelStyle={styles.button.label}
-          style={styles.button.style}
-          backgroundColor={styles.button.backgroundColor}
-        />
+        {/* TODO: V2 Feature */}
+        {/*<FlatButton*/}
+            {/*label="BOOKMARK"*/}
+            {/*labelStyle={styles.button.label}*/}
+            {/*style={styles.button.style}*/}
+            {/*backgroundColor={styles.button.backgroundColor}*/}
+        {/*/>*/}
       </div>
     )
   }
