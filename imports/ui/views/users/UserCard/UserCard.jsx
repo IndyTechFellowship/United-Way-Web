@@ -3,6 +3,7 @@ import { FlatButton } from 'material-ui'
 
 import Loading from '/imports/ui/components/Loading'
 import CardComponent from '/imports/ui/components/CardComponent'
+import RecommendButton from "/imports/ui/components/RecommendButton";
 
 class UserCard extends Component {
   render() {
@@ -54,6 +55,8 @@ class VolunteerButtons extends Component {
             style={styles.button.style}
             backgroundColor={styles.button.backgroundColor}
         />
+        <RecommendButton />
+
         {/* TODO: V2 Feature */}
         {/*<FlatButton*/}
             {/*label="BOOKMARK"*/}
