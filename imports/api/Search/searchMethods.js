@@ -65,7 +65,7 @@ Meteor.methods({
     check(query, String);
     check(filters, Object);
     if (query.length < 3) return [];
-    const positionsIndex = algoliaClient.initIndex('positionsIndex')
+    const positionsIndex = algoliaClient.initIndex('positions')
     return Meteor.wrapAsync(positionsIndex.search, positionsIndex)(query).hits;
   },
 

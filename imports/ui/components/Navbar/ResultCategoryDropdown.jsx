@@ -11,7 +11,9 @@ import { connect } from 'react-redux'
 import {
   setSearchCategoriesOpen,
   setUserSearchResults,
+  updateOrganizationSearchResults,
   updateUserSearchResults,
+  updatePositionSearchResults,
 } from '/imports/ui/state'
 
 const styles = {
@@ -27,13 +29,38 @@ const ResultCategoryDropdown = ({ anchor, dispatch, searchCategoriesOpen, search
       open={searchCategoriesOpen}
       style={styles.container}>
       <List style={styles.container}>
-        <ListItem leftIcon={<SocialPerson />} onTouchTap={onSearchClick(dispatch, searchTerm)} primaryText='Search Volunteers...' />
+        <ListItem
+          leftIcon={<SocialPerson />}
+          onTouchTap={onOrgSearchClick(dispatch, searchTerm)} 
+          primaryText='Search Organizations...' />
+        <ListItem 
+          leftIcon={<SocialPerson />}
+          onTouchTap={onPosSearchClick(dispatch, searchTerm)}
+          primaryText='Search Positions...' />
+        <ListItem 
+          leftIcon={<SocialPerson />} 
+          onTouchTap={onUserSearchClick(dispatch, searchTerm)} 
+          primaryText='Search Volunteers...' />
       </List>
     </Popover>
   )
 }
 
-const onSearchClick = (dispatch, searchTerm) => () => {
+const onOrgSearchClick = (dispatch, searchTerm) => () => {
+  if (!searchTerm) return dispatch(setOrganizationSearchResults(null));
+  dispatch(setSearchCategoriesOpen(false));
+  dispatch(updateOrganizationSearchResults());
+  return browserHistory.push('/organizations');
+}
+
+const onPosSearchClick = (dispatch, searchTerm) => () => {
+  if (!searchTerm) return dispatch(setPositionSearchResults(null));
+  dispatch(setSearchCategoriesOpen(false));
+  dispatch(updatePositionSearchResults());
+  return browserHistory.push('/positions');
+}
+
+const onUserSearchClick = (dispatch, searchTerm) => () => {
   if (!searchTerm) return dispatch(setUserSearchResults(null));
   dispatch(setSearchCategoriesOpen(false));
   dispatch(updateUserSearchResults());

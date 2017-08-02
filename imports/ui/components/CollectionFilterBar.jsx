@@ -1,14 +1,9 @@
 import { Row } from 'jsxstyle'
-import {
-  FlatButton,
-} from 'material-ui'
+import { FlatButton } from 'material-ui'
 import ContentClear from 'material-ui/svg-icons/content/clear';
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import {
-  setUserSearchResults,
-} from '/imports/ui/state'
 import { Colors } from '/imports/ui/styles'
 
 const styles = {
@@ -25,30 +20,27 @@ const styles = {
   },
 }
 
-const UserListFilterBar = ({ dispatch, isTextFiltered }) => {
+const CollectionFilterBar = ({ clearFilters, isTextFiltered, searchTerm }) => {
   return (
     <Row style={styles.container}>
-      {isTextFiltered
-        ? <span style={styles.filterText}>Text Filtered</span>
-        : <span style={styles.filterText}>No Text Filter</span>}
+      {isTextFiltered && searchTerm
+        ? <span style={styles.filterText}>Search for "{searchTerm}"</span>
+        : <span style={styles.filterText}>All Results</span>}
       <FlatButton
         icon={<ContentClear />}
-        onTouchTap={onXClick(dispatch)} />
+        onTouchTap={() => clearFilters()} />
     </Row>
   )
 }
 
-const onXClick = (dispatch) => () => {
-  dispatch(setUserSearchResults(null))
-}
-
-UserListFilterBar.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+CollectionFilterBar.propTypes = {
+  clearFilters: PropTypes.func.isRequired,
   isTextFiltered: PropTypes.bool.isRequired,
+  searchTerm: PropTypes.string,
 }
 
-const mapStateToProps = {
-  
-}
+const mapStateToProps = ({ search }) => ({
+  searchTerm: search.searchTerm,
+})
 
-export default connect()(UserListFilterBar);
+export default connect(mapStateToProps)(CollectionFilterBar);

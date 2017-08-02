@@ -20,6 +20,18 @@ export const setFullTextSearchFilterToggle = (toggle, toggled) => ({
   toggled,
 })
 
+export const SET_ORGANIZATION_SEARCH_RESULTS = 'SET_ORGANIZATION_SEARCH_RESULTS'
+export const setOrganizationSearchResults = (searchResults) => ({
+  type: SET_ORGANIZATION_SEARCH_RESULTS,
+  searchResults,
+})
+
+export const SET_POSITION_SEARCH_RESULTS = 'SET_POSITION_SEARCH_RESULTS'
+export const setPositionSearchResults = (searchResults) => ({
+  type: SET_POSITION_SEARCH_RESULTS,
+  searchResults,
+})
+
 export const SET_USER_SEARCH_RESULTS = 'SET_USER_SEARCH_RESULTS'
 export const setUserSearchResults = (searchResults) => ({
   type: SET_USER_SEARCH_RESULTS,
@@ -44,6 +56,28 @@ export const setSearchCategoriesOpen = (open) => ({
   searchCategoriesOpen: open,
 })
 
+export const updateOrganizationSearchResults = () => (
+  (dispatch, getState) => {
+    dispatch(setFullTextSearchResultsLoading(true));
+    Meteor.call('Search.Organizations.FullText', getState().search.searchTerm, {}, (err, results) => {
+      dispatch(setFullTextSearchResultsLoading(false));
+      if (err) return dispatch(setFullTextSearchError(err.reason));
+      else return dispatch(setOrganizationSearchResults(results));
+    })
+  }
+);
+
+export const updatePositionSearchResults = () => (
+  (dispatch, getState) => {
+    dispatch(setFullTextSearchResultsLoading(true));
+    Meteor.call('Search.Positions.FullText', getState().search.searchTerm, {}, (err, results) => {
+      dispatch(setFullTextSearchResultsLoading(false));
+      if (err) return dispatch(setFullTextSearchError(err.reason));
+      else return dispatch(setPositionSearchResults(results));
+    })
+  }
+);
+
 export const updateUserSearchResults = () => (
   (dispatch, getState) => {
     dispatch(setFullTextSearchResultsLoading(true));
@@ -57,6 +91,8 @@ export const updateUserSearchResults = () => (
 
 const initialState = {
   anchor: null,
+  organizationResults: null,
+  positionResults: null,
   searchError: null,
   searchFilters: {
     organizations: true,
@@ -82,6 +118,10 @@ export const searchReducer = (state = initialState, action) => {
           [action.toggle]: action.toggled,
         },
       };
+    case SET_ORGANIZATION_SEARCH_RESULTS:
+      return {...state, organizationResults: action.searchResults}
+    case SET_POSITION_SEARCH_RESULTS:
+      return {...state, positionResults: action.searchResults}
     case SET_USER_SEARCH_RESULTS:
       return {...state, userResults: action.searchResults}
     case SET_FULL_TEXT_SEARCH_RESULTS_LOADING:
