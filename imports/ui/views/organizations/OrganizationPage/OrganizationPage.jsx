@@ -51,7 +51,7 @@ class OrganizationPage extends Component {
               <AboutUsMission organization={this.props.organization} />
             </div>
           </div>
-          <PositionsList query={positionsQuery} organization={this.props.organization} />
+          <PositionsList query={positionsQuery} organization={this.props.organization} editable={true} />
         </div>
       )
     }

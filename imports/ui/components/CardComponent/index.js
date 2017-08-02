@@ -50,9 +50,12 @@ class CardComponent extends Component {
               <div style={{...styles.fontBase, ...styles.header.title.title}}>{this.props.title}</div>
               <div style={{...styles.fontBase, ...styles.header.title.subtitle}}>{this.props.subtitle}</div>
             </div>
-            <div style={styles.header.actions.style}>
-              <CardButtons />
-            </div>
+            { CardButtons 
+              ? <div style={styles.header.actions.style}>
+                  <CardButtons />
+                </div>
+              : null
+            }
           </div>
           <div style={styles.body}>
             <div style={styles.body.column}>

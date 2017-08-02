@@ -67,7 +67,7 @@ class UserPage extends Component {
           <div style={styles.columnTwo}>
             <UserProfileButtons />
             <Summary user={this.props.user} />
-            { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList experiences={this.props.user.profile.volunteerExperiences}/> : "" }
+            { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList user={this.props.user} experiences={this.props.user.profile.volunteerExperiences}/> : "" }
           </div>
         </div>
       )

@@ -3,6 +3,7 @@ import './accounts'
 
 import '/imports/api/Experiences'
 import '/imports/api/Experiences/server/experiencesPublications'
+import '/imports/api/Experiences/experiencesMethods'
 import '/imports/api/Organizations'
 import '/imports/api/Organizations/server/organizationsPublications'
 import '/imports/api/Organizations/organizationsMethods'
