@@ -22,12 +22,19 @@ const UserContainer = createContainer((props) => {
   ]
   if (_.some(subs, (s) => !s.ready())) return { loading: true, position: {}, organization: {} }
 
+  const volunteerExperiences = Experiences.find({ _id: { $in: user.profile.volunteerExperiences } }).fetch()
+  const professionalExperiences = Experiences.find({ _id: { $in: user.profile.professionalExperiences } }).fetch()
+
   // update organization with tag objects
   user.profile = Object.assign(user.profile, {
     interests: Tags.find({ _id: { $in: user.profile.interests } }).fetch(),
     skills: Tags.find({ _id: { $in: user.profile.skills } }).fetch(),
-    volunteerExperiences: Experiences.find({ _id: { $in: user.profile.volunteerExperiences } }).fetch(),
-    professionalExperiences: Experiences.find({ _id: { $in: user.profile.professionalExperiences } }).fetch()
+    volunteerExperiences: _.map(volunteerExperiences, experience => _.merge(experience, {
+      tags: Tags.find({ _id: { $in: experience.tags || [] } }).fetch()
+    })),
+    professionalExperiences: _.map(professionalExperiences, experience => _.merge(experience, {
+      tags: Tags.find({ _id: { $in: experience.tags || [] } }).fetch()
+    })),
   })
 
   // render

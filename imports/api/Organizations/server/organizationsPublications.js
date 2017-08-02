@@ -16,3 +16,7 @@ import { Organizations } from '/imports/api/Organizations'
 Meteor.publish('Organizations.get', function(query) {
     return Organizations.find(query)
 })
+
+Meteor.publish('Organizations.thatUserAdmins', function(userId) {
+    return Organizations.find({ admins: userId })
+});

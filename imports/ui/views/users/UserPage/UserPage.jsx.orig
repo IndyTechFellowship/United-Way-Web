@@ -78,21 +78,10 @@ class UserPage extends Component {
       )
     } else {
       return (
+<<<<<<< HEAD
         <div>
           <UserProfileTab user={user} loading={loading} tags={tags} />
-        </div>
-      )
-    }
-  }
-}
-
-class UserProfileTab extends Component {
-  render() {
-    if(this.props.loading) {
-      return <Loading />
-    } else {
-      const name = `${this.props.user.profile.firstName} ${this.props.user.profile.lastName}`
-      return (
+=======
         <div style={styles.twoColumnLayout}>
           <div style={styles.columnOne}>
             <Breadcrumbs crumbs={[
@@ -109,10 +98,42 @@ class UserProfileTab extends Component {
             <Summary user={this.props.user} />
             { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList user={this.props.user} experiences={this.props.user.profile.volunteerExperiences}/> : "" }
           </div>
+>>>>>>> 205afca1784ca1fa50b32df8e07bed1cad10c4a3
         </div>
       )
     }
   }
+}
+
+class UserProfileTab extends Component {
+  render() {
+    if (this.props.loading) {
+      return (
+        <Loading />
+      )
+    }
+    const name = `${this.props.user.profile.firstName} ${this.props.user.profile.lastName}`
+    return (
+      <div style={styles.twoColumnLayout}>
+        <div style={styles.columnOne}>
+          <Breadcrumbs crumbs={[
+              {text: 'Volunteers', path: '/users'},
+              {text: name, path: null}
+            ]}
+          />
+          <UserBasicInfo user={this.props.user} tags={this.props.tags} />
+          <Interests user={this.props.user} tags={this.props.tags} />
+          <ProfessionalExperienceList experiences={this.props.user.profile.professionalExperiences}/>
+        </div>
+        <div style={styles.columnTwo}>
+          <UserProfileButtons />
+          <Summary user={this.props.user} />
+          { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList experiences={this.props.user.profile.volunteerExperiences}/> : "" }
+        </div>
+      </div>    
+    )
+  }
+}
 
 UserPage.propTypes = {
   loading: PropTypes.bool.isRequired,

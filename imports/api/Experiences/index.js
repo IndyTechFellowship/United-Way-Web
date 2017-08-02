@@ -9,6 +9,7 @@ const ExperiencesSchema = new SimpleSchema({
   },
   title: {
     type: String,
+    optional: true
   },
   companyName: {
     type: String,
@@ -24,14 +25,20 @@ const ExperiencesSchema = new SimpleSchema({
   },
   location: {
     type: String,
+    optional: true
   },
   startDate: {
     type: Date,
+    optional: true
   },
   endDate: {
     type: Date,
     optional: true
   },
+  tags: {
+    type: [ String ],
+    optional: true
+  }
 })
 
 const Experiences = new Mongo.Collection('experiences')
