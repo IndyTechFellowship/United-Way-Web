@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { TagCloud } from 'react-tagcloud'
 import { Link } from 'react-router'
+import { Tabs, Tab } from 'material-ui/Tabs';
 
 import Breadcrumbs from '/imports/ui/components/Breadcrumbs'
 import Interests from '/imports/ui/views/users/Interests'
@@ -42,11 +43,50 @@ const styles = {
   },
   tag: {
     padding: '4px'
+  },
+  tabs: {
+    display: 'flex',
+    alignItems: 'left',
+    width: 400,
+    backgroundColor: '#0091ea'
+  },
+  tabContainerStyle: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1
   }
 }
 
 class UserPage extends Component {
+  render() {
+    const { loading, user, tags } = this.props
+    let myUserId = Meteor.userId() 
+    let thisUserId = user._id
+    let thisIsMyProfile = myUserId == thisUserId
+    if (thisIsMyProfile) {
+      return (
+        <div>
+          <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
+            <Tab label="Profile">
+              <UserProfileTab user={user} loading={loading} tags={tags} />
+            </Tab>
+            <Tab label="Recommendations">
 
+            </Tab>
+          </Tabs>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <UserProfileTab user={user} loading={loading} tags={tags} />
+        </div>
+      )
+    }
+  }
+}
+
+class UserProfileTab extends Component {
   render() {
     if(this.props.loading) {
       return <Loading />
@@ -73,8 +113,6 @@ class UserPage extends Component {
       )
     }
   }
-
-}
 
 UserPage.propTypes = {
   loading: PropTypes.bool.isRequired,
