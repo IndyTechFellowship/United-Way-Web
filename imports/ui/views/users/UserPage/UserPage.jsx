@@ -60,18 +60,29 @@ const styles = {
 class UserPage extends Component {
   render() {
     const { loading, user, tags } = this.props
-    return (
-      <div>
-        <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
-          <Tab label="Profile">
-            <UserProfileTab user={user} loading={loading} tags={tags} />
-          </Tab>
-          <Tab label="Recommendations">
-        
-          </Tab>
-        </Tabs>
-      </div>
-    )
+    let myUserId = Meteor.userId() 
+    let thisUserId = user._id
+    let thisIsMyProfile = myUserId == thisUserId
+    if (thisIsMyProfile) {
+      return (
+        <div>
+          <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
+            <Tab label="Profile">
+              <UserProfileTab user={user} loading={loading} tags={tags} />
+            </Tab>
+            <Tab label="Recommendations">
+
+            </Tab>
+          </Tabs>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <UserProfileTab user={user} loading={loading} tags={tags} />
+        </div>
+      )
+    }
   }
 }
 
