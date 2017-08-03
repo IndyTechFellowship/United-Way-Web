@@ -2,6 +2,7 @@ import { isObject, map, omit } from 'lodash'
 import { check, Match } from 'meteor/check'
 import { Meteor } from 'meteor/meteor'
 
+import { Users } from '/imports/api/Users'
 import { Organizations } from './index'
 
 Meteor.methods({
