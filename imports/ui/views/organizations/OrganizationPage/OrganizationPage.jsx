@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { Tabs, Tab } from 'material-ui/Tabs';
 
 import AboutUsMission from '/imports/ui/views/organizations/AboutUsMission'
 import Breadcrumbs from '/imports/ui/components/Breadcrumbs'
