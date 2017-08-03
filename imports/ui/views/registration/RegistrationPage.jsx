@@ -50,15 +50,21 @@ class RegistrationPage extends Component {
         } else if (!password1 || password1.length < 8) {
           return setError('Enter a Password At Least 8 Characters In Length.')
         }
+        setError(null)
         return this.setState({ stepIndex: stepIndex + 1 });
       case 3: // Final Step
+        setError(null)
         return createAccount(() => browserHistory.push('/'))
-      default: return this.setState({ stepIndex: stepIndex + 1 })
+      default: 
+        setError(null)
+        return this.setState({ stepIndex: stepIndex + 1 })
     }
   }
 
   handlePrev() {
+    const { setError } = this.props
     const { stepIndex } = this.state
+    setError(null)
     if (stepIndex > 0) this.setState({ stepIndex: stepIndex - 1 })
   }
 
@@ -76,6 +82,7 @@ class RegistrationPage extends Component {
   }
 
   render() {
+    const { error } = this.props;
     const { finished, stepIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
     return (
@@ -97,6 +104,7 @@ class RegistrationPage extends Component {
         <div style={contentStyle}>
           <div>{this.getStepContent(stepIndex)}</div>
           <div style={styles.buttons}>
+            {error && <span style={styles.error}>{error}</span>}
             <FlatButton
               label="Back"
               disabled={stepIndex === 0}
@@ -120,14 +128,21 @@ const styles = {
     marginBottom: '24px'
   },
   buttons: {
+    alignItems: 'center',
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-end',
     marginTop: '12px'
-  }
+  },
+  error: {
+    color: 'red',
+    fontSize: '13px',
+    marginRight: '8px',
+  },
 }
 
 const mapStateToProps = ({ onboarding }) => ({
+  error: onboarding.error,
   password1: onboarding.password1,
   password2: onboarding.password2,
 })
