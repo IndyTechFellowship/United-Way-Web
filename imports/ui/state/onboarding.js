@@ -7,7 +7,14 @@ export const setOnboardingField = (fieldName, fieldValue) => ({
   fieldValue,
 })
 
+export const SET_ONBOARDING_ERROR = 'SET_ONBOARDING_ERROR';
+export const setOnboardingError = (error) => ({
+  type: SET_ONBOARDING_ERROR,
+  error,
+})
+
 const initialState = {
+  error: null,
   email: '',
   firstName: '',
   lastName: '',
@@ -18,6 +25,8 @@ const initialState = {
 
 export const onboardingReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_ONBOARDING_ERROR:
+      return {...state, error: action.error};
     case SET_ONBOARDING_FIELD:
       return {...state, [action.fieldName]: action.fieldValue};
     default:

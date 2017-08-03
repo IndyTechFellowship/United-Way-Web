@@ -9,7 +9,7 @@ import {
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 
-import { setOnboardingField } from '/imports/ui/state'
+import { setOnboardingError, setOnboardingField } from '/imports/ui/state'
 import OrganizationProfile from './OrganizationProfile'
 import Password from './Password'
 import VolunteerProfile from './VolunteerProfile'
@@ -36,11 +36,20 @@ class RegistrationPage extends Component {
   }
 
   handleNext() {
+    const { dispatch, password1, password2 } = this.props;
     const { stepIndex } = this.state;
-    this.setState({
-      stepIndex: stepIndex + 1,
-      finished: stepIndex >= 3,
-    })
+    switch (stepIndex) {
+      case 1:  // Password
+        if (password1 !== password2) {
+          return dispatch(setOnboardingError('Your Passwords Must Match.'))
+        } else if (!password1 || password1.length < 8) {
+          return dispatch(setOnboardingError('Enter a Password At Least 8 Characters In Length.'))
+        }
+      default: return this.setState({
+        stepIndex: stepIndex + 1,
+        finished: stepIndex >= 3,
+      })
+    }
   }
 
   handlePrev() {
@@ -68,7 +77,6 @@ class RegistrationPage extends Component {
   render() {
     const { finished, stepIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
-    console.log(this.props.location.query)
     return (
       <div style={styles.stepper}>
         <Stepper activeStep={stepIndex}>
@@ -128,4 +136,9 @@ const styles = {
   }
 }
 
-export default connect()(RegistrationPage)
+const mapStateToProps = ({ onboarding }) => ({
+  password1: onboarding.password1,
+  password2: onboarding.password2,
+})
+
+export default connect(mapStateToProps)(RegistrationPage)
