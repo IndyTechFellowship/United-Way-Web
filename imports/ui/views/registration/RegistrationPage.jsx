@@ -37,7 +37,7 @@ class RegistrationPage extends Component {
     query.firstName && setField('firstName', query.firstName)
     query.lastName && setField('lastName', query.lastName)
     query.organizationName && setField('organizationName', query.organizationName)
-    query.token && dispatch(setField('token', query.token))
+    query.token && setField('token', query.token)
   }
 
   handleNext() {

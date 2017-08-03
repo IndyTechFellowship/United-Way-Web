@@ -9,7 +9,8 @@ export const createAccount = (cb) => (
       profile: {
         firstName: getState().onboarding.firstName,
         lastName: getState().onboarding.lastName,
-      }
+      },
+      token: getState().onboarding.token,
     }, (error) => {
       if (error) return dispatch(setOnboardingError(error.reason));
       else return cb()
