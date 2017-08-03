@@ -1,4 +1,21 @@
+import { Accounts } from 'meteor/accounts-base'
 import { Meteor } from 'meteor/meteor'
+
+export const createAccount = (cb) => (
+  (dispatch, getState) => {
+    Accounts.createUser({
+      email: getState().onboarding.email,
+      password: getState().onboarding.password1,
+      profile: {
+        firstName: getState().onboarding.firstName,
+        lastName: getState().onboarding.lastName,
+      }
+    }, (error) => {
+      if (error) return dispatch(setOnboardingError(error.reason));
+      else return cb()
+    })
+  }
+);
 
 export const SET_ONBOARDING_FIELD = 'SET_ONBOARDING_FIELD';
 export const setOnboardingField = (fieldName, fieldValue) => ({
@@ -21,6 +38,7 @@ const initialState = {
   organizationName: '',
   password1: '',
   password2: '',
+  token: '',
 }
 
 export const onboardingReducer = (state = initialState, action) => {

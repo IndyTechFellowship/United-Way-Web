@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 import { connect } from 'react-redux'
 import {
   Step,
@@ -9,7 +9,11 @@ import {
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 
-import { setOnboardingError, setOnboardingField } from '/imports/ui/state'
+import { 
+  createAccount,
+  setOnboardingError, 
+  setOnboardingField,
+} from '/imports/ui/state'
 import OrganizationProfile from './OrganizationProfile'
 import Password from './Password'
 import VolunteerProfile from './VolunteerProfile'
@@ -28,35 +32,34 @@ class RegistrationPage extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, location: { query } } = this.props
-    query.email && dispatch(setOnboardingField('email', query.email))
-    query.firstName && dispatch(setOnboardingField('firstName', query.firstName))
-    query.lastName && dispatch(setOnboardingField('lastName', query.lastName))
-    query.organizationName && dispatch(setOnboardingField('organizationName', query.organizationName))
+    const { location: { query }, setField } = this.props
+    query.email && setField('email', query.email)
+    query.firstName && setField('firstName', query.firstName)
+    query.lastName && setField('lastName', query.lastName)
+    query.organizationName && setField('organizationName', query.organizationName)
+    query.token && dispatch(setField('token', query.token))
   }
 
   handleNext() {
-    const { dispatch, password1, password2 } = this.props;
+    const { createAccount, password1, password2, setError } = this.props;
     const { stepIndex } = this.state;
     switch (stepIndex) {
       case 1:  // Password
         if (password1 !== password2) {
-          return dispatch(setOnboardingError('Your Passwords Must Match.'))
+          return setError('Your Passwords Must Match.')
         } else if (!password1 || password1.length < 8) {
-          return dispatch(setOnboardingError('Enter a Password At Least 8 Characters In Length.'))
+          return setError('Enter a Password At Least 8 Characters In Length.')
         }
-      default: return this.setState({
-        stepIndex: stepIndex + 1,
-        finished: stepIndex >= 3,
-      })
+        return this.setState({ stepIndex: stepIndex + 1 });
+      case 3: // Final Step
+        return createAccount(() => browserHistory.push('/'))
+      default: return this.setState({ stepIndex: stepIndex + 1 })
     }
   }
 
   handlePrev() {
-    const { stepIndex } = this.state;
-    if (stepIndex > 0) {
-      this.setState({stepIndex: stepIndex - 1});
-    }
+    const { stepIndex } = this.state
+    if (stepIndex > 0) this.setState({ stepIndex: stepIndex - 1 })
   }
 
   getStepContent(stepIndex) {
@@ -69,8 +72,6 @@ class RegistrationPage extends Component {
         return <OrganizationProfile />
       case 3:
         return <VolunteerProfile />
-      default:
-        return 'Oops, something went wrong!';
     }
   }
 
@@ -94,28 +95,18 @@ class RegistrationPage extends Component {
           </Step>
         </Stepper>
         <div style={contentStyle}>
-          {finished ? (
-            <p>
-              You've successfully set up your account! <Link to='/'>Click here</Link> to begin exploring the website.
-            </p>
-          ) : (
-            <div>
-              <div>{this.getStepContent(stepIndex)}</div>
-              <div style={styles.buttons}>
-                <FlatButton
-                  label="Back"
-                  disabled={stepIndex === 0}
-                  onTouchTap={this.handlePrev}
-                  style={{marginRight: 12}}
-                />
-                <RaisedButton
-                  label={stepIndex === 3 ? 'Finish' : 'Next'}
-                  primary={true}
-                  onTouchTap={this.handleNext}
-                />
-              </div>
-            </div>
-          )}
+          <div>{this.getStepContent(stepIndex)}</div>
+          <div style={styles.buttons}>
+            <FlatButton
+              label="Back"
+              disabled={stepIndex === 0}
+              onTouchTap={this.handlePrev}
+              style={{marginRight: 12}} />
+            <RaisedButton
+              label={stepIndex === 3 ? 'Finish' : 'Next'}
+              primary={true}
+              onTouchTap={this.handleNext} />
+          </div>
         </div>
       </div>
     );
@@ -141,4 +132,10 @@ const mapStateToProps = ({ onboarding }) => ({
   password2: onboarding.password2,
 })
 
-export default connect(mapStateToProps)(RegistrationPage)
+const mapDispatchToProps = (dispatch) => ({
+  createAccount: (cb) => dispatch(createAccount(cb)), 
+  setError: (e) => dispatch(setOnboardingError(e)),
+  setField: (fN, fV) => dispatch(setOnboardingField(fN, fV)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationPage)
