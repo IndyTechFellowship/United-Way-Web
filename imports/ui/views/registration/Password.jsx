@@ -1,34 +1,40 @@
-import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-class Password extends Component {
-
-  render() {
-    return (
-      <div style={styles.container}>
-        <div>
-          Create your secure password
-        </div>
-        <TextField
-          floatingLabelText="Password"
-          type="password"
-        />
-        <TextField
-          floatingLabelText="Confirm Password"
-          type="password"
-        />
-      </div>
-    )
-  }
-
-}
+import { setOnboardingField } from '/imports/ui/state'
 
 const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column'
-  }
+  },
 }
 
-export default Password
+const Password = ({ dispatch, password1, password2 }) => (
+  <div style={styles.container}>
+    <div>
+      Create A Secure Password
+    </div>
+    <TextField
+      floatingLabelText="Password"
+      onChange={(e, v) => dispatch(setOnboardingField('password1', v))}
+      type="password"
+      value={password1}
+    />
+    <TextField
+      errorText={password1 !== password2 && 'Your Passwords Must Match'}
+      floatingLabelText="Confirm Password"
+      onChange={(e, v) => dispatch(setOnboardingField('password2', v))}
+      type="password"
+      value={password2}
+    />
+  </div>
+)
 
+const mapStateToProps = ({ onboarding }) => ({
+  password1: onboarding.password1,
+  password2: onboarding.password2,
+})
+
+export default connect(mapStateToProps)(Password)

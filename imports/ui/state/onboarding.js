@@ -12,6 +12,8 @@ const initialState = {
   firstName: '',
   lastName: '',
   organizationName: '',
+  password1: '',
+  password2: '',
 }
 
 export const onboardingReducer = (state = initialState, action) => {

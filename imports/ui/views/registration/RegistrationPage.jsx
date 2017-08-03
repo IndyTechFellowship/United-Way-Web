@@ -92,7 +92,7 @@ class RegistrationPage extends Component {
             </p>
           ) : (
             <div>
-              <p>{this.getStepContent(stepIndex)}</p>
+              <div>{this.getStepContent(stepIndex)}</div>
               <div style={styles.buttons}>
                 <FlatButton
                   label="Back"
