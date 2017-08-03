@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { Tabs, Tab } from 'material-ui/Tabs';
 
 import AboutUsMission from '/imports/ui/views/organizations/AboutUsMission'
 import Breadcrumbs from '/imports/ui/components/Breadcrumbs'
@@ -24,10 +25,48 @@ const styles = {
     flex: 1,
     minWidth: 300,
     marginLeft: '16px'
+  },
+  tabs: {
+    display: 'flex',
+    alignItems: 'left',
+    width: 400,
+    backgroundColor: '#0091ea'
+  },
+  tabContainerStyle: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1
   }
 }
 
 class OrganizationPage extends Component {
+  render() {
+    let { loading, organization, isMyOrganization, tags } = this.props
+    console.log(loading, organization, isMyOrganization)
+    if (isMyOrganization) {
+      return (
+        <div>
+          <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
+            <Tab label="Profile">
+              <OrganizationTab loading={loading} organization={organization} tags={tags} />
+            </Tab>
+            <Tab label="Interested">
+
+            </Tab>
+          </Tabs>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <OrganizationTab loading={loading} organization={organization} tags={tags} />
+        </div>
+      )
+    }
+  }
+}
+
+class OrganizationTab extends Component {
 
   render() {
     if(this.props.loading) {
@@ -62,6 +101,7 @@ class OrganizationPage extends Component {
 OrganizationPage.propTypes = {
   loading: PropTypes.bool.isRequired,
   organization: PropTypes.object.isRequired,
+  isMyProfile: PropTypes.bool.isRequired
 }
 
 export default OrganizationPage
