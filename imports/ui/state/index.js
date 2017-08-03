@@ -9,12 +9,14 @@ import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 
 // Import each reducer you create here
+import { onboardingReducer } from './onboarding'
 import { searchReducer } from './search'
 import { userReducer } from './user'
 
 // Add them to the combineReducers call below
 export const store = createStore(
   combineReducers({
+    onboarding: onboardingReducer,
     search: searchReducer,
     user: userReducer,
   }), 
@@ -26,6 +28,7 @@ export const store = createStore(
 
 // And also export everything from each reducer file, 
 // as those are the files that contain the actions we are dispatching.
+export * from './onboarding'
 export * from './search'
 export * from './user'
 
