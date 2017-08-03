@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
 import {
   Step,
   Stepper,
@@ -8,6 +9,7 @@ import {
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 
+import { setOnboardingField } from '/imports/ui/state'
 import OrganizationProfile from './OrganizationProfile'
 import Password from './Password'
 import VolunteerProfile from './VolunteerProfile'
@@ -23,6 +25,14 @@ class RegistrationPage extends Component {
     }
     this.handleNext = this.handleNext.bind(this)
     this.handlePrev = this.handlePrev.bind(this)
+  }
+
+  componentDidMount() {
+    const { dispatch, location: { query } } = this.props
+    query.email && dispatch(setOnboardingField('email', query.email))
+    query.firstName && dispatch(setOnboardingField('firstName', query.firstName))
+    query.lastName && dispatch(setOnboardingField('lastName', query.lastName))
+    query.organizationName && dispatch(setOnboardingField('organizationName', query.organizationName))
   }
 
   handleNext() {
@@ -58,7 +68,7 @@ class RegistrationPage extends Component {
   render() {
     const { finished, stepIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
-
+    console.log(this.props.location.query)
     return (
       <div style={styles.stepper}>
         <Stepper activeStep={stepIndex}>
@@ -118,4 +128,4 @@ const styles = {
   }
 }
 
-export default RegistrationPage
+export default connect()(RegistrationPage)
