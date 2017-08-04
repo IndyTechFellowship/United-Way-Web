@@ -48,6 +48,10 @@ const styles = {
     margin: '20px',
     width: '180px',
   },
+  error: {
+    color: Colors.errorLight,
+    height: '20px',
+  },
 }
 
 const SigninDialog = ({ 
@@ -76,6 +80,7 @@ const SigninDialog = ({
         inputStyle={styles.textField}
         value={email} />
       <TextField
+        onKeyDown={(e) => e.keyCode === 13 && signinUser()}
         hintText='Password'
         hintStyle={styles.hintText}
         onChange={(e, v) => updatePassword(v)} 
@@ -90,6 +95,10 @@ const SigninDialog = ({
         labelColor={Colors.secondaryText}
         backgroundColor={Colors.secondary}
         style={styles.signinButton} />
+      {error
+        ? <div style={styles.error}>{error}</div>
+        : <div style={styles.error}></div>
+      }
     </Col>
   </Dialog>
 );

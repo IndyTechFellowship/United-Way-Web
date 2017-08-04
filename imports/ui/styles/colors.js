@@ -5,6 +5,8 @@ import {
   grey100,
   grey200,
   grey700,
+  red200,
+  red500,
 } from 'material-ui/styles/colors'
 
 export const Colors = {
@@ -19,4 +21,6 @@ export const Colors = {
   primaryTextLight: grey200,
   secondary: '#FF8B00',
   secondaryText: grey100,
+  error: red500,
+  errorLight: red200,
 };

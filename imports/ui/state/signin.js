@@ -2,12 +2,17 @@ import { Meteor } from 'meteor/meteor'
 
 export const signinUser = () => (
   (dispatch, getState) => {
-    Meteor.loginWithPassword(
-      getState().signin.email,
-      getState().signin.password,
-      (err) => {
-        if (err) dispatch(setSigninError(err.reason));
-        else dispatch(setSigninDialogOpen(false));
+    const email = getState().signin.email
+    const password = getState().signin.password
+    if (!email || !password) {
+      return dispatch(setSigninError('Please provide a username and password'))
+    }
+    Meteor.loginWithPassword(email, password, (err) => {
+        if (err) dispatch(setSigninError(err.reason))
+        else {
+          dispatch(setSigninError(null))
+          dispatch(setSigninDialogOpen(false))
+        }
       }
     );
   }
