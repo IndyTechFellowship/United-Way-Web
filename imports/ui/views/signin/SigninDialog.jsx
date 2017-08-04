@@ -3,6 +3,7 @@ import {
   Dialog,
   RaisedButton,
   TextField,
+  CircularProgress,
 } from 'material-ui'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -45,12 +46,17 @@ const styles = {
     color: Colors.primaryTextLight,
   },
   signinButton: {
-    margin: '20px',
     width: '180px',
   },
   error: {
     color: Colors.errorLight,
     height: '20px',
+  },
+  buttonArea: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: '60px',
   },
 }
 
@@ -63,6 +69,7 @@ const SigninDialog = ({
   updatePassword,
   signinUser,
   error,
+  loading,
 }) => (
   <Dialog
     onRequestClose={closeDialog}
@@ -89,12 +96,16 @@ const SigninDialog = ({
         style={styles.textField}
         inputStyle={styles.textField}
         value={password} />
-      <RaisedButton
-        onTouchTap={signinUser}
-        label='Sign-In'
-        labelColor={Colors.secondaryText}
-        backgroundColor={Colors.secondary}
-        style={styles.signinButton} />
+      <div style={styles.buttonArea}>
+        {loading
+          ? <CircularProgress color={Colors.secondary} />
+          : <RaisedButton
+              onTouchTap={signinUser}
+              label='Sign-In'
+              labelColor={Colors.secondaryText}
+              backgroundColor={Colors.secondary}
+              style={styles.signinButton} />}
+      </div>
       {error
         ? <div style={styles.error}>{error}</div>
         : <div style={styles.error}></div>
@@ -106,6 +117,7 @@ const SigninDialog = ({
 const mapStateToProps = ({ signin }) => ({
   email: signin.email,
   error: signin.error,
+  loading: signin.loading,
   open: signin.dialogOpen,
   password: signin.password,
 })

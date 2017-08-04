@@ -7,14 +7,16 @@ export const signinUser = () => (
     if (!email || !password) {
       return dispatch(setSigninError('Please provide a username and password'))
     }
+    dispatch(setSigninLoading(true))
     Meteor.loginWithPassword(email, password, (err) => {
-        if (err) dispatch(setSigninError(err.reason))
-        else {
-          dispatch(setSigninError(null))
-          dispatch(setSigninDialogOpen(false))
-        }
+      dispatch(setSigninLoading(false))
+      if (err) {
+        dispatch(setSigninError(err.reason))
+      } else {
+        dispatch(setSigninError(null))
+        dispatch(setSigninDialogOpen(false))
       }
-    );
+    });
   }
 )
 
@@ -43,10 +45,17 @@ export const setSigninField = (field, value) => ({
   value,
 })
 
+export const SET_SIGNIN_LOADING = 'SET_SIGNIN_LOADING';
+export const setSigninLoading = (loading) => ({
+  type: SET_SIGNIN_LOADING,
+  loading,
+})
+
 const initialState = {
   dialogOpen: false,
   error: null,
   email: '',
+  loading: false,
   password: '',
 }
 
@@ -58,6 +67,8 @@ export const signinReducer = (state = initialState, action) => {
       return {...state, error: action.error};
     case SET_SIGNIN_FIELD:
       return {...state, [action.field]: action.value};
+    case SET_SIGNIN_LOADING:
+      return {...state, loading: action.loading};
     default:
       return state
   }
