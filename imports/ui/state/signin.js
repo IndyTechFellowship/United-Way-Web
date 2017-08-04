@@ -20,14 +20,30 @@ export const signinUser = () => (
   }
 )
 
+export const resetState = () => (
+  (dispatch) => {
+    dispatch(setSigninError(null))
+    dispatch(setSigninField('email', ''))
+    dispatch(setSigninField('password', ''))
+    dispatch(setSigninLoading(false))
+  }
+)
+
 export const signoutUser = () => (
-  () => {
+  (dispatch) => {
+    dispatch(resetState())
     Meteor.logout()
   }
 )
 
 export const SET_SIGNIN_DIALOG_OPEN = 'SET_SIGNIN_DIALOG_OPEN';
-export const setSigninDialogOpen = (open) => ({
+export const setSigninDialogOpen = (open) => (
+  (dispatch) => {
+    if (!open) dispatch(resetState())
+    dispatch(setSigninDialogOpenStatus(open))
+  }
+)
+export const setSigninDialogOpenStatus = (open) => ({
   type: SET_SIGNIN_DIALOG_OPEN,
   open,
 })
