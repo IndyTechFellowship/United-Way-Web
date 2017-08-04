@@ -18,6 +18,12 @@ export const signinUser = () => (
   }
 )
 
+export const signoutUser = () => (
+  () => {
+    Meteor.logout()
+  }
+)
+
 export const SET_SIGNIN_DIALOG_OPEN = 'SET_SIGNIN_DIALOG_OPEN';
 export const setSigninDialogOpen = (open) => ({
   type: SET_SIGNIN_DIALOG_OPEN,
