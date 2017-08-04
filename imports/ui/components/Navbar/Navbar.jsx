@@ -21,12 +21,21 @@ import {
   setUserSearchResults,
   updateUserSearchResults,
   setSearchCategoriesOpen,
+  setSigninDialogOpen,
 } from '/imports/ui/state'
 
 class Navbar extends Component {
   
   render() {
-    const { dispatch, searchLoading, searchTerm, isUserLoggedIn, onUserButtonClicked } = this.props
+    const { 
+      currentUser, 
+      dispatch, 
+      searchLoading, 
+      searchTerm, 
+      isUserLoggedIn, 
+      onUserButtonClicked,
+      openSigninDialog,
+    } = this.props
     return (
       <div style={toolbarStyle}>
         <div style={toolbarGroup}>
@@ -41,24 +50,12 @@ class Navbar extends Component {
           </Row>
           <Link to={'/organizations'} style={linkStyle}>Organizations</Link>
           <Link to={'/users'} style={linkStyle}>Volunteers</Link>
-          <UserButton isUserLoggedIn={isUserLoggedIn} onUserButtonClicked={onUserButtonClicked}/>
+          {!!currentUser
+            ? <UserProfileMenu />
+            : <div onClick={openSigninDialog} style={roundButton}>Sign-In</div>}
         </div>
       </div>
     )
-  }
-}
-
-class UserButton extends Component {
-  render() {
-    if (this.props.isUserLoggedIn) {
-      return (
-        <UserProfileMenu />
-      )
-    } else {
-      return (
-        <div style={roundButton} onClick={this.props.onUserButtonClicked}>Login</div>
-      )
-    }
   }
 }
 
@@ -122,9 +119,14 @@ const roundButton = {
   fontSize: '12px',
 }
 
-const mapStateToProps = ({ search }) => ({
+const mapStateToProps = ({ search, user }) => ({
+  currentUser: user.currentUser,
   searchLoading: search.searchResultsLoading,
   searchTerm: search.searchTerm,
 })
 
-export default connect(mapStateToProps)(Navbar)
+const mapDispatchToProps = (dispatch) => ({
+  openSigninDialog: () => dispatch(setSigninDialogOpen(true)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
 import { deepOrange500, grey200 } from 'material-ui/styles/colors'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import LoginModal from '/imports/ui/views/login/LoginModal'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import Footer from '/imports/ui/components/Footer'
 import Navbar from '/imports/ui/components/Navbar'
+import { setSigninDialogOpen } from '/imports/ui/state'
+import SigninDialog from '/imports/ui/views/signin/SigninDialog'
 
 const styles = {
   pageWrapper: {
@@ -41,15 +43,20 @@ class App extends Component {
   }
 
   render() {
+    const {
+      closeSigninDialog,
+      openSigninDialog,
+      signinDialogOpen,
+    } = this.props;
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <Navbar isUserLoggedIn={Meteor.user() != null} onUserButtonClicked={this.onUserButtonClicked} />
+          <Navbar />
           <div style={styles.pageWrapper}>
             <div style={styles.content}>{ this.props.children }</div>
             <Footer />
           </div>
-          <LoginModal isShown={this.state.showLoginModal} onUserLoggedIn={this.onUserLoggedIn} />
+          <SigninDialog />
         </div>
       </MuiThemeProvider>
     )
@@ -77,7 +84,15 @@ class App extends Component {
     })
   }
 
-
 }
 
-export default App
+const mapStateToProps = ({ signin }) => ({
+  signinDialogOpen: signin.dialogOpen,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  openSigninDialog: () => dispatch(setSigninDialogOpen(true)),
+  closeSigninDialog: () => dispatch(setSinginDialogOpen(false)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
