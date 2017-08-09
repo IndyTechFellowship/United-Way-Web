@@ -70,6 +70,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     height: '60px',
+    paddingTop: '8px',
   },
 }
 
@@ -96,6 +97,7 @@ const SigninDialog = ({
         </div>
       </Col>
       <Col style={styles.rightCol}>
+        <div style={{height:'32px'}}></div>
         <TextField
           hintText='Email Address'
           hintStyle={styles.hintText}
