@@ -6,7 +6,6 @@ import { IndexRoute, Router, Route, browserHistory } from 'react-router'
 import AboutPage from '/imports/ui/views/about/AboutPage'
 import AppContainer from '/imports/ui/components/AppContainer'
 import HomePage from '/imports/ui/views/home/HomePage'
-import LoginPage from '/imports/ui/views/login/LoginPage'
 import NotFoundPage from '/imports/ui/views/about/NotFoundPage'
 import OrganizationPage from '/imports/ui/views/organizations/OrganizationPage'
 import OrganizationsPage from '/imports/ui/views/organizations/OrganizationsPage'
@@ -27,7 +26,6 @@ export const Routes = () => (
         <Route path="register" component={RegistrationPage}/>
         <Route path="about" component={AboutPage}/>
         <Route path="positions" component={PositionsPage}/>
-        <Route path="login" component={LoginPage}/>
         <Route path="organizations">
           <IndexRoute component={OrganizationsPage}/>
           <Route path=":id" component={OrganizationPage}/>

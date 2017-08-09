@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import {
   Divider,
@@ -10,7 +11,11 @@ import {
 import { lightBlue800 } from 'material-ui/styles/colors'
 import Person from 'material-ui/svg-icons/action/account-circle'
 
-export default class UserProfileMenu extends Component {
+import {
+  signoutUser
+} from '/imports/ui/state'
+
+class UserProfileMenu extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -47,7 +52,7 @@ export default class UserProfileMenu extends Component {
         <MenuItem primaryText="View Organization Profile - Admin Only?" />
         <MenuItem primaryText="Edit Organization Profile - Admin Only?" />
         <MenuItem primaryText="Account Settings" />
-        <MenuItem primaryText="Sign out" />
+        <MenuItem onTouchTap={this.props.signout} primaryText="Sign Out" />
       </IconMenu>
     )
   }
@@ -103,3 +108,11 @@ const styles = {
     fontSize: '12px',
   }
 }
+
+const mapStateToProps = () => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+  signout: () => dispatch(signoutUser())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfileMenu)
