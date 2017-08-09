@@ -1,5 +1,5 @@
 import { Col, Row } from 'jsxstyle'
-import { 
+import {
   Dialog,
   RaisedButton,
   TextField,
@@ -9,7 +9,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { Colors } from '/imports/ui/styles'
-import { 
+import {
   setSigninDialogOpen,
   setSigninField,
   signinUser,
@@ -23,18 +23,29 @@ const styles = {
     padding: '0px',
   },
   container: {
+    height: '400px',
+  },
+  leftCol: {
     alignItems: 'center',
     backgroundColor: Colors.primary,
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    borderColor: Colors.primaryLight,
-    padding: '40px',
+    flex: '2',
+    height: '100%',
+    justifyContent: 'center',
+    paddingRight: '24px',
+  },
+  rightCol: {
+    alignItems: 'center',
+    backgroundColor: Colors.primaryLight,
+    flex: '1',
+    height: '100%',
+    justifyContent: 'center',
+    padding: '0px 24px 0px 24px',
   },
   title: {
     color: 'white',
-    fontSize: '30px',
-    fontWeight: 'bold',
-    margin: '0px 0px 12px 0px',
+    fontSize: '38px',
+    textAlign: 'center',
+    width: '320px',
   },
   textField: {
     color: 'white',
@@ -43,14 +54,16 @@ const styles = {
     borderColor: Colors.secondary,
   },
   hintText: {
-    color: Colors.primaryTextLight,
+    color: Colors.white,
   },
   signinButton: {
     width: '180px',
   },
   error: {
-    color: Colors.errorLight,
+    color: Colors.error,
     height: '20px',
+    paddingTop: '12px',
+    textAlign: 'center',
   },
   buttonArea: {
     display: 'flex',
@@ -60,12 +73,12 @@ const styles = {
   },
 }
 
-const SigninDialog = ({ 
-  closeDialog, 
+const SigninDialog = ({
+  closeDialog,
   email,
-  open, 
+  open,
   password,
-  updateEmail, 
+  updateEmail,
   updatePassword,
   signinUser,
   error,
@@ -76,41 +89,46 @@ const SigninDialog = ({
     open={open}
     overlayStyle={styles.overlay}
     bodyStyle={styles.dialog}>
-    <Col style={styles.container}>
-      <div style={styles.title}>Welcome Back to BoardServe Indy</div>
-      <TextField
-        hintText='Email Address'
-        hintStyle={styles.hintText}
-        onChange={(e, v) => updateEmail(v)}
-        underlineFocusStyle={styles.underlineFocus}
-        style={styles.textField}
-        inputStyle={styles.textField}
-        value={email} />
-      <TextField
-        onKeyDown={(e) => e.keyCode === 13 && signinUser()}
-        hintText='Password'
-        hintStyle={styles.hintText}
-        onChange={(e, v) => updatePassword(v)} 
-        type='password'
-        underlineFocusStyle={styles.underlineFocus}
-        style={styles.textField}
-        inputStyle={styles.textField}
-        value={password} />
-      <div style={styles.buttonArea}>
-        {loading
-          ? <CircularProgress color={Colors.secondary} />
-          : <RaisedButton
-              onTouchTap={signinUser}
-              label='Sign-In'
-              labelColor={Colors.secondaryText}
-              backgroundColor={Colors.secondary}
-              style={styles.signinButton} />}
-      </div>
-      {error
-        ? <div style={styles.error}>{error}</div>
-        : <div style={styles.error}></div>
-      }
-    </Col>
+    <Row style={styles.container}>
+      <Col style={styles.leftCol}>
+        <div style={styles.title}>
+          Welcome Back to <span style={{fontWeight: 'bold', ...styles.title}}>BoardServe Indy</span>
+        </div>
+      </Col>
+      <Col style={styles.rightCol}>
+        <TextField
+          hintText='Email Address'
+          hintStyle={styles.hintText}
+          onChange={(e, v) => updateEmail(v)}
+          underlineFocusStyle={styles.underlineFocus}
+          style={styles.textField}
+          inputStyle={styles.textField}
+          value={email} />
+        <TextField
+          onKeyDown={(e) => e.keyCode === 13 && signinUser()}
+          hintText='Password'
+          hintStyle={styles.hintText}
+          onChange={(e, v) => updatePassword(v)}
+          type='password'
+          underlineFocusStyle={styles.underlineFocus}
+          style={styles.textField}
+          inputStyle={styles.textField}
+          value={password} />
+        <div style={styles.buttonArea}>
+          {loading
+            ? <CircularProgress color={Colors.secondary} />
+            : <RaisedButton
+                onTouchTap={signinUser}
+                label='Sign In'
+                labelColor={Colors.secondaryText}
+                backgroundColor={Colors.secondary}
+                style={styles.signinButton} />}
+        </div>
+        {error
+          ? <div style={styles.error}>{error}</div>
+          : <div style={styles.error}></div>}
+      </Col>
+    </Row>
   </Dialog>
 );
 

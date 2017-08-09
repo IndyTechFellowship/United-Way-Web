@@ -1,7 +1,8 @@
-import { 
-  lightBlue200,
+import {
+  lightBlue400,
   lightBlue800,
-  deepOrange100,
+  blue400,
+  orange400,
   grey100,
   grey200,
   grey700,
@@ -16,11 +17,12 @@ export const Colors = {
   ultraLightGrey: '#FAFAFA',
   white: '#FFFFFF',
   primary: lightBlue800,
-  primaryLight: lightBlue200,
+  primaryLight: lightBlue400,
+  primaryDark: blue400,
   primaryText: grey100,
   primaryTextLight: grey200,
-  secondary: '#FF8B00',
+  secondary: '#f44336',
   secondaryText: grey100,
-  error: red500,
+  error: '#f44336',
   errorLight: red200,
 };

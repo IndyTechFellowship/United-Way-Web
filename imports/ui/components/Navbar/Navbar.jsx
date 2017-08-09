@@ -17,7 +17,7 @@ import { connect } from 'react-redux'
 
 import UserProfileMenu from '/imports/ui/components/UserProfileMenu'
 import SearchBox from './SearchBox'
-import { 
+import {
   setUserSearchResults,
   updateUserSearchResults,
   setSearchCategoriesOpen,
@@ -25,14 +25,14 @@ import {
 } from '/imports/ui/state'
 
 class Navbar extends Component {
-  
+
   render() {
-    const { 
-      currentUser, 
-      dispatch, 
-      searchLoading, 
-      searchTerm, 
-      isUserLoggedIn, 
+    const {
+      currentUser,
+      dispatch,
+      searchLoading,
+      searchTerm,
+      isUserLoggedIn,
       onUserButtonClicked,
       openSigninDialog,
     } = this.props
@@ -52,7 +52,7 @@ class Navbar extends Component {
           <Link to={'/users'} style={linkStyle}>Volunteers</Link>
           {!!currentUser
             ? <UserProfileMenu />
-            : <div onClick={openSigninDialog} style={roundButton}>Sign-In</div>}
+            : <div onClick={openSigninDialog} style={roundButton}>Sign In</div>}
         </div>
       </div>
     )
