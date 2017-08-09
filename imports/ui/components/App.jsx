@@ -46,7 +46,7 @@ class App extends Component {
         <div>
           <Navbar isUserLoggedIn={Meteor.user() != null} onUserButtonClicked={this.onUserButtonClicked} />
           <div style={styles.pageWrapper}>
-            <div style={styles.content}>{ this.props.children }</div>
+            { this.props.children }
             <Footer />
           </div>
           <LoginModal isShown={this.state.showLoginModal} onUserLoggedIn={this.onUserLoggedIn} />

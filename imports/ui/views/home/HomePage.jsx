@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import Content from '/imports/ui/components/Content'
 import Title from '/imports/ui/components/Title'
 import OrganizationCarousel from '/imports/ui/views/home/OrganizationCarousel'
 import PositionCarousel from '/imports/ui/views/home/PositionCarousel'
@@ -9,7 +10,7 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div>
+      <Content>
         <div style={styles.title}>
           <Title>Organize. Volunteer. Find Your Opportunity.</Title>
         </div>
@@ -32,9 +33,9 @@ class HomePage extends Component {
         <div style={styles.opportunityLabel}>Organizations</div>
         <OrganizationCarousel />
 
-          <div style={styles.opportunityLabel}>Volunteers</div>
-          <UserCarousel />
-      </div>
+        <div style={styles.opportunityLabel}>Volunteers</div>
+        <UserCarousel />
+      </Content>
     )
   }
 
