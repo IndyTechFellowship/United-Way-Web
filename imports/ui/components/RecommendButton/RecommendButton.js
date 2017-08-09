@@ -55,15 +55,16 @@ class RecommendButton extends Component {
 
     if (this.props.currentUser._id) {
       const opts = {userId: this.props.currentUser._id, note: this.state.note}
-      Meteor.call('Positions.expressInterest', positionId, opts,
-          (err, res) => {
-            if (err) {
-              console.log("Oh darn");
-              alert(err)
-            } else {
-              this.handleSnackbarOpen()
-            }
-          })
+      console.log('add method for recommend')
+      // Meteor.call('Positions.expressInterest', positionId, opts,
+      //     (err, res) => {
+      //       if (err) {
+      //         console.log("Oh darn");
+      //         alert(err)
+      //       } else {
+      //         this.handleSnackbarOpen()
+      //       }
+      //     })
     }
   }
 

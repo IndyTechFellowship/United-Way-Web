@@ -24,31 +24,32 @@ RecommendButtonContainer.propTypes = {
 const mapStateToProps = ({ user }) => ({ currentUser: user.currentUser })
 
 export default connect(mapStateToProps)(createContainer(props => {
-  const currentUser = !_.get(props, 'currentUser._id') ? {} : props.currentUser;
-  const isOrgAdmin = false;
-  const positions = [];
+  const currentUser = !_.get(props, 'currentUser._id') ? {} : props.currentUser
+  let isOrgAdmin = false
+  let positions = []
 
-  // TODO: check if user is org admin
+  if (!currentUser) return {loading: false, currentUser: props.currentUser, isOrgAdmin, positions}
 
-  // TODO: get positions for that organization
+  const orgSubscription = Meteor.subscribe('Organizations.thatUserAdmins', currentUser._id)
+  if (!orgSubscription.ready()) return {loading: true, currentUser: {}, isOrgAdmin, positions}
+  const orgs = Organizations.find({admins: currentUser._id}).fetch()
+  let positionIds = []
+  if (!orgs) {
+    isOrgAdmin = false
+  } else {
+    isOrgAdmin = true
+    for (let org of orgs) {
+      positionIds = positions.concat(org.positions)
+    }
+  }
 
-  const positionQuery = { _id: props.position._id}
-  const positionSubscription = Meteor.subscribe('Positions.get', positionQuery)
-  if (!positionSubscription.ready()) return { loading: true, position: {} }
-  let position = Positions.findOne(positionQuery)
+  if (positionIds.length > 0) {
+    const positionQuery = {_id: {$in: positionIds}}
+    const positionSubscription = Meteor.subscribe('Positions.get', positionQuery)
+    if (!positionSubscription.ready()) return {loading: true, currentUser, isOrgAdmin, positions}
 
-  const interestExpressed = !_.get(props, 'currentUser._id') ? false :
-      Positions.find({
-        _id: position._id,
-        'applicants.userId': props.currentUser._id
-      }).count() === 1
+    positions = Positions.find(positionQuery).fetch()
+  }
 
-  return { loading: false, position: position, interestExpressed, currentUser: props.currentUser }
+  return {loading: false, currentUser, isOrgAdmin, positions}
 }, RecommendButtonContainer))
-
-/*
-  const handle = Meteor.subscribe('Organizations.thatUserAdmins', userId)
-  if (!handle.ready()) return { loading: true }
-  const admins = Organizations.find({ admins: userId }).fetch()
-  return { admins }
- */
