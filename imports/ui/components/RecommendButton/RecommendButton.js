@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { Meteor } from 'meteor/meteor'
-import { FlatButton, RaisedButton, Popover, Snackbar } from 'material-ui'
+import { FlatButton, RaisedButton, Popover, Snackbar, DropDownMenu, MenuItem } from 'material-ui'
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 import Loading from '/imports/ui/components/Loading'
+import _ from 'lodash'
 
 class RecommendButton extends Component {
 
@@ -12,6 +13,7 @@ class RecommendButton extends Component {
     this.state = {
       open: false,
       note: '',
+      selectedPosition: -1, // place holder text has a value of -1
       snackbarOpen: false
     };
   }
@@ -48,6 +50,10 @@ class RecommendButton extends Component {
 
   handleNoteChange(event) {
     this.setState({note: event.target.value})
+  }
+
+  handleSelectPosition(event, index, positionId) {
+    this.setState({selectedPosition: positionId})
   }
 
   handleRecommend() {
@@ -89,6 +95,22 @@ class RecommendButton extends Component {
         {dropDownArrow}
       </div>
 
+      const positionMenuItems = this.props.positions.length === 0 ?
+          <MenuItem value={0} primaryText="No positions available."/> :
+          this.props.positions.map((p) => {
+            return <MenuItem key={p._id} value={p._id} primaryText={p.name}/>
+          });
+
+
+      const positionDropDown = <DropDownMenu
+          value={this.state.selectedPosition}
+          onChange={this.handleSelectPosition.bind(this)}
+          autoWidth={false}
+          style={styles.positionDropDown}>
+          <MenuItem value={-1} primaryText="Choose a position from your organizations to recommend..."/>
+          {positionMenuItems}
+      </DropDownMenu>
+
       return (
           <div>
             <FlatButton
@@ -107,6 +129,9 @@ class RecommendButton extends Component {
               <div style={styles.dropDown}>
               <textarea style={styles.dropDown.note} type="text" value={this.state.note}
                         onChange={this.handleNoteChange.bind(this)}/>
+
+                {positionDropDown}
+
                 <div style={styles.dropDown.helperText}>You can choose to send a note later in
                   <span style={styles.dropDown.boldHelperText}> My Activity</span>
                 </div>
@@ -184,7 +209,7 @@ const styles = {
 
   dropDown: {
     width: '300px',
-    height: '160px',
+    height: '200px',
     backgroundColor: '#0277bd',
     padding: '16px',
 
@@ -224,5 +249,9 @@ const styles = {
         textAlign: 'center'
       }
     }
+  },
+
+  positionDropDown: {
+    width: '100%',
   }
 }

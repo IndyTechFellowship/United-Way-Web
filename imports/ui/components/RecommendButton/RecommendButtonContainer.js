@@ -48,7 +48,12 @@ export default connect(mapStateToProps)(createContainer(props => {
     const positionSubscription = Meteor.subscribe('Positions.get', positionQuery)
     if (!positionSubscription.ready()) return {loading: true, currentUser, isOrgAdmin, positions}
 
-    positions = Positions.find(positionQuery).fetch()
+    const positionsFull = Positions.find(positionQuery).fetch()
+
+    // Format Position Array for Drop Down Menu
+    for (let position of positionsFull) {
+      positions.push({id: position._id, name: position.name})
+    }
   }
 
   return {loading: false, currentUser, isOrgAdmin, positions}
