@@ -49,12 +49,6 @@ class VolunteerButtons extends Component {
   render() {
     return (
       <div style={styles.buttonContainer}>
-        <FlatButton
-            label="RECOMMEND"
-            labelStyle={styles.button.label}
-            style={styles.button.style}
-            backgroundColor={styles.button.backgroundColor}
-        />
         <RecommendButton />
 
         {/* TODO: V2 Feature */}

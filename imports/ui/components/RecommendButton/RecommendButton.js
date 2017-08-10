@@ -50,22 +50,26 @@ class RecommendButton extends Component {
     this.setState({note: event.target.value})
   }
 
-  handleExpressInterest() {
-    const positionId = this.props.position._id
+  handleRecommend() {
+    // TODO: add new post method
+    console.log('recommend this person!');
+    console.log(this.props);
 
-    if (this.props.currentUser._id) {
-      const opts = {userId: this.props.currentUser._id, note: this.state.note}
-      console.log('add method for recommend')
-      // Meteor.call('Positions.expressInterest', positionId, opts,
-      //     (err, res) => {
-      //       if (err) {
-      //         console.log("Oh darn");
-      //         alert(err)
-      //       } else {
-      //         this.handleSnackbarOpen()
-      //       }
-      //     })
-    }
+    // const positionId = this.props.position._id
+    //
+    // if (this.props.currentUser._id) {
+    //   const opts = {userId: this.props.currentUser._id, note: this.state.note}
+    //   console.log('add method for recommend')
+    //   Meteor.call('Positions.expressInterest', positionId, opts,
+    //       (err, res) => {
+    //         if (err) {
+    //           console.log("Oh darn");
+    //           alert(err)
+    //         } else {
+    //           this.handleSnackbarOpen()
+    //         }
+    //       })
+    // }
   }
 
   render() {
@@ -73,8 +77,12 @@ class RecommendButton extends Component {
       return <Loading/>
     } else {
 
-      const labelText = this.props.interestExpressed ? 'INTEREST SENT' : 'SHOW INTEREST'
-      const dropDownArrow = this.props.interestExpressed ? '' :  <DropDownArrow style={{...styles.label.content, ...styles.label.icon}}/>
+      if (!this.props.isOrgAdmin) {
+        return <div></div>
+      }
+
+      const labelText = 'RECOMMEND'
+      const dropDownArrow = <DropDownArrow style={{...styles.label.content, ...styles.label.icon}}/>
 
       const label = <div style={styles.label}>
         <span style={styles.label.content}>{labelText}</span>
@@ -85,8 +93,7 @@ class RecommendButton extends Component {
           <div>
             <FlatButton
                 children={label}
-                style={{...styles.button.style, ...((this.props.interestExpressed || !this.props.currentUser)&& styles.button.disabled)}}
-                disabled={this.props.interestExpressed || !this.props.currentUser}
+                style={styles.button.style}
                 backgroundColor={styles.button.backgroundColor}
                 onTouchTap={this.handleOpenDropDown.bind(this)}
             />
@@ -105,10 +112,10 @@ class RecommendButton extends Component {
                 </div>
                 <div style={styles.dropDown.buttonContainer}>
                   <RaisedButton
-                      label="SHOW INTEREST"
+                      label="RECOMMEND"
                       labelStyle={styles.dropDown.button.label}
                       style={styles.dropDown.button}
-                      onTouchTap={this.handleExpressInterest.bind(this)}
+                      onTouchTap={this.handleRecommend.bind(this)}
                   />
                   <RaisedButton
                       label="CANCEL"
@@ -133,7 +140,9 @@ class RecommendButton extends Component {
 
 RecommendButton.propTypes = {
   loading: PropTypes.bool.isRequired,
-  position: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  isOrgAdmin: PropTypes.bool.isRequired,
+  positions: PropTypes.array.isRequired,
 }
 
 export default RecommendButton

@@ -28,7 +28,7 @@ export default connect(mapStateToProps)(createContainer(props => {
   let isOrgAdmin = false
   let positions = []
 
-  if (!currentUser) return {loading: false, currentUser: props.currentUser, isOrgAdmin, positions}
+  if (_.isEmpty(currentUser)) return {loading: false, currentUser: props.currentUser, isOrgAdmin, positions}
 
   const orgSubscription = Meteor.subscribe('Organizations.thatUserAdmins', currentUser._id)
   if (!orgSubscription.ready()) return {loading: true, currentUser: {}, isOrgAdmin, positions}
