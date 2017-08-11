@@ -60,6 +60,10 @@ class RecommendButton extends Component {
     // TODO: add new post method
     console.log('recommend this person!');
     console.log(this.props);
+    console.log('position id: ' + this.state.selectedPosition)
+    console.log('volunteer id: ' + this.props.volunteer._id)
+    console.log('note: ' + this.state.note)
+    console.log('org admin id: ' + this.props.currentUser._id)
 
     // const positionId = this.props.position._id
     //
@@ -95,19 +99,21 @@ class RecommendButton extends Component {
         {dropDownArrow}
       </div>
 
-      const positionMenuItems = this.props.positions.length === 0 ?
-          <MenuItem value={0} primaryText="No positions available."/> :
-          this.props.positions.map((p) => {
-            return <MenuItem key={p._id} value={p._id} primaryText={p.name}/>
-          });
+      const positionPlaceholder = this.props.positions.length === 0 ?
+          <MenuItem value={-1} primaryText="No positions available."/> :
+          <MenuItem value={-1} primaryText="Choose a position from your organizations to recommend..."/>
 
+
+      const positionMenuItems = this.props.positions.map((p) => {
+        return <MenuItem key={p._id} value={p.id} primaryText={p.name}/>
+      });
 
       const positionDropDown = <DropDownMenu
           value={this.state.selectedPosition}
           onChange={this.handleSelectPosition.bind(this)}
           autoWidth={false}
           style={styles.positionDropDown}>
-          <MenuItem value={-1} primaryText="Choose a position from your organizations to recommend..."/>
+          {positionPlaceholder}
           {positionMenuItems}
       </DropDownMenu>
 
@@ -140,6 +146,7 @@ class RecommendButton extends Component {
                       label="RECOMMEND"
                       labelStyle={styles.dropDown.button.label}
                       style={styles.dropDown.button}
+                      disabled={this.props.positions.length === 0 || this.state.selectedPosition === -1}
                       onTouchTap={this.handleRecommend.bind(this)}
                   />
                   <RaisedButton
@@ -166,6 +173,7 @@ class RecommendButton extends Component {
 RecommendButton.propTypes = {
   loading: PropTypes.bool.isRequired,
   currentUser: PropTypes.object.isRequired,
+  volunteer: PropTypes.object.isRequired,
   isOrgAdmin: PropTypes.bool.isRequired,
   positions: PropTypes.array.isRequired,
 }
