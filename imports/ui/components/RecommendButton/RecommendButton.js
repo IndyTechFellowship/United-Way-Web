@@ -57,29 +57,18 @@ class RecommendButton extends Component {
   }
 
   handleRecommend() {
-    // TODO: add new post method
-    console.log('recommend this person!');
-    console.log(this.props);
-    console.log('position id: ' + this.state.selectedPosition)
-    console.log('volunteer id: ' + this.props.volunteer._id)
-    console.log('note: ' + this.state.note)
-    console.log('org admin id: ' + this.props.currentUser._id)
-
-    // const positionId = this.props.position._id
-    //
-    // if (this.props.currentUser._id) {
-    //   const opts = {userId: this.props.currentUser._id, note: this.state.note}
-    //   console.log('add method for recommend')
-    //   Meteor.call('Positions.expressInterest', positionId, opts,
-    //       (err, res) => {
-    //         if (err) {
-    //           console.log("Oh darn");
-    //           alert(err)
-    //         } else {
-    //           this.handleSnackbarOpen()
-    //         }
-    //       })
-    // }
+    if (this.props.currentUser._id) {
+      const opts = {userId: this.props.volunteer._id, orgAdminId: this.props.currentUser._id, note: this.state.note}
+      Meteor.call('Positions.recommend', this.state.selectedPosition, opts,
+          (err, res) => {
+            if (err) {
+              console.log("Oh darn");
+              alert(err)
+            } else {
+              this.handleSnackbarOpen()
+            }
+          })
+    }
   }
 
   render() {
