@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { browserHistory, Link } from 'react-router'
 import { connect } from 'react-redux'
+import { Paper } from 'material-ui'
 import {
   Step,
   Stepper,
@@ -86,7 +87,7 @@ class RegistrationPage extends Component {
     const { finished, stepIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
     return (
-      <div style={styles.stepper}>
+      <Paper style={styles.stepper}>
         <Stepper activeStep={stepIndex}>
           <Step>
             <StepLabel>Your Account</StepLabel>
@@ -116,7 +117,7 @@ class RegistrationPage extends Component {
               onTouchTap={this.handleNext} />
           </div>
         </div>
-      </div>
+      </Paper>
     );
   }
 
@@ -124,8 +125,9 @@ class RegistrationPage extends Component {
 
 const styles = {
   stepper: {
+    margin: '24px',
+    padding: '12px',
     width: '100%',
-    marginBottom: '24px'
   },
   buttons: {
     alignItems: 'center',
