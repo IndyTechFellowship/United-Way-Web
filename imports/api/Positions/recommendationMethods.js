@@ -12,8 +12,8 @@ Meteor.methods({
     check(opts, Match.Optional(Object));
     check(opts.userId, Match.Optional(String));
     if (!opts) opts = {};
-    if (this.connection) opts.userId = this.userId;
-    const callingUser = Users.findOne({ _id: opts.userId });
+    if (this.connection) opts.orgAdminId = this.userId;
+    const callingUser = Users.findOne({ _id: opts.orgAdminId });
     if (!callingUser) throw Meteor.Error(404, 'calling user not found');
     const position = Positions.findOne({ _id: positionId });
     if (!position) throw Meteor.Error(404, 'position not found');
@@ -53,8 +53,8 @@ Meteor.methods({
     check(opts, Match.Optional(Object));
     check(opts.userId, Match.Optional(String));
     if (!opts) opts = {};
-    if (this.connection) opts.userId = this.userId;
-    const callingUser = Users.findOne({ _id: opts.userId });
+    if (this.connection) opts.orgAdminId = this.userId;
+    const callingUser = Users.findOne({ _id: opts.orgAdminId });
     if (!callingUser) throw Meteor.Error(404, 'calling user not found');
     const position = Positions.findOne({ _id: positionId });
     if (!position) throw Meteor.Error(404, 'position not found');

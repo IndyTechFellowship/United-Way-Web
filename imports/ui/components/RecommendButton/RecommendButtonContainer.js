@@ -49,10 +49,17 @@ export default connect(mapStateToProps)(createContainer(props => {
     if (!positionSubscription.ready()) return {loading: true, currentUser, isOrgAdmin, positions}
 
     const positionsFull = Positions.find(positionQuery).fetch()
+    const volunteerBeingRecommendedId = props.volunteer._id
 
     // Format Position Array for Drop Down Menu
     for (let position of positionsFull) {
-      positions.push({id: position._id, name: position.name})
+      // Can only recommend user if they have not already been recommended for that position
+      const canRecommendPosition = !_.get(position, 'recommendations') ? true : position.recommendations.find(r => {
+        return r.userId !== volunteerBeingRecommendedId;
+      });
+      if (canRecommendPosition) {
+        positions.push({id: position._id, name: position.name})
+      }
     }
   }
 
