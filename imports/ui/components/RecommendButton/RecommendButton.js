@@ -21,6 +21,7 @@ class RecommendButton extends Component {
   handleOpenDropDown(event) {
 
     event.preventDefault()
+    event.stopPropagation()
 
     this.setState({
       open: true,
@@ -65,6 +66,7 @@ class RecommendButton extends Component {
               console.log("Oh darn");
               alert(err)
             } else {
+              this.handleRequestClose()
               this.handleSnackbarOpen()
             }
           })
@@ -101,7 +103,11 @@ class RecommendButton extends Component {
           value={this.state.selectedPosition}
           onChange={this.handleSelectPosition.bind(this)}
           autoWidth={false}
-          style={styles.positionDropDown}>
+          style={styles.positionDropDown}
+          menuStyle={styles.positionDropDown}
+          menuItemStyle={styles.positionDropDownMenuItems}
+          labelStyle={styles.labelStyle}
+          underlineStyle={styles.underlineStyle}>
           {positionPlaceholder}
           {positionMenuItems}
       </DropDownMenu>
@@ -112,7 +118,7 @@ class RecommendButton extends Component {
                 children={label}
                 style={styles.button.style}
                 backgroundColor={styles.button.backgroundColor}
-                onTouchTap={this.handleOpenDropDown.bind(this)}
+                onClick={this.handleOpenDropDown.bind(this)}
             />
             <Popover
                 open={this.state.open}
@@ -123,6 +129,7 @@ class RecommendButton extends Component {
             >
               <div style={styles.dropDown}>
               <textarea style={styles.dropDown.note} type="text" value={this.state.note}
+                        placeholder="Quick note to send to this potential for your position (supply your contact info if you want to share it)..."
                         onChange={this.handleNoteChange.bind(this)}/>
 
                 {positionDropDown}
@@ -149,7 +156,7 @@ class RecommendButton extends Component {
             </Popover>
             <Snackbar
                 open={this.state.snackbarOpen}
-                message="Thank you for sending your interest. It is up to the organization to contact you directly in return."
+                message="Thank you for sending your recommendation. The volunteer will be notified and has the option to express interest in this position."
                 autoHideDuration={4000}
                 onRequestClose={this.handleSnackbarClose.bind(this)}
             />
@@ -250,5 +257,23 @@ const styles = {
 
   positionDropDown: {
     width: '100%',
+    padding: '0',
+    fontSize: '13px',
+    fontColor: '#ffffff'
+  },
+  positionDropDownMenuItems: {
+    fontSize: '13px',
+    fontColor: '#ffffff',
+    width: '100%'
+  },
+
+  labelStyle: {
+    fontSize: '13px',
+    color: '#ffffff',
+    paddingLeft: '0'
+  },
+
+  underlineStyle: {
+    marginLeft: 0
   }
 }

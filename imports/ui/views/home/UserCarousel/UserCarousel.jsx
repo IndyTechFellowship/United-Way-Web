@@ -14,10 +14,9 @@ const UserCarousel = ({ loading, users }) => {
         return (
             <div key={user._id} style={styles.user}>
               <div style={styles[index%2 ? 'right' : 'left']}>
-                {/* TODO: Figure out how to better way to route to user profile. Currently routing on recommend button as well */}
-                {/*<Link to={`/users/${user._id}`} style={styles.link} key={user._id}>*/}
+                <Link to={`/users/${user._id}`} style={styles.link} key={user._id}>
                   <UserCard user={user.profile} />
-                {/*</Link>*/}
+                </Link>
               </div>
             </div>
         )
