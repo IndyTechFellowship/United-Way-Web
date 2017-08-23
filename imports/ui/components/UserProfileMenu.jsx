@@ -51,7 +51,7 @@ class UserProfileMenu extends Component {
         <MenuItem primaryText="Edit Profile" />
         <MenuItem primaryText="View Organization Profile - Admin Only?" />
         <MenuItem primaryText="Edit Organization Profile - Admin Only?" />
-        <MenuItem primaryText="Account Settings" />
+        <MenuItem onTouchTap={this.goToSettings} primaryText="Change Password" />
         <MenuItem onTouchTap={this.props.signout} primaryText="Sign Out" />
       </IconMenu>
     )
@@ -74,6 +74,11 @@ class UserProfileMenu extends Component {
   goToUserProfile() {
     browserHistory.push('/users/' + Meteor.userId())
   }
+
+  goToSettings() {
+    browserHistory.push('/settings')
+  }
+
 }
 
 const styles = {

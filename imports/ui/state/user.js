@@ -1,4 +1,10 @@
-import { Meteor } from 'meteor/meteor'
+import { Accounts } from 'meteor/accounts-base'
+
+export const changePassword = (oldp, newp, done) => (
+  () => {
+    Accounts.changePassword(oldp, newp, done);
+  }
+)
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const setCurrentUser = (currentUser) => ({
