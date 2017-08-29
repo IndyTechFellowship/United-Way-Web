@@ -15,7 +15,7 @@ class OrganizationBasicInfo extends Component {
     super(props)
     let tagsArray = _.cloneDeep(this.props.organization.tags)
     this.state = {
-      isEditing: false,
+      isEditing: props.isEditing || false,
       name: this.props.organization.name,
       tagline: this.props.organization.tagline,
       city: this.props.organization.city,

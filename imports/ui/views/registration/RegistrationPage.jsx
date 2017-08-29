@@ -90,8 +90,8 @@ class RegistrationPage extends Component {
         return <YourAccount />
       case 1:
         return <Password />
-      // case 2:
-      //   return organizationName ? <OrganizationProfile /> : <VolunteerProfile />
+      case 2:
+        return <OrganizationProfile organizationName={organizationName} />
       // case 3:
       //   return <VolunteerProfile />
     }

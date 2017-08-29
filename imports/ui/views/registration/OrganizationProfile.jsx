@@ -1,23 +1,68 @@
+import { Col } from 'jsxstyle';
+import {
+  MenuItem,
+  SelectField,
+  TextField,
+} from 'material-ui';
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+
+import states from '/imports/helpers/states';
+import {
+  setOnboardingField,
+} from '/imports/ui/state';
 
 class OrganizationProfile extends Component {
 
   render() {
+    const {
+      dispatch,
+      organizationCity,
+      organizationName,
+      organizationState,
+    } = this.props;
     return (
-      <div style={styles.container}>
-        Organization Profile
-      </div>
-    )
+      <Col style={styles.container}>
+        <div style={styles.header}>
+          Organization Information
+        </div>
+        <TextField
+          floatingLabelText="Organization Name"
+          onChange={(e, v) => dispatch(setOnboardingField('organizationName', v))}
+          value={organizationName}
+        />
+        <TextField
+          floatingLabelText="City"
+          onChange={(e, v) => dispatch(setOnboardingField('organizationCity', v))}
+          value={organizationCity}
+        />
+        <SelectField
+          floatingLabelText="State"
+          onChange={(e, i, v) => dispatch(setOnboardingField('organizationState', v))}
+          value={organizationState}>
+          {_.map(states, (s) => <MenuItem key={s.name} primaryText={s.name} value={s.abbreviation} />)}
+        </SelectField>
+      </Col>
+    );
   }
 
 }
 
 const styles = {
   container: {
-    display: 'flex',
-    flexDirection: 'column'
-  }
+    alignItems: 'center',
+  },
+  header: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+  },
 }
 
-export default OrganizationProfile
+const mapStateToProps = ({ onboarding }) => ({
+  organizationName: onboarding.organizationName,
+  organizationCity: onboarding.organizationCity,
+  organizationState: onboarding.organizationState,
+})
+
+export default connect(mapStateToProps)(OrganizationProfile);
 
