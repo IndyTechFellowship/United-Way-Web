@@ -61,6 +61,7 @@ class ShowInterestButton extends Component {
               console.log("Oh darn");
               alert(err)
             } else {
+              this.handleRequestClose()
               this.handleSnackbarOpen()
             }
           })
@@ -98,6 +99,7 @@ class ShowInterestButton extends Component {
           >
             <div style={styles.dropDown}>
               <textarea style={styles.dropDown.note} type="text" value={this.state.note}
+                        placeholder="Quick note to send with your contact information..."
                         onChange={this.handleNoteChange.bind(this)}/>
               <div style={styles.dropDown.helperText}>You can choose to send a note later in
                 <span style={styles.dropDown.boldHelperText}> My Activity</span>

@@ -16,6 +16,7 @@ const UsersList = ({ loading, users }) => {
         <Title>Volunteers</Title>
         <div style={styles.twoColumnLayout}>
           {users.map((user, index) => {
+            user.profile._id = user._id
             return (
               <div style={styles.column}>
                 <div style={styles[index%2 ? 'right' : 'left']}>
