@@ -11,10 +11,27 @@ export const createAccount = (cb) => (
         lastName: getState().onboarding.lastName,
       },
       token: getState().onboarding.token,
-    }, (error) => {
-      if (error) return dispatch(setOnboardingError(error.reason));
+    }, (err) => {
+      console.log(err)
+      if (err) return dispatch(setOnboardingError(err.reason));
       else return cb()
     })
+  }
+);
+
+export const createOrganization = (cb) => (
+  (dispatch, getState) => {
+    Meteor.call('Organizations.create', {
+      organization: {
+        city: getState().onboarding.organizationCity,
+        name: getState().onboarding.organizationName,
+        state: getState().onboarding.organizationState,
+      }
+    }, (err) => {
+      console.log(err)
+      if (err) return dispatch(setOnboardingError(err.reason));
+      else return cb();
+    });
   }
 );
 

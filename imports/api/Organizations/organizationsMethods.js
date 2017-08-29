@@ -7,10 +7,31 @@ import { Organizations } from './index'
 
 Meteor.methods({
   
+  'Organizations.create'({ organization }) {
+    const callingUser = Users.findOne({ _id: this.userId })
+    if (!callingUser) {
+      throw new Meteor.Error(401, 'unauthorized');
+    }
+    Organizations.insert({
+      admins: [ callingUser._id ],
+      avatarUrl: `${Meteor.absoluteUrl()}ic_business_black_48dp_1x.png`,
+      city: organization.city,
+      description: 'Enter An Awesome Description For Your Organization!',
+      imageUrls: [],
+      name: organization.name,
+      positions: [],
+      state: organization.state,
+      tagline: 'My Great Organization',
+      tags: [],
+      users: [ callingUser._id ],
+      websiteUrl: 'https://boardserveindy.org/',
+    });
+  },
+
   'Organization.update'(organization) {
     const callingUser = Users.findOne({ _id: this.userId });
     if (!callingUser) {
-      throw Meteor.Error(401, 'unauthorized')
+      throw new Meteor.Error(401, 'unauthorized')
     }
     if (organization.tags) {
       organization.tags = map(organization.tags, t => {

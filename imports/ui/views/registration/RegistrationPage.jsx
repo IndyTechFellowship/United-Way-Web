@@ -12,12 +12,12 @@ import FlatButton from 'material-ui/FlatButton'
 
 import { 
   createAccount,
+  createOrganization,
   setOnboardingError, 
   setOnboardingField,
 } from '/imports/ui/state'
 import OrganizationProfile from './OrganizationProfile'
 import Password from './Password'
-import VolunteerProfile from './VolunteerProfile'
 import YourAccount from './YourAccount'
 
 class RegistrationPage extends Component {
@@ -41,6 +41,15 @@ class RegistrationPage extends Component {
     query.token && setField('token', query.token)
   }
 
+  handleCreate() {
+    const { createAccount, createOrganization, organizationName } = this.props;
+    if (organizationName) {
+      createAccount(() => createOrganization(() => browserHistory.push('/')));
+    } else {
+      createAccount(() => browserHistory.push('/'));
+    }
+  }
+
   handleNext() {
     const { createAccount, organizationName, password1, password2, setError } = this.props;
     const { stepIndex } = this.state;
@@ -55,11 +64,11 @@ class RegistrationPage extends Component {
         if (organizationName) {
           return this.setState({ stepIndex: 2 });
         } else {
-          return this.setState({ stepIndex: 3 });
+          return this.handleCreate();
         }
-      case 3:
+      case 2:
         setError(null)
-        return createAccount(() => browserHistory.push('/'))
+        return this.handleCreate();
       default: 
         setError(null)
         return this.setState({ stepIndex: stepIndex + 1 })
@@ -170,7 +179,8 @@ const mapStateToProps = ({ onboarding }) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createAccount: (cb) => dispatch(createAccount(cb)), 
+  createAccount: (cb) => dispatch(createAccount(cb)),
+  createOrganization: (cb) => dispatch(createOrganization(cb)),
   setError: (e) => dispatch(setOnboardingError(e)),
   setField: (fN, fV) => dispatch(setOnboardingField(fN, fV)),
 })
