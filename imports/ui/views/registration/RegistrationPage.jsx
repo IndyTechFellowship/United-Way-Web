@@ -92,8 +92,6 @@ class RegistrationPage extends Component {
         return <Password />
       case 2:
         return <OrganizationProfile organizationName={organizationName} />
-      // case 3:
-      //   return <VolunteerProfile />
     }
     return <div></div>
   }
@@ -102,8 +100,8 @@ class RegistrationPage extends Component {
     const { organizationName } = this.props
     const { stepIndex } = this.state
     return organizationName 
-      ? stepIndex === 3
-      : stepIndex === 2;
+      ? stepIndex === 2
+      : stepIndex === 1;
   }
 
   render() {
@@ -121,9 +119,6 @@ class RegistrationPage extends Component {
           </Step>
           <Step disabled={!organizationName}>
             <StepLabel>Organization Profile</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Your Profile</StepLabel>
           </Step>
         </Stepper>
         <div style={contentStyle}>
