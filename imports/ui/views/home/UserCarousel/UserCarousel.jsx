@@ -10,6 +10,7 @@ const UserCarousel = ({ loading, users }) => {
       return <Loading/>
     } else {
       let userCards = users.map((user, index) => {
+        user.profile._id = user._id
         return (
             <div key={user._id} style={styles.user}>
               <div style={styles[index%2 ? 'right' : 'left']}>

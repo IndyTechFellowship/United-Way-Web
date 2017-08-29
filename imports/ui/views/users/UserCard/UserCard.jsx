@@ -3,6 +3,7 @@ import { FlatButton } from 'material-ui'
 
 import Loading from '/imports/ui/components/Loading'
 import CardComponent from '/imports/ui/components/CardComponent'
+import RecommendButton from "/imports/ui/components/RecommendButton";
 
 class UserCard extends Component {
   render() {
@@ -24,17 +25,18 @@ class UserCard extends Component {
           content: skills
         }
       }
+      const volunteerButtons = () => <VolunteerButtons user={this.props.user} />
       return (
         <div style={styles.card}>
           <CardComponent
-            key={user.name}  //FIXME: hacky for now - actually get user._id
+            key={user._id}
             imageUrl={user.avatar ? user.avatar.original : null}
             name={`${user.firstName} ${user.lastName}`}
             title={user.tagline}
             subtitle={user.companyName}
             body={body}
             cardType="user"
-            cardButtons={VolunteerButtons}
+            cardButtons={volunteerButtons}
           />
         </div>
       )
@@ -48,18 +50,15 @@ class VolunteerButtons extends Component {
   render() {
     return (
       <div style={styles.buttonContainer}>
-        <FlatButton
-          label="RECOMMEND"
-          labelStyle={styles.button.label}
-          style={styles.button.style}
-          backgroundColor={styles.button.backgroundColor}
-        />
-        <FlatButton
-          label="BOOKMARK"
-          labelStyle={styles.button.label}
-          style={styles.button.style}
-          backgroundColor={styles.button.backgroundColor}
-        />
+        <RecommendButton volunteer={this.props.user}/>
+
+        {/* TODO: V2 Feature */}
+        {/*<FlatButton*/}
+            {/*label="BOOKMARK"*/}
+            {/*labelStyle={styles.button.label}*/}
+            {/*style={styles.button.style}*/}
+            {/*backgroundColor={styles.button.backgroundColor}*/}
+        {/*/>*/}
       </div>
     )
   }

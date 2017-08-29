@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Mongo } from 'meteor/mongo'
 
-import InterestExpressionSchema from './InterestExpressionSchema';
+import MessageSchema from './MessageSchema';
 
 const PositionsSchema = new SimpleSchema({
   name: {
@@ -42,7 +42,11 @@ const PositionsSchema = new SimpleSchema({
     optional: true
   },
   applicants: {
-    type: [ InterestExpressionSchema ],
+    type: [ MessageSchema ],
+    optional: true,
+  },
+  recommendations: {
+    type: [ MessageSchema ],
     optional: true,
   },
   deadline: {
