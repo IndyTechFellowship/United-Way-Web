@@ -42,7 +42,7 @@ class RegistrationPage extends Component {
   }
 
   handleNext() {
-    const { createAccount, password1, password2, setError } = this.props;
+    const { createAccount, organizationName, password1, password2, setError } = this.props;
     const { stepIndex } = this.state;
     switch (stepIndex) {
       case 1:  // Password
@@ -52,8 +52,12 @@ class RegistrationPage extends Component {
           return setError('Enter a Password At Least 8 Characters In Length.')
         }
         setError(null)
-        return this.setState({ stepIndex: stepIndex + 1 });
-      case 3: // Final Step
+        if (organizationName) {
+          return this.setState({ stepIndex: 2 });
+        } else {
+          return this.setState({ stepIndex: 3 });
+        }
+      case 3:
         setError(null)
         return createAccount(() => browserHistory.push('/'))
       default: 
@@ -63,27 +67,47 @@ class RegistrationPage extends Component {
   }
 
   handlePrev() {
-    const { setError } = this.props
+    const { organizationName, setError } = this.props
     const { stepIndex } = this.state
     setError(null)
-    if (stepIndex > 0) this.setState({ stepIndex: stepIndex - 1 })
+    switch (stepIndex) {
+      case 3:
+        if (organizationName) {
+          return this.setState({ stepIndex: 2 });
+        } else {
+          return this.setState({ stepIndex: 1 });
+        }
+      default:
+        if (stepIndex > 0) {
+          return this.setState({ stepIndex: stepIndex - 1 });
+        }   
+    }
   }
 
-  getStepContent(stepIndex) {
+  getStepContent(stepIndex, organizationName) {
     switch (stepIndex) {
       case 0:
         return <YourAccount />
       case 1:
         return <Password />
-      case 2:
-        return <OrganizationProfile />
-      case 3:
-        return <VolunteerProfile />
+      // case 2:
+      //   return organizationName ? <OrganizationProfile /> : <VolunteerProfile />
+      // case 3:
+      //   return <VolunteerProfile />
     }
+    return <div></div>
+  }
+
+  onLastStep() {
+    const { organizationName } = this.props
+    const { stepIndex } = this.state
+    return organizationName 
+      ? stepIndex === 3
+      : stepIndex === 2;
   }
 
   render() {
-    const { error } = this.props;
+    const { error, organizationName } = this.props;
     const { finished, stepIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
     return (
@@ -95,26 +119,26 @@ class RegistrationPage extends Component {
           <Step>
             <StepLabel>Password</StepLabel>
           </Step>
-          <Step>
+          <Step disabled={!organizationName}>
             <StepLabel>Organization Profile</StepLabel>
           </Step>
           <Step>
-            <StepLabel>Your Profile (Optional)</StepLabel>
+            <StepLabel>Your Profile</StepLabel>
           </Step>
         </Stepper>
         <div style={contentStyle}>
-          <div>{this.getStepContent(stepIndex)}</div>
+          <div>{this.getStepContent(stepIndex, organizationName)}</div>
           <div style={styles.buttons}>
             {error && <span style={styles.error}>{error}</span>}
             <FlatButton
               label="Back"
               disabled={stepIndex === 0}
-              onTouchTap={this.handlePrev}
+              onTouchTap={this.handlePrev.bind(this)}
               style={{marginRight: 12}} />
             <RaisedButton
-              label={stepIndex === 3 ? 'Finish' : 'Next'}
+              label={this.onLastStep() ? 'Finish' : 'Next'}
               primary={true}
-              onTouchTap={this.handleNext} />
+              onTouchTap={this.handleNext.bind(this)} />
           </div>
         </div>
       </Paper>
@@ -145,6 +169,7 @@ const styles = {
 
 const mapStateToProps = ({ onboarding }) => ({
   error: onboarding.error,
+  organizationName: onboarding.organizationName,
   password1: onboarding.password1,
   password2: onboarding.password2,
 })

@@ -10,7 +10,7 @@ const styles = {
     alignItems: 'center',
   },
   header: {
-    fontSize: '22px',
+    fontSize: '24px',
     fontWeight: 'bold',
   },
 }
@@ -34,11 +34,6 @@ const YourAccount = ({ dispatch, email, firstName, lastName, organizationName })
       floatingLabelText="Email Address"
       onChange={(e, v) => dispatch(setOnboardingField('email', v))}
       value={email}
-    />
-    <TextField
-      floatingLabelText="Organization Name"
-      onChange={(e, v) => dispatch(setOnboardingField('organizationName', v))}
-      value={organizationName}
     />
   </Col>
 );
