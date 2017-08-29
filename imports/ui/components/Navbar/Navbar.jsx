@@ -39,7 +39,7 @@ class Navbar extends Component {
     return (
       <div style={toolbarStyle}>
         <div style={toolbarGroup}>
-          <img src="logo.svg" style={logoStyle} />
+          <Link to='/'><img src="logo.svg" style={logoStyle} /></Link>
           <Link to={'/'} style={linkStyle}>Opportunities</Link>
           <Link to={'/positions'} style={linkStyle}>Positions</Link>
           <Row style={searchArea}>
