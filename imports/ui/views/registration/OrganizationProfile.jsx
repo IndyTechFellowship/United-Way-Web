@@ -17,6 +17,7 @@ class OrganizationProfile extends Component {
   render() {
     const {
       dispatch,
+      organizationDescription,
       organizationCity,
       organizationName,
       organizationState,
@@ -30,6 +31,14 @@ class OrganizationProfile extends Component {
           floatingLabelText="Organization Name"
           onChange={(e, v) => dispatch(setOnboardingField('organizationName', v))}
           value={organizationName}
+        />
+        <TextField
+          floatingLabelText="Description"
+          multiLine={true}
+          onChange={(e, v) => dispatch(setOnboardingField('organizationDescription', v))}
+          rows={3}
+          rowsMax={3}
+          value={organizationDescription}
         />
         <TextField
           floatingLabelText="City"
@@ -59,6 +68,7 @@ const styles = {
 }
 
 const mapStateToProps = ({ onboarding }) => ({
+  organizationDescription: onboarding.organizationDescription,
   organizationName: onboarding.organizationName,
   organizationCity: onboarding.organizationCity,
   organizationState: onboarding.organizationState,

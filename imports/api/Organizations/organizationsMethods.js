@@ -16,7 +16,7 @@ Meteor.methods({
       admins: [ callingUser._id ],
       avatarUrl: `${Meteor.absoluteUrl()}ic_business_black_48dp_1x.png`,
       city: organization.city,
-      description: 'Enter An Awesome Description For Your Organization!',
+      description: organization.description,
       imageUrls: [],
       name: organization.name,
       positions: [],
