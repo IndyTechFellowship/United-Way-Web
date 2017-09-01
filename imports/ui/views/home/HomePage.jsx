@@ -10,20 +10,8 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <div style={styles.title}>
-          <Title>Organize. Volunteer. Find Your Opportunity.</Title>
-        </div>
-        <div style={styles.images}>
-          <img src="https://unsplash.it/100/160" style={styles.img} />
-          <img src="https://unsplash.it/200/150" style={styles.img} />
-          <img src="https://unsplash.it/150/200" style={styles.img} />
-          <img src="https://unsplash.it/250/175" style={styles.img} />
-        </div>
-        <div style={styles.images}>
-          <img src="https://unsplash.it/125/210" style={styles.img} />
-          <img src="https://unsplash.it/220/130" style={styles.img} />
-          <img src="https://unsplash.it/200/200" style={styles.img} />
-          <img src="https://unsplash.it/125/150" style={styles.img} />
+        <div>
+          <img src="organizations-banner.png" style={styles.img} />
         </div>
 
         <div style={styles.opportunityLabel}>Positions</div>
