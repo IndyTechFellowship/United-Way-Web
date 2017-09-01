@@ -3,6 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data'
 import React, { Component, PropTypes } from 'react'
 
 import { Organizations } from '/imports/api/Organizations'
+import { Positions } from '/imports/api/Positions'
 import { Tags } from '/imports/api/Tags'
 import OrganizationPage from './OrganizationPage'
 
@@ -13,12 +14,17 @@ const OrganizationContainer = createContainer((props) => {
   if (!organizationHandle.ready()) return { loading: true, organization: {} }
   let organization = Organizations.findOne(query)
 
-  // get tags
-  const tagsHandle = Meteor.subscribe('Tags.get', {})
-  if (!tagsHandle.ready()) return { loading: true, organization: {} }
+  // get tags and positions
+  const subs = [
+    Meteor.subscribe('Tags.get', {}),
+    Meteor.subscribe('Positions.get', { _id: { $in: (organization.positions || []) } })
+  ]
+  if (_.some(subs, (s) => !s.ready())) return { loading: true, organization: {} }
+
 
   // update organization with tag objects
   organization = Object.assign(organization, {
+    positions: Positions.find({ _id: { $in: organization.positions || [] } }).fetch(),
     tags: Tags.find({ _id: { $in: organization.tags } }).fetch()
   })
 

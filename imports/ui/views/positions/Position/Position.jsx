@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { FlatButton } from 'material-ui'
+import { Card, CardText, DatePicker, FlatButton, RaisedButton, TextField } from 'material-ui'
 import _ from 'lodash'
 
 import Loading from '/imports/ui/components/Loading'
@@ -9,12 +9,11 @@ import ShowInterestButton from '/imports/ui/components/ShowInterestButton'
 class Position extends Component {
 
   render() {
+    const { addPosition, organization, position, updatePosition, deletePosition } = this.props
     if (this.props.loading) {
       return <Loading/>
     } else {
-      let position = this.props.position
       let positionName = !position.name ? '' : position.name
-      let organization = this.props.organization
       let orgName = !_.get(this.props, 'organization.name') ? '' : this.props.organization.name;
 
       let skills = position.skills.map((skill) => {
@@ -44,19 +43,46 @@ class Position extends Component {
         }
       }
 
+      const edit = (
+        <div>
+          <TextField
+            hintText="ex. Committee Member"
+            floatingLabelText="Name"
+            floatingLabelFixed={true}
+            value={position.name}
+            onChange={e => updatePosition(position._id, 'name', e.target.value)}
+            fullWidth={true}
+          />
+          <div>
+            <div style={styles.descriptionLabel}>Description</div>
+            <textarea style={styles.textarea} value={position.description} onChange={e => updatePosition(position._id, 'description', e.target.value)} />
+          </div>
+          <RaisedButton 
+            label="Delete Position" 
+            labelColor='white'
+            backgroundColor='#E53935'
+            fullWidth={true}
+            onClick={e => deletePosition(position._id)}
+          />
+        </div>
+      )
+      const view = (
+        <CardComponent
+          key={position._id}
+          imageUrl={imageUrl}
+          name={positionName}
+          title={orgName}
+          subtitle="Open"
+          body={body}
+          cardType="position"
+          cardButtons={positionButtons}
+        />
+      )
+
       const positionButtons = () => <PositionButtons position={position} />
       return (
         <div style={styles.card}>
-          <CardComponent
-              key={position._id}
-              imageUrl={imageUrl}
-              name={positionName}
-              title={orgName}
-              subtitle="Open"
-              body={body}
-              cardType="position"
-              cardButtons={positionButtons}
-          />
+          {this.props.isEditing ? edit : view}
         </div>
       )
     }

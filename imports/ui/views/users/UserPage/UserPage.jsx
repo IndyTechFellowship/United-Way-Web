@@ -113,22 +113,26 @@ class UserProfileTab extends Component {
     } else {
       const name = `${this.props.user.profile.firstName} ${this.props.user.profile.lastName}`
       return (
-        <div style={styles.twoColumnLayout}>
-          <div style={styles.columnOne}>
-            <Breadcrumbs crumbs={[
-                {text: 'Volunteers', path: '/users'},
-                {text: name, path: null}
-              ]}
-            />
-            <UserBasicInfo user={this.props.user} tags={this.props.tags} />
-            <Interests user={this.props.user} tags={this.props.tags} />
-            <ProfessionalExperienceList experiences={this.props.user.profile.professionalExperiences}/>
-          </div>
-          <div style={styles.columnTwo}>
-            <UserProfileButtons />
-            <Summary user={this.props.user} />
-            { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList user={this.props.user} experiences={this.props.user.profile.volunteerExperiences}/> : "" }
-          </div>
+        <div style={styles.container}>
+          <Content>
+            <div style={styles.twoColumnLayout}>
+              <div style={styles.columnOne}>
+                <Breadcrumbs crumbs={[
+                    {text: 'Volunteers', path: '/users'},
+                    {text: name, path: null}
+                  ]}
+                />
+                <UserBasicInfo user={this.props.user} tags={this.props.tags} />
+                <Interests user={this.props.user} tags={this.props.tags} />
+                <ProfessionalExperienceList experiences={this.props.user.profile.professionalExperiences}/>
+              </div>
+              <div style={styles.columnTwo}>
+                <UserProfileButtons />
+                <Summary user={this.props.user} />
+                { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList user={this.props.user} experiences={this.props.user.profile.volunteerExperiences}/> : "" }
+              </div>
+            </div>
+          </Content>
         </div>
       )
     }

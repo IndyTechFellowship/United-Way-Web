@@ -20,7 +20,7 @@ const UserContainer = createContainer((props) => {
     Meteor.subscribe('Tags.get', {}),
     Meteor.subscribe('Experiences.get', { _id: { $in: (user.profile.volunteerExperiences || []).concat(user.profile.professionalExperiences || []) } })
   ]
-  if (_.some(subs, (s) => !s.ready())) return { loading: true, position: {}, organization: {} }
+  if (_.some(subs, (s) => !s.ready())) return { loading: true, organization: {} }
 
   const volunteerExperiences = Experiences.find({ _id: { $in: user.profile.volunteerExperiences || [] } }).fetch()
   const professionalExperiences = Experiences.find({ _id: { $in: user.profile.professionalExperiences || [] } }).fetch()
