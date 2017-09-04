@@ -11,6 +11,7 @@ import thunk from 'redux-thunk'
 // Import each reducer you create here
 import { onboardingReducer } from './onboarding'
 import { searchReducer } from './search'
+import { signinReducer } from './signin'
 import { userReducer } from './user'
 
 // Add them to the combineReducers call below
@@ -18,6 +19,7 @@ export const store = createStore(
   combineReducers({
     onboarding: onboardingReducer,
     search: searchReducer,
+    signin: signinReducer,
     user: userReducer,
   }), 
   applyMiddleware(
@@ -30,6 +32,7 @@ export const store = createStore(
 // as those are the files that contain the actions we are dispatching.
 export * from './onboarding'
 export * from './search'
+export * from './signin'
 export * from './user'
 
 // Every action must have a unique name.

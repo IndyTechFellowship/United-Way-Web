@@ -28,8 +28,16 @@ const OrganizationContainer = createContainer((props) => {
     tags: Tags.find({ _id: { $in: organization.tags } }).fetch()
   })
 
+  //determine if this organization is one the user admins
+  let userId = Meteor.userId()
+  const something = Meteor.subscribe('Organizations.thatUserAdmins', userId)
+  if (!something.ready()) return { loading: true, organization: {}, isMyOrganization: false }
+  let myOrg = Organizations.findOne({ admins: userId, _id: organization._id })
+  let isThisMyOrganization = myOrg != undefined
+
+
   // render
-  return { loading: false, organization: organization, tags: Tags.find().fetch() }
+  return { loading: false, organization: organization, tags: Tags.find().fetch(), isMyOrganization: isThisMyOrganization }
 }, OrganizationPage)
 
 OrganizationContainer.propTypes = {

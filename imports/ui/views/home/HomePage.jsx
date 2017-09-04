@@ -4,38 +4,44 @@ import Content from '/imports/ui/components/Content'
 import Title from '/imports/ui/components/Title'
 import OrganizationCarousel from '/imports/ui/views/home/OrganizationCarousel'
 import PositionCarousel from '/imports/ui/views/home/PositionCarousel'
+import Slider from 'react-slick'
 import UserCarousel from '/imports/ui/views/home/UserCarousel'
 
 class HomePage extends Component {
 
   render() {
+    const settings = {
+      dots: true,
+      arrows: false,
+      infinite: true,
+      speed: 500,
+      swipe: false,
+      autoplay: true,
+      autoplaySpeed: 7500
+    }
+
     return (
-      <Content>
-        <div style={styles.title}>
-          <Title>Organize. Volunteer. Find Your Opportunity.</Title>
-        </div>
+      <div>
         <div style={styles.images}>
-          <img src="https://unsplash.it/100/160" style={styles.img} />
-          <img src="https://unsplash.it/200/150" style={styles.img} />
-          <img src="https://unsplash.it/150/200" style={styles.img} />
-          <img src="https://unsplash.it/250/175" style={styles.img} />
-        </div>
-        <div style={styles.images}>
-          <img src="https://unsplash.it/125/210" style={styles.img} />
-          <img src="https://unsplash.it/220/130" style={styles.img} />
-          <img src="https://unsplash.it/200/200" style={styles.img} />
-          <img src="https://unsplash.it/125/150" style={styles.img} />
+          <Slider {...settings} style={styles.slider}>
+            <div><img src="volunteers-banner.png"  style={styles.img} /></div>
+            <div><img src="positions-banner.png" style={styles.img} /></div>
+            <div><img src="organizations-banner.png" style={styles.img} /></div>
+          </Slider>
         </div>
 
-        <div style={styles.opportunityLabel}>Positions</div>
-        <PositionCarousel />
+        <Content>
 
-        <div style={styles.opportunityLabel}>Organizations</div>
-        <OrganizationCarousel />
+          <div style={styles.opportunityLabel}>Positions</div>
+          <PositionCarousel />
 
-        <div style={styles.opportunityLabel}>Volunteers</div>
-        <UserCarousel />
-      </Content>
+          <div style={styles.opportunityLabel}>Organizations</div>
+          <OrganizationCarousel />
+
+          <div style={styles.opportunityLabel}>Volunteers</div>
+          <UserCarousel />
+        </Content>
+      </div>
     )
   }
 
@@ -44,12 +50,8 @@ class HomePage extends Component {
 const styles = {
   images: {
     width: '100%',
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  img: {
-    margin: '4px',
+    maxWidth: '1440px',
+    margin: 'auto'
   },
   title: {
     marginTop: '32px',
@@ -59,6 +61,12 @@ const styles = {
     fontSize: '24px',
     fontWeight: 'bold',
     margin: '12px'
+  },
+  slider: {
+    width: '100%'
+  },
+  img: {
+    width: '100%'
   }
 }
 

@@ -1,13 +1,22 @@
+import { 
+  Card,
+  CardHeader,
+} from 'material-ui'
+import Lock from 'material-ui/svg-icons/action/lock'
 import React, { Component } from 'react'
 
-import Content from '/imports/ui/components/Content'
+import ChangePasswordCard from './ChangePasswordCard'
 
-class SettingsPage extends Component {
+const styles = {
+  container: {
+    padding: '30px 100px',
+  },
+};
 
-  render() {
-    return <Content><div>Settings</div></Content>
-  }
-
-}
+const SettingsPage = ({ }) => (
+  <div style={styles.container}>
+    <ChangePasswordCard />
+  </div>
+);
 
 export default SettingsPage

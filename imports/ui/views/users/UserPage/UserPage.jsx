@@ -82,24 +82,21 @@ class UserPage extends Component {
     let thisIsMyProfile = myUserId == thisUserId
     if (thisIsMyProfile) {
       return (
-        <div style={styles.container}>
-          <div style={styles.fakeTabBar}></div>
-          <Content>
-            <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
-              <Tab label="Profile">
-                <UserProfileTab user={user} loading={loading} tags={tags} />
-              </Tab>
-              <Tab label="Recommendations">
-               <div style={styles.recommendations}>Recommendations coming soon</div>
-              </Tab>
-            </Tabs>
-          </Content>
+        <div>
+          <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
+            <Tab label="Profile">
+              <Content><UserProfileTab user={user} loading={loading} tags={tags} /></Content>
+            </Tab>
+            <Tab label="Recommendations">
+              <div style={styles.recommendations}>Recommendations coming soon</div>
+            </Tab>
+          </Tabs>
         </div>
       )
     } else {
       return (
         <div>
-          <UserProfileTab user={user} loading={loading} tags={tags} />
+          <Content><UserProfileTab user={user} loading={loading} tags={tags} /></Content>
         </div>
       )
     }
