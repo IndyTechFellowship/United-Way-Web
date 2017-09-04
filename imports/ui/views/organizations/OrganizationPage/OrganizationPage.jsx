@@ -3,6 +3,7 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 
 import AboutUsMission from '/imports/ui/views/organizations/AboutUsMission'
 import Breadcrumbs from '/imports/ui/components/Breadcrumbs'
+import Content from '/imports/ui/components/Content'
 import Loading from '/imports/ui/components/Loading'
 import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
 import OrganizationProfileButtons from '/imports/ui/views/organizations/OrganizationProfileButtons'
@@ -48,7 +49,7 @@ class OrganizationPage extends Component {
         <div>
           <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
             <Tab label="Profile">
-              <OrganizationTab loading={loading} organization={organization} tags={tags} />
+              <Content><OrganizationTab loading={loading} organization={organization} tags={tags} /></Content>
             </Tab>
             <Tab label="Interested">
 
@@ -59,7 +60,7 @@ class OrganizationPage extends Component {
     } else {
       return (
         <div>
-          <OrganizationTab loading={loading} organization={organization} tags={tags} />
+          <Content><OrganizationTab loading={loading} organization={organization} tags={tags} /></Content>
         </div>
       )
     }
