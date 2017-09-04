@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { Tabs, Tab } from 'material-ui/Tabs';
 
 import Breadcrumbs from '/imports/ui/components/Breadcrumbs'
+import Content from '/imports/ui/components/Content'
 import Interests from '/imports/ui/views/users/Interests'
 import Loading from '/imports/ui/components/Loading'
 import ProfessionalExperienceList from '/imports/ui/views/users/ProfessionalExperienceList'
@@ -68,7 +69,7 @@ class UserPage extends Component {
         <div>
           <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
             <Tab label="Profile">
-              <UserProfileTab user={user} loading={loading} tags={tags} />
+              <Content><UserProfileTab user={user} loading={loading} tags={tags} /></Content>
             </Tab>
             <Tab label="Recommendations">
 
@@ -79,7 +80,7 @@ class UserPage extends Component {
     } else {
       return (
         <div>
-          <UserProfileTab user={user} loading={loading} tags={tags} />
+          <Content><UserProfileTab user={user} loading={loading} tags={tags} /></Content>
         </div>
       )
     }

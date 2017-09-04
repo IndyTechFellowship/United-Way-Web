@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Carousel from '/imports/ui/components/Carousel'
+import Content from '/imports/ui/components/Content'
 import Title from '/imports/ui/components/Title'
 import OrganizationCarousel from '/imports/ui/views/home/OrganizationCarousel'
 import PositionCarousel from '/imports/ui/views/home/PositionCarousel'
@@ -14,7 +15,10 @@ class HomePage extends Component {
       dots: true,
       arrows: false,
       infinite: true,
-      speed: 500
+      speed: 500,
+      swipe: false,
+      autoplay: true,
+      autoplaySpeed: 7500
     }
 
     return (
@@ -27,14 +31,17 @@ class HomePage extends Component {
           </Slider>
         </div>
 
-        <div style={styles.opportunityLabel}>Positions</div>
-        <PositionCarousel />
+        <Content>
 
-        <div style={styles.opportunityLabel}>Organizations</div>
-        <OrganizationCarousel />
+          <div style={styles.opportunityLabel}>Positions</div>
+          <PositionCarousel />
+
+          <div style={styles.opportunityLabel}>Organizations</div>
+          <OrganizationCarousel />
 
           <div style={styles.opportunityLabel}>Volunteers</div>
           <UserCarousel />
+        </Content>
       </div>
     )
   }
@@ -43,7 +50,9 @@ class HomePage extends Component {
 
 const styles = {
   images: {
-    width: '100%'
+    width: '100%',
+    maxWidth: '1440px',
+    margin: 'auto'
   },
   title: {
     marginTop: '32px',
