@@ -18,17 +18,17 @@ const UserContainer = createContainer((props) => {
   // get tags and experiences
   const subs = [
     Meteor.subscribe('Tags.get', {}),
-    Meteor.subscribe('Experiences.get', { _id: { $in: user.profile.volunteerExperiences.concat(user.profile.professionalExperiences) } })
+    Meteor.subscribe('Experiences.get', { _id: { $in: (user.profile.volunteerExperiences || []).concat(user.profile.professionalExperiences || []) } })
   ]
-  if (_.some(subs, (s) => !s.ready())) return { loading: true, position: {}, organization: {} }
+  if (_.some(subs, (s) => !s.ready())) return { loading: true, organization: {} }
 
-  const volunteerExperiences = Experiences.find({ _id: { $in: user.profile.volunteerExperiences } }).fetch()
-  const professionalExperiences = Experiences.find({ _id: { $in: user.profile.professionalExperiences } }).fetch()
+  const volunteerExperiences = Experiences.find({ _id: { $in: user.profile.volunteerExperiences || [] } }).fetch()
+  const professionalExperiences = Experiences.find({ _id: { $in: user.profile.professionalExperiences || [] } }).fetch()
 
   // update organization with tag objects
   user.profile = Object.assign(user.profile, {
-    interests: Tags.find({ _id: { $in: user.profile.interests } }).fetch(),
-    skills: Tags.find({ _id: { $in: user.profile.skills } }).fetch(),
+    interests: Tags.find({ _id: { $in: user.profile.interests || [] } }).fetch(),
+    skills: Tags.find({ _id: { $in: user.profile.skills || [] } }).fetch(),
     volunteerExperiences: _.map(volunteerExperiences, experience => _.merge(experience, {
       tags: Tags.find({ _id: { $in: experience.tags || [] } }).fetch()
     })),

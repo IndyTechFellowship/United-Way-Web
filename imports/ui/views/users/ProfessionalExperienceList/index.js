@@ -94,7 +94,7 @@ class ProfileExperienceList extends Component {
       )
     }))
 
-    const addExperienceButton = <RaisedButton label="Add Volunteer Experience" fullWidth={true} onClick={this.addExperience} />
+    const addExperienceButton = <RaisedButton label="Add Professional Experience" fullWidth={true} onClick={this.addExperience} />
 
     return (
         <div style={styles.listContainer}>

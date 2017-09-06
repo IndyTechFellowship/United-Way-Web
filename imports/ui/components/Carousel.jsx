@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import Slider from 'react-slick'
 
 export default class Carousel extends Component {
@@ -9,13 +8,13 @@ export default class Carousel extends Component {
       speed: 500,
       slidesToShow: 2,
       slidesToScroll: 2,
-      nextArrow: <NextArrowCustom/>,
-      prevArrow: <PrevArrowCustom/>
-    };
+      swipe: false,
+      arrows: true
+    }
 
     return (
-      <div>
-        <Slider {...settings}>
+      <div style={styles.slider}>
+        <Slider ref={c => this.slider = c } {...settings}>
           {this.props.cards}
         </Slider>
       </div>
@@ -23,26 +22,10 @@ export default class Carousel extends Component {
   }
 }
 
-class NextArrowCustom extends Component {
-  render() {
-    return <div style={styles.arrow} ></div>
-  }
-}
-
-class PrevArrowCustom extends Component {
-  render() {
-    return <div style={styles.arrow} ></div>
-  }
-}
-
 const styles = {
-  arrow: {
-    backgroundColor: 'blue'
-  },
-
-  block: {
-    backgroundColor: 'blue',
-    width: '200px'
+  slider: {
+    margin: '0 30px',
+    position: 'relative'
   }
 }
 

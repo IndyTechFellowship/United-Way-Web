@@ -1,4 +1,4 @@
-import { deepOrange500, grey200 } from 'material-ui/styles/colors'
+import { deepOrange500, grey100 } from 'material-ui/styles/colors'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import React, { Component } from 'react'
@@ -13,15 +13,11 @@ const styles = {
   pageWrapper: {
     display: "flex",
     minHeight: "100vh",
+    width: '100%',
     flexDirection: "column",
-    alignItems: "center",
-    background: grey200,
-  },
-  content: {
-    flex: 1,
-    width: "80%",
-    maxWidth: 1440,
-  },
+    justifyContent: 'center',
+    background: '#f9f9f9',
+  }
 }
 
 const muiTheme = getMuiTheme({
@@ -53,7 +49,7 @@ class App extends Component {
         <div>
           <Navbar />
           <div style={styles.pageWrapper}>
-            <div style={styles.content}>{ this.props.children }</div>
+            { this.props.children }
             <Footer />
           </div>
           <SigninDialog />
