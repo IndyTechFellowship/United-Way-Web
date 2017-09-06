@@ -15,7 +15,6 @@ const styles = {
     minHeight: "100vh",
     width: '100%',
     flexDirection: "column",
-    justifyContent: 'center',
     background: '#f9f9f9',
   }
 }
