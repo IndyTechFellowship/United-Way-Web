@@ -8,7 +8,6 @@ import Loading from '/imports/ui/components/Loading'
 import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
 import OrganizationPositionsList from '/imports/ui/views/organizations/OrganizationPositionsList'
 import OrganizationProfileButtons from '/imports/ui/views/organizations/OrganizationProfileButtons'
-import Title from '/imports/ui/components/Title'
 
 const styles = {
   container: {
