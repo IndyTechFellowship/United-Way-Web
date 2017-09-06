@@ -133,7 +133,7 @@ class UserProfileTab extends Component {
               <ProfessionalExperienceList experiences={this.props.user.profile.professionalExperiences}/>
             </div>
             <div style={styles.columnTwo}>
-              <UserProfileButtons />
+              <UserProfileButtons user={this.props.user}/>
               <Summary user={this.props.user} />
               { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList user={this.props.user} experiences={this.props.user.profile.volunteerExperiences}/> : "" }
             </div>
