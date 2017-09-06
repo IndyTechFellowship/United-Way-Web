@@ -6,8 +6,8 @@ import Breadcrumbs from '/imports/ui/components/Breadcrumbs'
 import Content from '/imports/ui/components/Content'
 import Loading from '/imports/ui/components/Loading'
 import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
+import OrganizationPositionsList from '/imports/ui/views/organizations/OrganizationPositionsList'
 import OrganizationProfileButtons from '/imports/ui/views/organizations/OrganizationProfileButtons'
-import PositionsList from '/imports/ui/views/positions/PositionsList'
 import Title from '/imports/ui/components/Title'
 
 const styles = {
@@ -76,23 +76,28 @@ class OrganizationTab extends Component {
       let positionsQuery = { _id: { $in: this.props.organization.positions }}
 
       return (
-        <div style={styles.container}>
-          <div style={styles.twoColumnLayout}>
-            <div style={styles.columnOne}>
-              <Breadcrumbs crumbs={[
-                  {text: 'Organizations', path: '/organizations'},
-                  {text: this.props.organization.name, path: null}
-                ]}
-              />
-              <OrganizationBasicInfo organization={this.props.organization} tags={this.props.tags} />
+        <Content>
+          <div style={styles.container}>
+            <div style={styles.twoColumnLayout}>
+              <div style={styles.columnOne}>
+                <Breadcrumbs crumbs={[
+                    {text: 'Organizations', path: '/organizations'},
+                    {text: this.props.organization.name, path: null}
+                  ]}
+                />
+                <OrganizationBasicInfo organization={this.props.organization} tags={this.props.tags} />
+              </div>
+              <div style={styles.columnTwo}>
+                <OrganizationProfileButtons />
+                <AboutUsMission organization={this.props.organization} />
+              </div>
             </div>
-            <div style={styles.columnTwo}>
-              <OrganizationProfileButtons />
-              <AboutUsMission organization={this.props.organization} />
-            </div>
+            <OrganizationPositionsList 
+              organization={this.props.organization} 
+              positions={this.props.organization.positions} 
+            />
           </div>
-          <PositionsList query={positionsQuery} organization={this.props.organization} editable={true} />
-        </div>
+        </Content>
       )
     }
   }

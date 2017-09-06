@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import Carousel from '/imports/ui/components/Carousel'
 import Content from '/imports/ui/components/Content'
 import Title from '/imports/ui/components/Title'
 import OrganizationCarousel from '/imports/ui/views/home/OrganizationCarousel'
