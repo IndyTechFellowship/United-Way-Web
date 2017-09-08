@@ -39,9 +39,13 @@ class AboutUsMission extends Component {
     const viewing = (
       <div>
         <AboutUsImages images={this.props.organization.imageUrls} />
-        <div>
-          {this.state.description}
-        </div>
+        {this.state.description ?
+          <div>
+            {this.state.description}
+          </div>
+        :
+          <div style={styles.empty}>No Mission Added</div>
+        }
       </div>
     )
 
@@ -67,6 +71,13 @@ const styles = {
     width: '100%',
     height: '100px',
     fontSize: '14px'
+  },
+  empty: {
+    fontSize: '24px',
+    color: '#9b9b9b',
+    width: '100%',
+    padding: '48px 0',
+    textAlign: 'center'
   }
 }
 

@@ -36,9 +36,12 @@ class Summary extends Component {
       </div>
     )
     const viewing = (
-      <div style={styles.summary}>
-        {this.state.summary}
-      </div>
+      this.state.summary ?
+        <div style={styles.summary}>
+          {this.state.summary}
+        </div>
+      :
+        <div style={styles.empty}>No Summary Added</div>
     )
     return (
       <div style={styles.container}>
@@ -67,6 +70,13 @@ const styles = {
     width: '100%',
     height: '100px',
     fontSize: '14px'
+  },
+  empty: {
+    fontSize: '24px',
+    color: '#9b9b9b',
+    width: '100%',
+    padding: '48px 0',
+    textAlign: 'center'
   }
 }
 

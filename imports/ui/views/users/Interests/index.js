@@ -83,7 +83,7 @@ class Interests extends Component {
     const editing = (
       <div>{interestsDropdowns}</div>
     )
-    const viewing = (
+    const viewing = interests.length > 0 ? (
       <TagCloud 
         style={styles.cloud}
         minSize={18}
@@ -92,7 +92,7 @@ class Interests extends Component {
         renderer={customRenderer}
         disableRandomColor={true} 
       />
-    )
+    ) : <div style={styles.empty}>No Interests Added</div>
     return (
       <div style={styles.container}>
         <Title>Interests</Title>
@@ -121,6 +121,13 @@ const styles = {
   },
   tag: {
     padding: '4px'
+  },
+  empty: {
+    fontSize: '24px',
+    color: '#9b9b9b',
+    width: '100%',
+    padding: '48px 0',
+    textAlign: 'center'
   }
 }
 

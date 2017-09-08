@@ -11,10 +11,15 @@ import OrganizationProfileButtons from '/imports/ui/views/organizations/Organiza
 
 const styles = {
   container: {
-    marginBottom: '32px'
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   twoColumnLayout: {
     display: "flex",
+    flexWrap: "wrap",
+    width: '100%'
   },
   columnOne: {
     flex: 1,
@@ -35,7 +40,16 @@ const styles = {
   tabContainerStyle: {
     display: 'flex',
     flexDirection: 'column',
-    flex: 1
+    flex: 1,
+    width: '80%',
+    maxWidth: '1440px',
+    margin: 'auto'
+  },
+  tabBar: {
+    width: '100%',
+    position: 'absolute',
+    background: '#0091ea',
+    height: '48px'
   }
 }
 
@@ -46,9 +60,10 @@ class OrganizationPage extends Component {
     if (isMyOrganization) {
       return (
         <div>
+          <div style={styles.tabBar}></div>
           <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
             <Tab label="Profile">
-              <Content><OrganizationTab loading={loading} organization={organization} tags={tags} /></Content>
+              <OrganizationTab loading={loading} organization={organization} tags={tags} />
             </Tab>
             <Tab label="Interested">
 
@@ -59,7 +74,7 @@ class OrganizationPage extends Component {
     } else {
       return (
         <div>
-          <Content><OrganizationTab loading={loading} organization={organization} tags={tags} /></Content>
+          <OrganizationTab loading={loading} organization={organization} tags={tags} />
         </div>
       )
     }
