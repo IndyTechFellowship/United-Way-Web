@@ -14,7 +14,7 @@ const styles = {
   content: {
     width: '80%',
     maxWidth: 1440,
-    margin: 'auto',
+    margin: '0 auto',
     padding: '24px'
   },
 }

@@ -66,6 +66,8 @@ class Position extends Component {
           />
         </div>
       )
+      const positionButtons = () => <PositionButtons position={position} />
+
       const view = (
         <CardComponent
           key={position._id}
@@ -79,7 +81,6 @@ class Position extends Component {
         />
       )
 
-      const positionButtons = () => <PositionButtons position={position} />
       return (
         <div style={styles.card}>
           {this.props.isEditing ? edit : view}

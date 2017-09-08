@@ -23,6 +23,7 @@ const styles = {
   twoColumnLayout: {
     display: "flex",
     flexWrap: "wrap",
+    width: '100%'
   },
   columnOne: {
     flex: 1,
@@ -49,13 +50,15 @@ const styles = {
     display: 'flex',
     alignItems: 'left',
     width: 400,
-    backgroundColor: '#0091ea'
+    backgroundColor: '#0091ea',
   },
   tabContainerStyle: {
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
-    width: '100%'
+    width: '80%',
+    maxWidth: '1440px',
+    margin: 'auto'
   },
   container: {
     width: '100%',
@@ -71,6 +74,12 @@ const styles = {
   },
   recommendations: {
     padding: '32px'
+  },
+  tabBar: {
+    width: '100%',
+    position: 'absolute',
+    background: '#0091ea',
+    height: '48px'
   }
 }
 
@@ -83,12 +92,13 @@ class UserPage extends Component {
     if (thisIsMyProfile) {
       return (
         <div>
+          <div style={styles.tabBar}></div>
           <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
             <Tab label="Profile">
               <Content><UserProfileTab user={user} loading={loading} tags={tags} /></Content>
             </Tab>
             <Tab label="Recommendations">
-              <div style={styles.recommendations}>Recommendations coming soon</div>
+              <Content><div style={styles.recommendations}>Recommendations coming soon</div></Content>
             </Tab>
           </Tabs>
         </div>
@@ -111,25 +121,23 @@ class UserProfileTab extends Component {
       const name = `${this.props.user.profile.firstName} ${this.props.user.profile.lastName}`
       return (
         <div style={styles.container}>
-          <Content>
-            <div style={styles.twoColumnLayout}>
-              <div style={styles.columnOne}>
-                <Breadcrumbs crumbs={[
-                    {text: 'Volunteers', path: '/users'},
-                    {text: name, path: null}
-                  ]}
-                />
-                <UserBasicInfo user={this.props.user} tags={this.props.tags} />
-                <Interests user={this.props.user} tags={this.props.tags} />
-                <ProfessionalExperienceList experiences={this.props.user.profile.professionalExperiences}/>
-              </div>
-              <div style={styles.columnTwo}>
-                <UserProfileButtons />
-                <Summary user={this.props.user} />
-                { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList user={this.props.user} experiences={this.props.user.profile.volunteerExperiences}/> : "" }
-              </div>
+          <div style={styles.twoColumnLayout}>
+            <div style={styles.columnOne}>
+              <Breadcrumbs crumbs={[
+                  {text: 'Volunteers', path: '/users'},
+                  {text: name, path: null}
+                ]}
+              />
+              <UserBasicInfo user={this.props.user} tags={this.props.tags} />
+              <Interests user={this.props.user} tags={this.props.tags} />
+              <ProfessionalExperienceList experiences={this.props.user.profile.professionalExperiences}/>
             </div>
-          </Content>
+            <div style={styles.columnTwo}>
+              <UserProfileButtons user={this.props.user}/>
+              <Summary user={this.props.user} />
+              { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList user={this.props.user} experiences={this.props.user.profile.volunteerExperiences}/> : "" }
+            </div>
+          </div>
         </div>
       )
     }
