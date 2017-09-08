@@ -46,7 +46,7 @@ class OrganizationBasicInfo extends Component {
     })
   }
 
-  onClickUplaod() {
+  onClickUpload() {
     cloudinary.openUploadWidget({ 
       cloud_name: Meteor.settings.public.cloudinary.cloudName, 
       upload_preset: Meteor.settings.public.cloudinary.uploadPreset,
@@ -94,7 +94,7 @@ class OrganizationBasicInfo extends Component {
 
     const editing = (
       <div style={styles.edit}>
-        <div onClick={this.onClickUplaod.bind(this)} style={styles.dropzone}>
+        <div onClick={this.onClickUpload.bind(this)} style={styles.dropzone}>
           <span>Upload Image</span>
         </div>
         <div style={styles.middle}></div>
