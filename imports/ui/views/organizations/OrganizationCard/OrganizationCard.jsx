@@ -3,6 +3,7 @@ import { FlatButton } from 'material-ui'
 
 import Loading from '/imports/ui/components/Loading'
 import CardComponent from '/imports/ui/components/CardComponent'
+import { CloudinaryTransformToAvatar } from '/imports/helpers/images';
 
 class OrganizationCard extends Component {
   render() {

@@ -3,12 +3,15 @@ import React, { Component } from 'react'
 import { Card, TextField } from 'material-ui'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
+import { Meteor } from 'meteor/meteor';
+import Dropzone from 'react-dropzone'
 
 import AvatarCard from '/imports/ui/components/AvatarCard'
 import EditButton from '/imports/ui/components/EditButton'
 import Skills from '/imports/ui/components/Skills'
 import Title from '/imports/ui/components/Title'
 import AboutMeTagline from '/imports/ui/views/users/UserBasicInfo/AboutMeTagline'
+import { CloudinaryTransformToAvatar } from '/imports/helpers/images'
 
 class UserBasicInfo extends Component {
   constructor(props) {
@@ -54,10 +57,32 @@ class UserBasicInfo extends Component {
     this.setState({ skills: skills })
   }
 
+  onClickUplaod() {
+    cloudinary.openUploadWidget({ 
+      cloud_name: Meteor.settings.public.cloudinary.cloudName, 
+      upload_preset: Meteor.settings.public.cloudinary.uploadPreset,
+    }, (error, result) => {
+      if (error) console.error(error);
+      else {
+        Meteor.call('Users.setProfilePicture', result[0].url, () => {
+          this.save();
+        });
+      }
+    });
+  }
+
   render() {
     const { user, tags } = this.props
+    const avatar = _.get(user, 'profile.avatar.original');
     const viewing = <div style={styles.userInfoBlock}>
-                      <AvatarCard avatarUrl={user.profile.avatar ? user.profile.avatar.original : null} title={<span>{this.state.firstName}<br />{this.state.lastName}</span>} />
+                      <AvatarCard 
+                        avatarUrl={avatar} 
+                        title={
+                          <span>
+                            {this.state.firstName}
+                            <br />
+                            {this.state.lastName}
+                          </span>} />
                       <div style={styles.aboutMeSkillsBlock}>
                         <AboutMeTagline tagline={this.state.tagline}/>
                         <Card>
@@ -89,7 +114,10 @@ class UserBasicInfo extends Component {
     ))
                     
     const editing = <div style={styles.edit}>
-                      <div style={styles.column}>
+                      <div onClick={this.onClickUplaod.bind(this)} style={styles.dropzone}>
+                        <span>Upload Image</span>
+                      </div>
+                      <div style={styles.column}>  
                         <TextField
                           hintText="First Name"
                           floatingLabelText="First Name"
@@ -138,12 +166,25 @@ class UserBasicInfo extends Component {
 }
 
 const styles = {
+  dropzone: {
+    alignItems: 'center',
+    borderColor: '#C0C0C0',
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    color: '#C0C0C0',
+    display: 'flex',
+    flexDirection: 'column',
+    height: "200px",
+    justifyContent: 'center',
+    width: '100%'
+  },
   container: {
     marginBottom: '32px',
-    position: 'relative'
+    position: 'relative',
   },
   edit: {
-    display: 'flex'
+    display: 'flex',
+    flexDirection: 'column',
   },
   column: {
     flexBasis: '48%'

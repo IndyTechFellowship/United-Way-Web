@@ -6,6 +6,8 @@ import {
 import { grey200 } from 'material-ui/styles/colors'
 import React, { Component } from 'react'
 
+import { CloudinaryTransformToAvatar } from '/imports/helpers/images'
+
 class CardComponent extends Component {
   constructor(props) {
     super(props)
@@ -43,7 +45,7 @@ class CardComponent extends Component {
         <Card style={styles.card}>
           <div style={styles.header.style}>
             <div style={styles.header.logo.style}>
-              <img src={this.props.imageUrl} style={imgStyle} />
+              <img src={CloudinaryTransformToAvatar(this.props.imageUrl)} style={imgStyle} />
             </div>
             <div style={styles.header.title.style}>
               <div style={{...styles.fontBase, ...styles.header.title.name}}>{this.props.name}</div>

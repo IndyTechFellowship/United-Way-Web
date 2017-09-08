@@ -47,4 +47,15 @@ Meteor.methods({
     return true
   },
 
+  'Organizations.setAvatar'(url) {
+    const manages = Organizations.findOne({ admins: this.userId });
+    Organizations.update({
+      _id: manages._id,
+    }, {
+      $set: {
+        avatarUrl: url,
+      },
+    });
+  }
+
 })
