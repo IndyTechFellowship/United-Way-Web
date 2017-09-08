@@ -4,6 +4,7 @@ import { FlatButton } from 'material-ui'
 import Loading from '/imports/ui/components/Loading'
 import CardComponent from '/imports/ui/components/CardComponent'
 import RecommendButton from "/imports/ui/components/RecommendButton";
+import { CloudinaryTransformToAvatar } from '/imports/helpers/images'
 
 class UserCard extends Component {
   render() {
@@ -26,6 +27,7 @@ class UserCard extends Component {
         }
       }
       const volunteerButtons = () => <VolunteerButtons user={this.props.user} />
+
       return (
         <div style={styles.card}>
           <CardComponent

@@ -11,6 +11,7 @@ import EditButton from '/imports/ui/components/EditButton'
 import Skills from '/imports/ui/components/Skills'
 import Title from '/imports/ui/components/Title'
 import AboutMeTagline from '/imports/ui/views/users/UserBasicInfo/AboutMeTagline'
+import { CloudinaryTransformToAvatar } from '/imports/helpers/images'
 
 class UserBasicInfo extends Component {
   constructor(props) {
@@ -60,10 +61,12 @@ class UserBasicInfo extends Component {
     cloudinary.openUploadWidget({ 
       cloud_name: Meteor.settings.public.cloudinary.cloudName, 
       upload_preset: Meteor.settings.public.cloudinary.uploadPreset,
-    }, function(error, result) {
+    }, (error, result) => {
       if (error) console.error(error);
       else {
-        Meteor.call('Users.setProfilePicture', result[0].url);
+        Meteor.call('Users.setProfilePicture', result[0].url, () => {
+          this.save();
+        });
       }
     });
   }
