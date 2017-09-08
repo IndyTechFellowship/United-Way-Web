@@ -54,7 +54,7 @@ class OrganizationPage extends Component {
               <Content><OrganizationTab loading={loading} organization={organization} tags={tags} /></Content>
             </Tab>
             <Tab label="Interested">
-              <OrganizationInterests organization={organization} />
+              <Content><OrganizationInterests organization={organization} /></Content>
             </Tab>
           </Tabs>
         </div>

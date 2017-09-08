@@ -21,7 +21,8 @@ const styles = {
   },
   infoStyle: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    margin: 8
   },
   subInfoStyle: {
 
@@ -74,7 +75,7 @@ const NoteSection = (props) => {
   if (note) {
     return (
       <CardText>
-        Note From Volunteer:<br />
+        Note From Volunteer:<br /><br />
         {note}
       </CardText>
     )

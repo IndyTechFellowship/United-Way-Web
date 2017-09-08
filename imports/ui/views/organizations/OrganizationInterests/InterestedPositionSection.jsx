@@ -14,8 +14,8 @@ class InterestedPositionSection extends Component {
         <Loading />
       )
     }
- 
-    let items = applicants.map((person) => {
+
+    let items = applicants === undefined ? <div></div> : applicants.map((person) => {
       return (
         <InterestedPositionItem key={person.userId} userId={person.userId} note={person.note} />
       )
@@ -23,7 +23,7 @@ class InterestedPositionSection extends Component {
 
     return (
       <div>
-        <div>{name}</div>
+        <div style={{margin: 10}}>{name}</div>
         {items}
       </div>
     )
@@ -31,7 +31,7 @@ class InterestedPositionSection extends Component {
 }
 
 const InterestedPositionCardContainer = createContainer((props) => {
-  const query = {_id: props.position}
+  const query = {_id: props.position._id}
   const positionHandle = Meteor.subscribe('Positions.get', query)
   if (!positionHandle.ready()) return { loading: true, position: {} }
   let position = Positions.findOne(query)
