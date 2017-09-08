@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { check, Match } from 'meteor/check'
 import { Meteor } from 'meteor/meteor'
 
@@ -15,5 +16,14 @@ Meteor.methods({
       return newUser
     }
     throw Meteor.Error(401, 'unauthorized')
-  }
+  },
+  'Users.setProfilePicture'(url) {
+    Users.update({
+      _id: this.userId,
+    }, {
+      $set: {
+        'profile.avatar.original': url,
+      }
+    });
+  },
 })

@@ -19,6 +19,7 @@ import { Colors } from '/imports/ui/styles';
 import {
   signoutUser,
 } from '/imports/ui/state'
+import { CloudinaryTransformToAvatar } from '/imports/helpers/images';
 
 class UserProfileMenu extends Component {
   
@@ -34,7 +35,6 @@ class UserProfileMenu extends Component {
 
   render() {
     const { adminCompany, currentUser: { emails, profile } } = this.props;
-    console.log(adminCompany)
     const name = `${profile.firstName} ${profile.lastName}`;
     const email = emails[0].address;
     const imageUri = "http://placehold.it/350x150"
@@ -64,8 +64,8 @@ class UserProfileMenu extends Component {
     const avatar = get(this.props, 'currentUser.profile.avatar.original');
     if (avatar) {
       return <img
-        src={original}
-        style={{borderRadius: '50%', height: '48px', width: '48px'}}
+        src={CloudinaryTransformToAvatar(avatar)}
+        style={{ ...styles.baseIcon, ...styles.navBarIcon }}
       />;
     } else {
       const firstName = get(this.props, 'currentUser.profile.firstName');
