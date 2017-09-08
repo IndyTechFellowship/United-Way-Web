@@ -14,13 +14,14 @@ class OrganizationBasicInfo extends Component {
   constructor(props) {
     super(props)
     let tagsArray = _.cloneDeep(this.props.organization.tags)
+    let emptyTags = [null, null, null, null, null, null]
     this.state = {
       isEditing: props.isEditing || false,
       name: this.props.organization.name,
       tagline: this.props.organization.tagline,
       city: this.props.organization.city,
       state: this.props.organization.state,
-      tags: _.fill(tagsArray, null, tagsArray.length-1, 5)
+      tags: _.merge(emptyTags, tagsArray)
     }
     this.edit = this.edit.bind(this)
     this.save = this.save.bind(this)
@@ -58,7 +59,9 @@ class OrganizationBasicInfo extends Component {
     const orgTags = this.state.tags.map((orgTag, index) => (
       <SelectField
         key={index}
+        style={styles.select}
         floatingLabelText={index === 0 ? "Tags" : null}
+        floatingLabelFixed={true}
         hintText="Select Tag"
         value={orgTag ? orgTag.name : null}
         fullWidth={true}
@@ -119,13 +122,15 @@ class OrganizationBasicInfo extends Component {
                 <div>{this.state.state}</div>
               </div>
               <Card>
-                <Skills skills={_.compact(this.state.tags)}/>
+                {
+                  _.compact(this.state.tags).length > 0 ?
+                    <Skills skills={_.compact(this.state.tags)} />
+                  :
+                    <div style={styles.noTags}>No Tags Added</div>
+                }
               </Card>
             </div>
           </div>
-        </div>
-        <div style={styles.buttonContainer}>
-          <RaisedButton label="Follow Organization" />
         </div>
       </div>
     )
@@ -174,6 +179,14 @@ const styles= {
   middle: {
     flexBasis: '4%'
   },
+  select: {
+    width: '100%',
+    overflow: 'hidden'
+  },
+  noTags: {
+    color: '#9b9b9b',
+    padding: '16px'
+  }
 }
 
 export default OrganizationBasicInfo

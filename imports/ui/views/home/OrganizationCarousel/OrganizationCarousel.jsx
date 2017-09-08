@@ -9,19 +9,22 @@ const OrganizationCarousel = ({ loading, organizations }) => {
     if (loading) {
       return <Loading/>
     } else {
-      let organizationCards = organizations.map((organization, index) => {
-        return (
-            <div key={organization._id} style={styles.organization}>
-              <div style={styles[index%2 ? 'right' : 'left']}>
-                <Link to={`/organizations/${organization._id}`} style={styles.link} key={organization._id}>
-                  <OrganizationCard organization={organization} />
-                </Link>
+      if (organizations.length > 0) {
+        let organizationCards = organizations.map((organization, index) => {
+          return (
+              <div key={organization._id} style={styles.organization}>
+                <div style={styles[index%2 ? 'right' : 'left']}>
+                  <Link to={`/organizations/${organization._id}`} style={styles.link} key={organization._id}>
+                    <OrganizationCard organization={organization} />
+                  </Link>
+                </div>
               </div>
-            </div>
-        )
-      })
-
-      return <Carousel cards={organizationCards}/>
+          )
+        })
+        return <Carousel cards={organizationCards}/>
+      } else {
+        return <div style={styles.empty}>No Organizations</div>
+      }
     }
 }
 
@@ -42,6 +45,13 @@ const styles = {
   },
   link: {
     textDecoration: 'none'
+  },
+  empty: {
+    fontSize: '24px',
+    color: '#9b9b9b',
+    width: '100%',
+    padding: '48px 0',
+    textAlign: 'center'
   }
 }
 

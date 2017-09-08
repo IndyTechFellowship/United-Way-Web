@@ -10,6 +10,7 @@ import {
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 
+import Content from '/imports/ui/components/Content'
 import { 
   createAccount,
   createOrganization,
@@ -118,35 +119,37 @@ class RegistrationPage extends Component {
     const { finished, stepIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
     return (
-      <Paper style={styles.stepper}>
-        <Stepper activeStep={stepIndex}>
-          <Step>
-            <StepLabel>Your Account</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Password</StepLabel>
-          </Step>
-          <Step disabled={!organizationName}>
-            <StepLabel>Organization Profile</StepLabel>
-          </Step>
-        </Stepper>
-        <div style={contentStyle}>
-          <div>{this.getStepContent(stepIndex, organizationName)}</div>
-          <div style={styles.buttons}>
-            {error && <span style={styles.error}>{error}</span>}
-            <FlatButton
-              label="Back"
-              disabled={stepIndex === 0}
-              onTouchTap={this.handlePrev.bind(this)}
-              style={{marginRight: 12}} />
-            <RaisedButton
-              label={this.onLastStep() ? 'Finish' : 'Next'}
-              primary={true}
-              onTouchTap={this.handleNext.bind(this)} />
+      <Content>
+        <Paper style={styles.stepper}>
+          <Stepper activeStep={stepIndex}>
+            <Step>
+              <StepLabel>Your Account</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Password</StepLabel>
+            </Step>
+            <Step disabled={!organizationName}>
+              <StepLabel>Organization Profile</StepLabel>
+            </Step>
+          </Stepper>
+          <div style={contentStyle}>
+            <div>{this.getStepContent(stepIndex, organizationName)}</div>
+            <div style={styles.buttons}>
+              {error && <span style={styles.error}>{error}</span>}
+              <FlatButton
+                label="Back"
+                disabled={stepIndex === 0}
+                onTouchTap={this.handlePrev.bind(this)}
+                style={{marginRight: 12}} />
+              <RaisedButton
+                label={this.onLastStep() ? 'Finish' : 'Next'}
+                primary={true}
+                onTouchTap={this.handleNext.bind(this)} />
+            </div>
           </div>
-        </div>
-      </Paper>
-    );
+        </Paper>
+      </Content>
+    )
   }
 
 }

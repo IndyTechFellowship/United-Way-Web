@@ -103,7 +103,11 @@ class OrganizationPositionsList extends Component {
           />
           <div style={styles.twoColumnLayout}>
             { this.state.isEditing ? addPositionButton : null}
-            { positions }
+            { positions.length > 0 ? 
+              positions
+            :
+              <div style={styles.empty}>No Positions Added</div>
+            }
           </div>
         </div>
     )
@@ -115,7 +119,8 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     paddingBottom: '10px',
-    position: 'relative'
+    position: 'relative',
+    width: '100%'
   },
   twoColumnLayout: {
     display: 'flex',
@@ -130,6 +135,13 @@ const styles = {
   },
   right: {
     marginLeft: '8px'
+  },
+  empty: {
+    fontSize: '24px',
+    color: '#9b9b9b',
+    width: '100%',
+    padding: '48px 0',
+    textAlign: 'center'
   }
 }
 

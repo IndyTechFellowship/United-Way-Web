@@ -9,20 +9,22 @@ const UserCarousel = ({ loading, users }) => {
     if (loading) {
       return <Loading/>
     } else {
-      let userCards = users.map((user, index) => {
-        user.profile._id = user._id
-        return (
-            <div key={user._id} style={styles.user}>
-              <div style={styles[index%2 ? 'right' : 'left']}>
-                <Link to={`/users/${user._id}`} style={styles.link} key={user._id}>
-                  <UserCard user={user.profile} />
-                </Link>
+      if (users.length > 0) {
+        let userCards = users.map((user, index) => {
+          user.profile._id = user._id
+          return (
+              <div key={user._id} style={styles.user}>
+                <div style={styles[index%2 ? 'right' : 'left']}>
+                  <Link to={`/users/${user._id}`} style={styles.link} key={user._id}>
+                    <UserCard user={user.profile} />
+                  </Link>
+                </div>
               </div>
-            </div>
-        )
-      })
-
-      return <Carousel cards={userCards}/>
+          )
+        })
+      } else {
+        return <div style={styles.empty}>No Volunteers</div>
+      }
     }
 }
 
@@ -43,6 +45,13 @@ const styles = {
   },
   link: {
     textDecoration: 'none'
+  },
+  empty: {
+    fontSize: '24px',
+    color: '#9b9b9b',
+    width: '100%',
+    padding: '48px 0',
+    textAlign: 'center'
   }
 }
 

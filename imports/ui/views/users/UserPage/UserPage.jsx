@@ -66,12 +66,6 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center'
   },
-  fakeTabBar: {
-    width: '100%',
-    backgroundColor: '#0091ea',
-    height: '48px',
-    position: 'absolute'
-  },
   recommendations: {
     padding: '32px'
   },

@@ -82,17 +82,22 @@ class ProfileExperienceList extends Component {
   }
 
   render() {
-    let professionalExperienceList = _.reverse(this.state.experiences.map((item) => {
-      return (
-        <Experience 
-          key={item._id}
-          experience={item}
-          isEditing={this.state.isEditing}
-          updateExperience={this.updateExperience}
-          deleteExperience={this.deleteExperience}
-        />
-      )
-    }))
+    let professionalExperienceList = null
+    if (this.state.experiences.length > 0) {
+      professionalExperienceList = _.reverse(this.state.experiences.map((item) => {
+        return (
+          <Experience 
+            key={item._id}
+            experience={item}
+            isEditing={this.state.isEditing}
+            updateExperience={this.updateExperience}
+            deleteExperience={this.deleteExperience}
+          />
+        )
+      }))
+    } else {
+      professionalExperienceList = <div style={styles.empty}>No Professional Experiences Added</div>
+    }
 
     const addExperienceButton = <RaisedButton label="Add Professional Experience" fullWidth={true} onClick={this.addExperience} />
 
@@ -120,6 +125,13 @@ const styles = {
     paddingBottom: '10px',
     position: 'relative'
   },
+  empty: {
+    fontSize: '24px',
+    color: '#9b9b9b',
+    width: '100%',
+    padding: '48px 0',
+    textAlign: 'center'
+  }
 }
 
 export default ProfileExperienceList

@@ -8,17 +8,20 @@ const PositionCarousel = ({ loading, positions }) => {
     if (loading) {
       return <Loading/>
     } else {
-      let positionCards = positions.map((p, index) => {
-        return (
-            <div key={p._id} style={styles.position}>
-              <div style={styles[index%2 ? 'right' : 'left']}>
-                <Position position={p} />
+      if (positions.length > 0) {
+        let positionCards = positions.map((p, index) => {
+          return (
+              <div key={p._id} style={styles.position}>
+                <div style={styles[index%2 ? 'right' : 'left']}>
+                  <Position position={p} />
+                </div>
               </div>
-            </div>
-        )
-      })
-
-      return <Carousel cards={positionCards}/>
+          )
+        })
+        return <Carousel cards={positionCards}/>
+      } else {
+        return <div style={styles.empty}>No Positions</div>
+      }
     }
 }
 
@@ -37,6 +40,13 @@ const styles = {
   right: {
     marginLeft: '8px'
   },
+  empty: {
+    fontSize: '24px',
+    color: '#9b9b9b',
+    width: '100%',
+    padding: '48px 0',
+    textAlign: 'center'
+  }
 }
 
 export default PositionCarousel

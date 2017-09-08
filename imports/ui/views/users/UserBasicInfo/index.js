@@ -14,12 +14,13 @@ class UserBasicInfo extends Component {
   constructor(props) {
     super(props)
     let skillsArray = this.props.user.profile.skills
+    let emptySkills = [null, null, null, null, null, null]
     this.state = {
       isEditing: false,
       firstName: this.props.user.profile.firstName,
       lastName: this.props.user.profile.lastName,
       tagline: this.props.user.profile.tagline,
-      skills: _.fill(skillsArray, null, skillsArray.length-1, 5)
+      skills: _.merge(emptySkills, skillsArray)
     }
     this.edit = this.edit.bind(this)
     this.save = this.save.bind(this)
@@ -61,7 +62,12 @@ class UserBasicInfo extends Component {
                       <div style={styles.aboutMeSkillsBlock}>
                         <AboutMeTagline tagline={this.state.tagline}/>
                         <Card>
-                          <Skills skills={_.compact(this.state.skills)}/>
+                          {
+                            _.compact(this.state.skills).length > 0 ?
+                              <Skills skills={_.compact(this.state.skills)} />
+                            :
+                              <div style={styles.noSkills}>No Skills Added</div>
+                          }
                         </Card>
                       </div>
                     </div>
@@ -69,7 +75,9 @@ class UserBasicInfo extends Component {
     const skills = this.state.skills.map((skill, index) => (
       <SelectField
         key={index}
+        style={styles.select}
         floatingLabelText={index === 0 ? "Skills" : null}
+        floatingLabelFixed={true}
         hintText="Select Skill"
         value={skill ? skill.name : null}
         fullWidth={true}
@@ -160,6 +168,14 @@ const styles = {
     flexDirection: 'column',
     marginLeft: '24px'
   },
+  select: {
+    width: '100%',
+    overflow: 'hidden'
+  },
+  noSkills: {
+    color: '#9b9b9b',
+    padding: '16px'
+  }
 }
 
 export default UserBasicInfo
