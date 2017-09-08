@@ -14,11 +14,13 @@ class InterestedPositionSection extends Component {
         <Loading />
       )
     }
+ 
     let items = applicants.map((person) => {
       return (
         <InterestedPositionItem key={person.userId} userId={person.userId} note={person.note} />
       )
     })
+
     return (
       <div>
         <div>{name}</div>
