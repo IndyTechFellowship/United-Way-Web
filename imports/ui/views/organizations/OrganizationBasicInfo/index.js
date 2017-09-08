@@ -9,6 +9,7 @@ import EditButton from '/imports/ui/components/EditButton'
 import Skills from '/imports/ui/components/Skills'
 import Title from '/imports/ui/components/Title'
 import AvatarCard from '/imports/ui/components/AvatarCard'
+import { CloudinaryTransformToAvatar } from '/imports/helpers/images';
 
 class OrganizationBasicInfo extends Component {
   constructor(props) {
@@ -45,6 +46,20 @@ class OrganizationBasicInfo extends Component {
     })
   }
 
+  onClickUplaod() {
+    cloudinary.openUploadWidget({ 
+      cloud_name: Meteor.settings.public.cloudinary.cloudName, 
+      upload_preset: Meteor.settings.public.cloudinary.uploadPreset,
+    }, (error, result) => {
+      if (error) console.error(error);
+      else {
+        Meteor.call('Organizations.setAvatar', result[0].url, () => {
+          this.save();
+        });
+      }
+    });
+  }
+
 
   selectTag(index, selectedIndex) {
     const newTag= this.props.tags[selectedIndex]
@@ -79,8 +94,8 @@ class OrganizationBasicInfo extends Component {
 
     const editing = (
       <div style={styles.edit}>
-        <div style={styles.column}>
-          one
+        <div onClick={this.onClickUplaod.bind(this)} style={styles.dropzone}>
+          <span>Upload Image</span>
         </div>
         <div style={styles.middle}></div>
         <div style={styles.column}>
@@ -108,7 +123,9 @@ class OrganizationBasicInfo extends Component {
       <div style={styles.twoColumnLayout}>
         <div style={styles.outerContainer}>
           <div style={styles.column}>
-            <AvatarCard avatarUrl={this.props.organization.avatarUrl} title={this.props.organization.name} />
+            <AvatarCard 
+              avatarUrl={CloudinaryTransformToAvatar(this.props.organization.avatarUrl)}
+              title={this.props.organization.name} />
           </div>
           <div style={styles.middle}></div>
           <div style={styles.column}>
@@ -144,6 +161,18 @@ class OrganizationBasicInfo extends Component {
 }
 
 const styles= {
+  dropzone: {
+    alignItems: 'center',
+    borderColor: '#C0C0C0',
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    color: '#C0C0C0',
+    display: 'flex',
+    flexDirection: 'column',
+    height: "200px",
+    justifyContent: 'center',
+    width: '100%'
+  },
   container: {
     position: 'relative',
     marginBottom: '24px'
@@ -166,7 +195,8 @@ const styles= {
     width: '100%',
   },
   edit: {
-    display: 'flex'
+    display: 'flex',
+    flexDirection: 'column',
   },
   column: {
     flexBasis: '48%'

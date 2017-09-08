@@ -71,10 +71,6 @@ class UserBasicInfo extends Component {
     });
   }
 
-  onDrop(acceptedFiles) {
-    console.log(acceptedFiles)
-  }
-
   render() {
     const { user, tags } = this.props
     const avatar = _.get(user, 'profile.avatar.original');
