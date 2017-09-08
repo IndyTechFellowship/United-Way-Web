@@ -16,8 +16,8 @@ class OrganizationCard extends Component {
 
       let body = {
         leftColumn: [{
-          label: 'Other Website URL',
-          content: organization.websiteUrl
+          label: 'About Us',
+          content: organization.description
         }],
         rightColumn: {
           label: 'Search Tags',
@@ -30,8 +30,8 @@ class OrganizationCard extends Component {
           <CardComponent
             imageUrl={organization.avatarUrl}
             name={organization.name}
-            title="Who Knows?"
-            subtitle="Location TODO"
+            title={organization.tagline}
+            subtitle={`${organization.city}, ${organization.state}`}
             buttonLabel="Favorite"
             body={body}
             cardType="organization"
@@ -50,12 +50,13 @@ class OrganizationButtons extends Component {
   render() {
     return (
       <div style={styles.buttonContainer}>
-        <FlatButton
-          label="BOOKMARK"
-          labelStyle={styles.button.label}
-          style={styles.button.style}
-          backgroundColor={styles.button.backgroundColor}
-        />
+        {/* TODO: V2 Feature */}
+        {/*<FlatButton*/}
+            {/*label="BOOKMARK"*/}
+            {/*labelStyle={styles.button.label}*/}
+            {/*style={styles.button.style}*/}
+            {/*backgroundColor={styles.button.backgroundColor}*/}
+        {/*/>*/}
       </div>
     )
   }

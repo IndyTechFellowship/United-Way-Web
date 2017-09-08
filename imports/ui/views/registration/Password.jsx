@@ -1,3 +1,4 @@
+import { Col } from 'jsxstyle'
 import TextField from 'material-ui/TextField'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
@@ -6,14 +7,17 @@ import { setOnboardingField } from '/imports/ui/state'
 
 const styles = {
   container: {
-    display: 'flex',
-    flexDirection: 'column'
+    alignItems: 'center',
+  },
+  header: {
+    fontSize: '22px',
+    fontWeight: 'bold',
   },
 }
 
 const Password = ({ dispatch, password1, password2 }) => (
-  <div style={styles.container}>
-    <div>
+  <Col style={styles.container}>
+    <div style={styles.header}>
       Create A Secure Password
     </div>
     <TextField
@@ -28,7 +32,7 @@ const Password = ({ dispatch, password1, password2 }) => (
       type="password"
       value={password2}
     />
-  </div>
+  </Col>
 )
 
 const mapStateToProps = ({ onboarding }) => ({

@@ -1,3 +1,4 @@
+import { Col } from 'jsxstyle'
 import TextField from 'material-ui/TextField'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
@@ -6,15 +7,18 @@ import { setOnboardingField } from '/imports/ui/state'
 
 const styles = {
   container: {
-    display: 'flex',
-    flexDirection: 'column'
+    alignItems: 'center',
+  },
+  header: {
+    fontSize: '24px',
+    fontWeight: 'bold',
   },
 }
 
 const YourAccount = ({ dispatch, email, firstName, lastName, organizationName }) => (
-  <div style={styles.container}>
-    <div>
-      Confirm Or Edit Your Account Information
+  <Col style={styles.container}>
+    <div style={styles.header}>
+      Basic Account Information
     </div>
     <TextField
       floatingLabelText="First Name"
@@ -31,12 +35,7 @@ const YourAccount = ({ dispatch, email, firstName, lastName, organizationName })
       onChange={(e, v) => dispatch(setOnboardingField('email', v))}
       value={email}
     />
-    <TextField
-      floatingLabelText="Organization Name"
-      onChange={(e, v) => dispatch(setOnboardingField('organizationName', v))}
-      value={organizationName}
-    />
-  </div>
+  </Col>
 );
 
 YourAccount.propTypes = {

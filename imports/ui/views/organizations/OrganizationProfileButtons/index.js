@@ -1,23 +1,16 @@
 import React, { Component } from 'react'
-import { lightBlue800 } from 'material-ui/styles/colors'
-import RaisedButton from 'material-ui/RaisedButton'
 
 class OrganizationProfileButtons extends Component {
   render() {
     return (
       <div style={styles.buttons}>
-        <RaisedButton 
-          label="Show Interest" 
-          style={styles.button} 
-          labelColor='white'
-          backgroundColor={lightBlue800}
-        />
-        <RaisedButton 
-          label="Bookmark" 
-          style={styles.button} 
-          labelColor='white'
-          backgroundColor={lightBlue800} 
-        />
+        {/* TODO: V2 Feature */}
+        {/*<RaisedButton */}
+          {/*label="Bookmark" */}
+          {/*style={styles.button} */}
+          {/*labelColor='white'*/}
+          {/*backgroundColor={lightBlue800} */}
+        {/*/>*/}
       </div>
     )
   }

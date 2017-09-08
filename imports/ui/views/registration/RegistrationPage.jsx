@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { browserHistory, Link } from 'react-router'
 import { connect } from 'react-redux'
+import { Paper } from 'material-ui'
 import {
   Step,
   Stepper,
@@ -11,12 +12,12 @@ import FlatButton from 'material-ui/FlatButton'
 
 import { 
   createAccount,
+  createOrganization,
   setOnboardingError, 
   setOnboardingField,
 } from '/imports/ui/state'
 import OrganizationProfile from './OrganizationProfile'
 import Password from './Password'
-import VolunteerProfile from './VolunteerProfile'
 import YourAccount from './YourAccount'
 
 class RegistrationPage extends Component {
@@ -40,8 +41,17 @@ class RegistrationPage extends Component {
     query.token && setField('token', query.token)
   }
 
+  handleCreate() {
+    const { createAccount, createOrganization, organizationName } = this.props;
+    if (organizationName) {
+      createAccount(() => createOrganization(() => browserHistory.push('/')));
+    } else {
+      createAccount(() => browserHistory.push('/'));
+    }
+  }
+
   handleNext() {
-    const { createAccount, password1, password2, setError } = this.props;
+    const { createAccount, organizationName, password1, password2, setError } = this.props;
     const { stepIndex } = this.state;
     switch (stepIndex) {
       case 1:  // Password
@@ -51,10 +61,14 @@ class RegistrationPage extends Component {
           return setError('Enter a Password At Least 8 Characters In Length.')
         }
         setError(null)
-        return this.setState({ stepIndex: stepIndex + 1 });
-      case 3: // Final Step
+        if (organizationName) {
+          return this.setState({ stepIndex: 2 });
+        } else {
+          return this.handleCreate();
+        }
+      case 2:
         setError(null)
-        return createAccount(() => browserHistory.push('/'))
+        return this.handleCreate();
       default: 
         setError(null)
         return this.setState({ stepIndex: stepIndex + 1 })
@@ -62,31 +76,49 @@ class RegistrationPage extends Component {
   }
 
   handlePrev() {
-    const { setError } = this.props
+    const { organizationName, setError } = this.props
     const { stepIndex } = this.state
     setError(null)
-    if (stepIndex > 0) this.setState({ stepIndex: stepIndex - 1 })
+    switch (stepIndex) {
+      case 3:
+        if (organizationName) {
+          return this.setState({ stepIndex: 2 });
+        } else {
+          return this.setState({ stepIndex: 1 });
+        }
+      default:
+        if (stepIndex > 0) {
+          return this.setState({ stepIndex: stepIndex - 1 });
+        }   
+    }
   }
 
-  getStepContent(stepIndex) {
+  getStepContent(stepIndex, organizationName) {
     switch (stepIndex) {
       case 0:
         return <YourAccount />
       case 1:
         return <Password />
       case 2:
-        return <OrganizationProfile />
-      case 3:
-        return <VolunteerProfile />
+        return <OrganizationProfile organizationName={organizationName} />
     }
+    return <div></div>
+  }
+
+  onLastStep() {
+    const { organizationName } = this.props
+    const { stepIndex } = this.state
+    return organizationName 
+      ? stepIndex === 2
+      : stepIndex === 1;
   }
 
   render() {
-    const { error } = this.props;
+    const { error, organizationName } = this.props;
     const { finished, stepIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
     return (
-      <div style={styles.stepper}>
+      <Paper style={styles.stepper}>
         <Stepper activeStep={stepIndex}>
           <Step>
             <StepLabel>Your Account</StepLabel>
@@ -94,29 +126,26 @@ class RegistrationPage extends Component {
           <Step>
             <StepLabel>Password</StepLabel>
           </Step>
-          <Step>
+          <Step disabled={!organizationName}>
             <StepLabel>Organization Profile</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Your Profile (Optional)</StepLabel>
           </Step>
         </Stepper>
         <div style={contentStyle}>
-          <div>{this.getStepContent(stepIndex)}</div>
+          <div>{this.getStepContent(stepIndex, organizationName)}</div>
           <div style={styles.buttons}>
             {error && <span style={styles.error}>{error}</span>}
             <FlatButton
               label="Back"
               disabled={stepIndex === 0}
-              onTouchTap={this.handlePrev}
+              onTouchTap={this.handlePrev.bind(this)}
               style={{marginRight: 12}} />
             <RaisedButton
-              label={stepIndex === 3 ? 'Finish' : 'Next'}
+              label={this.onLastStep() ? 'Finish' : 'Next'}
               primary={true}
-              onTouchTap={this.handleNext} />
+              onTouchTap={this.handleNext.bind(this)} />
           </div>
         </div>
-      </div>
+      </Paper>
     );
   }
 
@@ -124,8 +153,9 @@ class RegistrationPage extends Component {
 
 const styles = {
   stepper: {
+    margin: '24px',
+    padding: '12px',
     width: '100%',
-    marginBottom: '24px'
   },
   buttons: {
     alignItems: 'center',
@@ -143,12 +173,14 @@ const styles = {
 
 const mapStateToProps = ({ onboarding }) => ({
   error: onboarding.error,
+  organizationName: onboarding.organizationName,
   password1: onboarding.password1,
   password2: onboarding.password2,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createAccount: (cb) => dispatch(createAccount(cb)), 
+  createAccount: (cb) => dispatch(createAccount(cb)),
+  createOrganization: (cb) => dispatch(createOrganization(cb)),
   setError: (e) => dispatch(setOnboardingError(e)),
   setField: (fN, fV) => dispatch(setOnboardingField(fN, fV)),
 })

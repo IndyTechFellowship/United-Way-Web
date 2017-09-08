@@ -21,7 +21,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     flexGrow: '1',
-    margin: '24px 24px 24px 8px',
+    margin: '16px 24px 16px 8px',
   },
   icon: {
     color: 'white',
