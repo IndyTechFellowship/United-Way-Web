@@ -64,7 +64,7 @@ class InterestedPositionItem extends Component {
   getPlaceholder() {
     let userAvatar = 'https://placehold.it/350x150'; //replace this with an actual user avatar url once all that is setup
     if (userAvatar == undefined) {
-      return getUserInitials();
+      return getUserInitials()
     }
     return <img style={{height: '48px', width: '48px', borderRadius: '50%'}} src={userAvatar} />;
   }

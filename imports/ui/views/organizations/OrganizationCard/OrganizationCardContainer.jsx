@@ -19,7 +19,6 @@ OrganizationCardContainer.propTypes = {
 
 export default createContainer((props) => {
   const orgQuery = { _id: props.organization._id }
-  console.log("orgQUery", orgQuery)
   const orgSubscription = Meteor.subscribe('Organizations.get', orgQuery)
   if (!orgSubscription.ready()) return { loading: true, organization: {} }
   let organization = Organizations.findOne(orgQuery)
