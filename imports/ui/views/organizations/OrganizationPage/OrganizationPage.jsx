@@ -8,6 +8,9 @@ import Loading from '/imports/ui/components/Loading'
 import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
 import OrganizationPositionsList from '/imports/ui/views/organizations/OrganizationPositionsList'
 import OrganizationProfileButtons from '/imports/ui/views/organizations/OrganizationProfileButtons'
+import PositionsList from '/imports/ui/views/positions/PositionsList'
+import Title from '/imports/ui/components/Title'
+import OrganizationInterests from '/imports/ui/views/organizations/OrganizationInterests'
 
 const styles = {
   container: {
@@ -66,7 +69,7 @@ class OrganizationPage extends Component {
               <OrganizationTab loading={loading} organization={organization} tags={tags} />
             </Tab>
             <Tab label="Interested">
-
+              <Content><OrganizationInterests organization={organization} /></Content>
             </Tab>
           </Tabs>
         </div>
@@ -82,7 +85,6 @@ class OrganizationPage extends Component {
 }
 
 class OrganizationTab extends Component {
-
   render() {
     if(this.props.loading) {
       return <Loading />
