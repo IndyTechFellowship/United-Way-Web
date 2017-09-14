@@ -36,7 +36,7 @@ const SearchBox = ({ dispatch, searchResults, searchTerm }) => {
   return (
     <div style={styles.container}>
       <TextField
-        hintText="Search BoardServe Indy..."
+        hintText="Search BoardServeIndy..."
         hintStyle={{color:'rgba(255,255,255,0.6)'}}
         fullWidth={true}
         inputStyle={styles.textField}

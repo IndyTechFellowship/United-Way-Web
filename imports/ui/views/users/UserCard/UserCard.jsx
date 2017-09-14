@@ -89,6 +89,7 @@ const styles = {
     height: '100%'
   },
   card: {
-    marginBottom: '16px'
+    marginBottom: '16px',
+    height: '320px'
   }
 }

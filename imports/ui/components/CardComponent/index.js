@@ -89,7 +89,8 @@ const styles = {
   },
   card: {
     padding: '24px',
-    height: '100%'
+    height: '100%',
+    overflow: 'hidden'
   },
   header: {
     style: {
@@ -123,17 +124,17 @@ const styles = {
         margin: '0 16px',
       },
       name: {
-        fontSize: '20px',
+        fontSize: '18px',
         fontWeight: 'bold',
         margin: '0 0 4px 0',
       },
       title: {
-        fontSize: '18px',
+        fontSize: '16px',
         fontWeight: 'regular',
         margin: '0 0 4px 0',
       },
       subtitle: {
-        fontSize: '16px',
+        fontSize: '14px',
         fontStyle: 'italic',
       },
     },
@@ -172,14 +173,14 @@ const styles = {
     },
 
     label: {
-      height: '20px',
-      fontSize: '16px',
+      height: '18px',
+      fontSize: '14px',
       fontWeight: '300',
     },
 
     content: {
       flex: '1 0 16px',
-      fontSize: '16px',
+      fontSize: '14px',
       fontWeight: '500',
       whiteSpace: 'normal',
     }
