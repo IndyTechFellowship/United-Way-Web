@@ -44,7 +44,7 @@ class UserBasicInfo extends Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       tagline: this.state.tagline,
-      skills: this.state.skills
+      skills: _.compact(this.state.skills)
     }
     let newUser = _.merge({}, this.props.user, { profile: profile })
     Meteor.call('User.update', newUser, (err, resp) => {

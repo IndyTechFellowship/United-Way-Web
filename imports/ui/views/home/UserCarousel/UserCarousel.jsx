@@ -22,6 +22,7 @@ const UserCarousel = ({ loading, users }) => {
               </div>
           )
         })
+        return <Carousel cards={userCards}/>
       } else {
         return <div style={styles.empty}>No Volunteers</div>
       }
