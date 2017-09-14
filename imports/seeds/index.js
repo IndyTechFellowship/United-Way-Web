@@ -9,12 +9,12 @@ Meteor.methods({
 
   'Seed'() {
     if (Meteor.isDevelopment) {
-      SeedTags()
       SeedPositions()
       SeedOrganizations()
       SeedUsers()
       console.log('done!')
     }
+    SeedTags()
   }
 
 })
