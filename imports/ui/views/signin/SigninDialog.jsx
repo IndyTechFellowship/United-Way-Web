@@ -93,7 +93,7 @@ const SigninDialog = ({
     <Row style={styles.container}>
       <Col style={styles.leftCol}>
         <div style={styles.title}>
-          Welcome Back to <span style={{fontWeight: 'bold', ...styles.title}}>BoardServe Indy</span>
+          Welcome Back to <span style={{fontWeight: 'bold', ...styles.title}}>BoardServeIndy</span>
         </div>
       </Col>
       <Col style={styles.rightCol}>

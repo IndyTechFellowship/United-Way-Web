@@ -80,7 +80,7 @@ class ChangePasswordCard extends Component {
         <CardHeader 
           avatar={<Lock />}
           title='Change Password'
-          subtitle='Access BoardServe Indy With A New Password'
+          subtitle='Access BoardServeIndy With A New Password'
         />
         <Col style={styles.body}>
           <TextField
