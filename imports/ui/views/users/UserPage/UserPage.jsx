@@ -74,12 +74,16 @@ const styles = {
     position: 'absolute',
     background: '#0091ea',
     height: '48px'
+  },
+  mainContent : {
+    display: 'flex',
+    flexDirection: 'column'
   }
 }
 
 class UserPage extends Component {
   render() {
-    const { loading, user, tags } = this.props
+    const { loading, user, tags, recommendations } = this.props
     let myUserId = Meteor.userId()
     let thisUserId = user ? user._id : null
     let thisIsMyProfile = myUserId == thisUserId
@@ -92,7 +96,7 @@ class UserPage extends Component {
               <Content><UserProfileTab user={user} loading={loading} tags={tags} /></Content>
             </Tab>
             <Tab label="Recommendations">
-              <Content><div style={styles.recommendations}>Recommendations coming soon</div></Content>
+              <Content><RecommendationsArea positions={recommendations} /></Content>
             </Tab>
           </Tabs>
         </div>
@@ -104,6 +108,34 @@ class UserPage extends Component {
         </div>
       )
     }
+  }
+}
+
+class RecommendationsArea extends Component {
+  render() {
+    let { positions } = this.props
+
+    console.log("positions: ", positions)
+
+    let positionsStuff = positions === undefined ? <div></div> : positions.map((pos) => {
+      return (
+        <div>
+          Yo yo yo
+          {pos.name}
+        </div>
+      )
+    })
+    console.log("Stuff", positionsStuff)
+
+    return (
+      <div style={styles.mainContent}>
+        <Breadcrumbs crumbs={[
+          {text: 'Volunteers', path: '/users'},
+          {text: 'Organization Recommend Positions for You', path: null}
+        ]} />
+        {positionsStuff}
+      </div>
+    )
   }
 }
 

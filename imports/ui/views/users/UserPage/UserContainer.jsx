@@ -6,6 +6,7 @@ import _ from 'lodash'
 import { Experiences } from '/imports/api/Experiences'
 import { Users } from '/imports/api/Users'
 import { Tags } from '/imports/api/Tags'
+import { Positions } from '/imports/api/Positions'
 import UserPage from './UserPage'
 
 const UserContainer = createContainer((props) => {
@@ -37,8 +38,34 @@ const UserContainer = createContainer((props) => {
     })),
   })
 
-  // render
-  return { loading: false, user: user, tags: Tags.find().fetch() }
+  // ***get recommendations for the user*** //
+  // get all positions 
+  const positionQuery = {}
+  const positionHandle = Meteor.subscribe('Positions.get', positionQuery)
+  if (!positionHandle.ready()) return { loading: true, user: user, tags: Tags.find().fetch(), recommendations: {} }
+  let positions = Positions.find(positionQuery).fetch()
+
+  // for each position, get the recommendations
+
+  let positionsWithRecommendations = positions.filter((position) => {
+    return position.recommendations != undefined
+  })
+
+
+  let positionsToSendBack = positionsWithRecommendations.map((pos) => {
+    let result = pos.recommendations.map((rec) => {
+      return rec.userId === user._id
+    })
+    if (result) {
+      return pos
+    }
+  })
+
+  let finalResult = positionsToSendBack.filter((pos) => {
+    return pos != undefined
+  })
+
+  return { loading: false, user: user, tags: Tags.find().fetch(), recommendations: finalResult }
 }, UserPage)
 
 UserContainer.propTypes = {

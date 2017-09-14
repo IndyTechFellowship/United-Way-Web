@@ -59,7 +59,6 @@ const styles = {
 class OrganizationPage extends Component {
   render() {
     let { loading, organization, isMyOrganization, tags } = this.props
-    console.log(loading, organization, isMyOrganization)
     if (isMyOrganization) {
       return (
         <div>
