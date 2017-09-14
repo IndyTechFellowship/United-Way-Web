@@ -162,11 +162,14 @@ class UserBasicInfo extends Component {
     return (
       <div style={styles.container}>
         <Title>About Me & Skills</Title>
-        <EditButton
-          isEditing={this.state.isEditing}
-          edit={this.edit}
-          save={this.save}
-        />
+        {this.props.editable ?
+          <EditButton
+            isEditing={this.state.isEditing}
+            edit={this.edit}
+            save={this.save}
+          />
+        : null
+        }
         {this.state.isEditing ? editing : viewing}
       </div>
     )

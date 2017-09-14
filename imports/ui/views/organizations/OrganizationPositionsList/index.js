@@ -34,7 +34,7 @@ class OrganizationPositionsList extends Component {
       } else {
         Meteor.call('Position.insert', position, (err, resp) => {
           let organization = _.cloneDeep(this.props.organization)
-          organization.positions.push({ _id: id })
+          organization.positions.push({ _id: resp })
           Meteor.call('Organization.update', organization, (err, resp => {}))
         })
       }
@@ -54,7 +54,8 @@ class OrganizationPositionsList extends Component {
     let positions = this.state.positions
     positions.push({
       _id: `new-${this.state.numberOfNewPositions}`,
-      name: ''
+      name: '',
+      skills: []
     })
     this.setState({
       positions,
@@ -96,11 +97,14 @@ class OrganizationPositionsList extends Component {
     return (
         <div style={styles.listContainer}>
           <Title>Positions</Title>
-          <EditButton
-            isEditing={this.state.isEditing}
-            edit={this.edit}
-            save={this.save}
-          />
+          {this.props.editable ?
+            <EditButton
+              isEditing={this.state.isEditing}
+              edit={this.edit}
+              save={this.save}
+            />
+          : null
+          }
           <div style={styles.twoColumnLayout}>
             { this.state.isEditing ? addPositionButton : null}
             { positions.length > 0 ? 

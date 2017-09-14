@@ -52,11 +52,14 @@ class AboutUsMission extends Component {
     return (
       <div style={styles.container}>
         <Title>About Us & Our Mission</Title>
-        <EditButton
-          isEditing={this.state.isEditing}
-          edit={this.edit}
-          save={this.save}
-        />
+        {this.props.editable ?
+          <EditButton
+            isEditing={this.state.isEditing}
+            edit={this.edit}
+            save={this.save}
+          />
+        : null
+        }
         {this.state.isEditing ? editing : viewing}
       </div>
     )

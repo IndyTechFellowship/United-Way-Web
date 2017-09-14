@@ -34,7 +34,7 @@ class VolunteerExperienceList extends Component {
       } else {
         Meteor.call('Experience.insert', experience, (err, resp) => {
           let user = _.cloneDeep(this.props.user)
-          user.profile.volunteerExperienceList.push({ _id: id })
+          user.profile.volunteerExperiences.push({ _id: resp })
           Meteor.call('User.update', user, (err, resp => {}))
         })
       }
@@ -75,35 +75,43 @@ class VolunteerExperienceList extends Component {
     })
     if (!_.includes(id, 'new-')) {
       let user = this.props.user
-      _.remove(this.props.user.profile.volunteerExperienceList, id)
+      _.remove(this.props.user.profile.volunteerExperiences, id)
       Meteor.call('Experience.delete', id, (err, resp) => {})
       Meteor.call('User.update', this.props.user, (err, resp => {}))
     }
   }
 
   render() {
-    let volunteerExperienceList = _.reverse(this.state.experiences.map((item) => {
-      return (
-        <Experience 
-          key={item._id}
-          experience={item}
-          isEditing={this.state.isEditing}
-          updateExperience={this.updateExperience}
-          deleteExperience={this.deleteExperience}
-        />
-      )
-    }))
+    let volunteerExperienceList = null
+    if (this.state.experiences.length > 0) {
+      volunteerExperienceList = _.reverse(this.state.experiences.map((item) => {
+        return (
+          <Experience 
+            key={item._id}
+            experience={item}
+            isEditing={this.state.isEditing}
+            updateExperience={this.updateExperience}
+            deleteExperience={this.deleteExperience}
+          />
+        )
+      }))
+    } else {
+      volunteerExperienceList = <div style={styles.empty}>No Volunteer Experiences Added</div>
+    }
 
     const addExperienceButton = <RaisedButton label="Add Volunteer Experience" fullWidth={true} onClick={this.addExperience} />
 
     return (
         <div style={styles.listContainer}>
           <Title>Volunteer Experience</Title>
-          <EditButton
-            isEditing={this.state.isEditing}
-            edit={this.edit}
-            save={this.save}
-          />
+          {this.props.editable ?
+            <EditButton
+              isEditing={this.state.isEditing}
+              edit={this.edit}
+              save={this.save}
+            />
+          : null
+          }
           <div style={styles.listContainer}>
             { this.state.isEditing ? addExperienceButton : null}
             { volunteerExperienceList }
@@ -120,6 +128,13 @@ const styles = {
     paddingBottom: '10px',
     position: 'relative'
   },
+  empty: {
+    fontSize: '24px',
+    color: '#9b9b9b',
+    width: '100%',
+    padding: '48px 0',
+    textAlign: 'center'
+  }
 }
 
 export default VolunteerExperienceList

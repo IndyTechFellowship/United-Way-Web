@@ -46,11 +46,14 @@ class Summary extends Component {
     return (
       <div style={styles.container}>
         <Title>Summary</Title>
-        <EditButton
-          isEditing={this.state.isEditing}
-          edit={this.edit}
-          save={this.save}
-        />
+        {this.props.editable ?
+          <EditButton
+            isEditing={this.state.isEditing}
+            edit={this.edit}
+            save={this.save}
+          />
+        : null
+        }
         {this.state.isEditing ? editing : viewing}
       </div>
     )

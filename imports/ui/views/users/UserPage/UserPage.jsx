@@ -89,7 +89,7 @@ class UserPage extends Component {
           <div style={styles.tabBar}></div>
           <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
             <Tab label="Profile">
-              <Content><UserProfileTab user={user} loading={loading} tags={tags} /></Content>
+              <Content><UserProfileTab editable={thisIsMyProfile} user={user} loading={loading} tags={tags} /></Content>
             </Tab>
             <Tab label="Recommendations">
               <Content><div style={styles.recommendations}>Recommendations coming soon</div></Content>
@@ -122,14 +122,14 @@ class UserProfileTab extends Component {
                   {text: name, path: null}
                 ]}
               />
-              <UserBasicInfo user={this.props.user} tags={this.props.tags} />
-              <Interests user={this.props.user} tags={this.props.tags} />
-              <ProfessionalExperienceList experiences={this.props.user.profile.professionalExperiences}/>
+              <UserBasicInfo editable={this.props.editable} user={this.props.user} tags={this.props.tags} />
+              <Interests editable={this.props.editable} user={this.props.user} tags={this.props.tags} />
+              <ProfessionalExperienceList editable={this.props.editable} user={this.props.user} experiences={this.props.user.profile.professionalExperiences}/>
             </div>
             <div style={styles.columnTwo}>
               <UserProfileButtons user={this.props.user}/>
-              <Summary user={this.props.user} />
-              { this.props.user.profile.volunteerExperiences.length > 0 ? <VolunteerExperienceList user={this.props.user} experiences={this.props.user.profile.volunteerExperiences}/> : "" }
+              <Summary editable={this.props.editable} user={this.props.user} />
+              <VolunteerExperienceList editable={this.props.editable} user={this.props.user} experiences={this.props.user.profile.volunteerExperiences}/>
             </div>
           </div>
         </div>
