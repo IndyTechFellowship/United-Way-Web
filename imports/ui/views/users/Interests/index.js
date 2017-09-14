@@ -37,7 +37,7 @@ class Interests extends Component {
   save() {
     this.setState({ isEditing: false })
     const profile = {
-      interests: this.state.interests
+      interests: _.compact(this.state.interests)
     }
     let newUser = _.merge({}, this.props.user, { profile: profile })
     Meteor.call('User.update', newUser, (err, resp) => {
@@ -46,7 +46,7 @@ class Interests extends Component {
   
   render() {
     const { tags } = this.props
-    const interests = _.reverse(_.filter(this.state.interests, i => { return i !== null })).map((interest,index) => ({
+    const interests = _.reverse(_.compact(this.state.interests)).map((interest,index) => ({
       value: interest.name,
       count: index
     }))
@@ -96,11 +96,14 @@ class Interests extends Component {
     return (
       <div style={styles.container}>
         <Title>Interests</Title>
-        <EditButton
-          isEditing={this.state.isEditing}
-          edit={this.edit}
-          save={this.save}
-        />
+        {this.props.editable ?
+          <EditButton
+            isEditing={this.state.isEditing}
+            edit={this.edit}
+            save={this.save}
+          />
+        : null
+        }
         {this.state.isEditing ? editing : viewing}
       </div>
     )

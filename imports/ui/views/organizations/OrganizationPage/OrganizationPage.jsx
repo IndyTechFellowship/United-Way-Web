@@ -8,6 +8,9 @@ import Loading from '/imports/ui/components/Loading'
 import OrganizationBasicInfo from '/imports/ui/views/organizations/OrganizationBasicInfo'
 import OrganizationPositionsList from '/imports/ui/views/organizations/OrganizationPositionsList'
 import OrganizationProfileButtons from '/imports/ui/views/organizations/OrganizationProfileButtons'
+import PositionsList from '/imports/ui/views/positions/PositionsList'
+import Title from '/imports/ui/components/Title'
+import OrganizationInterests from '/imports/ui/views/organizations/OrganizationInterests'
 
 const styles = {
   container: {
@@ -56,17 +59,16 @@ const styles = {
 class OrganizationPage extends Component {
   render() {
     let { loading, organization, isMyOrganization, tags } = this.props
-    console.log(loading, organization, isMyOrganization)
     if (isMyOrganization) {
       return (
         <div>
           <div style={styles.tabBar}></div>
           <Tabs tabItemContainerStyle={styles.tabs} style={styles.tabContainerStyle}>
             <Tab label="Profile">
-              <OrganizationTab loading={loading} organization={organization} tags={tags} />
+              <OrganizationTab editable={isMyOrganization} loading={loading} organization={organization} tags={tags} />
             </Tab>
             <Tab label="Interested">
-
+              <Content><OrganizationInterests organization={organization} /></Content>
             </Tab>
           </Tabs>
         </div>
@@ -74,7 +76,7 @@ class OrganizationPage extends Component {
     } else {
       return (
         <div>
-          <OrganizationTab loading={loading} organization={organization} tags={tags} />
+          <OrganizationTab editable={isMyOrganization} loading={loading} organization={organization} tags={tags} />
         </div>
       )
     }
@@ -82,7 +84,6 @@ class OrganizationPage extends Component {
 }
 
 class OrganizationTab extends Component {
-
   render() {
     if(this.props.loading) {
       return <Loading />
@@ -99,14 +100,15 @@ class OrganizationTab extends Component {
                     {text: this.props.organization.name, path: null}
                   ]}
                 />
-                <OrganizationBasicInfo organization={this.props.organization} tags={this.props.tags} />
+                <OrganizationBasicInfo editable={this.props.editable} organization={this.props.organization} tags={this.props.tags} />
               </div>
               <div style={styles.columnTwo}>
                 <OrganizationProfileButtons />
-                <AboutUsMission organization={this.props.organization} />
+                <AboutUsMission editable={this.props.editable} organization={this.props.organization} />
               </div>
             </div>
-            <OrganizationPositionsList 
+            <OrganizationPositionsList
+              editable={this.props.editable}
               organization={this.props.organization} 
               positions={this.props.organization.positions} 
             />

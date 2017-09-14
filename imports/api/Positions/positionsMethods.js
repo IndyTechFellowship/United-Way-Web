@@ -7,7 +7,7 @@ Meteor.methods({
   'Position.insert'(position) {
     if (this.connection) {
       position._id = null
-      position.tags = position.tags.map(i => i._id)
+      //position.tags = position.tags.map(i => i._id)
       const newPosition = Positions.insert(position)
       if (!newPosition) throw Meteor.Error(401, 'unauthorized')
       return newPosition
@@ -16,7 +16,7 @@ Meteor.methods({
   },
   'Position.update'(position) {
     if (this.connection) {
-      position.tags = position.tags.map(i => i._id)
+      //position.tags = position.tags.map(i => i._id)
       const newPosition = Positions.update(position._id, { $set: position })
       if (!newPosition) throw Meteor.Error(401, 'unauthorized')
       return newPosition

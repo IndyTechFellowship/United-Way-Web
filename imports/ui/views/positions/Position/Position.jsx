@@ -102,7 +102,10 @@ class PositionButtons extends Component {
   render() {
     return (
         <div style={styles.buttonContainer}>
-          <ShowInterestButton position={this.props.position}/>
+          {this.props.position._id ?
+            <ShowInterestButton position={this.props.position}/>
+          : null
+          }
           {/* TODO: V2 Feature */}
           {/*<FlatButton*/}
               {/*label="BOOKMARK"*/}

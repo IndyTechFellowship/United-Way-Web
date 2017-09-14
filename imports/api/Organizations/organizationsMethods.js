@@ -39,6 +39,12 @@ Meteor.methods({
         else return t
       })
     }
+    if (organization.positions) {
+      organization.positions = map(organization.positions, t => {
+        if (isObject(t)) return t._id
+        else return t
+      })
+    }
     Organizations.update({
       _id: organization._id,
     }, {

@@ -34,7 +34,7 @@ class ProfileExperienceList extends Component {
       } else {
         Meteor.call('Experience.insert', experience, (err, resp) => {
           let user = _.cloneDeep(this.props.user)
-          user.profile.volunteerExperienceList.push({ _id: id })
+          user.profile.professionalExperiences.push({ _id: resp })
           Meteor.call('User.update', user, (err, resp => {}))
         })
       }
@@ -75,7 +75,7 @@ class ProfileExperienceList extends Component {
     })
     if (!_.includes(id, 'new-')) {
       let user = this.props.user
-      _.remove(this.props.user.profile.volunteerExperienceList, id)
+      _.remove(this.props.user.profile.professionalExperiences, id)
       Meteor.call('Experience.delete', id, (err, resp) => {})
       Meteor.call('User.update', this.props.user, (err, resp => {}))
     }
@@ -104,11 +104,14 @@ class ProfileExperienceList extends Component {
     return (
         <div style={styles.listContainer}>
           <Title>Professional Experience</Title>
-          <EditButton
-            isEditing={this.state.isEditing}
-            edit={this.edit}
-            save={this.save}
-          />
+          {this.props.editable ?
+            <EditButton
+              isEditing={this.state.isEditing}
+              edit={this.edit}
+              save={this.save}
+            />
+          : null
+          }
           <div style={styles.listContainer}>
             { this.state.isEditing ? addExperienceButton : null}
             { professionalExperienceList }
