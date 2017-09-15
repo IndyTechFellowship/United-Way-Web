@@ -177,7 +177,7 @@ class RegistrationPage extends Component {
               </div>
             </div>
           :
-            <Introduction 
+            <Introduction
               organizationName={organizationName}
               getStarted={() => { this.setState({ stepping: true })}} 
             />
