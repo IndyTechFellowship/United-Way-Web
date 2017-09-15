@@ -7,18 +7,22 @@ import { setOnboardingField } from '/imports/ui/state'
 
 const styles = {
   container: {
-    alignItems: 'center',
   },
   header: {
-    fontSize: '24px',
-    fontWeight: 'bold',
+    fontSize: '32px',
+    fontWeight: '300',
   },
+  subtitle: {
+    fontSize: '16px',
+    marginTop: '8px'
+  }
 }
 
 const YourAccount = ({ dispatch, email, firstName, lastName, organizationName }) => (
   <Col style={styles.container}>
     <div style={styles.header}>
-      Basic Account Information
+      <div>Your Account</div>
+      <div style={styles.subtitle}>Please fill out the fields below to setup your account.</div>
     </div>
     <TextField
       floatingLabelText="First Name"

@@ -7,18 +7,22 @@ import { setOnboardingField } from '/imports/ui/state'
 
 const styles = {
   container: {
-    alignItems: 'center',
   },
   header: {
-    fontSize: '22px',
-    fontWeight: 'bold',
+    fontSize: '32px',
+    fontWeight: '300',
   },
+  subtitle: {
+    fontSize: '16px',
+    marginTop: '8px'
+  }
 }
 
 const Password = ({ dispatch, password1, password2 }) => (
   <Col style={styles.container}>
     <div style={styles.header}>
-      Create A Secure Password
+      <div>Your Password</div>
+      <div style={styles.subtitle}>Please create a secure password below. At least 8 characters in length.</div>
     </div>
     <TextField
       floatingLabelText="Password"
