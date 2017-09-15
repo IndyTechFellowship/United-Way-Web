@@ -7,7 +7,7 @@ const Introduction = (props) => {
   const content = props.organizationName ?
     <div>
       <div style={styles.subtitle}>
-        You've been invited to be an organization admin for <b>{organizationName}</b>. 
+        You've been invited to be an organization admin for <b>{props.organizationName}</b>. 
       </div>
       <div style={styles.description}>
         <div>
@@ -22,22 +22,22 @@ const Introduction = (props) => {
       </div>
     </div>
   : 
-  <div>
-    <div style={styles.subtitle}>
-      You've been invited to create a volunteer profile. 
-    </div>
-    <div style={styles.description}>
-      <div>
-        As a volunteer, you'll be able to: 
-        <ul>
-          <li>Browse organizations</li>
-          <li>View and express interest positions</li>
-          <li>Share your contact details with organizations</li>
-        </ul>
-        Click the button below to setup your account.
+    <div>
+      <div style={styles.subtitle}>
+        You've been invited to create a volunteer profile. 
+      </div>
+      <div style={styles.description}>
+        <div>
+          As a volunteer, you'll be able to: 
+          <ul>
+            <li>Browse organizations</li>
+            <li>View and express interest positions</li>
+            <li>Share your contact details with organizations</li>
+          </ul>
+          Click the button below to setup your account.
+        </div>
       </div>
     </div>
-  </div>
 
   return (
     <div style={styles.welcomeContainer}>
