@@ -25,7 +25,8 @@ class OrganizationProfile extends Component {
     return (
       <Col style={styles.container}>
         <div style={styles.header}>
-          Organization Information
+          <div>Your Organization</div>
+          <div style={styles.subtitle}>Tell us basic information about your organization. You'll be able to edit this information, fill out additional details, and add positions later.</div>
         </div>
         <TextField
           floatingLabelText="Organization Name"
@@ -59,12 +60,15 @@ class OrganizationProfile extends Component {
 
 const styles = {
   container: {
-    alignItems: 'center',
   },
   header: {
-    fontSize: '24px',
-    fontWeight: 'bold',
+    fontSize: '32px',
+    fontWeight: '300',
   },
+  subtitle: {
+    fontSize: '16px',
+    marginTop: '8px'
+  }
 }
 
 const mapStateToProps = ({ onboarding }) => ({
