@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+import Content from '/imports/ui/components/Content'
 import { Users } from '/imports/api/Users'
 import UsersList from './UsersList'
 import CollectionFilterBar from '/imports/ui/components/CollectionFilterBar';
@@ -21,14 +22,14 @@ class UsersListContainer extends Component {
     } = this.props
     let { users } = this.props
     if (userResults) users = _.intersectionBy(users, userResults, u => u._id)
-    return <div>
+    return <Content>
       <CollectionFilterBar 
         clearFilters={() => dispatch(setUserSearchResults(null))} 
         isTextFiltered={!!userResults} />
       <UsersList 
         loading={searchResultsLoading || loading} 
         users={users} />
-    </div>
+    </Content>
   }
 
 }

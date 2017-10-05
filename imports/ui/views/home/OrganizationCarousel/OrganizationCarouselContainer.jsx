@@ -24,8 +24,8 @@ export default createContainer(() => {
   if (!organizationSubscription.ready()) {
     return { loading: true, organizations: [] }
   } else {
-    // NOTE: shuffle array of organizations and then select 10 organizations (or however many are available if less than 10)
-    let organizations =  _.take(_.shuffle(Organizations.find(organizationQuery).fetch()), 10);
+    // NOTE: shuffle array of organizations and then select 5 organizations (or however many are available if less than 5)
+    let organizations =  _.take(_.shuffle(Organizations.find(organizationQuery).fetch()), 5);
     return { loading: false, organizations: organizations }
   }
 }, OrganizationCarouselContainer)

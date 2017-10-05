@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 
+import Content from '/imports/ui/components/Content'
 import { Positions } from '/imports/api/Positions'
 import PositionsList from './PositionsList'
 import CollectionFilterBar from '/imports/ui/components/CollectionFilterBar';
@@ -23,7 +24,7 @@ class PositionsListContainer extends Component {
     } = this.props;
     if (positionResults) positions = _.intersectionBy(positions, positionResults, p => p._id)
     return (
-      <div>
+      <Content>
         <CollectionFilterBar
           clearFilters={() => dispatch(setPositionSearchResults(null))}
           isTextFiltered={!!positionResults} />
@@ -31,7 +32,7 @@ class PositionsListContainer extends Component {
           loading={loading}
           organization={organization}
           positions={positions} />
-      </div>
+      </Content>
     );
   }
 }

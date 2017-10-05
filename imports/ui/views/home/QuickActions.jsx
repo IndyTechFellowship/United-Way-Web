@@ -6,20 +6,78 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 
+import { Colors } from '/imports/ui/styles'
 import { Organizations } from '/imports/api/Organizations'
 
 const QuickActions = props => {
   return (
     <div style={styles.container}>
       <div style={styles.columnOne}>
-        {props.adminCompany ? <div style={styles.button}><Link to={`/organizations/${props.adminCompany._id}`}><RaisedButton label="View / Edit My Organization's Profile" fullWidth={true} primary={true} /></Link></div> : null}
-        <div style={styles.button}><Link to={`/users/${Meteor.userId()}`}><RaisedButton label="View / Edit My Volunteer Profile" fullWidth={true} primary={true} /></Link></div>
-        <div style={styles.button}><Link to="/settings"><RaisedButton label="Change My Password" fullWidth={true} primary={true} /></Link></div>
+        {props.adminCompany ? 
+          <div style={styles.button}>
+            <Link to={`/organizations/${props.adminCompany._id}`}>
+              <RaisedButton 
+                label="Edit Your Organization's Profile" 
+                fullWidth={true} 
+                backgroundColor={Colors.primary}
+                labelColor={'white'} 
+              />
+            </Link>
+          </div> 
+        : null
+        }
+        <div style={styles.button}>
+          <Link to={`/users/${Meteor.userId()}`}>
+            <RaisedButton 
+              label="Edit Your Volunteer Profile" 
+              fullWidth={true} 
+              backgroundColor={Colors.primary}
+              labelColor={'white'}
+            />
+          </Link>
+        </div>
+        <div style={styles.button}>
+          <Link to="/settings">
+            <RaisedButton 
+              label="Change Your Password" 
+              fullWidth={true} 
+              backgroundColor={Colors.primary}
+              labelColor={'white'}
+            />
+          </Link>
+        </div>
       </div>
       <div style={styles.columnTwo}>
-        <div style={styles.button}><Link to="/positions"><RaisedButton label="Browse Positions" fullWidth={true} primary={true} /></Link></div>
-        <div style={styles.button}><Link to="/organizations"><RaisedButton label="Browse Organizations" fullWidth={true} primary={true} /></Link></div>
-        <div style={styles.button}><Link to="/users"><RaisedButton label="Browse Volunteers" fullWidth={true} primary={true} /></Link></div>
+        <div style={styles.button}>
+          <Link to="/positions">
+            <RaisedButton 
+              label="Browse Positions" 
+              fullWidth={true} 
+              backgroundColor={Colors.primary}
+              labelColor={'white'}
+            />
+          </Link>
+        </div>
+        <div style={styles.button}>
+          <Link to="/organizations">
+            <RaisedButton 
+              label="Browse Organizations" 
+              fullWidth={true} 
+              backgroundColor={Colors.primary}
+              labelColor={'white'}
+              />
+            </Link>
+          </div>
+        <div style={styles.button}>
+          <Link to="/users">
+            <RaisedButton 
+              label="Browse Volunteers" 
+              fullWidth={true} 
+              backgroundColor={Colors.primary}
+              labelColor={'white'}
+              />
+            </Link>
+          </div>
       </div>
     </div>
   )

@@ -12,7 +12,7 @@ class Content extends Component {
 
 const styles = {
   content: {
-    width: '80%',
+    width: '90%',
     maxWidth: 1440,
     margin: '0 auto',
     padding: '24px'

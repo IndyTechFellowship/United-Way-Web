@@ -8,12 +8,11 @@ import { Colors } from '/imports/ui/styles'
 
 const styles = {
   container: {
+    display: 'flex',
     alignItems: 'center',
     backgroundColor: Colors.white,
     justifyContent: 'space-between',
-    margin: '8px',
-    padding: '24px',
-    width: '100%',
+    padding: '16px'
   },
   filterText: {
     color: Colors.mediumGrey,
@@ -21,16 +20,16 @@ const styles = {
 }
 
 const CollectionFilterBar = ({ clearFilters, isTextFiltered, searchTerm }) => {
-  return (
-    <Row style={styles.container}>
-      {isTextFiltered && searchTerm
-        ? <span style={styles.filterText}>Search for "{searchTerm}"</span>
-        : <span style={styles.filterText}>All Results</span>}
+  return isTextFiltered && searchTerm ?
+    <div style={styles.container}>
+      <div style={styles.filterText}>Search for "{searchTerm}"</div>
       <FlatButton
         icon={<ContentClear />}
-        onTouchTap={() => clearFilters()} />
-    </Row>
-  )
+        onTouchTap={() => clearFilters()} 
+      />
+    </div>
+  :
+    null
 }
 
 CollectionFilterBar.propTypes = {
