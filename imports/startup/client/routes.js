@@ -14,7 +14,7 @@ import RegistrationPage from '/imports/ui/views/registration/RegistrationPage'
 import SettingsPage from '/imports/ui/views/settings/SettingsPage'
 import UserPage from '/imports/ui/views/users/UserPage'
 import UsersPage from '/imports/ui/views/users/UsersPage'
-import TermsAndConditions from '/imports/ui/views/terms/TermsAndConditions'
+import PrivacyPolicyPage from '/imports/ui/views/terms/PrivacyPolicyPage'
 
 import { store } from '/imports/ui/state'
 
@@ -35,7 +35,7 @@ export const Routes = () => (
           <IndexRoute component={UsersPage}/>
           <Route path=":id" component={UserPage}/>
         </Route>
-        <Route path="termsandconditions" component={TermsAndConditions} />
+        <Route path="privacy_policy" component={PrivacyPolicyPage} />
         <Route path="*" component={NotFoundPage}/>
       </Route>
     </Router>

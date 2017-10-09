@@ -22,10 +22,15 @@ import SigninDialog from '/imports/ui/views/signin/SigninDialog'
 const styles = {
   pageWrapper: {
     display: "flex",
-    minHeight: "100vh",
+    flexGrow: 1,
     width: '100%',
     flexDirection: "column",
     background: '#f9f9f9',
+  },
+  container: {
+    display: 'flex',
+    minHeight: '100vh',
+    flexDirection: 'column'
   }
 }
 
@@ -68,12 +73,12 @@ class App extends Component {
     } = this.props;
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
+        <div style={styles.container}>
           <Navbar />
           <div style={styles.pageWrapper}>
             { this.props.children }
-            <Footer />
           </div>
+          <Footer />
           <SigninDialog />
         </div>
       </MuiThemeProvider>

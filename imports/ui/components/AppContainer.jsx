@@ -9,6 +9,7 @@ import App from '/imports/ui/components/App'
 import {
   setCurrentUser,
 } from '/imports/ui/state'
+import ScrollToTop from '/imports/ui/components/ScrollToTop'
 
 class AppContainer extends Component {
 
@@ -21,7 +22,9 @@ class AppContainer extends Component {
 
   render() {
     return (
-      <App children={ this.props.children } />
+      <ScrollToTop>
+        <App children={ this.props.children } />
+      </ScrollToTop>
     )
   }
 }
