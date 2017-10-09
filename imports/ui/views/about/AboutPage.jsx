@@ -54,6 +54,28 @@ class AboutPage extends Component {
             We welcome your participation in BoardServeIndy and wish you success in becoming a board member
             of a nonprofit organization of your choice.
           </div>
+          <h2 style={styles.subHeader}>For Mission-Aligned Nonprofits Seeking Board/Committee Members</h2>
+          <div>
+            The United Way of Central Indiana (UWCI) believes that high functioning or "healthy" boards are key assets for building organizational capacity. Healthy boards enable organizations to respond strategically to new challenges and to garner the human & financial resources needed to strengthen, stabilize and sustain their organizations. This is why UWCI is committed to strengthening the capacity of our agencies and partners.
+          </div>
+          <h2 style={styles.subSubHeader}>Who can participate?</h2>
+          <div style={styles.block}>
+            UWCI agencies and partners looking for change makers or the chance to diversify their boards/committees stand to benefit the most from BoardServeIndy. 
+          </div>
+          <div style={styles.block}>
+            We’re looking for organizations focused on Education, Health, Financial Stability or Basic Needs and providing services one of UWCI’s six counties (Boone, Hamilton, Hancock, Hendricks, Marion or Morgan).
+          </div>
+          <h2 style={styles.subSubHeader}>PLEASE NOTE:</h2> 
+          <div style={styles.block}>
+            <i>
+              Due to the special role that board/committee members play as volunteers of a nonprofit organization, and the fact that board/committee membership that may require a formal application and selection process, BoardServeIndy requires engaged mission-aligned nonprofits and dedicated volunteers who are willing to commit to a process that demands active participation throughout all stages – from initial interest, mutual contact, conversations and cultivation, through the final decision of the mission-aligned nonprofit organization.
+            </i>
+          </div>
+          <div style={styles.block}>
+            <i>
+              BoardServeIndy does not verify background information provided by prospective board/committee candidates and participating mission-aligned nonprofit organizations. All participants are encouraged and expected to engage in their own due diligence throughout the matching process.
+            </i>
+        </div>
         </div>
       </Content>
     )
@@ -75,12 +97,21 @@ const styles = {
   },
 
   subHeader: {
-    color: '#0091ea'
+    color: '#0091ea',
+    marginTop: '48px'
+  },
+
+  subSubHeader: {
+    color: '#0091ea',
+    fontSize: '16px'
   },
 
   aboutContainer: {
-    margin: '0 0 40px 0',
-    fontSize: '14px'
+    marginBottom: '40px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    fontSize: '14px',
+    maxWidth: '700px'
   },
 }
 

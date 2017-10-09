@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Content from '/imports/ui/components/Content'
+import QuickActions from './QuickActions'
 import Title from '/imports/ui/components/Title'
 import OrganizationCarousel from '/imports/ui/views/home/OrganizationCarousel'
 import PositionCarousel from '/imports/ui/views/home/PositionCarousel'
@@ -31,6 +32,9 @@ class HomePage extends Component {
         </div>
 
         <Content>
+
+          <div style={styles.opportunityLabel}>Quick Actions</div>
+          <QuickActions />
 
           <div style={styles.opportunityLabel}>Positions</div>
           <PositionCarousel />

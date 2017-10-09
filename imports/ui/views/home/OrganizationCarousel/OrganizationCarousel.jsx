@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
+import FlatButton from 'material-ui/FlatButton'
 
 import Carousel from '/imports/ui/components/Carousel'
 import Loading from '/imports/ui/components/Loading'
@@ -21,6 +22,13 @@ const OrganizationCarousel = ({ loading, organizations }) => {
               </div>
           )
         })
+        organizationCards.push(
+          <div style={styles.seeMore}>
+            <Link to="/organizations">
+              <FlatButton label="See More" primary={true} />
+            </Link>
+          </div>
+        )
         return <Carousel cards={organizationCards}/>
       } else {
         return <div style={styles.empty}>No Organizations</div>
@@ -52,6 +60,12 @@ const styles = {
     width: '100%',
     padding: '48px 0',
     textAlign: 'center'
+  },
+  seeMore: {
+    height: '320px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }
 

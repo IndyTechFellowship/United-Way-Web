@@ -24,8 +24,8 @@ export default createContainer(() => {
   if (!userSubscription.ready()) {
     return { loading: true, users: [] }
   } else {
-    // NOTE: shuffle array of users and then select 10 users (or however many are available if less than 10)
-    let users =  _.take(_.shuffle(Users.find(userQuery).fetch()), 10);
+    // NOTE: shuffle array of users and then select 5 users (or however many are available if less than 5)
+    let users =  _.take(_.shuffle(Users.find(userQuery).fetch()), 5);
     return { loading: false, users: users }
   }
 }, UserCarouselContainer)

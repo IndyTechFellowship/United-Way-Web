@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { TagCloud } from 'react-tagcloud'
 import { Link } from 'react-router'
 import { Tabs, Tab } from 'material-ui/Tabs';
+import Joyride from 'react-joyride'
 
 import Breadcrumbs from '/imports/ui/components/Breadcrumbs'
 import Content from '/imports/ui/components/Content'

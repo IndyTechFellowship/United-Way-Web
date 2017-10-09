@@ -9,7 +9,9 @@ export default class Carousel extends Component {
       slidesToShow: 2,
       slidesToScroll: 2,
       swipe: false,
-      arrows: true
+      arrows: true,
+      dots: true,
+      infinite: false
     }
 
     return (

@@ -24,8 +24,8 @@ export default createContainer(() => {
   if (!positionSubscription.ready()) {
     return { loading: true, positions: [] }
   } else {
-    // NOTE: shuffle array of positions and then select 10 positions (or however many are available if less than 10)
-    let positions =  _.take(_.shuffle(Positions.find(positionQuery).fetch()), 10);
+    // NOTE: shuffle array of positions and then select 5 positions (or however many are available if less than 5)
+    let positions =  _.take(_.shuffle(Positions.find(positionQuery).fetch()), 5);
     return { loading: false, positions: positions }
   }
 }, PositionCarouselContainer)

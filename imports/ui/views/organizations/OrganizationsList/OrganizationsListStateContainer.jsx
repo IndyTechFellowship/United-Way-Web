@@ -6,6 +6,7 @@ import React, { Component, PropTypes } from 'react'
 import { Organizations } from '/imports/api/Organizations'
 import OrganizationsList from './OrganizationsList'
 
+import Content from '/imports/ui/components/Content'
 import CollectionFilterBar from '/imports/ui/components/CollectionFilterBar';
 import { setOrganizationSearchResults } from '/imports/ui/state'
 import { connect } from 'react-redux'
@@ -22,14 +23,14 @@ class OrganizationsListStateContainer extends Component {
     let { organizations } = this.props;
     if (organizationResults) organizations = _.intersectionBy(organizations, organizationResults, o => o._id)
     return (
-      <div>
+      <Content>
         <CollectionFilterBar
           clearFilters={() => dispatch(setOrganizationSearchResults(null))}
           isTextFiltered={!!organizationResults} />
         <OrganizationsList
           loading={loading}
           organizations={organizations} />
-      </div>
+      </Content>
     )
   }
 

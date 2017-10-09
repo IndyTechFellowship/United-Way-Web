@@ -15,9 +15,8 @@ class Footer extends Component {
           </div>
         </div>
         <Link style={styles.links} to={'/about'}>About</Link>
-        <Link style={styles.links} to={'/Privacy Policy'}>Privacy Policy</Link>
-        <Link style={styles.links} to={'/termsandconditions'}>Terms and Conditions</Link>
-        <Link style={styles.links} to={'http://www.uwci.org/'}>United Way of Central Indiana</Link>
+        <Link style={styles.links} to={'/privacy_policy'}>Privacy Policy</Link>
+        <a style={styles.links} href='http://www.uwci.org/'>United Way of Central Indiana</a>
         <div style={styles.outerBlock}>
           <div style={styles.innerBlock}>
             <span style={styles.bold}>Contact UWCI</span>
