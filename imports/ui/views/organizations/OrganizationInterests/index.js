@@ -1,2 +1,0 @@
-import OrganizationsInterests from './OrganizationInterestsContainer'
-export default OrganizationsInterests

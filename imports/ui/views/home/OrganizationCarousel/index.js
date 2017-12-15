@@ -1,2 +1,0 @@
-import OrganizationCarouselContainer from './OrganizationCarouselContainer'
-export default OrganizationCarouselContainer

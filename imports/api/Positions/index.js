@@ -26,10 +26,6 @@ const PositionsSchema = new SimpleSchema({
     optional: true
   },
   monetaryCommitment: {
-    type: Number,
-    optional: true
-  },
-  frequency: {
     type: String,
     optional: true
   },

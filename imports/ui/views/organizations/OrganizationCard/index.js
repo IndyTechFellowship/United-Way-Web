@@ -1,2 +1,0 @@
-import OrganizationCardContainer from './OrganizationCardContainer'
-export default OrganizationCardContainer
