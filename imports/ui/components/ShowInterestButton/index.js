@@ -1,2 +1,0 @@
-import ShowInterestButtonContainer from './ShowInterestButtonContainer'
-export default ShowInterestButtonContainer

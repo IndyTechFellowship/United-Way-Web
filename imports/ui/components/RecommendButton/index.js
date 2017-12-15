@@ -1,2 +1,0 @@
-import RecommendButtonContainer from './RecommendButtonContainer'
-export default RecommendButtonContainer
