@@ -1,78 +1,140 @@
+import _ from 'lodash'
 import React, { Component } from 'react';
 import { Link } from 'react-router'
 import PropTypes from 'prop-types';
-import { Button, Card, Icon, Intent, Tag, Tooltip } from '@blueprintjs/core'
+import { Alert, Button, Card, Icon, Intent, Tag, Tooltip } from '@blueprintjs/core'
 
 import PositionDialog from './PositionDialog'
+import EditPositionDialog from './EditPositionDialog'
 
 class Position extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      isOpen: false
+      isOpen: false,
+      isEditing: false,
+      confirmCancelOpen: false
     }
     this.toggleDialog = this.toggleDialog.bind(this)
+    this.toggleIsEditing = this.toggleIsEditing.bind(this)
+    this.toggleConfirmCancel = this.toggleConfirmCancel.bind(this)
+    this.deletePosition = this.deletePosition.bind(this)
   }
 
   toggleDialog() {
     this.setState({ isOpen: !this.state.isOpen })
   }
 
+  toggleIsEditing(e) {
+    this.setState({ isEditing: !this.state.isEditing })
+    e && e.stopPropagation()
+  }
+
+  toggleConfirmCancel(e) {
+    this.setState({ confirmCancelOpen: !this.state.confirmCancelOpen })
+    e && e.stopPropagation()
+  }
+
+  deletePosition() {
+    Meteor.call('Position.delete', this.props.position._id, (err, resp) => {
+      this.setState({
+        confirmCancelOpen: false
+      })
+    })
+  }
+
   render() {
     const { position } = this.props
+    const canEdit = _.includes(position.organization.admins, Meteor.userId())
     return (
       <div>
         <div style={styles.card}>
-          <Tooltip content="View more details about this position" hoverOpenDelay={200}>
-            <Card interactive={true} onClick={this.toggleDialog}>
-              <div style={styles.cardContent}>
-                <div style={styles.cardHeader}>
-                  <Tooltip content={position.opportunityType === 'Board' ? 'Board Position' : 'Committee Position'} hoverOpenDelay={200}>
-                    <div style={styles.icon(position.opportunityType === 'Board')}>
-                      <Icon iconName={position.opportunityType === 'Board' ? 'pt-icon-person' : 'pt-icon-people'} />
-                    </div>
+          <Card interactive={true} onClick={this.toggleDialog}>
+            <div style={styles.cardContent}>
+              {canEdit ?
+                <div style={styles.editButton}>
+                  <Tooltip content="Edit this position" hoverOpenDelay={200}>
+                    <Button
+                      iconName='edit'
+                      intent={Intent.PRIMARY}
+                      onClick={this.toggleIsEditing}
+                      style={styles.edit}
+                    />
                   </Tooltip>
-                  <div style={{maxWidth: '90%'}} className="pt-text-overflow-ellipsis">
-                    <h3 style={styles.h3}>{position.name}</h3>
-                    <h6 style={styles.h3}>
-                      <Tooltip content="View this organization's profile" hoverOpenDelay={200}>
-                        <Link to={`/organizations/${position.organization._id}`}>{position.organization.name}</Link>
-                      </Tooltip>
-                    </h6>
+                  <Tooltip content="Delete this position" hoverOpenDelay={200}>
+                    <Button
+                      iconName='trash'
+                      intent={Intent.DANGER}
+                      onClick={this.toggleConfirmCancel}
+                    />
+                  </Tooltip>
+                </div>
+              :
+                null
+              }
+              <div style={styles.cardHeader}>
+                <Tooltip content={position.opportunityType === 'Board' ? 'Board Position' : 'Committee Position'} hoverOpenDelay={200}>
+                  <div style={styles.icon(position.opportunityType === 'Board')}>
+                    <Icon iconName={position.opportunityType === 'Board' ? 'pt-icon-person' : 'pt-icon-people'} />
+                  </div>
+                </Tooltip>
+                <div style={{maxWidth: '90%'}} className="pt-text-overflow-ellipsis">
+                  <h3 style={styles.h3}>{position.name}</h3>
+                  <h6 style={styles.h3}>
+                    <Tooltip content="View this organization's profile" hoverOpenDelay={200}>
+                      <Link to={`/organizations/${position.organization._id}`}>{position.organization.name}</Link>
+                    </Tooltip>
+                  </h6>
+                </div>
+              </div>
+              <div style={styles.attributeContainer}>
+                <div style={styles.attributeColumn}>
+                  <div style={styles.attribute}>
+                    <div style={styles.label}>Position Category</div>
+                    <div>{position.positionType || '-'}</div>
+                  </div>
+                  <div style={styles.attribute}>
+                    <div style={styles.label}>Time Commitment</div>
+                    <div>{position.timeCommitment || '-'}</div>
+                  </div>
+                  <div style={styles.attribute}>
+                    <div style={styles.label}>Monetary Commitment</div>
+                    <div>{position.monetaryCommitment || '-'}</div>
                   </div>
                 </div>
-                <div style={styles.attributeContainer}>
-                  <div style={styles.attributeColumn}>
-                    <div style={styles.attribute}>
-                      <div style={styles.label}>Position Category</div>
-                      <div>{position.positionType || '-'}</div>
-                    </div>
-                    <div style={styles.attribute}>
-                      <div style={styles.label}>Time Commitment</div>
-                      <div>{position.timeCommitment || '-'}</div>
-                    </div>
-                    <div style={styles.attribute}>
-                      <div style={styles.label}>Monetary Commitment</div>
-                      <div>{position.monetaryCommitment || '-'}</div>
-                    </div>
-                  </div>
-                  <div style={styles.attributeColumn}>
-                    <div style={styles.attribute}>
-                      <div style={styles.label}>Desired Skills</div>
-                      <div>{position.skills.length > 0 ? position.skills.map(skill => <Tag key={skill._id} style={styles.tag}>{skill.name}</Tag>) : '-'}</div>
-                    </div>
+                <div style={styles.attributeColumn}>
+                  <div style={styles.attribute}>
+                    <div style={styles.label}>Desired Skills</div>
+                    <div>{position.skills.length > 0 ? position.skills.map(skill => <Tag key={skill._id} style={styles.tag}>{skill.name}</Tag>) : '-'}</div>
                   </div>
                 </div>
               </div>
-            </Card>
-          </Tooltip>
+            </div>
+          </Card>
         </div>
         <PositionDialog 
           position={position}
           isOpen={this.state.isOpen}
           toggleDialog={this.toggleDialog}
         />
+        <EditPositionDialog
+          position={position}
+          isOpen={this.state.isEditing}
+          toggleDialog={this.toggleIsEditing}
+        />
+        <Alert
+          intent={Intent.DANGER}
+          isOpen={this.state.confirmCancelOpen}
+          cancelButtonText="Cancel"
+          confirmButtonText="Delete"
+          onCancel={this.toggleConfirmCancel}
+          onConfirm={this.deletePosition}
+        >
+          <p>
+            Are you sure you want to delete this position?
+          </p>
+        </Alert>
       </div>
     );
   }
@@ -86,6 +148,7 @@ const styles = {
   card: {
     marginRight: '10px',
     marginBottom: '10px',
+    position: 'relative'
   },
   cardContent: {
     width: '430px',
@@ -135,6 +198,14 @@ const styles = {
   },
   tag: {
     margin: '2px'
+  },
+  editButton: {
+    position: 'absolute',
+    top: '-10px',
+    right: '10px'
+  },
+  edit: {
+    marginRight: '5px'
   }
 }
 

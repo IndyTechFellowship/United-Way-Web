@@ -8,6 +8,7 @@ import {
   setSearchCategoriesOpen,
   setSigninDialogOpen,
 } from '/imports/new-ui/state'
+import UserMenu from './UserMenu'
 
 const Navbar = (props) => {
   const {
@@ -19,6 +20,7 @@ const Navbar = (props) => {
     onUserButtonClicked,
     openSigninDialog,
   } = props
+
   return (
     <nav className="pt-navbar" style={styles.nav}>
       <div style={styles.container}>
@@ -37,7 +39,7 @@ const Navbar = (props) => {
           <Link to="/volunteers"><button className="pt-button pt-minimal" style={styles.link}>Volunteers</button></Link>
           <span className="pt-navbar-divider" style={styles.divider}></span>
           {!!currentUser
-            ? <span>{currentUser.firstName} {currentUser.lastName}</span>
+            ? <UserMenu />
             : <button onClick={openSigninDialog} className="pt-button pt-minimal" style={styles.link}>Login</button>
           }
         </div>

@@ -14,6 +14,13 @@ const ViewOrganizationPage = ({ organization }) => {
     <div style={styles.container}>
       <Card className="pt-fill">
         <div style={styles.card}>
+          <Button
+            iconName='edit'
+            intent={Intent.PRIMARY}
+            className='pt-minimal'
+            style={styles.editButton}
+            text="Edit"
+          />
           <div style={styles.icon(organization.avatarUrl)}></div>
           <div>
             <h2 style={styles.header}>{organization.name}</h2>
@@ -33,7 +40,20 @@ const ViewOrganizationPage = ({ organization }) => {
               <div style={styles.attributeColumn}>
                 <div style={styles.attribute}>
                   <div style={styles.label}>Tags</div>
-                  <div>{organization.tags.length > 0 ? organization.tags.map(tag => <Tag key={tag._id} style={styles.tag}>{tag.name}</Tag>) : '-'}</div>
+                  <div>
+                    {
+                      organization.tags.length > 0 
+                        ? organization.tags.map(tag => 
+                            <Tag 
+                              key={tag._id} 
+                              style={styles.tag}
+                            >
+                              {tag.name}
+                            </Tag>
+                          ) 
+                        : '-'
+                    }
+                  </div>
                 </div>
               </div>
             </div>
@@ -61,7 +81,8 @@ const styles = {
   },
   card: {
     display: 'flex',
-    padding: '20px'
+    padding: '20px',
+    position: 'relative'
   },
   icon: avatarUrl => ({
     height: '240px',
@@ -108,6 +129,11 @@ const styles = {
   title: {
     display: 'flex',
     justifyContent: 'space-between'
+  },
+  editButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0
   }
 }
 

@@ -16,9 +16,7 @@ class Experience extends Component {
             <Card interactive={true}>
               <div style={styles.cardContent}>
                 <div style={styles.cardHeader}>
-                  <div style={styles.icon('')}>
-                  </div>
-                  <div style={{maxWidth: '90%'}} className="pt-text-overflow-ellipsis">
+                  <div className="pt-text-overflow-ellipsis">
                     <h3 style={styles.h3}>{experience.title}</h3>
                     <h6 style={styles.h3}>{experience.companyName}</h6>
                   </div>
