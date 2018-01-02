@@ -35,7 +35,8 @@ const SigninDialog = ({
           type="text"
           placeholder="Email"
           dir="auto"
-          onChange={(e, v) => updateEmail(v)}
+          onKeyPress={(e) => { if (e.key === 'Enter') signinUser() }}
+          onChange={(e) => updateEmail(e.target.value)}
           value={email}
         />
       </label>
@@ -46,7 +47,8 @@ const SigninDialog = ({
           type="password"
           placeholder="Password"
           dir="auto"
-          onChange={(e, v) => updatePassword(v)}
+          onKeyPress={(e) => { if (e.key === 'Enter') signinUser() }}
+          onChange={(e) => updatePassword(e.target.value)}
           value={password}
         />
       </label>
