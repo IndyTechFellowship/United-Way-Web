@@ -201,7 +201,7 @@ const styles = {
   },
   editButton: {
     position: 'absolute',
-    top: '-10px',
+    top: '-8px',
     right: '10px'
   },
   edit: {

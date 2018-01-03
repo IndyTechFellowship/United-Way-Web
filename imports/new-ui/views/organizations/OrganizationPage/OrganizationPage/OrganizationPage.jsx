@@ -99,7 +99,7 @@ class OrganizationPage extends Component {
               <h2>Positions</h2>
               <div style={styles.positionCards}>
                 {
-                  organization.positions.map(position => <Position key={position._id} position={position} />)
+                  _.sortBy(organization.positions, ['name']).map(position => <Position key={position._id} position={position} />)
                 }
               </div>
               <Button
