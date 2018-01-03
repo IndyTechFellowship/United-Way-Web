@@ -5,11 +5,7 @@ import { Positions } from './index'
 
 Meteor.methods({
   'Position.insert'(position) {
-    console.log('hihihi')
-    debugger
-    console.log(position)
     if (this.connection) {
-      console.log(position)
       position._id = null
       position.skills = position.skills.map(i => i._id)
       const newPosition = Positions.insert(position)

@@ -50,17 +50,15 @@ class EditPositionDialog extends Component {
 
   save() {
     const position = _.cloneDeep(this.state.position)
-    const newPosition = position._id !== null
-    console.log('hello')
+    const newPosition = position._id === null
     if (newPosition) {
       Meteor.call('Position.insert', position, (err, resp) => {
-        console.log(err)
-        console.log(resp)
-        // let organization = this.props.position.organization
-        // organization.positions.push(position)
-        // Meteor.call('Position.insert', position, (err, resp) => {
-        //   this.props.toggleDialog()
-        // })
+        let organization = _.cloneDeep(this.props.position.organization)
+        organization.positions = organization.positions.map(position => position._id)
+        organization.positions.push({ _id: resp })
+        Meteor.call('Organization.update', organization, (err, resp) => {
+          this.props.toggleDialog()
+        })
       })
     } else {
       Meteor.call('Position.update', position, (err, resp) => {
