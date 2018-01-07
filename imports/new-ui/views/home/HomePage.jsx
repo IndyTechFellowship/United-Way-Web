@@ -82,7 +82,7 @@ const HomePage = () => {
           <VolunteerCarousel />
           <div style={styles.actions}>
             <Tooltip content="Browse and search volunteers" hoverOpenDelay={200}>
-              <Link to="/users"><Button intent={Intent.PRIMARY} text="See More Volunteers" rightIconName="pt-icon-arrow-right" /></Link>
+              <Link to="/volunteers"><Button intent={Intent.PRIMARY} text="See More Volunteers" rightIconName="pt-icon-arrow-right" /></Link>
             </Tooltip>
           </div>
         </div>
