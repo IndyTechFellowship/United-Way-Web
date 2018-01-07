@@ -28,114 +28,114 @@ class OrganizationPage extends Component {
 
   render() {
     const { loading, isMyOrganization, organization, tags } = this.props
-    if (loading) {
-      return <Loader />
-    } else {
-      let location = "-"
-      if (organization.city && organization.state) {
-        location = `${organization.city}, ${organization.state}`
-      } else if (organization.city || organization.state) {
-        location = organization.city || organization.state
-      }
-      return (
-        <div style={styles.content}>
-          <div style={styles.container}>
-            <Card className="pt-fill">
-              <div style={styles.card}>
-                {isMyOrganization ?
-                  <div style={styles.editButton}>
-                    <Tooltip content="Edit this organization's profile" hoverOpenDelay={200}>
-                      <Button
-                        iconName='edit'
-                        intent={Intent.PRIMARY}
-                        text="Edit"
-                        onClick={this.toggleIsEditing}
-                      />
-                    </Tooltip>
-                  </div>
-                : 
-                  null
-                }
-                <div style={styles.icon(organization.avatarUrl)}></div>
-                <div>
-                  <h2 style={styles.header}>{organization.name}</h2>
-                  <h5 style={styles.header}>{organization.tagline}</h5>
-                  <p>{organization.description}</p>
-                  <div style={styles.attributeContainer}>
-                    <div style={styles.attributeColumn}>
-                      <div style={styles.attribute}>
-                        <div style={styles.label}>Location</div>
-                        <div>{location}</div>
-                      </div>
-                      <div style={styles.attribute}>
-                        <div style={styles.label}>Website</div>
-                        <div>{organization.websiteUrl || '-'}</div>
-                      </div>
+    if (loading) return <Loader />
+    let location = "-"
+    if (organization.city && organization.state) {
+      location = `${organization.city}, ${organization.state}`
+    } else if (organization.city || organization.state) {
+      location = organization.city || organization.state
+    }
+    return (
+      <div style={styles.content}>
+        <div style={styles.container}>
+          <Card className="pt-fill">
+            <div style={styles.card}>
+              {isMyOrganization ?
+                <div style={styles.editButton}>
+                  <Tooltip content="Edit this organization's profile" hoverOpenDelay={200}>
+                    <Button
+                      iconName='edit'
+                      intent={Intent.PRIMARY}
+                      text="Edit"
+                      onClick={this.toggleIsEditing}
+                    />
+                  </Tooltip>
+                </div>
+              : 
+                null
+              }
+              <div style={styles.icon(organization.avatarUrl)}></div>
+              <div>
+                <h2 style={styles.header}>{organization.name}</h2>
+                <h5 style={styles.header}>{organization.tagline}</h5>
+                <p>{organization.description}</p>
+                <div style={styles.attributeContainer}>
+                  <div style={styles.attributeColumn}>
+                    <div style={styles.attribute}>
+                      <div style={styles.label}>Location</div>
+                      <div>{location}</div>
                     </div>
-                    <div style={styles.attributeColumn}>
-                      <div style={styles.attribute}>
-                        <div style={styles.label}>Tags</div>
-                        <div>
-                          {
-                            organization.tags.length > 0 
-                              ? organization.tags.map(tag => 
-                                  <Tag
-                                    key={tag._id} 
-                                    style={styles.tag}
-                                  >
-                                    {tag.name}
-                                  </Tag>
-                                ) 
-                              : '-'
-                          }
-                        </div>
+                    <div style={styles.attribute}>
+                      <div style={styles.label}>Website</div>
+                      <div>{organization.websiteUrl || '-'}</div>
+                    </div>
+                  </div>
+                  <div style={styles.attributeColumn}>
+                    <div style={styles.attribute}>
+                      <div style={styles.label}>Tags</div>
+                      <div>
+                        {
+                          organization.tags.length > 0 
+                            ? organization.tags.map(tag => 
+                                <Tag
+                                  key={tag._id} 
+                                  style={styles.tag}
+                                >
+                                  {tag.name}
+                                </Tag>
+                              ) 
+                            : '-'
+                        }
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </Card>
-            <div style={styles.positions}>
-              <h2>Positions</h2>
-              <div style={styles.positionCards}>
-                {
-                  _.sortBy(organization.positions, ['name']).map(position => <Position key={position._id} position={position} />)
-                }
-              </div>
+            </div>
+          </Card>
+          <div style={styles.positions}>
+            <h2>Positions</h2>
+            <div style={styles.positionCards}>
+              {
+                _.sortBy(organization.positions, ['name']).map(position => <Position key={position._id} position={position} />)
+              }
+            </div>
+            {isMyOrganization ?
               <Button
                 className="pt-fill pt-large"
                 iconName='plus'
                 intent={Intent.PRIMARY}
                 text="Add Position"
                 onClick={this.toggleAddPosition}
-                style={styles.addPositionButton}
               />
-            </div>
+            :
+              null
+            }
           </div>
-          <EditOrganizationDialog 
-            organization={organization}
-            tags={tags}
-            isOpen={this.state.isEditing}
-            toggleDialog={this.toggleIsEditing}
-          />
-          <EditPositionDialog
-            position={{
-              _id: null,
-              name: '',
-              opportunityType: 'Committee',
-              description: '',
-              positionType: '',
-              timeCommitment: '',
-              monetaryCommitment: '',
-              skills: [],
-              organization: organization
-            }}
-            isOpen={this.state.addingPosition}
-            toggleDialog={this.toggleAddPosition}
-          />
         </div>
-      )
-    }
+        <EditOrganizationDialog 
+          organization={organization}
+          tags={tags}
+          isOpen={this.state.isEditing}
+          toggleDialog={this.toggleIsEditing}
+        />
+        <EditPositionDialog
+          position={{
+            _id: null,
+            name: '',
+            opportunityType: 'Committee',
+            description: '',
+            positionType: '',
+            timeCommitment: '',
+            monetaryCommitment: '',
+            skills: [],
+            organization: organization
+          }}
+          isOpen={this.state.addingPosition}
+          toggleDialog={this.toggleAddPosition}
+        />
+      </div>
+    )
   }
 }
 
