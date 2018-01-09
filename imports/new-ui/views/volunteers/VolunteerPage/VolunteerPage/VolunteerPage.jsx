@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Card, Intent, Tag, Tooltip } from '@blueprintjs/core'
+import { Button, Card, Intent, NonIdealState, Tag, Tooltip } from '@blueprintjs/core'
 
+import EditExperienceDialog from '/imports/new-ui/components/Experiences/EditExperienceDialog'
 import EditVolunteerDialog from './EditVolunteerDialog'
 import Experience from '/imports/new-ui/components/Experiences/Experience'
 import Loader from '/imports/new-ui/components/Loader'
@@ -75,58 +76,104 @@ export default class VolunteerPage extends React.Component {
               </div>
             </div>
           </Card>
-          <div style={styles.experiences}>
-            <h2>Volunteer Experience</h2>
-            <div style={styles.experienceCards}>
-              {
-                volunteer.profile.volunteerExperiences.length > 0 
-                  ? volunteer.profile.volunteerExperiences.map(experience => <Experience key={experience._id} experience={experience} />)
-                  : <div className="pt-non-ideal-state">
-                      <h4 className="pt-non-ideal-state-title">No volunteer experiences</h4>
-                    </div>
-              }
-            </div>
-            {isMe ?
-              <Button
-                className="pt-fill pt-large"
-                iconName='plus'
-                intent={Intent.PRIMARY}
-                text="Add Volunteer Experience"
-                onClick={this.toggleAddVolunteerExperience}
-              />
-            :
-              null
-            }
-          </div>
-          <div style={styles.experiences}>
-            <h2>Professional Experience</h2>
-            <div style={styles.experienceCards}>
-              {
-                volunteer.profile.professionalExperiences.length > 0
-                  ? volunteer.profile.professionalExperiences.map(experience => <Experience key={experience._id} experience={experience} />)
-                  : <div className="pt-non-ideal-state">
-                      <h4 className="pt-non-ideal-state-title">No professional experiences</h4>
-                    </div>
-              }
-            </div>
-            {isMe ?
-              <Button
-                className="pt-fill pt-large"
-                iconName='plus'
-                intent={Intent.PRIMARY}
-                text="Add Professional Experience"
-                onClick={this.toggleAddProfessionalExperience}
-              />
-            :
-              null
-            }
-          </div>
+          { volunteer.profile.volunteerExperiences.length > 0 || isMe
+            ? <div style={styles.experiences}>
+                <h2>Volunteer Experience</h2>
+                <div style={styles.experienceCards}>
+                  {
+                    volunteer.profile.volunteerExperiences.length > 0 
+                      ? volunteer.profile.volunteerExperiences.map(experience => <Experience key={experience._id} experience={experience} canEdit={isMe} user={volunteer} experienceType='volunteer' />)
+                      : <div style={styles.nonIdealState}>
+                          <NonIdealState
+                            visual="box"
+                            title="No volunteer experiences added"
+                            description="Click the button below to add a volunteer experience."
+                          />
+                        </div>
+                  }
+                </div>
+                {isMe ?
+                  <Button
+                    className="pt-fill pt-large"
+                    iconName='plus'
+                    intent={Intent.PRIMARY}
+                    text="Add Volunteer Experience"
+                    onClick={this.toggleAddVolunteerExperience}
+                  />
+                :
+                  null
+                }
+              </div>
+            : null
+          }
+          { volunteer.profile.professionalExperiences.length > 0 || isMe
+            ? <div style={styles.experiences}>
+                <h2>Professional Experience</h2>
+                <div style={styles.experienceCards}>
+                  {
+                    volunteer.profile.professionalExperiences.length > 0
+                      ? volunteer.profile.professionalExperiences.map(experience => <Experience key={experience._id} experience={experience} canEdit={isMe} volunteer={volunteer} experienceType='professional' />)
+                      : <div style={styles.nonIdealState}>
+                          <NonIdealState
+                            visual="box"
+                            title="No professional experiences added"
+                            description="Click the button below to add a professional experience."
+                          />
+                        </div>
+                  }
+                </div>
+                {isMe ?
+                  <Button
+                    className="pt-fill pt-large"
+                    iconName='plus'
+                    intent={Intent.PRIMARY}
+                    text="Add Professional Experience"
+                    onClick={this.toggleAddProfessionalExperience}
+                  />
+                :
+                  null
+                }
+              </div>
+            : null
+          }
         </div>
         <EditVolunteerDialog 
           volunteer={volunteer}
           tags={tags}
           isOpen={this.state.isEditing}
           toggleDialog={this.toggleIsEditing}
+        />
+        <EditExperienceDialog
+          experienceType='volunteer'
+          experience={{
+            _id: null,
+            title: '',
+            companyName: '',
+            description: '',
+            location: '',
+            startDate: null,
+            endDate: null,
+            tags: []
+          }}
+          volunteer={volunteer}
+          isOpen={this.state.addingVolunteerExperience}
+          toggleDialog={this.toggleAddVolunteerExperience}
+        />
+        <EditExperienceDialog
+          experienceType='professional'
+          experience={{
+            _id: null,
+            title: '',
+            companyName: '',
+            description: '',
+            location: '',
+            startDate: null,
+            endDate: null,
+            tags: []
+          }}
+          volunteer={volunteer}
+          isOpen={this.state.addingProfessionalExperience}
+          toggleDialog={this.toggleAddProfessionalExperience}
         />
       </div>
     )
@@ -199,5 +246,9 @@ const styles = {
     position: 'absolute',
     top: 0,
     right: 0
+  },
+  nonIdealState: {
+    margin: '32px 0',
+    width: '100%'
   }
 }

@@ -9,6 +9,7 @@ import AboutPage from '/imports/new-ui/views/about/AboutPage'
 import PositionsPage from '/imports/new-ui/views/positions/PositionsPage'
 import OrganizationsPage from '/imports/new-ui/views/organizations/OrganizationsPage'
 import OrganizationPage from '/imports/new-ui/views/organizations/OrganizationPage'
+import RegistrationPage from '/imports/new-ui/views/registration/RegistrationPage'
 import SettingsPage from '/imports/new-ui/views/settings/SettingsPage'
 import VolunteersPage from '/imports/new-ui/views/volunteers/VolunteersPage'
 import VolunteerPage from '/imports/new-ui/views/volunteers/VolunteerPage'
@@ -31,6 +32,7 @@ export const Routes = () => (
           <Route path=":id" component={VolunteerPage} />
         </Route>
         <Route path="settings" component={SettingsPage} />
+        <Route path="register" component={RegistrationPage} />
       </Route>
     </Router>
   </Provider>

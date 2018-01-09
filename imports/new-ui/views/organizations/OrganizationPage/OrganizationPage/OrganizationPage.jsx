@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Card, Intent, Tag, Tooltip } from '@blueprintjs/core'
+import { Button, Card, Intent, NonIdealState, Tag, Tooltip } from '@blueprintjs/core'
 
 import EditPositionDialog from '/imports/new-ui/components/Positions/EditPositionDialog'
 import EditOrganizationDialog from './EditOrganizationDialog'
@@ -95,21 +95,52 @@ class OrganizationPage extends Component {
           </Card>
           <div style={styles.positions}>
             <h2>Positions</h2>
-            <div style={styles.positionCards}>
-              {
-                _.sortBy(organization.positions, ['name']).map(position => <Position key={position._id} position={position} />)
-              }
-            </div>
-            {isMyOrganization ?
-              <Button
-                className="pt-fill pt-large"
-                iconName='plus'
-                intent={Intent.PRIMARY}
-                text="Add Position"
-                onClick={this.toggleAddPosition}
-              />
-            :
-              null
+            {
+              organization.positions.length > 0 || isMyOrganization
+              ? organization.positions.length > 0 
+                  ? <div>
+                      <div style={styles.positionCards}>
+                        {
+                          _.sortBy(organization.positions, ['name']).map(position => <Position key={position._id} position={position} />)
+                        }
+                      </div>
+                      {isMyOrganization ?
+                        <Button
+                          className="pt-fill pt-large"
+                          iconName='plus'
+                          intent={Intent.PRIMARY}
+                          text="Add Position"
+                          onClick={this.toggleAddPosition}
+                        />
+                      :
+                        null
+                      }
+                    </div>
+                  :
+                    <div>
+                      <div style={styles.nonIdealState}>
+                        <NonIdealState
+                          visual="box"
+                          title="No positions added"
+                          description="Click the button below to add a position."
+                        />
+                      </div>
+                      <Button
+                        className="pt-fill pt-large"
+                        iconName='plus'
+                        intent={Intent.PRIMARY}
+                        text="Add Position"
+                        onClick={this.toggleAddPosition}
+                      />
+                    </div>
+              :
+                <div style={styles.nonIdealState}>
+                  <NonIdealState
+                    visual="box"
+                    title="No positions currently open"
+                    description="Check back later to see if any positions have become available."
+                  />
+                </div>
             }
           </div>
         </div>
@@ -205,6 +236,10 @@ const styles = {
     position: 'absolute',
     top: 0,
     right: 0
+  },
+  nonIdealState: {
+    margin: '32px 0',
+    width: '100%'
   }
 }
 
