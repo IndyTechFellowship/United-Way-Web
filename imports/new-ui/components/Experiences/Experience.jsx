@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react';
 import { Link } from 'react-router'
 import PropTypes from 'prop-types';
@@ -29,9 +30,17 @@ class Experience extends Component {
   }
 
   deleteExperience() {
-    Meteor.call('Experience.delete', this.props.experience._id, (err, resp) => {
-      this.setState({
-        confirmCancelOpen: false
+    const volunteer = _.cloneDeep(this.props.volunteer)
+    if (this.props.experienceType === 'volunteer') {
+      _.remove(volunteer.profile.volunteerExperiences, { _id: this.props.experience._id })
+    } else {
+      _.remove(volunteer.profile.professionalExperiences, { _id: this.props.experience._id })
+    }
+    Meteor.call('User.update', volunteer, (err, resp) => {
+      Meteor.call('Experience.delete', this.props.experience._id, (err, resp) => {
+        this.setState({
+          confirmCancelOpen: false
+        })
       })
     })
   }

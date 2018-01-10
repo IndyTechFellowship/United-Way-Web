@@ -82,7 +82,7 @@ export default class VolunteerPage extends React.Component {
                 <div style={styles.experienceCards}>
                   {
                     volunteer.profile.volunteerExperiences.length > 0 
-                      ? volunteer.profile.volunteerExperiences.map(experience => <Experience key={experience._id} experience={experience} canEdit={isMe} user={volunteer} experienceType='volunteer' />)
+                      ? volunteer.profile.volunteerExperiences.map(experience => <Experience key={experience._id} experience={experience} canEdit={isMe} volunteer={volunteer} experienceType='volunteer' />)
                       : <div style={styles.nonIdealState}>
                           <NonIdealState
                             visual="box"

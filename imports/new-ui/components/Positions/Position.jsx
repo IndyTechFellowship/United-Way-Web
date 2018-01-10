@@ -37,9 +37,14 @@ class Position extends Component {
   }
 
   deletePosition() {
-    Meteor.call('Position.delete', this.props.position._id, (err, resp) => {
-      this.setState({
-        confirmCancelOpen: false
+    let organization = _.cloneDeep(this.props.position.organization)
+    _.remove(organization.positions, { _id: this.props.position._id})
+    organization.positions = organization.positions.map(position => position._id)
+    Meteor.call('Organization.update', organization, (err, resp) => {
+      Meteor.call('Position.delete', this.props.position._id, (err, resp) => {
+        this.setState({
+          confirmCancelOpen: false
+        })
       })
     })
   }

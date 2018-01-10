@@ -29,6 +29,7 @@ Meteor.methods({
   },
 
   'Organization.update'(organization) {
+    debugger
     const callingUser = Users.findOne({ _id: this.userId });
     if (!callingUser) {
       throw new Meteor.Error(401, 'unauthorized')

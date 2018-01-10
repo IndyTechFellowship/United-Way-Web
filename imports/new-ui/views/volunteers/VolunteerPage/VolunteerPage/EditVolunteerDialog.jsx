@@ -188,6 +188,7 @@ class EditVolunteerDialog extends Component {
                 </TagPicker>
               </div>
             </div>
+            <br />
             <div>
               <div>Interests</div>
               <div style={styles.helperText}>Interests you have but don't necessarily have much experience with</div>
