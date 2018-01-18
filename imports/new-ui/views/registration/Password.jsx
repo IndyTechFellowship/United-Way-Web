@@ -9,8 +9,7 @@ const styles = {
   container: {
   },
   header: {
-    fontSize: '32px',
-    fontWeight: '300',
+    marginBottom: '20px'
   },
   subtitle: {
     fontSize: '16px',
@@ -21,21 +20,29 @@ const styles = {
 const Password = ({ dispatch, password1, password2 }) => (
   <Col style={styles.container}>
     <div style={styles.header}>
-      <div>Your Password</div>
-      <div style={styles.subtitle}>Please create a secure password below. At least 8 characters in length.</div>
+      <h2>Your Password</h2>
+      <span>Please create a secure password below. At least 8 characters in length.</span>
     </div>
-    <TextField
-      floatingLabelText="Password"
-      onChange={(e, v) => dispatch(setOnboardingField('password1', v))}
-      type="password"
-      value={password1}
-    />
-    <TextField
-      floatingLabelText="Confirm Password"
-      onChange={(e, v) => dispatch(setOnboardingField('password2', v))}
-      type="password"
-      value={password2}
-    />
+    <label className="pt-label">
+      Password
+      <input 
+        className='pt-input pt-fill' 
+        type="password"
+        dir="auto"
+        value={password1}
+        onChange={e => dispatch(setOnboardingField('password1', e.target.value))}
+      />
+    </label>
+    <label className="pt-label">
+      Confirm Password
+      <input 
+        className='pt-input pt-fill' 
+        type="password"
+        dir="auto"
+        value={password2}
+        onChange={e => dispatch(setOnboardingField('password2', e.target.value))}
+      />
+    </label>
   </Col>
 )
 

@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import { check, Match } from 'meteor/check'
 import { Meteor } from 'meteor/meteor'
+import { Promise } from 'meteor/promise'
+import BitlyClient from 'bitly'
 
 import { Users } from './index'
 
@@ -26,4 +28,9 @@ Meteor.methods({
       }
     });
   },
+  'User.generateInviteLink'(link) {
+    const fullLink = `${link}&token=${Meteor.settings.signupToken}` 
+    const bitly = BitlyClient(Meteor.settings.bitly.token)
+    return bitly.shorten(fullLink)
+  }
 })

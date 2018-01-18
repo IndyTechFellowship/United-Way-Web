@@ -29,7 +29,6 @@ Meteor.methods({
   },
 
   'Organization.update'(organization) {
-    debugger
     const callingUser = Users.findOne({ _id: this.userId });
     if (!callingUser) {
       throw new Meteor.Error(401, 'unauthorized')
@@ -54,15 +53,14 @@ Meteor.methods({
     return true
   },
 
-  'Organizations.setAvatar'(url) {
-    const manages = Organizations.findOne({ admins: this.userId });
+  'Organization.addAdmin'(id) {
     Organizations.update({
-      _id: manages._id,
+      _id: id,
     }, {
-      $set: {
-        avatarUrl: url,
+      $push: {
+        admins: this.userId,
       },
     });
-  }
+  },
 
 })

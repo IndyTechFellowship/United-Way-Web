@@ -1,6 +1,8 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton'
 
+import { Button, Intent } from '@blueprintjs/core'
+
 const Introduction = (props) => {
   const content = props.organizationName ?
     <div>
@@ -41,11 +43,12 @@ const Introduction = (props) => {
     <div style={styles.welcomeContainer}>
       <div style={styles.header}>Welcome to <b>BoardServeIndy!</b></div>
       {content}
-      <RaisedButton
+      <Button
+        className="pt-large"
         style={styles.getStarted}
-        label='Get Started'
-        labelColor={'white'}
-        onTouchTap={props.getStarted}
+        intent={Intent.PRIMARY}
+        text='Get Started'
+        onClick={props.getStarted}
       />
     </div>
   );
@@ -59,11 +62,13 @@ const styles = {
   },
   header: {
     fontSize: '48px',
-    fontWeight: '300'
+    fontWeight: '300',
+    color: '#0E5A8A'
   },
   subtitle: {
     fontSize: '32px',
-    margin: '8px 0'
+    margin: '8px 0',
+    color: '#0E5A8A'
   },
   description: {
     fontSize: '16px',
@@ -72,8 +77,9 @@ const styles = {
     fontWeight: 'normal'
   },
   getStarted: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    padding: '0 50px'
   }
 }
 
-export default Introduction;
+export default Introduction

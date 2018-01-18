@@ -1,7 +1,9 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import { browserHistory, Link } from 'react-router'
+import { createContainer } from 'meteor/react-meteor-data'
 import { connect } from 'react-redux'
-import { Paper } from 'material-ui'
+import { MuiThemeProvider, Paper } from 'material-ui'
 import {
   Step,
   Stepper,
@@ -10,6 +12,7 @@ import {
 } from 'material-ui/Stepper'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
+import { Button, Card, Intent } from '@blueprintjs/core'
 
 import { 
   createAccount,
@@ -19,8 +22,10 @@ import {
 } from '/imports/new-ui/state'
 import Introduction from './Introduction'
 import OrganizationProfile from './OrganizationProfile'
+import { Organizations } from '/imports/api/Organizations'
 import Password from './Password'
 import YourAccount from './YourAccount'
+import Loader from '/imports/new-ui/components/Loader'
 
 class RegistrationPage extends Component {
 
@@ -33,6 +38,7 @@ class RegistrationPage extends Component {
     }
     this.handleNext = this.handleNext.bind(this)
     this.handlePrev = this.handlePrev.bind(this)
+    this.addOrganizationAdmin = this.addOrganizationAdmin.bind(this)
   }
 
   componentDidMount() {
@@ -41,20 +47,27 @@ class RegistrationPage extends Component {
     query.firstName && setField('firstName', query.firstName)
     query.lastName && setField('lastName', query.lastName)
     query.organizationName && setField('organizationName', query.organizationName)
+    query.organizationId && setField('organizationId', query.organizationId)
     query.token && setField('token', query.token)
   }
 
+  addOrganizationAdmin(cb) {
+    Meteor.call('Organization.addAdmin', this.props.organizationId, (err, resp) => {
+      cb()
+    })
+  }
+
   handleCreate() {
-    const { createAccount, createOrganization, organizationName } = this.props;
-    if (organizationName) {
-      createAccount(() => createOrganization(() => browserHistory.push('/')));
+    const { createAccount, createOrganization, organizationName, organizationId } = this.props;
+    if (organizationName && !organizationId) {
+      createAccount(() => createOrganization(() => browserHistory.push('/?tour=true')));
     } else {
-      createAccount(() => browserHistory.push('/'));
+      createAccount(() => this.addOrganizationAdmin(browserHistory.push('/?tour=true')));
     }
   }
 
   handleNext() {
-    const { createAccount, organizationName, password1, password2, setError } = this.props;
+    const { createAccount, organizationName, organizationId, password1, password2, setError } = this.props;
     const { stepIndex } = this.state;
     switch (stepIndex) {
       case 1:  // Password
@@ -64,7 +77,7 @@ class RegistrationPage extends Component {
           return setError('Enter a Password At Least 8 Characters In Length.')
         }
         setError(null)
-        if (organizationName) {
+        if (organizationName && !organizationId) {
           return this.setState({ stepIndex: 2 });
         } else {
           return this.handleCreate();
@@ -79,12 +92,12 @@ class RegistrationPage extends Component {
   }
 
   handlePrev() {
-    const { organizationName, setError } = this.props
+    const { organizationName, organizationId, setError } = this.props
     const { stepIndex } = this.state
     setError(null)
     switch (stepIndex) {
       case 3:
-        if (organizationName) {
+        if (organizationName && !organizationId) {
           return this.setState({ stepIndex: 2 });
         } else {
           return this.setState({ stepIndex: 1 });
@@ -109,15 +122,15 @@ class RegistrationPage extends Component {
   }
 
   onLastStep() {
-    const { organizationName } = this.props
+    const { organizationName, organizationId } = this.props
     const { stepIndex } = this.state
-    return organizationName 
+    return organizationName && !organizationId
       ? stepIndex === 2
       : stepIndex === 1;
   }
 
   render() {
-    const { error, organizationName } = this.props;
+    const { loading, error, organizationName, organizationId } = this.props;
     const { finished, stepIndex, stepping } = this.state;
 
     let steps = [
@@ -134,7 +147,7 @@ class RegistrationPage extends Component {
         </StepContent>
       </Step>
     ]
-    if (organizationName) {
+    if (organizationName && !organizationId) {
       steps.push(
         <Step>
           <StepLabel>Organization Profile</StepLabel>
@@ -143,45 +156,58 @@ class RegistrationPage extends Component {
     }
     
     return (
-      <div style={styles.fullscreen}>
-        <div style={styles.title}>
-          <div><img style={styles.logo} src="logo.svg" /></div>
-          <div>BoardServeIndy</div>
-        </div>
-        <Paper style={styles.paper}>
-          { stepping ?
-            <div style={styles.stepper}>
-              <div style={styles.sidebar}>
-                <Stepper activeStep={stepIndex} orientation="vertical">
-                  {steps}
-                </Stepper>
-              </div>
-              <div style={styles.content}>
-                <div>{this.getStepContent(stepIndex, organizationName)}</div>
-                <div style={styles.buttons}>
-                  {error && <span style={styles.error}>{error}</span>}
-                  {stepIndex > 0 ?
-                    <FlatButton
-                      label="Back"
-                      onTouchTap={this.handlePrev.bind(this)}
-                      style={{marginRight: 12}} />
-                  : null
-                  }
-                  <RaisedButton
-                    label={this.onLastStep() ? 'Finish' : 'Next'}
-                    primary={true}
-                    onTouchTap={this.handleNext.bind(this)} />
+      <MuiThemeProvider>
+        <div style={styles.fullscreen}>
+          <div style={styles.title}>
+            <div><img style={styles.logo} src="logo.svg" /></div>
+            <div>BoardServeIndy</div>
+          </div>
+          <div style={styles.paper}>
+            <Card elevation={2}>
+              { stepping ?
+                <div style={styles.stepper}>
+                  <div style={styles.sidebar}>
+                    <Stepper activeStep={stepIndex} orientation="vertical">
+                      {steps}
+                    </Stepper>
+                  </div>
+                  <div style={styles.content}>
+                    <div>
+                      {this.getStepContent(stepIndex, organizationName)}
+                    </div>
+                    {error && <span style={styles.error}>{error}</span>}
+                    <div style={styles.buttons}>
+                      {stepIndex > 0 ?
+                        <Button
+                          text="Back"
+                          onClick={this.handlePrev.bind(this)}
+                          className='pt-large'
+                          style={{marginRight: 12}} />
+                      : null
+                      }
+                      <Button
+                        text={this.onLastStep() ? 'Finish' : 'Next'}
+                        intent={Intent.PRIMARY}
+                        rightIconName='arrow-right'
+                        className='pt-large'
+                        onClick={this.handleNext.bind(this)} />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          :
-            <Introduction
-              organizationName={organizationName}
-              getStarted={() => { this.setState({ stepping: true })}} 
-            />
-          }
-        </Paper>
-      </div>
+              :
+                loading ?
+                  <Loader />
+                :
+                  <Introduction
+                    organizationName={organizationName}
+                    organizationId={organizationId}
+                    getStarted={() => { this.setState({ stepping: true })}} 
+                  />
+              }
+            </Card>
+          </div>
+        </div>
+      </MuiThemeProvider>
     )
   }
 
@@ -194,8 +220,8 @@ const styles = {
   paper: {
     margin: '24px',
     padding: '12px',
-    maxWidth: '800px',
-    margin: '0 auto'
+    margin: '0 auto',
+    width: '780px'
   },
   sidebar: {
     flexBasis: '30%',
@@ -253,6 +279,7 @@ const mapStateToProps = ({ onboarding }) => ({
   organizationName: onboarding.organizationName,
   password1: onboarding.password1,
   password2: onboarding.password2,
+  organizationId: onboarding.organizationId
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -262,4 +289,13 @@ const mapDispatchToProps = (dispatch) => ({
   setField: (fN, fV) => dispatch(setOnboardingField(fN, fV)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegistrationPage)
+export default connect(mapStateToProps, mapDispatchToProps)(createContainer((props) => {
+  // get tags and experiences
+  const subs = [
+    Meteor.subscribe('Organizations.get', {}),
+  ]
+  if (_.some(subs, (s) => !s.ready())) return { ...props, loading: true }
+
+  let organization = Organizations.find({ _id: props.location.query.organizationId }).fetch()[0]
+  return _.assign({}, props, { loading: false, organizationName: organization.name })
+}, RegistrationPage))

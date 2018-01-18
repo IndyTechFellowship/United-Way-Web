@@ -9,8 +9,7 @@ const styles = {
   container: {
   },
   header: {
-    fontSize: '32px',
-    fontWeight: '300',
+    marginBottom: '20px'
   },
   subtitle: {
     fontSize: '16px',
@@ -21,24 +20,42 @@ const styles = {
 const YourAccount = ({ dispatch, email, firstName, lastName, organizationName }) => (
   <Col style={styles.container}>
     <div style={styles.header}>
-      <div>Your Account</div>
-      <div style={styles.subtitle}>Please fill out the fields below to setup your account.</div>
+      <h2>Your Account</h2>
+      <span>Please fill out the fields below to setup your account.</span>
     </div>
-    <TextField
-      floatingLabelText="First Name"
-      onChange={(e, v) => dispatch(setOnboardingField('firstName', v))}
-      value={firstName}
-    />
-    <TextField
-      floatingLabelText="Last Name"
-      onChange={(e, v) => dispatch(setOnboardingField('lastName', v))}
-      value={lastName}
-    />
-    <TextField
-      floatingLabelText="Email Address"
-      onChange={(e, v) => dispatch(setOnboardingField('email', v))}
-      value={email}
-    />
+    <label className="pt-label">
+      First Name
+      <input 
+        className='pt-input pt-fill' 
+        type="text"
+        placeholder='ex. John'
+        dir="auto"
+        value={firstName}
+        onChange={e => dispatch(setOnboardingField('firstName', e.target.value))}
+      />
+    </label>
+    <label className="pt-label">
+      Last Name
+      <input 
+        className='pt-input pt-fill' 
+        type="text"
+        placeholder='ex. Smith'
+        dir="auto"
+        value={lastName}
+        onChange={e => dispatch(setOnboardingField('lastName', e.target.value))}
+      />
+    </label>
+    <label className="pt-label">
+      Email Address
+      <input 
+        className='pt-input pt-fill' 
+        type="text"
+        placeholder='ex. john.smith@website.com'
+        dir="auto"
+        value={email}
+        onChange={e => dispatch(setOnboardingField('email', e.target.value))}
+      />
+    </label>
   </Col>
 );
 

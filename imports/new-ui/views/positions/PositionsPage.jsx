@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { createContainer } from 'meteor/react-meteor-data'
 import React, { Component } from 'react'
 import _ from 'lodash'
+import { connect } from 'react-redux'
 
 import Loader from '/imports/new-ui/components/Loader'
 import { Tags } from '/imports/api/Tags'
@@ -12,12 +13,19 @@ import Position from '/imports/new-ui/components/Positions/Position'
 class PositionsPage extends Component {
 
   render() {
-    const { loading, positions } = this.props
+    const { 
+      dispatch,
+      loading,
+      searchResultsLoading,
+      positionResults
+    } = this.props
+    let { positions } = this.props
     if (loading) {
       return (
         <Loader />
       )
     } else {
+      if (positionResults) positions = _.intersectionBy(positions, positionResults, p => p._id)
       return (
         <div style={styles.content}>
           <div style={styles.positions}>
@@ -49,6 +57,10 @@ const styles = {
   }
 }
 
+const mapStateToProps = ({ search }) => ({
+  positionResults: search.positionResults,
+});
+
 export default createContainer(() => {
   // get tags and experiences
   const subs = [
@@ -69,4 +81,4 @@ export default createContainer(() => {
   ))
 
   return { loading: false, positions: positions }
-}, PositionsPage)
+}, connect(mapStateToProps)(PositionsPage))

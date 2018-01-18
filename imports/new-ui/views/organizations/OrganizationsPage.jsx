@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { createContainer } from 'meteor/react-meteor-data'
 import React, { Component } from 'react'
 import _ from 'lodash'
+import { connect } from 'react-redux'
 
 import Loader from '/imports/new-ui/components/Loader'
 import { Tags } from '/imports/api/Tags'
@@ -11,12 +12,19 @@ import Organization from '/imports/new-ui/components/Organizations/Organization'
 class OrganizationsPage extends Component {
 
   render() {
-    const { loading, organizations } = this.props
+    const { 
+      dispatch,
+      loading,
+      searchResultsLoading,
+      organizationResults
+    } = this.props
+    let { organizations } = this.props
     if (loading) {
       return (
         <Loader />
       )
     } else {
+      if (organizationResults) organizations = _.intersectionBy(organizations, organizationResults, o => o._id)
       return (
         <div style={styles.content}>
           <div style={styles.organizations}>
@@ -48,6 +56,10 @@ const styles = {
   }
 }
 
+const mapStateToProps = ({ search }) => ({
+  organizationResults: search.organizationResults,
+});
+
 export default createContainer(() => {
   // get tags and experiences
   const subs = [
@@ -66,4 +78,4 @@ export default createContainer(() => {
   ))
 
   return { loading: false, organizations: organizations }
-}, OrganizationsPage)
+}, connect(mapStateToProps)(OrganizationsPage))
