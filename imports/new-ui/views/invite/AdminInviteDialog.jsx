@@ -68,14 +68,13 @@ class AdminInviteDialog extends Component {
     }
     const organization = validNewOrg ? `&organizationName=${this.state.organizationName}` : `&organizationId=${this.state.organizationId}`
     const link = `${location.protocol}//${location.host}/register?firstName=${this.state.firstName}&lastName=${this.state.lastName}&email=${this.state.email}${organization}`
-    this.setState({ inviteLink: link })
-    // Meteor.call('User.generateInviteLink', link, (err, resp) => {
-    //   if (err) {
-    //     this.setState({ inviteLink: "Oops, unable to generate link. Please try again." })
-    //   } else {
-    //     this.setState({ inviteLink: resp.data.url })
-    //   }
-    // })
+    Meteor.call('User.generateInviteLink', link, (err, resp) => {
+      if (err) {
+        this.setState({ inviteLink: "Oops, unable to generate link. Please try again." })
+      } else {
+        this.setState({ inviteLink: resp.data.url })
+      }
+    })
   }
 
   toggleNewOrganization(value) {
