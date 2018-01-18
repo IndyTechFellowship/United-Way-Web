@@ -297,5 +297,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(createContainer((pro
   if (_.some(subs, (s) => !s.ready())) return { ...props, loading: true }
 
   let organization = Organizations.find({ _id: props.location.query.organizationId }).fetch()[0]
-  return _.assign({}, props, { loading: false, organizationName: organization ? organization.name : props.organizationName })
+  let obj = { loading: false }
+  if (organization) {
+    obj.organizationName = organization.name
+  }
+  return _.assign({}, props, obj)
 }, RegistrationPage))
