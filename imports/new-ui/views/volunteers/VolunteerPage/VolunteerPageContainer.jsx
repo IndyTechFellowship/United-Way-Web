@@ -1,13 +1,20 @@
 import { Meteor } from 'meteor/meteor'
 import { createContainer } from 'meteor/react-meteor-data'
+import { connect } from 'react-redux'
 import React, { Component, PropTypes } from 'react'
 
 import { Experiences } from '/imports/api/Experiences'
+import { Organizations } from '/imports/api/Organizations'
+import { Positions } from '/imports/api/Positions'
 import { Users } from '/imports/api/Users'
 import { Tags } from '/imports/api/Tags'
 import VolunteerPage from './VolunteerPage'
 
-const VolunteerPageContainer = createContainer((props) => {
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+})
+
+const VolunteerPageContainer = connect(mapStateToProps)(createContainer((props) => {
   // get organization
   const query = {_id: props.params.id}
   const volunteerHandle = Meteor.subscribe('Users.get', query)
@@ -18,8 +25,10 @@ const VolunteerPageContainer = createContainer((props) => {
   const subs = [
     Meteor.subscribe('Experiences.get', {}),
     Meteor.subscribe('Tags.get', {}),
+    Meteor.subscribe('Organizations.thatUserAdmins', props.currentUser._id),
+    Meteor.subscribe('Positions.get', {})
   ]
-  if (_.some(subs, (s) => !s.ready())) return { loading: true, volunteer: {} }
+  if (_.some(subs, (s) => !s.ready())) return { currentUser: props.currentUser, loading: true, volunteer: {} }
 
 
   // update volunteer with tag objects
@@ -34,9 +43,18 @@ const VolunteerPageContainer = createContainer((props) => {
   let userId = Meteor.userId()
   let isThisMe = userId === volunteer._id
 
+  let organizations = Organizations.find({ admins: props.currentUser._id }).fetch()
+  organizations = organizations.map(organization => (
+    Object.assign(organization,
+      {
+        positions: Positions.find({ _id: { $in: organization.positions || [] } }).fetch()
+      }
+    )
+  ))
+
   // render
-  return { loading: false, volunteer: volunteer, tags: Tags.find().fetch(), isMe: isThisMe }
-}, VolunteerPage)
+  return { currentUser: props.currentUser, loading: false, volunteer: volunteer, tags: Tags.find().fetch(), isMe: isThisMe, orgsIAdmin: organizations }
+}, VolunteerPage))
 
 VolunteerPageContainer.propTypes = {
   id: PropTypes.number

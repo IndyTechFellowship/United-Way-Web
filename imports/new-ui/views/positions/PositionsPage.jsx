@@ -53,7 +53,7 @@ const styles = {
     alignContent: 'flex-start'
   },
   positions: {
-    margin: '20px 0 10px 0'
+    margin: '40px 0'
   }
 }
 

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, Card, Intent, NonIdealState, Tag, Tooltip } from '@blueprintjs/core'
+import { Button, Card, Intent, NonIdealState, Popover, Position, Tag, Tooltip } from '@blueprintjs/core'
 
 import EditExperienceDialog from '/imports/new-ui/components/Experiences/EditExperienceDialog'
 import EditVolunteerDialog from './EditVolunteerDialog'
 import Experience from '/imports/new-ui/components/Experiences/Experience'
 import Loader from '/imports/new-ui/components/Loader'
+import RecommendPopover from './RecommendPopover'
 
 export default class VolunteerPage extends React.Component {
 
@@ -33,7 +34,7 @@ export default class VolunteerPage extends React.Component {
   }
 
   render() {
-    const { loading, isMe, tags, volunteer } = this.props
+    const { currentUser, loading, isMe, tags, volunteer, orgsIAdmin } = this.props
     if (loading) return <Loader />
     return (
       <div style={styles.content}>
@@ -52,7 +53,24 @@ export default class VolunteerPage extends React.Component {
                     </Tooltip>
                   </div>
                 : 
-                  null
+                  orgsIAdmin.length > 0 ?
+                    <div style={styles.editButton}>
+                      <Popover 
+                        position={Position.BOTTOM_RIGHT}
+                        content={<RecommendPopover currentUser={currentUser} volunteer={volunteer} orgs={orgsIAdmin} />} 
+                        target={
+                          <Tooltip content="Recommend this volunteer for one of your organization's positions" hoverOpenDelay={200}>
+                            <Button
+                              iconName='share'
+                              intent={Intent.PRIMARY}
+                              text="Recommend"
+                            />
+                          </Tooltip>
+                        }
+                      />
+                    </div>
+                  :
+                    null
                 }
               <div style={styles.icon(volunteer.profile.avatar ? volunteer.profile.avatar.original : '')}></div>
               <div>
@@ -186,7 +204,7 @@ const styles = {
     margin: '0 auto'
   },
   container: {
-    margin: '20px 0'
+    margin: '40px 0'
   },
   header: {
     color: '#106BA3'
@@ -231,7 +249,7 @@ const styles = {
     margin: '2px'
   },
   experiences: {
-    marginTop: '20px'
+    marginTop: '30px'
   },
   experienceCards: {
     display: 'flex',

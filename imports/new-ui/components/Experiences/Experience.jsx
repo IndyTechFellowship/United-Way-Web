@@ -50,7 +50,7 @@ class Experience extends Component {
     return (
       <div>
         <div style={styles.card}>
-          <Card interactive={true}>
+          <Card>
             <div style={styles.cardContent}>
               {canEdit ?
                 <div style={styles.editButton}>

@@ -21,6 +21,7 @@ class UserMenu extends Component {
     this.getAvatar = this.getAvatar.bind(this);
     this.goToOrgProfile = this.goToOrgProfile.bind(this);
     this.goToUserProfile = this.goToUserProfile.bind(this);
+    this.goToActivity = this.goToActivity.bind(this)
   }
 
   render() {
@@ -44,6 +45,10 @@ class UserMenu extends Component {
             text={`Go To ${adminCompany.name}`}
             onClick={this.goToOrgProfile}
           />}
+          <MenuItem
+            text="View Your Activity"
+            onClick={this.goToActivity}
+          />
           <MenuDivider />
           <MenuItem
             text="Change Password"
@@ -91,6 +96,10 @@ class UserMenu extends Component {
 
   goToSettings() {
     browserHistory.push('/settings')
+  }
+
+  goToActivity() {
+    browserHistory.push('/activity')
   }
 
 }

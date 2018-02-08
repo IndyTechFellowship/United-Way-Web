@@ -49,6 +49,10 @@ const ProfileSchema = new SimpleSchema({
     type: [ String ],
     optional: true,
   },
+  bookmarks: {
+    type: [ String ],
+    optional: true,
+  },
 })
 
 const EmailAddressSchema = new SimpleSchema({
@@ -73,11 +77,7 @@ const UserSchema = new SimpleSchema({
   profile: {
     type: ProfileSchema,
     optional: true,
-  },
-  savedPositions: {
-    type: [ String ],
-    optional: true,
-  },
+  }
 })
 
 const Users = Meteor.users;

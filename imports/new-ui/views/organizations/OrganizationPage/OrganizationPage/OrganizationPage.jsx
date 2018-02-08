@@ -176,7 +176,7 @@ const styles = {
     margin: '0 auto'
   },
   container: {
-    margin: '20px 0'
+    margin: '40px 0'
   },
   header: {
     color: '#106BA3'
@@ -221,7 +221,7 @@ const styles = {
     margin: '2px'
   },
   positions: {
-    marginTop: '20px'
+    marginTop: '30px'
   },
   positionCards: {
     display: 'flex',

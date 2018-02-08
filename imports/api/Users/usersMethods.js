@@ -32,5 +32,23 @@ Meteor.methods({
     const fullLink = `${link}&token=${Meteor.settings.signupToken}` 
     const bitly = BitlyClient(Meteor.settings.bitly.token)
     return bitly.shorten(fullLink)
-  }
+  },
+  'User.addBookmark'(positionId) {
+    Users.update({
+      _id: this.userId,
+    }, {
+      $push: {
+        'profile.bookmarks': positionId,
+      },
+    });
+  },
+  'User.removeBookmark'(positionId) {
+    Users.update({
+      _id: this.userId,
+    }, {
+      $pull: {
+        'profile.bookmarks': positionId,
+      },
+    });
+  },
 })

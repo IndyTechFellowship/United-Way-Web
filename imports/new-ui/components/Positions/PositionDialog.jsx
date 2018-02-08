@@ -1,14 +1,38 @@
+import _ from 'lodash'
 import React, { Component } from 'react';
+import { createContainer } from 'meteor/react-meteor-data'
 import { Link } from 'react-router'
 import PropTypes from 'prop-types';
 import { Button, Dialog, Icon, Intent, Popover, Position, Tag, Tooltip } from '@blueprintjs/core'
+import { connect } from 'react-redux'
 
+import Loader from '/imports/new-ui/components/Loader'
+import { Positions } from '/imports/api/Positions'
 import ShowInterestPopover from './ShowInterestPopover'
 
 class PositionDialog extends Component {
 
+  constructor(props) {
+    super(props)
+    this.addBookmark = this.addBookmark.bind(this)
+    this.removeBookmark = this.removeBookmark.bind(this)
+  }
+
+  addBookmark() {
+    Meteor.call('User.addBookmark', this.props.position._id, (err, resp) => {
+    })
+  }
+
+  removeBookmark() {
+    Meteor.call('User.removeBookmark', this.props.position._id, (err, resp) => {
+    })
+  }
+
   render() {
-    const { position, isOpen, toggleDialog } = this.props
+    const { currentUser, loading, position, interestExpressed, isOpen, toggleDialog } = this.props
+    if (loading) {
+      return <Loader />
+    }
     return (
       <Dialog
         isOpen={isOpen} 
@@ -26,9 +50,14 @@ class PositionDialog extends Component {
               </h6>
             </div>
             <div style={styles.actions}>
-              <Tooltip content="Bookmark this position for later" hoverOpenDelay={200}>
-                <Button intent={Intent.PRIMARY} className="pt-icon-bookmark" text="Bookmark" />
-              </Tooltip>
+              {currentUser.profile.bookmarks && _.includes(currentUser.profile.bookmarks, position._id) 
+                ? <Tooltip content="Unbookmark this position" hoverOpenDelay={200}>
+                    <Button className="pt-icon-bookmark" text="Unbookmark"  onClick={this.removeBookmark} />
+                  </Tooltip>
+                : <Tooltip content="Bookmark this position for later" hoverOpenDelay={200}>
+                    <Button intent={Intent.PRIMARY} className="pt-icon-bookmark" text="Bookmark"  onClick={this.addBookmark} />
+                  </Tooltip>
+              }
             </div>
           </div>
           <div>
@@ -75,19 +104,26 @@ class PositionDialog extends Component {
               />
             </Tooltip>
           :
-            <Tooltip content="Tell the organization you are interested in their position" hoverOpenDelay={200}>
-              <Popover 
-                position={Position.TOP}
-                content={<ShowInterestPopover />} 
-                target={
-                  <Button 
-                    text="Show Interest"
-                    intent={Intent.PRIMARY}
-                    className="pt-icon-endorsed"
-                  />
-                } 
+            interestExpressed
+            ? <Button 
+                text="Interested"
+                disabled={true}
+                intent={Intent.PRIMARY}
+                className="pt-icon-endorsed"
               />
-            </Tooltip>
+            : <Tooltip content="Tell the organization you are interested in their position" hoverOpenDelay={200}>
+                <Popover 
+                  position={Position.TOP}
+                  content={<ShowInterestPopover position={position} currentUser={currentUser} />} 
+                  target={
+                    <Button 
+                      text="Show Interest"
+                      intent={Intent.PRIMARY}
+                      className="pt-icon-endorsed"
+                    />
+                  } 
+                />
+              </Tooltip>
           }
         </div>
       </Dialog>
@@ -148,4 +184,21 @@ const styles = {
   }
 }
 
-export default PositionDialog;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+})
+
+export default connect(mapStateToProps)(createContainer(props => {
+  const positionQuery = { _id: props.position._id}
+  const positionSubscription = Meteor.subscribe('Positions.get', positionQuery)
+  if (!positionSubscription.ready()) return { loading: true, position: props.position }
+  let position = Positions.findOne(positionQuery)
+
+  const interestExpressed = !_.get(props, 'currentUser._id') ? false :
+    Positions.find({
+    _id: position._id,
+    'applicants.userId': props.currentUser._id
+  }).count() === 1
+
+  return { loading: false, position: props.position, interestExpressed, currentUser: props.currentUser }
+}, PositionDialog))
