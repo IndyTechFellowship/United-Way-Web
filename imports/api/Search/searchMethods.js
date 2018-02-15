@@ -56,7 +56,6 @@ Meteor.methods({
   'Search.Organizations.FullText'(query, filters) {
     check(query, String);
     check(filters, Object);
-    if (query.length < 3) return [];
     const orgIndex = algoliaClient.initIndex('organizations')
     return Meteor.wrapAsync(orgIndex.search, orgIndex)(query).hits;
   },
@@ -64,7 +63,6 @@ Meteor.methods({
   'Search.Positions.FullText'(query, filters) {
     check(query, String);
     check(filters, Object);
-    if (query.length < 3) return [];
     const positionsIndex = algoliaClient.initIndex('positions')
     return Meteor.wrapAsync(positionsIndex.search, positionsIndex)(query).hits;
   },
@@ -72,7 +70,6 @@ Meteor.methods({
   'Search.Users.FullText'(query, filters) {
     check(query, String);
     check(filters, Object);
-    if (query.length < 3) return [];
     const usersIndex = algoliaClient.initIndex('users');
     return Meteor.wrapAsync(usersIndex.search, usersIndex)(query).hits;
   },

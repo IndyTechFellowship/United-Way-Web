@@ -10,6 +10,7 @@ import {
 } from '/imports/new-ui/state'
 import UserMenu from './UserMenu'
 import SearchBox from './SearchBox'
+import NotificationsMenu from './NotificationsMenu'
 
 const Navbar = (props) => {
   const {
@@ -35,6 +36,14 @@ const Navbar = (props) => {
           <Link to="/positions"><button className="pt-button pt-minimal" style={styles.link}>Positions</button></Link>
           <Link to="/organizations"><button className="pt-button pt-minimal" style={styles.link}>Organizations</button></Link>
           <Link to="/volunteers"><button className="pt-button pt-minimal" style={styles.link}>Volunteers</button></Link>
+          {!!currentUser
+            ? <span className="pt-navbar-divider" style={styles.divider}></span>
+            : null
+          }
+          {!!currentUser
+            ? <NotificationsMenu />
+            : null
+          }
           <span className="pt-navbar-divider" style={styles.divider}></span>
           <div className='user'>
             {!!currentUser

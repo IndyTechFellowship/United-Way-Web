@@ -21,10 +21,10 @@ Meteor.methods({
       name: organization.name,
       positions: [],
       state: organization.state,
-      tagline: 'My Great Organization',
+      tagline: '',
       tags: [],
       users: [ callingUser._id ],
-      websiteUrl: 'https://boardserveindy.org/',
+      websiteUrl: '',
     });
   },
 

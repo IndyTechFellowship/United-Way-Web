@@ -1,6 +1,7 @@
 import { check, Match } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 
+import { Notifications } from '/imports/api/Notifications'
 import { Positions } from './index';
 import { Users } from '/imports/api/Users'
 
@@ -41,6 +42,25 @@ Meteor.methods({
             at: new Date(),
           },
         },
+      }
+    );
+
+    const notificationId = Notifications.insert({
+      title: `${callingUser.profile.firstName} ${callingUser.profile.lastName} is interested in your position "${position.name}"`,
+      description: 'hello',
+      icon: 'share',
+      path: '/activity',
+      viewed: false,
+      at: new Date()
+    })
+
+    // Add a notification to the user
+    Users.update(
+      { _id: opts.userId },
+      {
+        $push: {
+          'profile.notifications': notificationId
+          }
       }
     );
     

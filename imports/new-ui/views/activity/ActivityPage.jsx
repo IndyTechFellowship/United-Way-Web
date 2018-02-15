@@ -50,9 +50,7 @@ class ActivityPage extends Component {
             ? <div style={styles.container}>
                 {
                   interestedPositions.map(position => (
-                    <div>
-                      <Position key={position._id} position={position} />
-                    </div>
+                    <Position key={position._id} position={position} />
                   ))
                 }
               </div>

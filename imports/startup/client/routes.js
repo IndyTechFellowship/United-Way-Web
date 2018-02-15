@@ -12,8 +12,8 @@ import PositionsPage from '/imports/new-ui/views/positions/PositionsPage'
 import OrganizationsPage from '/imports/new-ui/views/organizations/OrganizationsPage'
 import OrganizationPage from '/imports/new-ui/views/organizations/OrganizationPage'
 import RegistrationPage from '/imports/new-ui/views/registration/RegistrationPage'
+import SearchPage from '/imports/new-ui/views/search/SearchPage'
 import SettingsPage from '/imports/new-ui/views/settings/SettingsPage'
-import WelcomePage from '/imports/new-ui/views/welcome/WelcomePage'
 import VolunteersPage from '/imports/new-ui/views/volunteers/VolunteersPage'
 import VolunteerPage from '/imports/new-ui/views/volunteers/VolunteerPage'
 
@@ -38,7 +38,7 @@ export const Routes = () => (
         <Route path="settings" component={SettingsPage} />
         <Route path="register" component={RegistrationPage} />
         <Route path="invite" component={InvitePage} />
-        <Route path="welcome" component={WelcomePage} />
+        <Route path="search" component={SearchPage} />
       </Route>
     </Router>
   </Provider>

@@ -53,8 +53,11 @@ const ProfileSchema = new SimpleSchema({
     type: [ String ],
     optional: true,
   },
+  notifications: {
+    type: [ String ],
+    optional: true
+  }
 })
-
 const EmailAddressSchema = new SimpleSchema({
   address: { type: String },
   verified: { type: Boolean, optional: true },

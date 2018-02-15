@@ -1,19 +1,6 @@
 import _ from 'lodash';
-import {
-  TextField,
-} from 'material-ui'
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-
-import {
-  setFullTextSearchAnchor,
-  setFullTextSearchTerm,
-  setUserSearchResults,
-  updateFullTextSearchResults,
-  setSearchCategoriesOpen,
-} from '/imports/new-ui/state'
-import ResultCategoryDropdown from './ResultCategoryDropdown'
 
 const styles = {
   container: {
@@ -32,39 +19,39 @@ const styles = {
   },
 }
 
-const SearchBox = ({ dispatch, searchResults, searchTerm }) => {
-  return (
-    <div style={styles.container}>
-      <div className="pt-input-group search">
-        <span className="pt-icon pt-icon-search"></span>
-        <input 
-          className="pt-input" 
-          placeholder="Search..." 
-          type="text"
-          onChange={onUpdateInput(dispatch)}
-          value={searchTerm}
-        />
-        <ResultCategoryDropdown />
-      </div>
-    </div>
-  )
-};
+export default class SearchBox extends Component {
 
-const onUpdateInput = (dispatch) => (e) => {
-  dispatch(setFullTextSearchAnchor(e.target));
-  if (e.target.value) {
-    dispatch(setSearchCategoriesOpen(true));
+  constructor(props) {
+    super(props)
+    this.state = {
+      query: ''
+    }
   }
-  dispatch(setFullTextSearchTerm(e.target.value));
+
+  componentDidMount() {
+    this.setState({ query: '' })
+  }
+
+  render() {
+    return (
+      <div style={styles.container}>
+        <div className="pt-input-group search">
+          <span className="pt-icon pt-icon-search"></span>
+          <input
+            className="pt-input"
+            placeholder="Search..."
+            type="text"
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                this.setState({ query: '' })
+                browserHistory.push(`/search?q=${this.state.query}`)
+              }
+            }}
+            onChange={(e) => this.setState({ query: e.target.value })}
+            value={this.state.query}
+          />
+        </div>
+      </div>
+    )
+  }
 }
-
-SearchBox.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  searchTerm: PropTypes.string.isRequired,
-}
-
-const mapStateToProps = ({ search }) => ({
-  searchTerm: search.searchTerm,
-})
-
-export default connect(mapStateToProps)(SearchBox)
