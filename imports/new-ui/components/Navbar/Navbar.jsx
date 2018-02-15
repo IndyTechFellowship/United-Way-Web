@@ -45,7 +45,7 @@ const Navbar = (props) => {
             : null
           }
           <span className="pt-navbar-divider" style={styles.divider}></span>
-          <div className='user'>
+          <div className='user' style={styles.user}>
             {!!currentUser
               ? <UserMenu />
               : <button onClick={openSigninDialog} className="pt-button pt-minimal" style={styles.link}>Login</button>
@@ -76,6 +76,10 @@ const styles = {
   },
   divider: {
     borderColor: 'rgba(255,255,255,.5)'
+  },
+  user: {
+    whiteSpace: 'nowrap',
+    maxWidth: '110px'
   }
 }
 
