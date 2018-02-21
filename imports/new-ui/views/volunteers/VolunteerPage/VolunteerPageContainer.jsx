@@ -22,12 +22,14 @@ const VolunteerPageContainer = connect(mapStateToProps)(createContainer((props) 
   let volunteer = Users.findOne(query)
 
   // get tags and positions
-  const subs = [
+  let subs = [
     Meteor.subscribe('Experiences.get', {}),
     Meteor.subscribe('Tags.get', {}),
-    Meteor.subscribe('Organizations.thatUserAdmins', props.currentUser._id),
     Meteor.subscribe('Positions.get', {})
   ]
+  if (props.currentUser) {
+    subs.push(Meteor.subscribe('Organizations.thatUserAdmins', props.currentUser._id))
+  }
   if (_.some(subs, (s) => !s.ready())) return { currentUser: props.currentUser, loading: true, volunteer: {} }
 
 
@@ -43,15 +45,17 @@ const VolunteerPageContainer = connect(mapStateToProps)(createContainer((props) 
   let userId = Meteor.userId()
   let isThisMe = userId === volunteer._id
 
-  let organizations = Organizations.find({ admins: props.currentUser._id }).fetch()
-  organizations = organizations.map(organization => (
-    Object.assign(organization,
-      {
-        positions: Positions.find({ _id: { $in: organization.positions || [] } }).fetch()
-      }
-    )
-  ))
-
+  let organizations = []
+  if (userId && props.currentUser) {
+    organizations = Organizations.find({ admins: props.currentUser._id }).fetch()
+    organizations = organizations.map(organization => (
+      Object.assign(organization,
+        {
+          positions: Positions.find({ _id: { $in: organization.positions || [] } }).fetch()
+        }
+      )
+    ))
+  }
   // render
   return { currentUser: props.currentUser, loading: false, volunteer: volunteer, tags: Tags.find().fetch(), isMe: isThisMe, orgsIAdmin: organizations }
 }, VolunteerPage))

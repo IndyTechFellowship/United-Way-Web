@@ -25,7 +25,7 @@ class RecommendPopover extends Component {
   }
 
   handleRecommend() {
-    if (this.props.currentUser._id) {
+    if (this.props.currentUser && this.props.currentUser._id) {
       const opts = {userId: this.props.volunteer._id, orgAdminId: this.props.currentUser._id, note: this.state.note}
       Meteor.call('Positions.recommend', this.state.selectedPositionId, opts,
         (err, res) => {
