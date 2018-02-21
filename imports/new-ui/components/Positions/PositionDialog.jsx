@@ -50,7 +50,7 @@ class PositionDialog extends Component {
               </h6>
             </div>
             <div style={styles.actions}>
-              {currentUser.profile.bookmarks && _.includes(currentUser.profile.bookmarks, position._id) 
+              {currentUser && currentUser.profile.bookmarks && _.includes(currentUser.profile.bookmarks, position._id) 
                 ? <Tooltip content="Unbookmark this position" hoverOpenDelay={200}>
                     <Button className="pt-icon-bookmark" text="Unbookmark"  onClick={this.removeBookmark} />
                   </Tooltip>
@@ -194,11 +194,14 @@ export default connect(mapStateToProps)(createContainer(props => {
   if (!positionSubscription.ready()) return { loading: true, position: props.position }
   let position = Positions.findOne(positionQuery)
 
-  const interestExpressed = !_.get(props, 'currentUser._id') ? false :
-    Positions.find({
-    _id: position._id,
-    'applicants.userId': props.currentUser._id
-  }).count() === 1
+  const interestExpressed = props.currentUser ?
+    !_.get(props, 'currentUser._id') ? false :
+      Positions.find({
+      _id: position._id,
+      'applicants.userId': props.currentUser._id
+    }).count() === 1
+  :
+    false
 
   return { loading: false, position: props.position, interestExpressed, currentUser: props.currentUser }
 }, PositionDialog))

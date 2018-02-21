@@ -51,7 +51,8 @@ class Position extends Component {
 
   render() {
     const { position } = this.props
-    const canEdit = _.includes(position.organization.admins, Meteor.userId())
+    const userId = Meteor.userId()
+    const canEdit = userId ? _.includes(position.organization.admins, userId) : false
     return (
       <div>
         <div style={styles.card}>
