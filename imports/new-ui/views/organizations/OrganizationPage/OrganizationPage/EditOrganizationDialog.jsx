@@ -120,7 +120,8 @@ class EditOrganizationDialog extends Component {
               />
             </label>
             <label className="pt-label">
-              Tagline
+              <div>Tagline</div>
+              <div style={styles.helperText}>A short slogan, motto, or phrase about your organization</div>
               <input 
                 className="pt-input pt-fill" 
                 type="text"
@@ -130,7 +131,8 @@ class EditOrganizationDialog extends Component {
               />
             </label>
             <label className="pt-label">
-              Summary
+              <div>Summary</div>
+              <div style={styles.helperText}>A description of your organization's mission, goals, and initiatives</div>
               <textarea
                 style={styles.summary}
                 className='pt-input pt-fill'
@@ -315,7 +317,13 @@ const styles = {
   avatar: {
     display: 'flex',
     alignItems: 'center'
-  }
+  },
+  helperText: {
+    color: '#5C7080',
+    fontSize: '11px',
+    marginBottom: '4px',
+    lineHeight: '1.3'
+  },
 }
 
 export default EditOrganizationDialog;

@@ -92,7 +92,7 @@ class EditPositionDialog extends Component {
         <div className="pt-dialog-body" style={styles.dialogContent}>
           <div style={styles.columnLeft}>
             <label className="pt-label">
-              Type
+              Position Type
               <div className="pt-select">
                 <select 
                   value={this.state.position.opportunityType} 
@@ -125,16 +125,6 @@ class EditPositionDialog extends Component {
             </label>
           </div>
           <div style={styles.columnRight}>
-            <label className="pt-label">
-              Category
-              <input 
-                className="pt-input pt-fill" 
-                type="text"
-                dir="auto"
-                value={this.state.position.positionType}
-                onChange={(e) => this.setState({ position: { ...this.state.position, positionType: e.target.value }})}
-              />
-            </label>
             <label className="pt-label">
               Time Commitment
               <input 

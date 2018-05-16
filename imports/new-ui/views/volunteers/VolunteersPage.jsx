@@ -56,7 +56,7 @@ export default createContainer(() => {
   ]
   if (_.some(subs, (s) => !s.ready())) return { loading: true, volunteers: [] }
 
-  let volunteers = Users.find().fetch()
+  let volunteers = Users.find({}, { sort: { 'profile.lastName': 1 } }).fetch()
   volunteers.map(volunteer => {
     volunteer.profile = Object.assign(volunteer.profile, {
       skills: Tags.find({ _id: { $in: volunteer.profile.skills || [] } }).fetch()

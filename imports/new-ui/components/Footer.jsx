@@ -9,6 +9,9 @@ class Footer extends Component {
         <div style={styles.container}>
           <div style={styles.outerBlock}>
             <div style={styles.innerBlock}>
+              <img style={styles.logo} src="/logo.svg" />
+            </div>
+            <div style={styles.innerBlock}>
               <span>&copy; 2017 All Rights Reserved</span>
               <span>United Way of Central Indiana</span>
               <span style={styles.subtitle}>Website by Indy Tech Fellowship</span>
@@ -17,12 +20,12 @@ class Footer extends Component {
           <div style={styles.outerBlock}>
             <div style={styles.innerBlock}>
               <span style={styles.bold}>Contact UWCI</span>
-              <span>community@uwci.org</span>
+              <span>volunteer@uwci.org</span>
               <span>(317) 923-1466</span>
             </div>
             <div style={styles.innerBlock}>
-              <span style={styles.italic}>3901 N. Meridian Street</span>
-              <span style={styles.italic}>P.O. Box 88409</span>
+              <span style={styles.italic}>2955 N. Meridian Street</span>
+              <span style={styles.italic}>Suite 300</span>
               <span style={styles.italic}>Indianapolis, IN 46208</span>
             </div>
           </div>
@@ -34,6 +37,10 @@ class Footer extends Component {
 }
 
 const styles =  {
+  logo: {
+    height: '50px',
+    width: '50px'
+  },
   footerContainer: {
     boxShadow: 'inset rgba(0, 0, 0, 0.117647) 0px 1px 6px, inset rgba(0, 0, 0, 0.117647) 0px 1px 4px',
     display: 'flex',

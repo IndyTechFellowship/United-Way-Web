@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 import PropTypes from 'prop-types';
 import { Button, Dialog, Icon, Intent, Popover, Position, Tag, Tooltip } from '@blueprintjs/core'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 import Loader from '/imports/new-ui/components/Loader'
 import { Positions } from '/imports/api/Positions'
@@ -66,8 +67,8 @@ class PositionDialog extends Component {
           <div style={styles.attributeContainer}>
             <div style={styles.attributeColumn}>
               <div style={styles.attribute}>
-                <div style={styles.label}>Position Category</div>
-                <div>Hello</div>
+                <div style={styles.label}>Posted Date</div>
+                <div>{position.created ? moment(position.created).format("MMM D, YYYY") : '-'}</div>
               </div>
               <div style={styles.attribute}>
                 <div style={styles.label}>Time Commitment</div>

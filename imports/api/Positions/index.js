@@ -13,6 +13,10 @@ const PositionsSchema = new SimpleSchema({
     type: String,
     optional: true
   },
+  created: {
+    type: Date,
+    optional: true
+  },
   positionType: {
     type: String,
     optional: true

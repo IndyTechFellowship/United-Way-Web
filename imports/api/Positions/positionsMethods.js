@@ -8,6 +8,7 @@ Meteor.methods({
     if (this.connection) {
       position._id = null
       position.skills = position.skills.map(i => i._id)
+      position.created = new Date()
       const newPosition = Positions.insert(position)
       if (!newPosition) throw Meteor.Error(401, 'unauthorized')
       return newPosition

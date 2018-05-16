@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 import PropTypes from 'prop-types';
 import { Alert, Button, Card, Icon, Intent, Tag, Tooltip } from '@blueprintjs/core'
+import moment from 'moment'
 
 import PositionDialog from './PositionDialog'
 import EditPositionDialog from './EditPositionDialog'
@@ -97,8 +98,8 @@ class Position extends Component {
               <div style={styles.attributeContainer}>
                 <div style={styles.attributeColumn}>
                   <div style={styles.attribute}>
-                    <div style={styles.label}>Position Category</div>
-                    <div>{position.positionType || '-'}</div>
+                    <div style={styles.label}>Posted Date</div>
+                    <div>{position.created ? moment(position.created).format("MMM D, YYYY") : '-'}</div>
                   </div>
                   <div style={styles.attribute}>
                     <div style={styles.label}>Time Commitment</div>
