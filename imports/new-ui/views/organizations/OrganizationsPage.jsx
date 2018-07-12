@@ -56,7 +56,7 @@ export default createContainer(() => {
   ]
   if (_.some(subs, (s) => !s.ready())) return { loading: true, organizations: [] }
 
-  let organizations = Organizations.find({}, { sort: { name: 1 } }).fetch()
+  let organizations = _.sortBy(Organizations.find().fetch(), org => _.toLower(org.name))
   organizations.map(organization => (
     Object.assign(organization,
       {

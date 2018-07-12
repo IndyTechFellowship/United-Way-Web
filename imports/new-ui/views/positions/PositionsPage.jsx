@@ -58,7 +58,7 @@ export default createContainer(() => {
   ]
   if (_.some(subs, (s) => !s.ready())) return { loading: true, positions: [] }
 
-  const positions = Positions.find().fetch()
+  const positions = Positions.find({}, { sort: { created: -1 }}).fetch()
   positions.map(position => (
     Object.assign(position,
       {

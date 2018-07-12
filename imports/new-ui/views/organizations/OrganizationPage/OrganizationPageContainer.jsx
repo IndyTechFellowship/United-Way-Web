@@ -24,7 +24,7 @@ const OrganizationPageContainer = createContainer((props) => {
 
   // update organization with tag objects
   organization = Object.assign(organization, {
-    positions: Positions.find({ _id: { $in: organization.positions || [] } }).fetch().map(position => (
+    positions: Positions.find({ _id: { $in: organization.positions || [] } }, { sort: { created: -1 }}).fetch().map(position => (
       Object.assign(position, {
         skills: Tags.find({ _id: { $in: position.skills } }).fetch(),
         organization: organization

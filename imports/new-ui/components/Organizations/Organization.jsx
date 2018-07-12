@@ -30,6 +30,10 @@ class Organization extends Component {
                       <h6 style={styles.h3}>{organization.tagline}</h6>
                     </div>
                   </div>
+                  <div style={styles.attribute}>
+                    <div style={styles.label}>Summary</div>
+                    <div style={styles.summary}>{organization.description}</div>
+                  </div>
                   <div style={styles.attributeContainer}>
                     <div style={styles.attributeColumn}>
                       <div style={styles.attribute}>
@@ -119,6 +123,10 @@ const styles = {
   link: {
     textDecoration: 'none',
     color: 'inherit'
+  },
+  summary: {
+    overflow: 'scroll',
+    maxHeight: '75px'
   }
 }
 

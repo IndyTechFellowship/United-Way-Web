@@ -67,16 +67,16 @@ class PositionDialog extends Component {
           <div style={styles.attributeContainer}>
             <div style={styles.attributeColumn}>
               <div style={styles.attribute}>
-                <div style={styles.label}>Posted Date</div>
-                <div>{position.created ? moment(position.created).format("MMM D, YYYY") : '-'}</div>
-              </div>
-              <div style={styles.attribute}>
                 <div style={styles.label}>Time Commitment</div>
                 <div>{position.timeCommitment || '-'}</div>
               </div>
               <div style={styles.attribute}>
                 <div style={styles.label}>Monetary Commitment</div>
                 <div>{position.monetaryCommitment || '-'}</div>
+              </div>
+              <div style={styles.attribute}>
+                <div style={styles.label}>Posted Date</div>
+                <div>{position.created ? moment(position.created).format("MMM D, YYYY") : '-'}</div>
               </div>
             </div>
             <div style={styles.attributeColumn}>

@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import { Button, Card, Intent, NonIdealState, Tag, Tooltip } from '@blueprintjs/core'
 
@@ -101,7 +102,7 @@ class OrganizationPage extends Component {
                   ? <div>
                       <div style={styles.positionCards}>
                         {
-                          _.sortBy(organization.positions, ['name']).map(position => <Position key={position._id} position={position} />)
+                          organization.positions.map(position => <Position key={position._id} position={position} />)
                         }
                       </div>
                       {isMyOrganization ?

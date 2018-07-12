@@ -33,8 +33,9 @@ class UserMenu extends Component {
       <Popover position={Position.BOTTOM}>
         <Button 
           style={styles.link} 
-          className="pt-minimal" 
-          text={name} 
+          className="pt-minimal pt-intent-primary"
+          rightIconName="caret-down"
+          text={name}
         />
         <Menu>
           <MenuItem
